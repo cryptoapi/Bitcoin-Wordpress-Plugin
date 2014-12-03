@@ -908,7 +908,7 @@ final class gourlclass
 		echo "<div class='wrap ".GOURL."admin'>";
 		echo $this->page_title(__('All Paid Files', GOURL).$this->space(1).'<a class="add-new-h2" href="'.GOURL_ADMIN.GOURL.'file">' . __('Add New File', GOURL) . '</a>', 2);
 		echo "<div class='".GOURL."intro postbox'>";
-		echo  '<a style="float:right" target="_blank" href="https://gourl.io/lib/examples/pay-per-download-multi.php"><img title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
+		echo  '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
 		echo  __('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode.', GOURL);
 		echo '<br /><br />';
 		echo  __('<b>Simple Instruction :</b>', GOURL);
@@ -990,7 +990,7 @@ final class gourlclass
 			$tmp .= "<div class='".GOURL."intro postbox'>";
 			$tmp .= "<div style='float:right'>";
 			$tmp .= "<div align='center'>";
-			$tmp .= '<a target="_blank" href="https://gourl.io/lib/examples/pay-per-page-multi.php"><img title="Example - Pay Per View - Video/Page Access for Unregistered Visitors" src="'.plugins_url('/images/pay-per-page.png', __FILE__).'" border="0"></a>';
+			$tmp .= '<a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php"><img title="Example - Pay Per View - Video/Page Access for Unregistered Visitors" src="'.plugins_url('/images/pay-per-page.png', __FILE__).'" border="0"></a>';
 			$tmp .= "<br/><br/>".__('Buttons For Your Website: ', GOURL)."<br/>";
 			$tmp .= '<img src="'.plugins_url('/images/bitcoin_accepted.png', __FILE__).'" border="0"><br/>';
 			$tmp .= '<img src="'.plugins_url('/images/btc_accepted.png', __FILE__).'" border="0">';
@@ -999,7 +999,7 @@ final class gourlclass
 			$tmp .= __('<b>Pay-Per-View Summary</b> - Your unregistered anonymous website visitors  will need to send you a set amount of cryptocoins for access to your website\'s specific pages & videos during a specific time. All will be in automatic mode - allowing you to receive payments, open webpage access to your visitors, showing after the time a new payment form, payment notifications to your email, etc.', GOURL);
 			$tmp .= "<br /><br />";
 			$tmp .= __('For example, you might offer paid access to 20 (twenty) of your website pages/posts for the price of 1 USD for 1 DAY giving unlimited access to all locked pages for website visitors (non-registered users or registered subscribers). You can add  simple shortcode below for all those twenty WordPress pages/posts. When visitors to on any of those pages, they will see automatic cryptocoin payment box (the original page content will be hidden). After visitor makes his payment, he will get access to original pages content/videos and after 24 hours  will see a new payment box. Visitor needs to make payment on any locked page and he will get access to all other locked pages also. Website Editors / Admins will have all the time full access to locked pages and see original page content.', GOURL);
-			$tmp .= ' <a target="_blank" href="https://gourl.io/lib/examples/pay-per-page-multi.php">'.__('See Example', GOURL).'</a>';
+			$tmp .= ' <a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php">'.__('See Example', GOURL).'</a>';
 			$tmp .= "<br /><br />";
 			$tmp .= __('You can customize lock image for each page or no images at all. Default image directory: <b>'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
 			$tmp .= "<br /><br />";
