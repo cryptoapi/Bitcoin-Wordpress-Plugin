@@ -51,8 +51,10 @@ Icons: [Oxygen Tean](http://icongal.com/gallery/iconset/840/oxygen) with GPL Lic
 
 * Install and activate the plugin like you do with any other plugins. 
 * Free Register or Login on https://gourl.io and get free Payment Boxes Private/Public Keys
+* Free Register or Login on the website https://gourl.io 
+* Create new payment box/es and get free Private/Public Keys https://gourl.io/editrecord/coin_boxes/0
 * You will need to place Callback URL, please use: http://yoursite.com/?cryptobox.callback.php
-* Goto Plugin Settings on your website and enter that keys
+* Goto Plugin General Settings on your website and enter that keys
 
 THAT'S IT! YOUR WEBSITE READY TO ACCEPT BITCOINS ONLINE!
 
