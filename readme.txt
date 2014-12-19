@@ -1,4 +1,4 @@
-=== GoUrl Bitcoin Paid Downloads & Paid Access to Videos/Pages ===
+=== GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership ===
 
 Author URI: https://gourl.io 
 
@@ -8,33 +8,38 @@ Tags: bitcoin, download, bitcoins, downloads, paid downloads, digital downloads,
 
 Requires at least: 3.5
 
-Tested up to: 4.1
+Tested up to: 4.2
 
-Stable Tag: 1.0
+Stable Tag: 1.1.0
 
 Contributors: none
 
 License: GNU Version 2 or Any Later Version
 
-**Sell Digital Downloads & Files & Videos. Sell Premium Access to Your Webpages. Accept Bitcoin, Litecoin, Dogecoin Payments Online**
+
+**GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc Payments Online**
 
 
 
 == Description ==
 
-Official GoUrl.io Bitcoin Payment Gateway Wordpress Plugin. Pay-Per-Download - make money on digital file downloads. Pay-Per-View/PageAccess - offer paid access to your premium content/videos. Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode with GoUrl Bitcoin / altcoin payment gateway.
+Official GoUrl.io Bitcoin Payment Gateway Plugin for Wordpress. Pay-Per-Product - sell your products online. Pay-Per-Download - make money on digital file downloads. Pay-Per-Membership - easy to use website membership system with bitcoin payments. Pay-Per-View - offer paid access to your premium content/videos for unregistered visitors, no registration needed, anonymous. Easily Sell Files, Videos, Music, Photos, Premium Content on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. All in automatic mode. Easy integration Bitcoin payments to other wordpress plugins with Affiliate Program to plugins owners using GoUrl Official Wordpress Bitcoin Plugin Gateway.
 
 
 Features of the plugin include:
 
 * 100% Free Open Source on Github.com
-* No Monthly Fee, Transaction Fee from 0%
-* Set your own prices in USD, Live Exchange Rates
-* Pay-Per-Download - make money on file downloads
-* Pay-Per-View/Page - paid access to videos/pages
-* Accept Bitcoin, Dogecoin on your Website Online
-* Global, Anonymous, Zero Risk, No Chargebacks
-* Free Support in the integration of GoUrl Payments
+* Accept Bitcoin Payments Online on your Wordpress website
+* No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD
+* Pay-Per-Product - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc Example
+* Pay-Per-Download - simple solution for your unregistered visitors: make money on file downloads Example
+* Pay-Per-View/Page - for your unregistered visitors: offer paid access to your premium content/videos Example
+* Pay-Per-Membership - for your registered users: offer paid access to your premium content/etc Example
+* No Chargebacks, Global, Secure, Anonymous. All in automatic mode
+* Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments
+* Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add a few lines of code below to their plugins (gourl bitcoin payment gateway with Affiliate Program - 33.3% lifetime revenue share) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.
+* Auto Synchronization - between payments data stored on your GoUrl.io account and this your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
+* Free Wordpress Plugin Support for You
 
 Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html).
 
@@ -49,45 +54,63 @@ Icons: [Oxygen Tean](http://icongal.com/gallery/iconset/840/oxygen) with GPL Lic
 
 == Installation ==
 
-* Install and activate the plugin like you do with any other plugins. 
-* Free Register or Login on https://gourl.io and get free Payment Boxes Private/Public Keys
+* Go to Wordpress Plugins > Add New
+* Click Upload Plugin Zip File
+* Upload the zipped gourl_wordpress file and click "Upload Now"
+* Go to Installed Plugins
+* Activate the "GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership"
 * Free Register or Login on the website https://gourl.io 
-* Create new payment box/es and get free Private/Public Keys https://gourl.io/editrecord/coin_boxes/0
-* You will need to place Callback URL, please use: http://yoursite.com/?cryptobox.callback.php
-* Goto Plugin General Settings on your website and enter that keys
+* Create new payment boxes and get free Private/Public Keys https://gourl.io/editrecord/coin_boxes/0
+* You will need to place Callback URL, please use: http://yoursite.com/?cryptobox.callback.php (the gourl wordpress plugin should be activated beforehand)
+* Go to GoUrl Plugin Settings on your website and enter the private/public keys
+* You can create Paid Products, Files, Membership, etc on your Wordpress Website
 
-THAT'S IT! YOUR WEBSITE READY TO ACCEPT BITCOINS ONLINE!
-
-
-Now you can add paid files for sell using "Add New File"
-or click on "Pay-Per-View", get shortcode and use it on your webpages to sell premium content / videos
+THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
 
 More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html).
 
 
 
+== Upgrading ==
+
+* Go to Wordpress Plugins
+* Delete "GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership" plugin with files (all your uploaded files/settings are saved in the system and will not be deleted)
+* Install new Plugin version and Activate it.
+
+
 
 
 == Screenshots ==
 
-Screenshot folder location is /screenshots
+1. GoUrl Bitcoin Plugin Summary Page
+2. GoUrl Bitcoin Information
+3. Plugin General Settings Page - place free Private/Public keys from Gourl.io and activate bitcoin/cryptocoin payments
+4. All Payments Page - list of all received payments
+5. Pay-Per-Membership Settings Page - sell Premium Access to Your Webpages/Videos
+6. Example Pay-Per-Membership locked page
+7. Pay-Per-Product Page - list of all paid payments
+8. Pay-Per-Product New Record Page - add new product for sale
+9. Example Pay-Per-Product - selling product online
+10. Pay-Per-Download Page - list of all paid files
+11. Example Pay-Per-Download - selling file online
 
-1. screenshot-1.png  - Plugin General Settings Page - place free Private/Public keys from Gourl.io and activate bitcoin/cryptocoin payments
-2. screenshot-2.png  - Files Page - list of all your files for sell
-3. screenshot-3.png  - Payments Page - list of all received payments
-4. screenshot-4.png  - Pay-Per-View Settings Page - sell Premium Access to Your Webpages/Videos
-5. screenshot-5.png  - File Edit Page - add new file for sell
-6. screenshot-6.png  - Webpage Example with Payment Box. Just add this shortcode to any your page or post - [gourl-download id="1"]
-7. screenshot-7.png  - Second Example with Payment Box. Just add this shortcode to any your page or post - [gourl-download id="2"]
-8. screenshot-8.png  - Pay-Per-View Content Lock Page. Place this shortcode - [gourl-lock img="image1.jpg"] anywhere in the original text on your premium pages/posts 
-9. screenshot-9.png  - Pay-Per-View Video Lock Page. Place shortcode - [gourl-lock img="image2.jpg"] anywhere in the original text on your premium pages/posts with videos
 
 
 
 == Changelog ==
 
-= 1.00 =
-This is the first version of GoUrl Bitcoin Paid Downloads & Paid Access to Videos/Pages Plugin.
+= 1.1.0 =
+Added Pay-Per-Product, Pay-Per-Membership
 
+= 1.0.0 =
+This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin.
+
+
+
+
+== Upgrade Notice ==
+
+= 1.1.0 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended.
 

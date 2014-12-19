@@ -1,0 +1,105 @@
+<?php
+
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL_IPN' )) exit; // Exit if accessed directly
+
+/*
+	-----------------------------------------------------------------------------
+	GoUrl IPN (Instant Payment Notification) for Bitcoin/Altcoins Payment Gateway
+	-----------------------------------------------------------------------------
+	Optional - You can use additional actions after a payment has been received (update database records, etc).
+	Use for GoUrl Pay-Per-Product, Pay-Per-Download, Pay-Per-Membership, Pay-Per-View - https://gourl.io
+	 
+	Simply edit this php file and add section with your order_ID in function gourl_successful_payment() below.
+	Function gets user_ID - user who made payment, current order_ID and payment details as array.
+	
+	Example - user with ID = 11 made the payment for product with ID = 8
+	// Function gourl_successful_payment($user_ID, $order_ID, $payment_details) will receive -  
+	$user_ID = 11;
+	$order_ID = "product_8";
+	$payment_details = Array
+	{
+		"error":"",
+		"status":"payment_received",
+		"is_paid":1,
+		"paymentID":17,
+		"paymentDate":"2014-12-12 14:10:46",
+		"paymentLink":"http://example.com/wp-admin/admin.php?page=gourlpayments&s=payment_17",
+		"addr":"BTutorcSLL8PQbfTT3Hahc23fJc8bxD1Wz", // your wallet address on gourl.io
+		"tx":"b605bdc2d0e4954f3ffe29c00046c9ce823a756a012248dc137a483a215a5643",
+		"is_confirmed":0,
+		"amount":"0.00694415",
+		"amountusd":"12.5",
+		"coinlabel":"BTC",
+		"coinname":"bitcoin",
+		"boxID":"34",
+		"boxtype":"paymentbox",
+		"boxLink":"https://gourl.io/view/coin_boxes/34/statistics.html",
+		"orderID":"product_8",
+		"userID":"11",
+		"usercountry":"CAN",
+		"userLink":"http://example.com/wp-admin/user-edit.php?user_id=11"
+*/	
+
+
+
+if (!function_exists('gourl_successful_payment')) 
+{
+	function gourl_successful_payment ($user_ID = 0, $order_ID = "", $payment_details = array())
+	{
+		// --------------------------
+		// DON'T EDIT IT
+		// --------------------------
+
+		if (!$user_ID) return false;
+		if (strpos($order_ID, "product_") !== 0  &&			// Pay-Per-Product, 	example: product_2  (db record crypto_files.fileID = 2)
+			strpos($order_ID, "file_") !== 0  &&			// Pay-Per-Download, 	example: file_5		(db record crypto_products.productID = 5)
+			$order_ID != "membership"  &&				// Pay-Per-Membership, 	example: membership
+			$order_ID != "payperview" )				// Pay-Per-View 	example: payperview
+			return false;
+	
+
+		// --------------------------
+		// PLEASE EDIT BELOW
+		// --------------------------
+
+		switch ($order_ID) 
+		{
+			case "product_1":
+				// code to be executed if you sold product with crypto_products.productID = 1
+				// user_id -  wordpress user id, $current_user->ID
+				break;
+				
+			case "product_2":
+				// code to be executed if you sold product with crypto_products.productID = 2
+				// user_id -  wordpress user id, $current_user->ID
+				break;
+				
+			case "file_1":
+				// code to be executed if you sold file with crypto_files.fileID = 1
+				// user_id -  according "Store Visitor IDs" option  on file edit page. 
+				//            if "Store Visitor IDs" = "Registered Users", user_id is wordpress user id, $current_user->ID; 
+				//            otherwise user_id is randomly generated string as user identification from unregistered visitor cookies
+				break;
+				
+			case "payperview":
+				// code to be executed if unregistered visitor bought membership Pay-Per-View
+				// user_id -  randomly generated string as user identification from unregistered visitor cookies
+				break;
+
+			case "membership":
+				// code to be executed if registered user bought membership Pay-Per-Membership
+				// user_id -  wordpress user id, $current_user->ID
+				break;
+				
+		}
+		
+		
+		// Debug - send you email every time when function gourl_successful_payment() called
+		//mail('..your_email@gmail.com', 'Debug - called gourl_successful_payment(user_ID = '.$user_ID.', order_ID = '.$order_ID.', payment_details)', 'payment_details = '.json_encode($payment_details));
+		
+		
+		return true;
+	}
+}
+    
+?>

@@ -1,3 +1,9 @@
+
+
+.gourladmin h2 {
+	font-family: 'Tenor Sans', sans-serif;
+}
+	
 .gourladmin .inside {
 	background-color: #fff !important;
 	background-image: none !important;
@@ -5,6 +11,10 @@
 
 .gourladmin h2 {
 	margin: 15px 0;
+}
+
+.gourladmin em {
+	line-height: 20px;
 }
 
 .gourladmin .error {
@@ -28,18 +38,6 @@
 	height: 100%;
 	overflow: hidden;
 	color: #666;
-}
-
-.gourladmin .donation {
-	padding: 40px;
-	font-size: 16px;
-	line-height: 26px;
-	color: #1c8a43;
-	text-align: center;
-}
-
-.gourladmin .donation img {
-	margin: 2px 20px 2px 0;
 }
 
 
@@ -106,17 +104,13 @@
 	text-decoration: underline;
 }
 
-.gourladmin .gourlbutton {
-	margin: 10px 0; 
-}
-
 .gourladmin .alignright a {
 	margin-right: 40px;
 }
 
 .gourladmin  #gourlsubmitloading {
 	position:absolute; 
-	margin: 7px 0 0 -70px;
+	margin: -3px 0 0 -70px;
 	display: none;
 }
 
@@ -135,6 +129,11 @@
 
 .gourladmin .gourlnumeric {
 	width: 80px; 
+	text-align: right;
+}
+
+.gourladmin .gourlnumeric2 {
+	width: 120px; 
 	text-align: right;
 }
 
@@ -164,40 +163,45 @@
 	margin: 7px;
 }	
 
-.gourladmin  .gourlpreview {
+.gourladmin  .gourlright {
 	float: right;
 	margin-top:-5px;
 }
 
 
-
-
-.gourladmin .gourltablestats {
-	margin-left: 300px;
-	padding: 5px;
-	border: 1px solid #fff;
-	width: 500px;
-	text-align: center;
-	background-color: #ddd;
-	color: #444;
+.gourladmin .gourlsearch {
+	float: left;
+	margin: 0 10px 10px 0;
 }
 
+.gourladmin .gourltablestats {
+    width: auto;
+    position: relative;
+    float: right;
+	}
 
-.gourladmin .gourltablestats2 {
-	margin-left: 300px;
-	padding: 5px;
+.gourladmin .gourltablestats div {
+	
+	padding: 5px 20px;
+	display:inline-block;
 	border: 1px solid #fff;
-	width: auto;
 	text-align: center;
 	background-color: #fff;
 	font-size: 14px;
 	line-height: 25px;
 	color: #444;
+	border: 1px solid #E5E5E5;
 }
 
-.gourladmin .gourltablestats2 span {
+.gourladmin .gourltablestats span, .gourlnowrap {
 	white-space:nowrap;
 }
+
+.gourladmin .gourlimgright {
+	float: right;
+	margin: 15px 10px 20px 20px;
+}
+
 
 .gourladmin .gourlwidetable {
    width: 100%;
@@ -210,7 +214,9 @@
 	float: left;
 }
 
-.gourladmin .gourlwidetable tfoot {
+.gourladmin .gourlwidetable tfoot,
+.gourladmin .gourluserstable tfoot
+ {
 	display: none;
 }
 
@@ -238,7 +244,8 @@
 .gourladmin .gourlwidetable .column-fileTitle { width: 9.7%; }
 .gourladmin .gourlwidetable .column-fileSize { width: 5.4%; text-align: center; }
 .gourladmin .gourlwidetable .column-priceUSD { width: 5.5%; text-align: right; }
-.gourladmin .gourlwidetable .column-priceShow { width: 4%; text-align: center; }
+.gourladmin .gourlwidetable .column-priceCoin { width: 7%; text-align: right; }
+.gourladmin .gourlwidetable .column-priceShow { width: 3%; text-align: center; }
 .gourladmin .gourlwidetable .column-paymentCnt { width: 3.5%; text-align: center; }
 .gourladmin .gourlwidetable .column-paymentTime { width: 6.7%; text-align: center; }
 .gourladmin .gourlwidetable .column-updatetime { width: 6.7%; text-align: center; }
@@ -258,7 +265,7 @@
 .gourladmin .gourlwidetable .column-paymentID { width: 3%; font-weight: bold; }
 .gourladmin .gourlwidetable .column-boxID { width: 3%; text-align: center; }
 .gourladmin .gourlwidetable .column-coinLabel { width: 4.2%; text-align: center; }
-.gourladmin .gourlwidetable .column-orderID { width: 6.5%; text-align: center; }
+.gourladmin .gourlwidetable .column-orderID { width: 8%; text-align: left; }
 .gourladmin .gourlwidetable .column-amount { width: 10.5%; text-align: right; }
 .gourladmin .gourlwidetable .column-amountUSD { width: 8.5%; text-align: right; }
 .gourladmin .gourlwidetable .column-unrecognised { width: 3.7%; text-align: center; }
@@ -266,11 +273,43 @@
 .gourladmin .gourlwidetable .column-countryID { width: 9%; }
 .gourladmin .gourlwidetable .column-txDate { width: 6.5%; text-align: center; }
 .gourladmin .gourlwidetable .column-txConfirmed { width: 3.5%; text-align: center; }
-.gourladmin .gourlwidetable .column-processed { width: 3.5%; text-align: center; }
-.gourladmin .gourlwidetable .column-processedDate { width: 6.5%; text-align: center; }
+.gourladmin .gourlwidetable .column-processed { width: 2.5%; text-align: center; }
+.gourladmin .gourlwidetable .column-processedDate { width: 6%; text-align: center; }
 .gourladmin .gourlwidetable .column-txID { width: 5.5%; overflow: hidden; white-space:nowrap; }
 .gourladmin .gourlwidetable .column-addr { overflow: hidden; white-space:nowrap; text-align: right; }
 
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-orderID { width: 10%; text-align: left; }
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-txID { width: 8%; overflow: hidden; white-space:nowrap; }
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-userID { width: 13.5%; }
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-amountUSD { width: 8%; }
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-txDate { width: 7%; }
+
+
+
+.gourladmin .gourluserstable .column-membID { width: 5%; text-align: center; }
+.gourladmin .gourluserstable .column-startDate,
+.gourladmin .gourluserstable .column-endDate	{ width: 17%; text-align: center; }
+.gourladmin .gourluserstable .column-recordCreated  { width: 15%; text-align: center; }
+.gourladmin .gourluserstable .column-paymentID { width: 9%; text-align: center; }
+.gourladmin .gourluserstable .column-disabled { width: 12%; text-align: center; }
+
+
+.gourladmin .gourlproducttable .column-productID { width: 3%; text-align: center; }
+.gourladmin .gourlproducttable .column-active { width: 3%; text-align: center; }
+.gourladmin .gourlproducttable .column-productTitle { width: 11%; }
+.gourladmin .gourlproducttable .column-priceUSD { width: 8%; text-align: right; }
+.gourladmin .gourlproducttable .column-priceCoin { width: 9%; text-align: right; }
+.gourladmin .gourlproducttable .column-paymentCnt { width: 4%; text-align: center; }
+.gourladmin .gourlproducttable .column-paymentTime { width: 8%; text-align: center; }
+.gourladmin .gourlproducttable .column-updatetime { width: 7.5%; text-align: center; }
+.gourladmin .gourlproducttable .column-createtime { width: 7.5%; text-align: center; }
+.gourladmin .gourlproducttable .column-expiryPeriod { width: 7%; text-align: center; }
+.gourladmin .gourlproducttable .column-defCoin { width: 6.6%; text-align: center; }
+.gourladmin .gourlproducttable .column-defShow { width: 5%; text-align: center; }
+.gourladmin .gourlproducttable .column-lang { width: 5.5%; text-align: left; }
+.gourladmin .gourlproducttable .column-purchases { width: 5.5%; text-align: center; }
+.gourladmin .gourlproducttable .column-emailUser { text-align: center; }
+.gourladmin .gourlproducttable .column-emailAdmin { text-align: center; }
 
 
 
@@ -284,12 +323,81 @@
 }
 
 
+.gourladmin .gourlsummary {
+	margin: 5px  5px 5px 50px;
+	border: 0;
+	font-family: 'Tenor Sans', sans-serif;
+}
 
 
+.gourladmin .gourlimgphone {
+	float:right;
+	margin: 80px 30px 50px 50px;
+}
 
 
+.gourladmin .gourlimginstruction {
+	float:right; 
+	margin: 0 10px 30px 40px;
+}
 
 
+.gourladmin .gourlimgpreview {
+	position: absolute;
+	margin: 2px 0 0 15px;
+	border: 0;
+}
 
+
+.gourladmin .gourlsummary p {
+	font-size: 18px;
+	line-height: 25px;
+}
+
+.gourladmin .gourllist {
+	max-width: 1420px;
+}
+
+.gourladmin .gourllist  li
+{
+	box-sizing: border-box;
+	color: rgb(51, 51, 51);
+	display: list-item;
+	font-family: 'Tenor Sans', sans-serif;
+	font-size: 19px;
+	line-height: 30px;
+	list-style-image: url(../images/checkmark.png);
+	list-style-position: outside;
+	list-style-type: disc;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 5px;
+	text-align: left;
+}
+
+.gourlsummaryinfo {
+	font-family: 'Tenor Sans', sans-serif;
+	font-size: 19px;
+	line-height: 30px;
+}
+
+.gourlsummaryinfo table {
+	min-width: 1100px;
+}
+
+.gourlsummaryinfo td {
+	padding: 5px 30px 7px 5px;
+}
+
+
+.gourladmin  .gourltitle {
+	font-family: 'Tenor Sans', sans-serif;
+	font-size: 36px;
+	font-weight: 500;
+	color: #444;
+	line-height: 39px;
+	margin: 40px 0;
+}
 
 
