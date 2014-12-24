@@ -55,11 +55,11 @@ Installation Instruction
 * ![Bitcoin-Plugin-Settings](https://gourl.io/images/gourl-wordpress-plugin.png)
 
 
-THAT'S IT! YOUR WEBSITE READY TO ACCEPT BITCOINS ONLINE!
+THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
 
 
-  
+ 
 Read more - [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
 

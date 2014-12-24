@@ -1,13 +1,14 @@
 .gourlbox {
 	padding-top: 10px;
-	text-align: center;
 	font-weight: normal;
+	text-align: center;
 }
 
 .gourlbox h1 {
 	padding: 30px;
 	margin: 0;
 	font-weight: normal;
+	text-align: center;
 }
 
 .gourlbox h3 {
@@ -15,17 +16,24 @@
 	margin: 0;
 	line-height: 140%;
 	font-weight: normal;
+	text-align: center;
 }
 
 .gourlbox .gourlprice {
 	margin: 7px;
 	font-size: 14px;
 	font-weight: normal;
+	text-align: center;
+}
+
+.gourlbox .gourlprice h3 {
+	text-align: center;
 }
 
 .gourlfiledescription, .gourldownloadlink
 {
 	font-weight: normal;
+	text-align: center;
 }
 
 #gourlcryptocoins {
@@ -34,8 +42,8 @@
 	font-size: 13px;
 	height: auto;
 	line-height: 19px;
-	text-align: center;
 	width: auto;
+	text-align: center;
 }
 
 #gourlcryptocoins a {
@@ -51,10 +59,12 @@
 	margin: 30px 0 20px 0;
 	border-radius:15px;
 	border: 0;
+	text-align: center;
 }
 
 .gourlbox .gourldownloadlink {
 	margin: 0;
+	text-align: center;
 }
 
 .gourlmembershipprice, .gourlmembershipprice2 {
@@ -78,18 +88,21 @@
 
 .gourlmembershipprice2 span {	
 	font-size: 16px;
-}	
-
+}  
 
 .gourlfiletext {
+	text-align: center;
 }
 
 .gourlproducttext {
 	margin: 30px 0 20px 0;
+	text-align: center;
 }
 
 .gourlviewtext {
+	text-align: center;
 }
 
 .gourlmembershiptext {
+	text-align: center;
 }
