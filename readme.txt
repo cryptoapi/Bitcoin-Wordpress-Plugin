@@ -1,54 +1,45 @@
 === GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership ===
-
-Author URI: https://gourl.io 
-
+Contributors: gourl
+Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
-
-Tags: bitcoin, download, bitcoins, downloads, paid downloads, digital downloads, btc, usd, selling, paypal, ecommerce, pay video, altcoin, gourl, sell, pay per download, ppd, pay per view, ppv, litecoin, dogecoin, speedcoin, darkcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, payments, online 
-
+Author URI: https://gourl.io 
+Donate link: https://gourl.io/bitcoin-wordpress-plugin.html
+Tags: bitcoin, paypal, membership, bitcoins, osCommerce, coinbase, shopping cart, ecommerce, commerce, payment gateway, payment, plugin, shop, download, credit cards
 Requires at least: 3.5
-
 Tested up to: 4.2
-
 Stable Tag: 1.1.0
-
-Contributors: none
-
 License: GNU Version 2 or Any Later Version
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc. Payments Online
 
-**GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc Payments Online**
 
 
 
 == Description ==
 
-Official GoUrl.io Bitcoin Payment Gateway Plugin for Wordpress. Pay-Per-Product - sell your products online. Pay-Per-Download - make money on digital file downloads. Pay-Per-Membership - easy to use website membership system with bitcoin payments. Pay-Per-View - offer paid access to your premium content/videos for unregistered visitors, no registration needed, anonymous. Easily Sell Files, Videos, Music, Photos, Premium Content on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. All in automatic mode. Easy integration Bitcoin payments to other wordpress plugins with Affiliate Program to plugins owners using GoUrl Official Wordpress Bitcoin Plugin Gateway.
-
+Official GoUrl.io Bitcoin Payment Gateway Plugin for Wordpress. Pay-Per-Product - sell your products online. Pay-Per-Download - make money on digital file downloads. Pay-Per-Membership - easy to use website membership system with bitcoin payments. Pay-Per-View - offer paid access to your premium content/videos for unregistered visitors, no registration needed, anonymous. Easily Sell Files, Videos, Music, Photos, Premium Content on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. All in automatic mode. Easy to integrate Bitcoin payments to other wordpress plugins with Affiliate Program to plugin owners using GoUrl Official Wordpress Bitcoin Plugin Gateway.
 
 Features of the plugin include:
 
-* 100% Free Open Source on Github.com
+* 100% Free Open Source on [Github.com](https://github.com/cryptoapi/Bitcoin-Wordpress-Plugin)
 * Accept Bitcoin Payments Online on your Wordpress website
 * No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD
-* Pay-Per-Product - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc Example
-* Pay-Per-Download - simple solution for your unregistered visitors: make money on file downloads Example
-* Pay-Per-View/Page - for your unregistered visitors: offer paid access to your premium content/videos Example
-* Pay-Per-Membership - for your registered users: offer paid access to your premium content/etc Example
+* [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc Example
+* [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads Example
+* [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos Example
+* [Pay-Per-Membership](http://gourl.io/lib/examples/pay-per-membership-multi.php) - for your registered users: offer paid access to your premium content/etc Example
 * No Chargebacks, Global, Secure, Anonymous. All in automatic mode
 * Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add a few lines of code below to their plugins (gourl bitcoin payment gateway with Affiliate Program - 33.3% lifetime revenue share) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and this your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
 * Free Wordpress Plugin Support for You
 
-Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html).
+Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
-Github: [https://github.com/cryptoapi](https://github.com/cryptoapi)
-
-Demo: [https://gourl.io/bitcoin-payment-gateway-api.html](https://gourl.io/bitcoin-payment-gateway-api.html)
+Demo: [http://gourl.io/lib/examples/pay-per-download-multi.php](http://gourl.io/lib/examples/pay-per-download-multi.php)
 
 Icons: [Oxygen Tean](http://icongal.com/gallery/iconset/840/oxygen) with GPL License
-
 
 
 
@@ -67,8 +58,7 @@ Icons: [Oxygen Tean](http://icongal.com/gallery/iconset/840/oxygen) with GPL Lic
 
 THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
-
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html).
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
 
 
