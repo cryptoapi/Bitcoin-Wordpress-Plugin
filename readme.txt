@@ -4,7 +4,11 @@ Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
 Donate link: https://gourl.io/bitcoin-wordpress-plugin.html
-Tags: bitcoin, paypal, membership, bitcoins, osCommerce, coinbase, shopping cart, ecommerce, commerce, payment gateway, payment, plugin, shop, download, credit cards
+Tags: bitcoin, paypal, membership, bitcoins, osCommerce, coinbase, shopping cart, ecommerce, commerce, payment gateway, payment, plugin, shop, credit cards, google, example, donation, amazon, online shop, ebay, direct debit, wordpress paypal, paypal payment, buy now, currency, invoice, sell online, sell products online, sell products, earn money, affiliate program, plugin developers, digital downloads, paid downloads, easy downloads, easy digital downloads, digital download, paid download, download, downloads, file downloads, file download, e-commerce, e-downloads, e-store, ecommerce, selling, wp ecommerce, bitpay, woocommerce, payment processor, store, paid membership, membership pro, paid pages, paid video, paid plugins, btc, usd, altcoin, gourl, sell, pay per download, pay per view, pay per video, ppv, litecoin, dogecoin, speedcoin, darkcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, payments, online, affiliates, make money, developers, revenue, sale, shortcode, widget, wordpress, wordpress ecommerce, official, wordpress payment gateway, extension, gateway, paid content, subscriptions, marketspace, wordpress payment processor
+
+
+
+
 Requires at least: 3.5
 Tested up to: 4.2
 Stable Tag: 1.1.0
@@ -26,9 +30,9 @@ Features of the plugin include:
 * Accept Bitcoin Payments Online on your Wordpress website
 * No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD
 * [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc Example
-* [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads Example
-* [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos Example
-* [Pay-Per-Membership](http://gourl.io/lib/examples/pay-per-membership-multi.php) - for your registered users: offer paid access to your premium content/etc Example
+* [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads 
+* [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos 
+* [Pay-Per-Membership](http://gourl.io/lib/examples/pay-per-membership-multi.php) - for your registered users: offer paid access to your premium content/etc 
 * No Chargebacks, Global, Secure, Anonymous. All in automatic mode
 * Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add a few lines of code below to their plugins (gourl bitcoin payment gateway with Affiliate Program - 33.3% lifetime revenue share) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.
