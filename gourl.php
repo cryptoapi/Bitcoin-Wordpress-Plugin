@@ -2163,7 +2163,7 @@ final class gourlclass
 	
 			
 		// Paid Already
-		if ($is_paid) return "";
+		if ($is_paid && !$preview_mode) return "";
 	
 	
 	
@@ -2195,9 +2195,11 @@ final class gourlclass
 	
 		$tmp .= "<div class='gourlbox' style='min-width:".$box_width."px'>";
 	
-	
-		if ($image) $tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax>0?"style='max-width:".$imageWidthMax."px'":"")." title='".__('Page Content Locked! Please pay below ', GOURL)."' alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
-		if (!$is_paid) $tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
+		if (!$is_paid)
+		{
+			if ($image) $tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax>0?"style='max-width:".$imageWidthMax."px'":"")." title='".__('Page Content Locked! Please pay below ', GOURL)."' alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
+			$tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
+		}	
 	
 		if ($is_paid) 			$tmp .= "<br /><br /><br />";
 		elseif (!$coins_list) 	$tmp .= "<br /><br />";
@@ -2724,7 +2726,7 @@ final class gourlclass
 	else	
 	{	
 		// if admin disabled valid user membership, display new payment form with new unique orderID for that user
-		$prev_payments = $wpdb->get_row("SELECT count(membID) as cnt FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && paymentID > 0", OBJECT);
+		$prev_payments = $wpdb->get_row("SELECT count(membID) as cnt FROM crypto_membership WHERE userID = ".$current_user->ID." && disabled = 1 && startDate <= '$dt' && endDate >= '$dt' && paymentID > 0", OBJECT);
 		if ($prev_payments && $prev_payments->cnt > 0)
 		{
 			$orderID 		= "membership".($prev_payments->cnt+1);
@@ -2806,7 +2808,7 @@ final class gourlclass
 	
 			
 		// Paid Already
-		if ($is_paid) return "";
+		if ($is_paid && !$preview_mode) return "";
 	
 	
 	
@@ -2840,17 +2842,22 @@ final class gourlclass
 	
 		if ($imageWidthMax>0) $imageWidthMax .= "px";
 	
-		if ($image) 
-		{	
-			if ($this->right($image, "/", false) == "image1.png")
-			{ 
-				$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 3)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
-				if (is_user_logged_in() && $current_user->ID) $image = str_replace("image1.png", "image1b.png", $image);
-				$imageWidthMax = "none";
+		if (!$is_paid)
+		{
+			if ($image) 
+			{	
+				if ($this->right($image, "/", false) == "image1.png")
+				{ 
+					$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 3)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
+					if (is_user_logged_in() && $current_user->ID) $image = str_replace("image1.png", "image1b.png", $image);
+					$imageWidthMax = "none";
+				}
+				$tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax?"style='max-width:".$imageWidthMax."'":"")." alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
 			}
-			$tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax?"style='max-width:".$imageWidthMax."'":"")." alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
+			$tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
 		}
-		if (!$is_paid) $tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
+		elseif ($is_paid && $preview_mode) $tmp .= sprintf(__("<b>ADMIN NOTE:</b> Your test payment received successfully.<br>Please <a href='%s'>disable your test membership</a> and you will see payment box again", GOURL), GOURL_ADMIN.GOURL."paypermembership_users&s=user".$current_user->ID);
+		
 	
 		if ($is_paid) 			$tmp .= "<br /><br /><br />";
 		elseif (!$coins_list) 	$tmp .= "<br /><br />";
@@ -6615,7 +6622,7 @@ function gourl_action_links($links, $file)
 
 
 /*              
- *  XXI. Hooks & Main Class call
+ *  XXI. Hooks & Main Class call      
  *  ----------------------------------------
  */
 
