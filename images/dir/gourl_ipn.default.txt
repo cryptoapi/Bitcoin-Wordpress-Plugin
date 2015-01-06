@@ -8,6 +8,7 @@ if (!defined( 'ABSPATH' ) || !defined( 'GOURL_IPN' )) exit; // Exit if accessed 
 	
 	Optional. You can use additional actions after a payment has been received (update database records, etc).
 	Accept IPN for GoUrl Pay-Per-Product, Pay-Per-Download, Pay-Per-Membership, Pay-Per-View only.
+	See screenshot - http://gourl.io/images/plugin2.png
 	Simply edit this php file and add section with your order_ID in function gourl_successful_payment() below.
 	---------------------------------------------------------------------------------
 */
@@ -104,7 +105,8 @@ if (!function_exists('gourl_successful_payment'))
 
 	1. EXAMPLE - CORRECT PAYMENT - user with ID = 115 has made payment for product with ID = 8.
 
-	// Function gourl_successful_payment($user_ID, $order_ID, $payment_details, $box_status) will receive -  
+	// See screenshot - http://gourl.io/images/plugin2.png 
+	// Function gourl_successful_payment($user_ID, $order_ID, $payment_details, $box_status) will receive - 
 	
 	$user_ID = 115;
 	$order_ID = "product_8";	
@@ -171,5 +173,5 @@ if (!function_exists('gourl_successful_payment'))
 	// Second time function will appear with $box_status = "cryptobox_updated" and $payment_details["is_confirmed"] = 1. Other values will be the same
       
 ************************************/
-             
+  
 ?>

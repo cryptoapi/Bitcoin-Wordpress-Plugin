@@ -324,7 +324,7 @@
 
 
 .gourladmin .gourlsummary {
-	margin: 5px  5px 5px 50px;
+	margin: 5px  5px 5px 30px;
 	border: 0;
 	font-family: 'Tenor Sans', sans-serif;
 }
@@ -399,3 +399,17 @@
 	line-height: 39px;
 	margin: 40px 0;
 }
+
+.gourladmin  .gourlnews {
+	-o-box-shadow: 0 0 10px #eee;
+	-moz-box-shadow: 0 0 10px #eee;
+	-webkit-box-shadow: 0 0 10px #eee;
+	box-shadow: 0 0 10px #eee;
+	padding: 5px 30px 10px 40px;
+	color: #0db14b;
+}
+
+.gourladmin  .gourlnews  p {
+	font-family: 'Open Sans', sans-serif;
+	line-height: 35px;
+} 
