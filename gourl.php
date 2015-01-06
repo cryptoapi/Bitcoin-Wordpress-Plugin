@@ -1512,7 +1512,7 @@ final class gourlclass
 				
 			/// GoUrl Payment Class
 			// --------------------------
-			include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+			include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 				
 				
 				
@@ -2122,7 +2122,7 @@ final class gourlclass
 			
 		/// GoUrl Payment Class
 		// --------------------------
-		include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 			
 			
 			
@@ -2767,7 +2767,7 @@ final class gourlclass
 			
 		/// GoUrl Payment Class
 		// --------------------------
-		include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 			
 			
 			
@@ -3770,7 +3770,7 @@ final class gourlclass
 	
 			/// GoUrl Payment Class
 			// --------------------------
-			include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+			include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 	
 	
 	
@@ -3959,7 +3959,7 @@ final class gourlclass
 			$s = trim($_GET["s"]);
 			if (!$search)
 			{
-				include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+				include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 				
 				$key = get_country_name($s, true); 
 				if ($key) $s = $key;
@@ -4062,7 +4062,7 @@ final class gourlclass
 				"period"      => "NO EXPIRY"
 				);
 		
-		include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 		
 		$box = new Cryptobox ($options);
 		
@@ -4661,8 +4661,8 @@ final class gourlclass
 			
 			if ($cryptobox_private_keys) DEFINE("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 
-			include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
-			include_once(plugin_dir_path( __FILE__ )."cryptobox.callback.php");
+			include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
+			include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.callback.php");
 			
 			ob_flush();
 			
@@ -4789,7 +4789,7 @@ final class gourlclass
 	
 		/// GoUrl Payment Class
 		// --------------------------
-		include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 	
 	
 	
@@ -6183,7 +6183,7 @@ class gourl_table_payments extends WP_List_Table
 				)
 			);
 		
-		include_once(plugin_dir_path( __FILE__ )."cryptobox.class.php");
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 		
 	}
 
@@ -6621,7 +6621,7 @@ function gourl_action_links($links, $file)
 
 
 /*              
- *  XXI. Hooks & Main Class call      
+ *  XXI. Hooks & Main Class call                
  *  ----------------------------------------
  */
 
