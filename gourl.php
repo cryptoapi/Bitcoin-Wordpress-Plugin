@@ -2191,7 +2191,7 @@ final class gourlclass
 	
 		$tmp  = "<br />";
 	
-		if ($textAbove) $tmp .= "<div class='gourlviewtext'>".$textAbove."</div>".($image ? "<br /><br />" : ""); else $tmp .= "<br />";
+		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlviewtext'>".$textAbove."</div>".($image ? "<br /><br />" : ""); else $tmp .= "<br />";
 	
 		$tmp .= "<div class='gourlbox' style='min-width:".$box_width."px'>";
 	
@@ -2213,7 +2213,7 @@ final class gourlclass
 		$tmp .= "</div>";
 	
 	
-		if ($textBelow) $tmp .= "<br /><br /><br /><div class='gourlviewtext'>".$textBelow."</div>";
+		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br /><div class='gourlviewtext'>".$textBelow."</div>";
 	
 	
 	
@@ -2836,16 +2836,15 @@ final class gourlclass
 	
 		$tmp  = "<br />";
 	
-		if ($textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image ? "<br /><br />" : ""); else $tmp .= "<br />";
+		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image ? "<br /><br />" : ""); else $tmp .= "<br />";
 	
 		$tmp .= "<div align='center'><div class='gourlbox' style='min-width:".$box_width."px;".($image && $this->right($image,"/",false)=="image1.png"?"max-width:555px;":"")."'>";
-	
-		if ($imageWidthMax>0) $imageWidthMax .= "px";
 	
 		if (!$is_paid)
 		{
 			if ($image) 
-			{	
+			{
+				if ($imageWidthMax>0) $imageWidthMax .= "px";
 				if ($this->right($image, "/", false) == "image1.png")
 				{ 
 					$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 3)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
@@ -2871,7 +2870,7 @@ final class gourlclass
 		$tmp .= "</div></div>";
 	
 	
-		if ($textBelow) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
+		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
 	
 	
 	
