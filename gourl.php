@@ -3053,6 +3053,7 @@ final class gourlclass
 				
 		// User Selected
 		$f = true;
+		$this->record["userID"] = 0;
 		if (isset($_GET['userID']) && intval($_GET['userID'])) 
 		{
 			$obj =  get_userdata(intval($_GET['userID']));
@@ -3063,7 +3064,6 @@ final class gourlclass
 				$this->record["userID"] = $obj->ID;
 				$f = false;
 			}
-			else $this->record["userID"] = 0;
 		}
 		
 		
@@ -5286,7 +5286,7 @@ function gourl_userdetails($val, $br = true)
 		if ($userID)
 		{	
 			$obj =  get_userdata($userID);
-			if ($obj->data->user_nicename) $tmp = "user".$userID." - <a href='/wp-admin/user-edit.php?user_id=".$userID."'>".$obj->data->user_nicename . ($br?"<br/>":", &#160; ") . $obj->data->user_email . "</a>";
+			if ($obj && $obj->data->user_nicename) $tmp = "user".$userID." - <a href='/wp-admin/user-edit.php?user_id=".$userID."'>".$obj->data->user_nicename . ($br?"<br/>":", &#160; ") . $obj->data->user_email . "</a>";
 			else $tmp = "user".$userID;
 		}	
 	}
@@ -6618,10 +6618,37 @@ function gourl_action_links($links, $file)
 
 
 
+/*
+ *  XXI.
+*/
+if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
+{
+	function has_shortcode( $content, $tag ) {
+		if ( false === strpos( $content, '[' ) ) {
+			return false;
+		}
+	
+		preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches, PREG_SET_ORDER );
+		if ( empty( $matches ) )
+			return false;
+
+		foreach ( $matches as $shortcode ) {
+			if ( $tag === $shortcode[2] ) {
+				return true;
+			} elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
+
+
 
 
 /*              
- *  XXI. Hooks & Main Class call                
+ *  XXII. Hooks & Main Class call           
  *  ----------------------------------------
  */
 
