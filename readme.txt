@@ -3,11 +3,11 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payment, bitcoin payments, paypal, membership, bitcoins, download, osCommerce, coinbase, shopping cart, ecommerce, commerce, woocommerce, eshop, payment gateway, payment, plugin, shop, credit cards, google, example, donation, amazon, online shop, ebay, direct debit, wordpress paypal, paypal payment, buy now, currency, invoice, sell online, sell products online, sell products, earn money, affiliate program, plugin developers, digital downloads, paid downloads, easy downloads, easy digital downloads, easy digital download, digital download, downloads, file downloads, file download, e-commerce, e-downloads, e-store, ecommerce, selling, wp ecommerce, bitpay, woocommerce, payment processor, store, paid membership, paid pages, paid video, btc, usd, altcoin, gourl, sell, pay per download, pay per view, pay per video, ppv, litecoin, dogecoin, speedcoin, darkcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, payments, online, affiliates, make money, developers, revenue, sale, shortcode, widget, wordpress, wordpress ecommerce, official, wordpress payment gateway, extension, gateway, paid content, subscriptions, woocommerce, registration, content protection, control access, wordpress payment processor, subscription, wordpress membership, restrict content, paying users, multisite membership, paid membership, paying users, doge, cryptocurrency, crypto currency, virtual currency, altcoins, altcoin
+Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admin, affiliate program, affiliates, altcoin, altcoins, amazon, bitpay, btc, buy now, coinbase, commerce, content protection, content, control access, credit cards, crypto currency, cryptocurrency, currency, darkcoin, developers, digital download, digital downloads, direct debit, doge, dogecoin, donation, download, downloads, e-commerce, e-downloads, e-store, earn money, easy digital download, easy digital downloads, easy downloads, ebay, ecommerce, eshop, example, extension, feathercoin, file download, file downloads, gateway, google, gourl, invoice, litecoin, make money, member, members only, members, membership, memberships, multisite membership, official, online shop, online, osCommerce, paid content, paid downloads, paid membership, paid pages, paid video, pay per download, pay per video, pay per view, paying users, payment gateway, payment processor, payment, payments, paypal payment, paypal, plugin developers, plugin, potcoin, ppv, protection, reddcoin, register, registration, restrict access, restrict content, revenue, sale, sell online, sell products online, sell products, sell, selling, shop, shopping cart, shortcode, speedcoin, store, subscription, subscriptions, teaser, usd, vericoin, vertcoin, virtual currency, widget, woocommerce, wordPress Membership Plugin, wordpress ecommerce, wordpress membership, wordpress payment gateway, wordpress payment processor, wordpress paypal, wordpress, wp ecommerce
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.1
+Stable Tag: 1.2.2
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,10 +42,10 @@ GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, 
 .
 
 
-= Our Statement regarding Bitstamp, Mt Gox (January 2015) = 
+= Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015) = 
 
-The above companies kept the client's money on their servers. And this caused the problems.
-Our GoUrl Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. This gives additional protection to our customers against hackers, etc.
+The above companies kept the client's bitcoins on their servers. And this caused the problems.
+Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. This gives additional protection to our customers against hackers, etc.
 
 
 .
@@ -96,6 +96,13 @@ In the search field type "GoUrl" and click Search Plugins. Once you've found our
 
 THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
+
+= 3. Testing environment =
+
+You can use 110 free Speedcoins or Dogecoins for testing.
+Url: [http://speedcoin.co/info/free_coins/Free_Speedcoins.html](http://speedcoin.co/info/free_coins/Free_Speedcoins.html)
+The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
+
 More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
 
@@ -128,6 +135,9 @@ More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gou
 
 == Changelog ==
 
+= 1.2.2 =
+Several new enhancements
+
 = 1.2.1 =
 Several new enhancements
 
@@ -145,7 +155,7 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.1 =
+= 1.2.2 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
- 
+    
  

@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.2.1
+Version 1.2.2
 
 
 **GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc Payments Online**
@@ -11,7 +11,7 @@ Version 1.2.1
 * Plugin URI: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 * Requires at least: 3.5
 * Tested up to: 4.2
-* Stable Tag: 1.2.1
+* Stable Tag: 1.2.2
 * License: GNU Version 2 or Any Later Version
 
 
@@ -45,11 +45,11 @@ Our Payment Gateway with Instant Checkout allows you to easily organise your web
 
 
 
-Our Statement regarding Bitstamp, Mt Gox (January 2015)
+Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015)
 ---------------------
 
-The above companies kept the client's money on their servers. And this caused the problems.
-Our GoUrl Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. This gives additional protection to our customers against hackers, etc.
+The above companies kept the client's bitcoins on their servers. And this caused the problems.
+Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. This gives additional protection to our customers against hackers, etc.
 
 
 .
@@ -107,6 +107,19 @@ In the search field type "GoUrl" and click Search Plugins. Once you've found our
 
 THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
+
+**3. Testing environment**
+
+You can use 110 free Speedcoins or Dogecoins for testing.
+Url: http://speedcoin.co/info/free_coins/Free_Speedcoins.html
+The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
+
+
+
 More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
-   
+
+
+
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+

@@ -3,7 +3,7 @@
 Plugin Name: 		GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: 		https://gourl.io/bitcoin-wordpress-plugin.html
 Description: 		Official <a href="https://gourl.io">GoUrl.io</a> Bitcoin Payment Gateway Plugin for Wordpress. <a href="http://gourl.io/lib/examples/pay-per-product-multi.php">Pay-Per-Product</a> - sell your products online. <a href="http://gourl.io/lib/examples/pay-per-download-multi.php">Pay-Per-Download</a> - make money on digital file downloads. <a href="http://gourl.io/lib/examples/pay-per-membership-multi.php">Pay-Per-Membership</a> - easy to use website membership system with bitcoin payments. <a href="http://gourl.io/lib/examples/pay-per-page-multi.php">Pay-Per-View</a> - offer paid access to your premium content/videos for unregistered visitors, no registration needed, anonymous. Easily Sell Files, Videos, Music, Photos, Premium Content on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure.  All in automatic mode. Easy to integrate Bitcoin payments to other wordpress plugins with <a href="https://gourl.io/bitcoin-wordpress-plugin.html">Affiliate Program</a> to plugin owners using this plugin functionality. 
-Version: 			1.2.1
+Version: 			1.2.2
 Author: 			GoUrl.io
 Author URI: 		https://gourl.io
 License: 			GPLv2
@@ -31,7 +31,7 @@ $dir_arr = wp_upload_dir();
 DEFINE('GOURL', 				"gourl");
 DEFINE('GOURL_PREVIEW', 		"gourladmin");
 DEFINE('GOURL_NAME', 			__('GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership', GOURL));
-DEFINE('GOURL_VERSION', 		"1.2.1");
+DEFINE('GOURL_VERSION', 		"1.2.2");
 DEFINE('GOURL_ADMIN', 			get_bloginfo("wpurl")."/wp-admin/admin.php?page=");
 DEFINE('GOURL_DIR',  			$dir_arr["basedir"]."/".GOURL.'/');
 DEFINE('GOURL_DIR2', 			$dir_arr["baseurl"]."/".GOURL.'/');
@@ -96,8 +96,10 @@ final class gourlclass
 	public function __construct() 
 	{
 
-		// upload dir
-		gourl_retest_dir();
+		// compatible test
+		$ver = get_option(GOURL.'version');
+		if (!$ver || version_compare($ver, GOURL_VERSION) < 0) $this->upgrade();
+		else gourl_retest_dir();
 		
 		
 		// Current Page, Record ID
@@ -436,8 +438,8 @@ final class gourlclass
 		
 		$tmp .= "<br><br><br><br>";
 		$tmp .= "<div class='gourlnews'>";
-		$tmp .= "<div class='gourltitle'>".__('Our Statement regarding Bitstamp, Mt Gox (January 2015)', GOURL)."</div>";
-		$tmp .= "<p>The above companies kept the client's money on their servers. And this caused the problems.<br>Our GoUrl Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. This gives additional protection to our customers against hackers, etc.</p>";
+		$tmp .= "<div class='gourltitle'>".__('Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015)', GOURL)."</div>";
+		$tmp .= "<p>The above companies kept the client's bitcoins on their servers. And this caused the problems.<br>Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. This gives additional protection to our customers against hackers, etc.</p>";
 		$tmp .= "<a name='i3'></a>";
 		$tmp .= "</div>";
 		
@@ -458,6 +460,9 @@ final class gourlclass
 		$tmp .= "</ul>";
 		
 		$tmp .= "<p>".__('THAT\'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!', GOURL)."</p>";
+		
+		$tmp .= "<br><p>".__('<b>Testing environment</b>: You can use <a target="_blank" href="http://speedcoin.co/info/free_coins/Free_Speedcoins.html">110 free Speedcoins</a> or <a target="_blank" href="http://goo.gl/L8H9gG">Dogecoins</a> for testing', GOURL)."</p>";
+		
 		
 		$tmp .= "<br><p>".__('Start to use on your website -', GOURL)."</p>";
 		
@@ -4909,7 +4914,210 @@ final class gourlclass
 	
 	
 	/*
-	 *  57. Supported Functions
+	 *  58.
+	 */ 
+	private function upgrade ()
+	{
+		global $wpdb;
+	
+		if($wpdb->get_var("SHOW TABLES LIKE 'crypto_files'") != 'crypto_files')
+		{
+			$sql = "CREATE TABLE `crypto_files` (
+			  `fileID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			  `fileTitle` varchar(100) NOT NULL DEFAULT '',
+			  `active` tinyint(1) NOT NULL DEFAULT '1',
+			  `fileName` varchar(100) NOT NULL DEFAULT '',
+			  `fileSize` double(15,0) NOT NULL DEFAULT '0',
+			  `fileText` text,
+			  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
+			  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
+			  `priceLabel` varchar(6) NOT NULL DEFAULT '',
+			  `purchases` mediumint(8) NOT NULL DEFAULT '0',
+			  `userFormat` enum('MANUAL','COOKIE','SESSION','IPADDRESS') NOT NULL,
+			  `expiryPeriod` varchar(15) NOT NULL DEFAULT '',
+			  `lang` varchar(2) NOT NULL DEFAULT '',
+			  `defCoin` varchar(5) NOT NULL DEFAULT '',
+			  `defShow` tinyint(1) NOT NULL DEFAULT '1',
+			  `image` varchar(100) NOT NULL DEFAULT '',
+			  `imageWidth` smallint(5) NOT NULL DEFAULT '0',
+			  `priceShow` tinyint(1) NOT NULL DEFAULT '1',
+			  `paymentCnt` smallint(5) NOT NULL DEFAULT '0',
+			  `paymentTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `updatetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `createtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  PRIMARY KEY (`fileID`),
+			  KEY `fileTitle` (`fileTitle`),
+			  KEY `active` (`active`),
+			  KEY `fileName` (`fileName`),
+			  KEY `fileSize` (`fileSize`),
+			  KEY `priceUSD` (`priceUSD`),
+			  KEY `priceCoin` (`priceCoin`),
+			  KEY `priceLabel` (`priceLabel`),
+			  KEY `purchases` (`purchases`),
+			  KEY `userFormat` (`userFormat`),
+			  KEY `expiryPeriod` (`expiryPeriod`),
+			  KEY `lang` (`lang`),
+			  KEY `defCoin` (`defCoin`),
+			  KEY `defShow` (`defShow`),
+			  KEY `image` (`image`),
+			  KEY `imageWidth` (`imageWidth`),
+			  KEY `priceShow` (`priceShow`),
+			  KEY `paymentCnt` (`paymentCnt`),
+			  KEY `paymentTime` (`paymentTime`),
+			  KEY `updatetime` (`updatetime`),
+			  KEY `createtime` (`createtime`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+	
+			$wpdb->query($sql);
+		}
+		// upgrade
+		elseif ($wpdb->query("select priceCoin from crypto_files limit 1") === false)
+		{
+			$wpdb->query("alter table crypto_files add `priceCoin` double(15,3) NOT NULL DEFAULT '0.000' after priceUSD");
+			$wpdb->query("alter table crypto_files add `priceLabel` varchar(6) NOT NULL DEFAULT '' after priceCoin");
+			$wpdb->query("alter table crypto_files add key `priceCoin` (priceCoin)");
+			$wpdb->query("alter table crypto_files add key `priceLabel` (priceLabel)");
+		}
+	
+		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_payments'") != 'crypto_payments')
+		{
+			$sql = "CREATE TABLE `crypto_payments` (
+			  `paymentID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			  `boxID` int(11) unsigned NOT NULL DEFAULT '0',
+			  `boxType` enum('paymentbox','captchabox') NOT NULL,
+			  `orderID` varchar(50) NOT NULL DEFAULT '',
+			  `userID` varchar(50) NOT NULL DEFAULT '',
+			  `countryID` varchar(3) NOT NULL DEFAULT '',
+			  `coinLabel` varchar(6) NOT NULL DEFAULT '',
+			  `amount` double(20,8) NOT NULL DEFAULT '0.00000000',
+			  `amountUSD` double(20,8) NOT NULL DEFAULT '0.00000000',
+			  `unrecognised` tinyint(1) unsigned NOT NULL DEFAULT '0',
+			  `addr` varchar(34) NOT NULL DEFAULT '',
+			  `txID` char(64) NOT NULL DEFAULT '',
+			  `txDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `txConfirmed` tinyint(1) unsigned NOT NULL DEFAULT '0',
+			  `txCheckDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `processed` tinyint(1) unsigned NOT NULL DEFAULT '0',
+			  `processedDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `recordCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  PRIMARY KEY (`paymentID`),
+			  KEY `boxID` (`boxID`),
+			  KEY `boxType` (`boxType`),
+			  KEY `userID` (`userID`),
+			  KEY `countryID` (`countryID`),
+			  KEY `orderID` (`orderID`),
+			  KEY `amount` (`amount`),
+			  KEY `amountUSD` (`amountUSD`),
+			  KEY `coinLabel` (`coinLabel`),
+			  KEY `unrecognised` (`unrecognised`),
+			  KEY `addr` (`addr`),
+			  KEY `txID` (`txID`),
+			  KEY `txDate` (`txDate`),
+			  KEY `txConfirmed` (`txConfirmed`),
+			  KEY `txCheckDate` (`txCheckDate`),
+			  KEY `processed` (`processed`),
+			  KEY `processedDate` (`processedDate`),
+			  KEY `recordCreated` (`recordCreated`),
+			  KEY `key1` (`boxID`,`orderID`),
+			  KEY `key2` (`boxID`,`orderID`,`userID`),
+			  KEY `key3` (`boxID`,`orderID`,`userID`,`txID`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+	
+			$wpdb->query($sql);
+		}
+	
+	
+		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_membership'") != 'crypto_membership')
+		{
+			$sql = "CREATE TABLE `crypto_membership` (
+			  `membID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			  `userID` bigint(20) unsigned NOT NULL DEFAULT '0',
+			  `paymentID` int(11) unsigned NOT NULL DEFAULT '0',
+			  `startDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `endDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  `disabled` tinyint(1) unsigned NOT NULL DEFAULT '0',
+			  `recordCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			  PRIMARY KEY (`membID`),
+			  KEY `userID` (`userID`),
+			  KEY `paymentID` (`paymentID`),
+			  KEY `startDate` (`startDate`),
+			  KEY `endDate` (`endDate`),
+			  KEY `disabled` (`disabled`),
+			  KEY `recordCreated` (`recordCreated`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+	
+			$wpdb->query($sql);
+		}
+	
+	
+		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_products'") != 'crypto_products')
+		{
+			$sql = "CREATE TABLE `crypto_products` (
+				  `productID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				  `productTitle` varchar(100) NOT NULL DEFAULT '',
+				  `active` tinyint(1) NOT NULL DEFAULT '1',
+				  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
+				  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
+				  `priceLabel` varchar(6) NOT NULL DEFAULT '',
+				  `purchases` mediumint(8) NOT NULL DEFAULT '0',
+				  `expiryPeriod` varchar(15) NOT NULL DEFAULT '',
+				  `lang` varchar(2) NOT NULL DEFAULT '',
+				  `defCoin` varchar(5) NOT NULL DEFAULT '',
+				  `defShow` tinyint(1) NOT NULL DEFAULT '1',
+				  `productText` text,
+				  `finalText` text,
+				  `emailUser` tinyint(1) NOT NULL DEFAULT '1',
+				  `emailUserFrom` varchar(50) NOT NULL DEFAULT '',
+				  `emailUserTitle` varchar(100) NOT NULL DEFAULT '',
+				  `emailUserBody` text,
+				  `emailAdmin` tinyint(1) NOT NULL DEFAULT '1',
+				  `emailAdminFrom` varchar(50) NOT NULL DEFAULT '',
+				  `emailAdminTo` text,
+				  `emailAdminTitle` varchar(100) NOT NULL DEFAULT '',
+				  `emailAdminBody` text,
+				  `paymentCnt` smallint(5) NOT NULL DEFAULT '0',
+				  `paymentTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				  `updatetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				  `createtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				  PRIMARY KEY (`productID`),
+				  KEY `productTitle` (`productTitle`),
+				  KEY `active` (`active`),
+				  KEY `priceUSD` (`priceUSD`),
+				  KEY `priceCoin` (`priceCoin`),
+				  KEY `priceLabel` (`priceLabel`),
+				  KEY `purchases` (`purchases`),
+				  KEY `expiryPeriod` (`expiryPeriod`),
+				  KEY `lang` (`lang`),
+				  KEY `defCoin` (`defCoin`),
+				  KEY `defShow` (`defShow`),
+				  KEY `emailUser` (`emailUser`),
+				  KEY `emailAdmin` (`emailAdmin`),
+				  KEY `paymentCnt` (`paymentCnt`),
+				  KEY `paymentTime` (`paymentTime`),
+				  KEY `updatetime` (`updatetime`),
+				  KEY `createtime` (`createtime`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+	
+			$wpdb->query($sql);
+		}
+	
+	
+		// current version
+		update_option(GOURL.'version', GOURL_VERSION);
+	
+		// upload dir
+		gourl_retest_dir();
+	
+		ob_flush();
+	
+		return true;
+	}
+	
+	
+	
+	
+	/*
+	 *  58. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -4964,205 +5172,12 @@ final class gourlclass
 
 
 /*
- *  I. Install Plugin
+ *  I. Uninstall Plugin
 */
-function gourl_install ()
+function gourl_uninstall()
 {
-	global $wpdb;
-
-	if($wpdb->get_var("SHOW TABLES LIKE 'crypto_files'") != 'crypto_files') 
-	{
-		$sql = "CREATE TABLE `crypto_files` (
-			  `fileID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			  `fileTitle` varchar(100) NOT NULL DEFAULT '',
-			  `active` tinyint(1) NOT NULL DEFAULT '1',
-			  `fileName` varchar(100) NOT NULL DEFAULT '',
-			  `fileSize` double(15,0) NOT NULL DEFAULT '0',
-			  `fileText` text,
-			  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
-			  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
-			  `priceLabel` varchar(6) NOT NULL DEFAULT '',
-			  `purchases` mediumint(8) NOT NULL DEFAULT '0',
-			  `userFormat` enum('MANUAL','COOKIE','SESSION','IPADDRESS') NOT NULL,
-			  `expiryPeriod` varchar(15) NOT NULL DEFAULT '',
-			  `lang` varchar(2) NOT NULL DEFAULT '',
-			  `defCoin` varchar(5) NOT NULL DEFAULT '',
-			  `defShow` tinyint(1) NOT NULL DEFAULT '1',
-			  `image` varchar(100) NOT NULL DEFAULT '',
-			  `imageWidth` smallint(5) NOT NULL DEFAULT '0',
-			  `priceShow` tinyint(1) NOT NULL DEFAULT '1',
-			  `paymentCnt` smallint(5) NOT NULL DEFAULT '0',
-			  `paymentTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `updatetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `createtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  PRIMARY KEY (`fileID`),
-			  KEY `fileTitle` (`fileTitle`),
-			  KEY `active` (`active`),
-			  KEY `fileName` (`fileName`),
-			  KEY `fileSize` (`fileSize`),
-			  KEY `priceUSD` (`priceUSD`),
-			  KEY `priceCoin` (`priceCoin`),
-			  KEY `priceLabel` (`priceLabel`),
-			  KEY `purchases` (`purchases`),
-			  KEY `userFormat` (`userFormat`),
-			  KEY `expiryPeriod` (`expiryPeriod`),
-			  KEY `lang` (`lang`),
-			  KEY `defCoin` (`defCoin`),
-			  KEY `defShow` (`defShow`),
-			  KEY `image` (`image`),
-			  KEY `imageWidth` (`imageWidth`),
-			  KEY `priceShow` (`priceShow`),
-			  KEY `paymentCnt` (`paymentCnt`),
-			  KEY `paymentTime` (`paymentTime`),
-			  KEY `updatetime` (`updatetime`),
-			  KEY `createtime` (`createtime`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-
-		$wpdb->query($sql);
-	}	
-	// upgrade
-	elseif ($wpdb->query("select priceCoin from crypto_files limit 1") === false)
-	{
-		$wpdb->query("alter table crypto_files add `priceCoin` double(15,3) NOT NULL DEFAULT '0.000' after priceUSD");
-		$wpdb->query("alter table crypto_files add `priceLabel` varchar(6) NOT NULL DEFAULT '' after priceCoin");
-		$wpdb->query("alter table crypto_files add key `priceCoin` (priceCoin)");
-		$wpdb->query("alter table crypto_files add key `priceLabel` (priceLabel)");
-	} 
-
-	if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_payments'") != 'crypto_payments') 
-	{
-		$sql = "CREATE TABLE `crypto_payments` (
-			  `paymentID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			  `boxID` int(11) unsigned NOT NULL DEFAULT '0',
-			  `boxType` enum('paymentbox','captchabox') NOT NULL,
-			  `orderID` varchar(50) NOT NULL DEFAULT '',
-			  `userID` varchar(50) NOT NULL DEFAULT '',
-			  `countryID` varchar(3) NOT NULL DEFAULT '',
-			  `coinLabel` varchar(6) NOT NULL DEFAULT '',
-			  `amount` double(20,8) NOT NULL DEFAULT '0.00000000',
-			  `amountUSD` double(20,8) NOT NULL DEFAULT '0.00000000',
-			  `unrecognised` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `addr` varchar(34) NOT NULL DEFAULT '',
-			  `txID` char(64) NOT NULL DEFAULT '',
-			  `txDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `txConfirmed` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `txCheckDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `processed` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `processedDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `recordCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  PRIMARY KEY (`paymentID`),
-			  KEY `boxID` (`boxID`),
-			  KEY `boxType` (`boxType`),
-			  KEY `userID` (`userID`),
-			  KEY `countryID` (`countryID`),
-			  KEY `orderID` (`orderID`),
-			  KEY `amount` (`amount`),
-			  KEY `amountUSD` (`amountUSD`),
-			  KEY `coinLabel` (`coinLabel`),
-			  KEY `unrecognised` (`unrecognised`),
-			  KEY `addr` (`addr`),
-			  KEY `txID` (`txID`),
-			  KEY `txDate` (`txDate`),
-			  KEY `txConfirmed` (`txConfirmed`),
-			  KEY `txCheckDate` (`txCheckDate`),
-			  KEY `processed` (`processed`),
-			  KEY `processedDate` (`processedDate`),
-			  KEY `recordCreated` (`recordCreated`),
-			  KEY `key1` (`boxID`,`orderID`),
-			  KEY `key2` (`boxID`,`orderID`,`userID`),
-			  KEY `key3` (`boxID`,`orderID`,`userID`,`txID`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-
-		$wpdb->query($sql);
-	}	
-
-	
-	if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_membership'") != 'crypto_membership')
-	{
-		$sql = "CREATE TABLE `crypto_membership` (
-			  `membID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			  `userID` bigint(20) unsigned NOT NULL DEFAULT '0',
-			  `paymentID` int(11) unsigned NOT NULL DEFAULT '0',
-			  `startDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `endDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  `disabled` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `recordCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  PRIMARY KEY (`membID`),
-			  KEY `userID` (`userID`),
-			  KEY `paymentID` (`paymentID`),
-			  KEY `startDate` (`startDate`),
-			  KEY `endDate` (`endDate`),
-			  KEY `disabled` (`disabled`),
-			  KEY `recordCreated` (`recordCreated`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-	
-		$wpdb->query($sql);
-	}
-	
-	
-	if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_products'") != 'crypto_products')
-	{
-		$sql = "CREATE TABLE `crypto_products` (
-				  `productID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `productTitle` varchar(100) NOT NULL DEFAULT '',
-				  `active` tinyint(1) NOT NULL DEFAULT '1',
-				  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
-				  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
-				  `priceLabel` varchar(6) NOT NULL DEFAULT '',
-				  `purchases` mediumint(8) NOT NULL DEFAULT '0',
-				  `expiryPeriod` varchar(15) NOT NULL DEFAULT '',
-				  `lang` varchar(2) NOT NULL DEFAULT '',
-				  `defCoin` varchar(5) NOT NULL DEFAULT '',
-				  `defShow` tinyint(1) NOT NULL DEFAULT '1',
-				  `productText` text,
-				  `finalText` text,
-				  `emailUser` tinyint(1) NOT NULL DEFAULT '1',
-				  `emailUserFrom` varchar(50) NOT NULL DEFAULT '',
-				  `emailUserTitle` varchar(100) NOT NULL DEFAULT '',
-				  `emailUserBody` text,
-				  `emailAdmin` tinyint(1) NOT NULL DEFAULT '1',
-				  `emailAdminFrom` varchar(50) NOT NULL DEFAULT '',
-				  `emailAdminTo` text,
-				  `emailAdminTitle` varchar(100) NOT NULL DEFAULT '',
-				  `emailAdminBody` text,
-				  `paymentCnt` smallint(5) NOT NULL DEFAULT '0',
-				  `paymentTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-				  `updatetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-				  `createtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-				  PRIMARY KEY (`productID`),
-				  KEY `productTitle` (`productTitle`),
-				  KEY `active` (`active`),
-				  KEY `priceUSD` (`priceUSD`),
-				  KEY `priceCoin` (`priceCoin`),
-				  KEY `priceLabel` (`priceLabel`),
-				  KEY `purchases` (`purchases`),
-				  KEY `expiryPeriod` (`expiryPeriod`),
-				  KEY `lang` (`lang`),
-				  KEY `defCoin` (`defCoin`),
-				  KEY `defShow` (`defShow`),
-				  KEY `emailUser` (`emailUser`),
-				  KEY `emailAdmin` (`emailAdmin`),
-				  KEY `paymentCnt` (`paymentCnt`),
-				  KEY `paymentTime` (`paymentTime`),
-				  KEY `updatetime` (`updatetime`),
-				  KEY `createtime` (`createtime`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-	
-		$wpdb->query($sql);
-	}
-	
-	
-	update_option('gourl_gateway_version', GOURL_VERSION);
-	
-	
-	// upload dir
-	gourl_retest_dir();
-
-	ob_flush();
-
-	return true;
+	update_option(GOURL.'version', '');
 }
-
 
 
 
@@ -6648,11 +6663,11 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 
 
 /*              
- *  XXII. Hooks & Main Class call           
+ *  XXII. Hooks & Main Class call     
  *  ----------------------------------------
  */
 
-register_activation_hook(__FILE__, "gourl_install");
+register_deactivation_hook(__FILE__, "gourl_uninstall");
 
 add_action( 'show_user_profile', 'gourl_show_user_profile' );
 add_action( 'edit_user_profile', 'gourl_edit_user_profile' );
