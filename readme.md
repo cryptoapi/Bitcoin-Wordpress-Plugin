@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.2.2
+Version 1.2.3
 
 
 **GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc Payments Online**
@@ -11,7 +11,7 @@ Version 1.2.2
 * Plugin URI: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 * Requires at least: 3.5
 * Tested up to: 4.2
-* Stable Tag: 1.2.2
+* Stable Tag: 1.2.3
 * License: GNU Version 2 or Any Later Version
 
 
@@ -76,7 +76,11 @@ Icons: [Oxygen Tean](http://icongal.com/gallery/iconset/840/oxygen) with GPL Lic
 
 
 
-.
+Bitcoin Affiliate Program For Web Developers
+-------------------
+Simply use GoUrl Payment Gateway in your wordpress plugins / php scripts on websites, or create new e-commerce plugins, web applications and share it. GoUrl Payment Gateway will automatically track all purchases through your wordpress plugin / php script installed on various websites with your GoUrl affiliate key and it will automatically send you 0.50% from user payment. It is easy!
+
+Read more: https://gourl.io/affiliates.html
 
 
 
@@ -116,10 +120,6 @@ The minimum account balance on GoUrl.io which our system will automatically tran
 
 
 
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)     
 
-
-
-
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 

@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admi
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.2
+Stable Tag: 1.2.3
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,9 @@ More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gou
 
 == Changelog ==
 
+= 1.2.3 =
+New in Pay-Per-Membership: display login form on any premium page for unregistered users
+
 = 1.2.2 =
 Several new enhancements
 
@@ -155,7 +158,7 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.2 =
+= 1.2.3 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
     
  

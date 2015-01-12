@@ -1,53 +1,7 @@
 <?php
-/*
-Plugin Name: 		GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
-Plugin URI: 		https://gourl.io/bitcoin-wordpress-plugin.html
-Description: 		Official <a href="https://gourl.io">GoUrl.io</a> Bitcoin Payment Gateway Plugin for Wordpress. <a href="http://gourl.io/lib/examples/pay-per-product-multi.php">Pay-Per-Product</a> - sell your products online. <a href="http://gourl.io/lib/examples/pay-per-download-multi.php">Pay-Per-Download</a> - make money on digital file downloads. <a href="http://gourl.io/lib/examples/pay-per-membership-multi.php">Pay-Per-Membership</a> - easy to use website membership system with bitcoin payments. <a href="http://gourl.io/lib/examples/pay-per-page-multi.php">Pay-Per-View</a> - offer paid access to your premium content/videos for unregistered visitors, no registration needed, anonymous. Easily Sell Files, Videos, Music, Photos, Premium Content on your WordPress site/blog and accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure.  All in automatic mode. Easy to integrate Bitcoin payments to other wordpress plugins with <a href="https://gourl.io/bitcoin-wordpress-plugin.html">Affiliate Program</a> to plugin owners using this plugin functionality. 
-Version: 			1.2.2
-Author: 			GoUrl.io
-Author URI: 		https://gourl.io
-License: 			GPLv2
-License URI: 		http://www.gnu.org/licenses/gpl-2.0.html
-GitHub Plugin URI: 	https://github.com/cryptoapi/Bitcoin-Wordpress-Plugin
-
- *
- * GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership is free software: 
- * you can redistribute/resell it and/or modify it under the terms of the 
- * GNU General Public License as published by  the Free Software Foundation, 
- * either version 2 of the License, or any later version.
- *
- * GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership is distributed 
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- * without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE. 
- * See the GNU General Public License for more details.
-*/
 
 
-if (!defined( 'ABSPATH' )) exit; // Exit if accessed directly in wordpress
-
-$dir_arr = wp_upload_dir();
-
-DEFINE('GOURL', 				"gourl");
-DEFINE('GOURL_PREVIEW', 		"gourladmin");
-DEFINE('GOURL_NAME', 			__('GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership', GOURL));
-DEFINE('GOURL_VERSION', 		"1.2.2");
-DEFINE('GOURL_ADMIN', 			get_bloginfo("wpurl")."/wp-admin/admin.php?page=");
-DEFINE('GOURL_DIR',  			$dir_arr["basedir"]."/".GOURL.'/');
-DEFINE('GOURL_DIR2', 			$dir_arr["baseurl"]."/".GOURL.'/');
-
-DEFINE('GOURL_TAG_DOWNLOAD',	"gourl-download"); 		// [gourl-download id=1] 				- paid download tag
-DEFINE('GOURL_TAG_PRODUCT',		"gourl-product"); 		// [gourl-product id=1] 				- paid product tag
-DEFINE('GOURL_TAG_VIEW',		"gourl-lock"); 			// [gourl-lock img='image1.jpg'] 		- paid lock page tag
-DEFINE('GOURL_TAG_MEMBERSHIP',	"gourl-membership"); 	// [gourl-membership img='image1.png'] 	- paid membership tag
-
-DEFINE('GOURL_LOCK_START',		"<!-- start_gourlpayment_box -->"); 
-DEFINE('GOURL_LOCK_END',		"<!-- end_gourlpayment_box -->");
-
-DEFINE('CRYPTOBOX_WORDPRESS',	true);
-
-unset($dir_arr);
-
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; // Exit if accessed directly in wordpress
 
 
 final class gourlclass 
@@ -55,7 +9,7 @@ final class gourlclass
 	private $options 		= array(); 		// global setting values
 	private $errors			= array(); 		// global setting errors
 	private $payments		= array(); 		// global activated payments (bitcoin, litecoin, etc)
-
+	
 	private $options2 		= array(); 		// pay-per-view settings
 	private $options3 		= array(); 		// pay-per-membership settings
 	
@@ -84,7 +38,7 @@ final class gourlclass
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");	
 	
-	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTitle" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
+	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
 	private $fields_membership_newuser 	= array("userID" => 0, "paymentID" => 0, "startDate"  => "", "endDate" => "", "disabled" => 0, "recordCreated"  => "");
 	private $lock_level_membership 		= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
 	
@@ -2230,15 +2184,22 @@ final class gourlclass
 			add_filter('the_content', 		'gourl_lock_filter', 11111);
 			add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
 			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
-	
+
+			
 			if ($hideTitles)
 			{
-				add_filter("wp_title", 		'gourl_lock_title', 11111); 
-				add_filter("wp_title_rss", 	'gourl_lock_title', 11111);
+				add_filter("wp_title", 		'gourl_wp_title', 11111);
+				add_filter("wp_title_rss", 	'gourl_wp_title', 11111);
 				add_filter('the_title', 	'gourl_lock_title', 11111);
 				add_filter('the_title_rss', 'gourl_lock_title', 11111);
 			}
-				
+			else
+			{
+				add_filter('the_title', 	'gourl_top_title', 11111);
+				add_filter('the_title_rss', 'gourl_top_title', 11111);
+			}
+
+			
 			if ($commentAuthor) add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
 				
 			if ($commentBody) add_filter('comment_text',	'gourl_lock_comments', 11111);
@@ -2410,18 +2371,34 @@ final class gourlclass
 	
 		if ($preview)
 		{
-			$example 	= ($_GET["example"] == "2") ? 2 : 1;
-			$short_code = '['.GOURL_TAG_MEMBERSHIP.' img="image'.$example.($example==2?'.jpg':'.png').'"]';
-	
-			$tmp .= "<div class='postbox'>";
-			$tmp .= "<h3 class='hndle'>".sprintf(__('Preview Shortcode &#160; &#160; %s', GOURL), $short_code);
-			$tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
-			$tmp .= "</h3>";
-			$tmp .= "<div class='inside'>";
-			$tmp .= $this->shortcode_membership_init("image".$example.($example==2?'.jpg':'.png'));
-			$tmp .= "</div>";
-			$tmp .= '<div class="gourlright"><small>'.__('Shortcode', GOURL).': &#160; '.$short_code.'</small></div>';
-			$tmp .= "</div>";
+			if ($_GET["example"] == "3")
+			{
+				$tmp .= "<div class='postbox'>";
+				$tmp .= "<h3 class='hndle'>".__('Preview - Your unregistered visitors/non-logged users will see on premium pages - login form with custom text/images', GOURL);
+				$tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
+				$tmp .= "</h3>";
+				$tmp .= "<br><br><div class='inside' align='center'>";
+				$tmp .= $this->options3['ppmTextAbove2'];
+				$tmp .= "<br><br><br><img src='".plugins_url('/images/loginform.png', __FILE__)."' border='0'><br><br><br>";
+				$tmp .= $this->options3['ppmTextBelow2'];
+				$tmp .= "<br><br></div>";
+				$tmp .= "</div>";
+			}
+			else
+			{
+				$example 	= ($_GET["example"] == "2") ? 2 : 1;
+				$short_code = '['.GOURL_TAG_MEMBERSHIP.' img="image'.$example.($example==2?'.jpg':'.png').'"]';
+		
+				$tmp .= "<div class='postbox'>";
+				$tmp .= "<h3 class='hndle'>".sprintf(__('Preview Shortcode &#160; &#160; %s', GOURL), $short_code);
+				$tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
+				$tmp .= "</h3>";
+				$tmp .= "<div class='inside'>";
+				$tmp .= $this->shortcode_membership_init("image".$example.($example==2?'.jpg':'.png'));
+				$tmp .= "</div>";
+				$tmp .= '<div class="gourlright"><small>'.__('Shortcode', GOURL).': &#160; '.$short_code.'</small></div>';
+				$tmp .= "</div>";
+			}	
 		}
 		else
 		{
@@ -2442,7 +2419,7 @@ final class gourlclass
 			$tmp .= "<br /><br />";
 			$tmp .= __('Ready to use shortcodes: ', GOURL);
 			$tmp .= "<ol>";
-			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="image1.png"] &#160; - <small>'.__('lock page with default page lock image', GOURL).'</small></li>';
+			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="image1.png"] &#160; - <small>'.__('lock page with default page lock image; visible for unpaid logged-in users', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="image2.jpg"] &#160; - <small>'.__('lock page with default video lock image', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="my_image_etc.jpg"] &#160; - <small>'.sprintf(__('lock page with any custom lock image stored in directory %slockimg', GOURL), GOURL_DIR2).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="http://....."] &#160; - <small>'.__('lock page with any custom lock image', GOURL).'</small></li>';
@@ -2473,6 +2450,7 @@ final class gourlclass
 		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
 		if ($example != 1 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=1&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 1', GOURL)."</a>";
 		if ($example != 2 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=2&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 2', GOURL)."</a>";
+		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Preview 3 - Unregistered users', GOURL)."</a>";
 		$tmp .= "<a target='_blank' href='".plugins_url('/images/tagexample_membership_full.png', __FILE__)."' class='".GOURL."button button-secondary'>".__('Instruction', GOURL)."</a>".$this->space();
 		$tmp .= '</div><br /><br />';
 	
@@ -2511,11 +2489,9 @@ final class gourlclass
 								 Website Editors / Admins will have all the time full access to locked pages and see original page content.', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
-	
 		$tmp .= '<tr><th>'.__('Add to User Profile', GOURL).':</th>';
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmProfile" id="'.GOURL.'ppmProfile" value="1" '.$this->chk($this->options3['ppmProfile'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, users will see own membership status on user profile page (<a href="/wp-admin/profile.php">profile.php</a>)', GOURL).'</em></td>';
 		$tmp .= '</tr>';
-		
 		
 		$tmp .= '<tr><th>'.__('PaymentBox Language', GOURL).':</th>';
 		$tmp .= '<td><select name="'.GOURL.'ppmLang" id="'.GOURL.'ppmLang">';
@@ -2539,7 +2515,6 @@ final class gourlclass
 		$tmp .= '<br /><em>'.__('Default Coin in Payment Box', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
-	
 		$tmp .= '<tr><th>'.__('Use Default Coin only:', GOURL).'</th>';
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmOneCoin" id="'.GOURL.'ppmOneCoin" value="1" '.$this->chk($this->options3['ppmOneCoin'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, payment box will accept payments in one default coin "PaymentBox Coin" (no multiple coins)', GOURL).'</em></td>';
 		$tmp .= '</tr>';
@@ -2549,20 +2524,47 @@ final class gourlclass
 		$tmp .= '<td><input type="text" class="gourlnumeric" name="'.GOURL.'ppmImgMaxWidth" id="'.GOURL.'ppmImgMaxWidth" value="'.htmlspecialchars($this->options3['ppmImgMaxWidth'], ENT_QUOTES).'"><label>'.__('px', GOURL).'</label><br /><em>'.__('Optional, Set the maximum width of your custom lock images in ['.GOURL_TAG_MEMBERSHIP.' img="my_image_etc.jpg"] or use "0" - if you don\'t want to use it', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
+		$tmp .= '<tr><th colspan="2"><br/>';
+		$tmp .= '<h3>'.__('A. Unregistered Users will see Login Form with custom text/images -', GOURL).'</h3>';
+		$tmp .= '<p>'.__('You can separate the content your logged-in users see from what your unregistered users see; things like a log-in form + custom text A for unregistered users &#160;or&#160; payment box + other custom text B for unpaid logged-in users.', GOURL).'</p>';
+		$tmp .= '<p>'.__('IMPORTANT: Please check that Website Registration is enabled (option "Membership	- Anyone can register") under Wordpress Settings -> General in the admin panel', GOURL).'</p>';
+		$tmp .= '</th>';
+		$tmp .= '</tr>';
+		
+		$tmp .= '<tr><th>'.__('Text - Above Login Form', GOURL).':</th><td>';
+		echo $tmp;
+		wp_editor( $this->options3['ppmTextAbove2'], GOURL.'ppmTextAbove2', array('textarea_name' => GOURL.'ppmTextAbove2', 'quicktags' => true, 'media_buttons' => true, 'wpautop' => false));
+		$tmp  = '<br /><em>'.__('Your Custom Text and Image For Unregistered Users (original pages content will be hidden). This text will publish <b>Above</b> Login Form', GOURL).'</em>';
+		$tmp .= '</td></tr>';
 	
+	
+		$tmp .= '<tr><th>'.__('Text - Below Login Form', GOURL).':</th><td>';
+		echo $tmp;
+		wp_editor( $this->options3['ppmTextBelow2'], GOURL.'ppmTextBelow2', array('textarea_name' => GOURL.'ppmTextBelow2', 'quicktags' => true, 'media_buttons' => true, 'wpautop' => false));
+		$tmp  = '<br /><em>'.__('Your Custom Text and Image For Unregistered Users (original pages content will be hidden). This text will publish <b>Below</b> Login Form', GOURL).'</em>';
+		$tmp .= '</td></tr>';
+	
+		$tmp .= '<tr><th colspan="2"><br/>';
+		$tmp .= '<h3>'.__('B. Unpaid logged-in users will see payment box with custom text -', GOURL).'</h3>';
+		$tmp .= '</th>';
+		$tmp .= '</tr>';
+				
 		$tmp .= '<tr><th>'.__('Text - Above Payment Box', GOURL).':</th><td>';
 		echo $tmp;
 		wp_editor( $this->options3['ppmTextAbove'], GOURL.'ppmTextAbove', array('textarea_name' => GOURL.'ppmTextAbove', 'quicktags' => true, 'media_buttons' => true, 'wpautop' => false));
 		$tmp  = '<br /><em>'.__('Your Custom Text and Image For Payment Request Lock Pages (original pages content will be hidden). This text will publish <b>Above</b> Payment Box', GOURL).'</em>';
 		$tmp .= '</td></tr>';
-	
-	
+		
+		
 		$tmp .= '<tr><th>'.__('Text - Below Payment Box', GOURL).':</th><td>';
 		echo $tmp;
 		wp_editor( $this->options3['ppmTextBelow'], GOURL.'ppmTextBelow', array('textarea_name' => GOURL.'ppmTextBelow', 'quicktags' => true, 'media_buttons' => true, 'wpautop' => false));
 		$tmp  = '<br /><em>'.__('Your Custom Text and Image For Payment Request Lock Pages (original pages content will be hidden). This text will publish <b>Below</b> Payment Box', GOURL).'</em>';
 		$tmp .= '</td></tr>';
-	
+		
+		$tmp .= '<tr><th colspan="2"><br/><h3>'.__('General Content Restriction', GOURL).'</h3></th>';
+		$tmp .= '</tr>';
+		
 		$tmp .= '<tr><th>'.__('Hide All Titles ?', GOURL).'</th>';
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle" id="'.GOURL.'ppmTitle" value="1" '.$this->chk($this->options3['ppmTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on premium pages', GOURL).'</em></td>';
 		$tmp .= '</tr>';
@@ -2632,10 +2634,14 @@ final class gourlclass
 		// preview admin mode
 		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpaypermembership") ? true : false;
 		
+
+		// user logged or not
+		$logged	= (is_user_logged_in() && $current_user->ID) ? true : false;
+		
 		
 		// if premium user already
 		$dt = gmdate('Y-m-d H:i:s');
-		if (!$preview_mode && is_user_logged_in() && $current_user->ID && $wpdb->get_row("SELECT membID FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && disabled = 0 LIMIT 1", OBJECT)) return "";
+		if (!$preview_mode && $logged && $wpdb->get_row("SELECT membID FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && disabled = 0 LIMIT 1", OBJECT)) return "";
 		
 		
 		
@@ -2677,8 +2683,8 @@ final class gourlclass
 	
 		$level			= $this->options3["ppmLevel"];
 		$imageWidthMax	= $this->options3["ppmImgMaxWidth"];
-		$textAbove		= $this->options3["ppmTextAbove"];
-		$textBelow		= $this->options3["ppmTextBelow"];
+		$textAbove		= ($logged) ? $this->options3["ppmTextAbove"] : $this->options3["ppmTextAbove2"];
+		$textBelow		= ($logged) ? $this->options3["ppmTextBelow"] : $this->options3["ppmTextBelow2"];
 		$hideTitles		= $this->options3["ppmTitle"];
 		$commentAuthor	= $this->options3["ppmCommentAuthor"];
 		$commentBody	= $this->options3["ppmCommentBody"];
@@ -2702,7 +2708,7 @@ final class gourlclass
 	
 		// Wordprtess roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
 		$_administrator =  $_editor = $_author = $_contributor = false;
-		if (is_user_logged_in())
+		if ($logged)
 		{
 			$_administrator = in_array('administrator', $current_user->roles);
 			$_editor 		= in_array('editor', 		$current_user->roles);
@@ -2721,12 +2727,21 @@ final class gourlclass
 	
 		if (!$activate && !$preview_mode) return "";
 	
-	
 		
 		
-	if (!is_user_logged_in() || !$current_user->ID)
+		
+	if (!$logged)
 	{
-		$box_html = "<br /><div align='center'><a href='".wp_login_url(get_permalink())."'><img vspace='20' width='527' height='242' alt='".__('Please register or login to website', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_login2.png' border='0'></a></div><br /><br />";
+		// Html code
+		$tmp  = "<div align='center'>";
+		
+		if ($textAbove) $tmp .= "<div class='gourlmembershiptext2'>".$textAbove."</div>";
+		
+		$tmp .= $this->login_form();
+		
+		if ($textBelow) $tmp .= "<div class='gourlmembershiptext2'>".$textBelow."</div>";
+		
+		$tmp .= "</div>";
 	}
 	else	
 	{	
@@ -2831,10 +2846,7 @@ final class gourlclass
 		// C. Active Box
 		$box_html = $box->display_cryptobox(true, $box_width, $box_height, $box_style, $message_style, $anchor);
 			
-	}			
-	
-	
-	
+
 	
 		// Html code
 		// ---------------------
@@ -2876,10 +2888,13 @@ final class gourlclass
 	
 	
 		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
+	}
+	
 	
 	
 	
 		// Lock Page
+		// -----------------------
 		if (!$is_paid && !$preview_mode)
 		{
 			$tmp = GOURL_LOCK_START.$tmp.GOURL_LOCK_END;
@@ -2887,15 +2902,31 @@ final class gourlclass
 			add_filter('the_content', 		'gourl_lock_filter', 11111);
 			add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
 			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
-	
+
+			
 			if ($hideTitles)
 			{
-				add_filter("wp_title", 		'gourl_lock_title', 11111); 
-				add_filter("wp_title_rss", 	'gourl_lock_title', 11111);
+				if (!$logged)
+				{
+					add_filter("wp_title", 		'gourl_wp_login_title', 11111);
+					add_filter("wp_title_rss", 	'gourl_wp_login_title', 11111);
+				}	
+				else
+				{
+					add_filter("wp_title", 		'gourl_wp_title', 11111);
+					add_filter("wp_title_rss", 	'gourl_wp_title', 11111);
+				}
+				
 				add_filter('the_title', 	'gourl_lock_title', 11111);
 				add_filter('the_title_rss', 'gourl_lock_title', 11111);
 			}
+			else
+			{
+				add_filter('the_title', 	'gourl_top_title', 11111);
+				add_filter('the_title_rss', 'gourl_top_title', 11111);
+			}
 				
+			
 			if ($commentAuthor) add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
 	
 			if ($commentBody) add_filter('comment_text',	'gourl_lock_comments', 11111);
@@ -4154,6 +4185,59 @@ final class gourlclass
 	}
 	
 	
+	
+	
+	
+	/*
+	 *  
+	*/
+	private function login_form()
+	{
+		global $user;
+		
+		$err = "";
+		$tmp = '<a id="info" name="info"></a>';
+		
+		if (isset($_POST[GOURL.'login_submit'])) 
+		{
+			$creds = array();
+			$creds['user_login'] = $_POST['login_name'];
+			$creds['user_password'] =  $_POST['login_password'];
+			if (!$creds['user_login'] && !$creds['user_password']) $creds['user_login'] = "no";
+			$creds['remember'] = true;
+			$user = wp_signon( $creds, false );
+			if ( is_wp_error($user) ) {
+				$err = $user->get_error_message();
+			}
+			if ( !is_wp_error($user) ) {
+				wp_redirect(site_url($_SERVER['REQUEST_URI']));
+			}
+		}
+		
+		$tmp .= 
+			'<div id="gourllogin">
+				<div class="login">
+					<div class="app-title"><h2>'.__('Login', GOURL).'</h2>'.$err.'</div>
+					<form method="post" action="'.$_SERVER['REQUEST_URI'].'#info">
+						<div class="login-form">
+							<div class="control-group">
+								<input type="text" class="login-field" value="" placeholder="username" name="login_name" id="login_name">
+								<label class="login-field-icon fui-user" for="login_name"></label>
+							</div>
+							<div class="control-group">
+								<input type="password" class="login-field" value="" placeholder="password" name="login_password" id="login_password">
+								<label class="login-field-icon fui-lock" for="login_password"></label>
+							</div>
+							<input class="btn btn-primary btn-large btn-block" type="submit" name="'.GOURL.'login_submit" value="'.__('Log in', GOURL).'" />
+								<a class="login-link" href="'.wp_lostpassword_url(site_url($_SERVER['REQUEST_URI'])).'">'.__('Lost your password?', GOURL).'</a>
+								'.wp_register('<div class="reg-link">', '</div>', false).'		
+						</div>
+					</form>
+				</div>
+			</div>';
+	
+		return $tmp;
+	}
 	
 	
 	
@@ -5560,15 +5644,32 @@ function gourl_lock_comments($content)
 
 
 /*
- *  XII.
+ *  XII. Content Restriction
 */
 
-function gourl_lock_title($content)
+function gourl_lock_title($title)
 {
-	$content = "* * * * * * * * &#160; * * * * * *";
+	$title = (in_the_loop()) ? "" : "* * * * * * * * &#160; * * * * * *";
 
-	return $content;
+	return $title;
 }
+
+function gourl_top_title($title)
+{
+	if(!in_the_loop()) return $title;
+	else return "";
+}
+
+function gourl_wp_title($title)
+{
+	return get_bloginfo('name');
+}
+
+function gourl_wp_login_title($title)
+{
+	return __("Please Login", GOURL) . " | " . get_bloginfo('name');
+}
+
 
 
 /*
@@ -6612,12 +6713,12 @@ class gourl_table_premiumusers extends WP_List_Table
 /*
  *  XX.
 */
-function gourl_action_links($links, $file) 
+function gourl_action_links($links, $file)
 {
 	static $this_plugin;
 
 	if (false === isset($this_plugin) || true === empty($this_plugin)) {
-		$this_plugin = plugin_basename(__FILE__);
+		$this_plugin = GOURL_BASENAME;
 	}
 
 	if ($file == $this_plugin) {
@@ -6634,7 +6735,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.
+ *  XXI.   
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -6658,21 +6759,5 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		return false;
 	}
 }
-
-
-
-
-/*              
- *  XXII. Hooks & Main Class call     
- *  ----------------------------------------
- */
-
-register_deactivation_hook(__FILE__, "gourl_uninstall");
-
-add_action( 'show_user_profile', 'gourl_show_user_profile' );
-add_action( 'edit_user_profile', 'gourl_edit_user_profile' );
-add_filter( 'plugin_action_links', 'gourl_action_links', 10, 2);
-
-$gourl = new gourlclass();
 
 

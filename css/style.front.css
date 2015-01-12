@@ -1,3 +1,95 @@
+
+
+
+#gourllogin {
+	margin: 70px 0 90px 0;
+	font-family: Arial;
+	box-sizing: border-box;
+	text-align: center;
+	height: auto;
+}
+
+#gourllogin h2 {
+	margin: 40px 0 30px 0;
+	color: #aaa;
+}
+
+#gourllogin .login {
+	background-color: #fefefe;
+	padding: 0 30px 20px 30px;
+	border: 1px solid #eee;
+	border-radius: 15px;
+	height: auto;
+}
+
+#gourllogin .app-title {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#gourllogin .login-form {
+	text-align: center;
+}
+
+#gourllogin .control-group {
+	margin-bottom: 10px;
+}
+
+#gourllogin input {
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	margin-bottom: 5px;
+	width: 300px;
+	transition: border .5s;
+}
+
+#gourllogin input:focus {
+	border: 2px solid #3498DB;
+	box-shadow: none;
+}
+
+#gourllogin .btn {
+	border: 2px solid transparent;
+	background: #3498DB;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 3px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 250px;
+	margin: 20px auto;
+}
+
+#gourllogin .btn:hover {
+	background-color: #2980B9;
+}
+
+#gourllogin .login-link {
+	font-size: 12px;
+	color: #444;
+	display: block;
+	padding-top: 5px;
+	border-bottom: none;
+}
+
+#gourllogin .reg-link {
+	font-size: 14px;
+	color: #444;
+	display: block;
+	margin-top: 12px;
+	border-bottom: none;
+}
+
 .gourlbox {
 	padding-top: 10px;
 	font-weight: normal;
@@ -106,3 +198,7 @@
 .gourlmembershiptext {
 	text-align: center;
 }
+
+.gourlmembershiptext2 {
+
+} 
