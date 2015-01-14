@@ -34,11 +34,11 @@ final class gourlclass
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");	
 	
-	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvImgMaxWidth"  => 0, "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => ""); 
+	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvImgMaxWidth"  => 0, "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => ""); 
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");	
 	
-	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
+	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
 	private $fields_membership_newuser 	= array("userID" => 0, "paymentID" => 0, "startDate"  => "", "endDate" => "", "disabled" => 0, "recordCreated"  => "");
 	private $lock_level_membership 		= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
 	
@@ -1895,8 +1895,12 @@ final class gourlclass
 		$tmp  = '<br /><em>'.__('Your Custom Text and Image For Payment Request Lock Pages (original pages content will be hidden). This text will publish <b>Below</b> Payment Box', GOURL).'</em>';
 		$tmp .= '</td></tr>';
 	
-		$tmp .= '<tr><th>'.__('Hide All Titles ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle" id="'.GOURL.'ppvTitle" value="1" '.$this->chk($this->options2['ppvTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on page', GOURL).'</em></td>';
+		$tmp .= '<tr><th>'.__('Hide Page Title ?', GOURL).'</th>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle2" id="'.GOURL.'ppvTitle2" value="1" '.$this->chk($this->options2['ppvTitle2'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see current page title', GOURL).'</em></td>';
+		$tmp .= '</tr>';
+		
+		$tmp .= '<tr><th>'.__('Hide Menu Titles ?', GOURL).'</th>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle" id="'.GOURL.'ppvTitle" value="1" '.$this->chk($this->options2['ppvTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on premium pages', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Comments Authors ?', GOURL).'</th>';
@@ -2002,6 +2006,7 @@ final class gourlclass
 		$imageWidthMax	= $this->options2["ppvImgMaxWidth"];
 		$textAbove		= $this->options2["ppvTextAbove"];
 		$textBelow		= $this->options2["ppvTextBelow"];
+		$hideCurTitle	= $this->options2["ppvTitle2"];
 		$hideTitles		= $this->options2["ppvTitle"];
 		$commentAuthor	= $this->options2["ppvCommentAuthor"];
 		$commentBody	= $this->options2["ppvCommentBody"];
@@ -2185,18 +2190,27 @@ final class gourlclass
 			add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
 			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
 
+
+			if ($hideTitles && $hideCurTitle)
+			{
+				add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+				add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
 			
-			if ($hideTitles)
-			{
-				add_filter("wp_title", 		'gourl_wp_title', 11111);
-				add_filter("wp_title_rss", 	'gourl_wp_title', 11111);
-				add_filter('the_title', 	'gourl_lock_title', 11111);
-				add_filter('the_title_rss', 'gourl_lock_title', 11111);
+				add_filter('the_title', 	'gourl_hide_all_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
 			}
-			else
+			elseif ($hideTitles)
 			{
-				add_filter('the_title', 	'gourl_top_title', 11111);
-				add_filter('the_title_rss', 'gourl_top_title', 11111);
+				add_filter('the_title', 	'gourl_hide_menu_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_menu_titles', 11111);
+			}
+			elseif ($hideCurTitle)
+			{
+				add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+				add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
+				
+				add_filter('the_title', 	'gourl_hide_page_title', 11111);
+				add_filter('the_title_rss', 'gourl_hide_page_title', 11111);
 			}
 
 			
@@ -2564,8 +2578,12 @@ final class gourlclass
 		
 		$tmp .= '<tr><th colspan="2"><br/><h3>'.__('General Content Restriction', GOURL).'</h3></th>';
 		$tmp .= '</tr>';
+
+		$tmp .= '<tr><th>'.__('Hide Page Title ?', GOURL).'</th>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle2" id="'.GOURL.'ppmTitle2" value="1" '.$this->chk($this->options3['ppmTitle2'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see current page title', GOURL).'</em></td>';
+		$tmp .= '</tr>';
 		
-		$tmp .= '<tr><th>'.__('Hide All Titles ?', GOURL).'</th>';
+		$tmp .= '<tr><th>'.__('Hide Menu Titles ?', GOURL).'</th>';
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle" id="'.GOURL.'ppmTitle" value="1" '.$this->chk($this->options3['ppmTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on premium pages', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
@@ -2685,6 +2703,7 @@ final class gourlclass
 		$imageWidthMax	= $this->options3["ppmImgMaxWidth"];
 		$textAbove		= ($logged) ? $this->options3["ppmTextAbove"] : $this->options3["ppmTextAbove2"];
 		$textBelow		= ($logged) ? $this->options3["ppmTextBelow"] : $this->options3["ppmTextBelow2"];
+		$hideCurTitle	= $this->options3["ppmTitle2"];
 		$hideTitles		= $this->options3["ppmTitle"];
 		$commentAuthor	= $this->options3["ppmCommentAuthor"];
 		$commentBody	= $this->options3["ppmCommentBody"];
@@ -2904,28 +2923,44 @@ final class gourlclass
 			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
 
 			
-			if ($hideTitles)
+			if ($hideTitles && $hideCurTitle)
 			{
 				if (!$logged)
 				{
-					add_filter("wp_title", 		'gourl_wp_login_title', 11111);
-					add_filter("wp_title_rss", 	'gourl_wp_login_title', 11111);
-				}	
+					add_filter("wp_title", 		'gourl_hide_headtitle_unlogged', 11111);
+					add_filter("wp_title_rss", 	'gourl_hide_headtitle_unlogged', 11111);
+				}
 				else
 				{
-					add_filter("wp_title", 		'gourl_wp_title', 11111);
-					add_filter("wp_title_rss", 	'gourl_wp_title', 11111);
+					add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+					add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
 				}
 				
-				add_filter('the_title', 	'gourl_lock_title', 11111);
-				add_filter('the_title_rss', 'gourl_lock_title', 11111);
+				add_filter('the_title', 	'gourl_hide_all_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
 			}
-			else
+			elseif ($hideTitles)
 			{
-				add_filter('the_title', 	'gourl_top_title', 11111);
-				add_filter('the_title_rss', 'gourl_top_title', 11111);
+				add_filter('the_title', 	'gourl_hide_menu_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_menu_titles', 11111);
 			}
+			elseif ($hideCurTitle)
+			{
+				if (!$logged)
+				{
+					add_filter("wp_title", 		'gourl_hide_headtitle_unlogged', 11111);
+					add_filter("wp_title_rss", 	'gourl_hide_headtitle_unlogged', 11111);
+				}
+				else
+				{
+					add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+					add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
+				}
 				
+				add_filter('the_title', 	'gourl_hide_page_title', 11111);
+				add_filter('the_title_rss', 'gourl_hide_page_title', 11111);
+			}	
+			
 			
 			if ($commentAuthor) add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
 	
@@ -5647,25 +5682,32 @@ function gourl_lock_comments($content)
  *  XII. Content Restriction
 */
 
-function gourl_lock_title($title)
+function gourl_hide_all_titles($title)
 {
 	$title = (in_the_loop()) ? "" : "* * * * * * * * &#160; * * * * * *";
 
 	return $title;
 }
 
-function gourl_top_title($title)
+function gourl_hide_menu_titles($title)
 {
-	if(!in_the_loop()) return $title;
-	else return "";
+	if (!in_the_loop()) $title = "* * * * * * * * &#160; * * * * * *";
+
+	return $title;
+}
+function gourl_hide_page_title($title)
+{
+	if (in_the_loop()) $title = "";
+
+	return $title;
 }
 
-function gourl_wp_title($title)
+function gourl_hide_headtitle($title)
 {
 	return get_bloginfo('name');
 }
 
-function gourl_wp_login_title($title)
+function gourl_hide_headtitle_unlogged($title)
 {
 	return __("Please Login", GOURL) . " | " . get_bloginfo('name');
 }
@@ -6735,7 +6777,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.   
+ *  XXI.          
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
