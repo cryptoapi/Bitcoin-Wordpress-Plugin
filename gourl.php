@@ -316,7 +316,7 @@ final class gourlclass
 		
 		
 		$tmp .= "<a name='i1'></a>";
-		$tmp .= "<div style='padding-top:15px' class='gourltitle'>".__('Summary', GOURL)."</div>";
+		$tmp .= "<div style='padding-top:20px' class='gourltitle'>".__('Summary', GOURL)."</div>";
 		$tmp .= "<div class='gourlsummaryinfo'>";
 		$tmp .= '<div style="min-width:1200px;width:100%;">';
 		
@@ -358,8 +358,10 @@ final class gourlclass
 		$tmp .= "<tr><td>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
 		$tmp .= "</table>";
 
-		$tmp .="<br/><br/></div>";
-		$tmp .="</div>";
+		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1100' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=90&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=250&amp;w=500&amp;t=usd'></iframe></div>";
+		
+		$tmp .="</div></div>";
+		
 		$tmp .= "<div class='gourlimgphone'><a target='_blank' href='https://gourl.io/'><img src='".plugins_url('/images/screen.png', __FILE__)."' border='0'></a></div>";
 		
 		
@@ -6782,7 +6784,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.                   
+ *  XXI.   
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
