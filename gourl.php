@@ -266,7 +266,7 @@ final class gourlclass
 			{
 				$us_addon[$v] = " ( $" . gourl_number_format($res->total, 2) . " )";
 				$res = $wpdb->get_row("SELECT paymentID, amount, coinLabel, countryID, DATE_FORMAT(txDate, '%d %b %Y, %H:%i %p') as dt from crypto_payments where orderID like '".esc_sql($v).".%' order by txDate desc", OBJECT);
-				$dt_addon[$v] = "<span title='".__('Latest Payment to WooCommerce', GOURL)."'>".$this->space(2).$res->dt.$this->space()."-".$this->space().
+				$dt_addon[$v] = "<span title='".__('Latest Payment', GOURL)."'>".$this->space(2).$res->dt.$this->space()."-".$this->space().
 				($res->countryID?"<a href='".GOURL_ADMIN.GOURL."payments&s=".$res->countryID."'><img width='16' border='0' style='margin-right:9px' alt='".$res->countryID."' src='".plugins_url('/images/flags/'.$res->countryID.'.png', __FILE__)."' border='0'></a>":"") .
 				"<a href='".GOURL_ADMIN.GOURL."payments&s=payment_".$res->paymentID."'>" . gourl_number_format($res->amount, 4) . "</a> " . $res->coinLabel . "</span>";
 			}
@@ -338,6 +338,7 @@ final class gourlclass
 		foreach ($us_addon as $k => $v)
 		{
 			if ($k == "gourlwoocommerce") 		$nme = "GoUrl WooCommerce";
+			elseif ($k == "gourljigoshop") 		$nme = "GoUrl Jigoshop";
 			elseif ($k == "gourledd") 			$nme = "GoUrl Easy Digital Downloads";
 			elseif (strpos($k, "gourl") === 0) 	$nme = "GoUrl " . ucfirst(str_replace("gourl", "", $k));
 			else 								$nme = ucfirst($k);
@@ -378,6 +379,7 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
 		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in WooCommerce). <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon">Plugin installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in Jigoshop). <a href="https://gourl.io/bitcoin-payments-jigoshop.html">Plugin installation page &#187;</a>', GOURL)."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments', GOURL)."</li>";
 		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
@@ -4005,7 +4007,7 @@ final class gourlclass
 			$s = mb_strtolower(trim($_GET["s"]));
 			foreach ($this->addon as $v)
 			{
-				if 	($s == str_replace("gourl", "", $v)) $search = " && orderID like '".esc_sql($v).".%'";
+				if 	(str_replace("gourl", "", $s) == str_replace("gourl", "", $v)) $search = " && orderID like '".esc_sql("gourl".str_replace("gourl", "", $v)).".%'";
 				$sql_where .= " && orderID not like '".esc_sql($v).".%'";
 			}
 			if (!$search)
@@ -4039,7 +4041,7 @@ final class gourlclass
 				$search = " && (orderID LIKE '%".$s."%' || userID LIKE '%".$s."%' || countryID LIKE '%".$s."%' || coinLabel LIKE '%".$s."%' || amount LIKE '%".$s."%' || amountUSD LIKE '%".$s."%' || addr LIKE '%".$s."%' || txID LIKE '%".$s."%' || DATE_FORMAT(txDate, '%d %M %Y') LIKE '%".$s."%')";
 			}
 		}	
-
+		
 		$res = $wpdb->get_row("SELECT sum(amountUSD) as total from crypto_payments WHERE 1".$search, OBJECT);
 		$total = $res->total; 
 		$total = number_format($total, 2);
@@ -5250,14 +5252,14 @@ final class gourlclass
 	
 		return $tmp;
 	}
-	private function left($str, $findme, $firstpos = true)
+	public function left($str, $findme, $firstpos = true)
 	{
 		$pos = ($firstpos)? mb_stripos($str, $findme) : mb_strripos($str, $findme);
 	
 		if ($pos === false) return $str;
 		else return mb_substr($str, 0, $pos);
 	}
-	private function right($str, $findme, $firstpos = true)
+	public function right($str, $findme, $firstpos = true)
 	{
 		$pos = ($firstpos)? mb_stripos($str, $findme) : mb_strripos($str, $findme);
 	
@@ -6347,6 +6349,8 @@ class gourl_table_payments extends WP_List_Table
 
 	function column_default( $item, $column_name )
 	{
+		global $gourl; 
+		
 		$tmp = "";
 		switch( $column_name )
 		{
@@ -6377,7 +6381,8 @@ class gourl_table_payments extends WP_List_Table
 					elseif (strpos($item->$column_name, "file_") === 0) 		$url = GOURL_ADMIN.GOURL."file&id=".substr($item->$column_name, 5)."&gourlcryptocoin=".$this->coin_names[$item->coinLabel]."&preview=true";
 					elseif ($item->$column_name == "payperview") 				$url = GOURL_ADMIN.GOURL."payperview";
 					elseif (strpos($item->$column_name, "membership") === 0)	$url = GOURL_ADMIN.GOURL."paypermembership";
-					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) $item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) 	$item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
 					else	$item->$column_name = str_replace(".", ", ", str_replace("gourl", "", $item->$column_name)); 
 					
 					$tmp = ($url) ? "<a href='".$url."'>".$item->$column_name."</a>" : $item->$column_name; 
@@ -6777,7 +6782,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.          
+ *  XXI.                   
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
