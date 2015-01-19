@@ -344,7 +344,7 @@ final class gourlclass
 			else 								$nme = ucfirst($k);
 			
 			$tmp .= "<tr><td>".$nme."</td><td></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=".str_replace("gourl", "", $k)."'>".$tr_addon[$k]."</a> ".__('payments', GOURL).$us_addon[$k]."</small></td><td><small>".$dt_addon[$k]."</small></td></tr>";
+				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=".$k."'>".$tr_addon[$k]."</a> ".__('payments', GOURL).$us_addon[$k]."</small></td><td><small>".$dt_addon[$k]."</small></td></tr>";
 		}	
 		
 		// 6
@@ -358,7 +358,7 @@ final class gourlclass
 		$tmp .= "<tr><td>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
 		$tmp .= "</table>";
 
-		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1100' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=90&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=250&amp;w=500&amp;t=usd'></iframe></div>";
+		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=180&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd&amp;r=1'></iframe></div>";
 		
 		$tmp .="</div></div>";
 		
@@ -381,7 +381,7 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
 		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in WooCommerce). <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon">Plugin installation page &#187;</a>', GOURL)."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in Jigoshop). <a href="https://gourl.io/bitcoin-payments-jigoshop.html">Plugin installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in Jigoshop). <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+jigoshop">Plugin installation page &#187;</a>', GOURL)."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments', GOURL)."</li>";
 		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
@@ -4009,7 +4009,7 @@ final class gourlclass
 			$s = mb_strtolower(trim($_GET["s"]));
 			foreach ($this->addon as $v)
 			{
-				if 	(str_replace("gourl", "", $s) == str_replace("gourl", "", $v)) $search = " && orderID like '".esc_sql("gourl".str_replace("gourl", "", $v)).".%'";
+				if 	($s == $v) $search = " && orderID like '".esc_sql($v).".%'";
 				$sql_where .= " && orderID not like '".esc_sql($v).".%'";
 			}
 			if (!$search)
@@ -6784,7 +6784,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.   
+ *  XXI.      
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
