@@ -4780,7 +4780,7 @@ final class gourlclass
 	{
 		global $wp;
 	
-		if (in_array(trim($_SERVER["REQUEST_URI"], "/ "), array("?cryptobox.callback.php", "index.php?cryptobox.callback.php")))
+		if (in_array(strtolower($this->right($_SERVER["REQUEST_URI"], "/", false)), array("?cryptobox.callback.php", "index.php?cryptobox.callback.php")))
 		{
 			ob_clean();
 			
@@ -6788,7 +6788,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.    
+ *  XXI.        
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
