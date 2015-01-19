@@ -34,6 +34,7 @@ GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, 
 * User will see successful payment result typically within 5 seconds after the payment has been sent
 * Global, Anonymous, Secure, Zero Risk, No Chargebacks, No visitor registration is needed.
 * Support [WooCommerce Bitcoin Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin/altcoins payments in WooCommerce)
+* Support [Jigoshop Bitcoin Processor](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin/altcoins payments in Jigoshop)
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
 * [Free Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
@@ -56,6 +57,8 @@ Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security 
 Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 
 WooCommerce Addon: [https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/)
+
+Jigoshop Addon: [https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/)
 
 Demo: [http://gourl.io/lib/examples/pay-per-download-multi.php](http://gourl.io/lib/examples/pay-per-download-multi.php)
 
@@ -163,5 +166,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 = 1.2.4 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
-    
+ 
  
