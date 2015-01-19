@@ -355,10 +355,10 @@ final class gourlclass
 				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=unrecognised'>".$tr_unrecognised."</a> ".__('payments', GOURL).$us_unrecognised."</small></td><td><small>".$dt_unrecognised."</small></td></tr>";
 		// 8
 		$tmp .= "<tr><td><small>---------</small><br />".__('Total Received', GOURL)."</td><td colspan='2'><br /><a href='".GOURL_ADMIN.GOURL."payments'>".sprintf(__('%s payments', GOURL), $all_payments)."</a>".$all_details."</td></tr>";
-		$tmp .= "<tr><td>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
+		$tmp .= "<tr><td><a name='chart' id='chart'></a>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
 		$tmp .= "</table>";
-
-		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=180&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd&amp;r=1'></iframe></div>";
+		
+		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=180&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd".($this->options['chart_reverse']?"":"&amp;r=1")."'></iframe></div>";
 		
 		$tmp .="</div></div>";
 		
@@ -575,6 +575,7 @@ final class gourlclass
 		$this->options["rec_per_page"]  = "";
 		$this->options["popup_message"] = "";
 		$this->options["file_columns"]  = "";
+		$this->options["chart_reverse"]  = "";
 		
 		foreach($this->coin_names as $k => $v)
 		{
@@ -733,7 +734,7 @@ final class gourlclass
 			$tmp .= '<td>';
 			$tmp .= '<div>'.$v2.' '.__('Box Public Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'public_key" name="'.GOURL.$v.'public_key" value="'.htmlspecialchars($this->options[$v.'public_key'], ENT_QUOTES).'" class="widefat">';
 			$tmp .= '<div>'.$v2.' '.__('Box Private Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'private_key" name="'.GOURL.$v.'private_key" value="'.htmlspecialchars($this->options[$v.'private_key'], ENT_QUOTES).'" class="widefat">';
-			$tmp .= '<br /><em>'.__('If you want to start accepting payments in <a target="_blank" href="'.$this->coin_www[$v].'">'.$v2.'s ('.$k.')</a>, please create a <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0/">'.$v2.' Payment Box</a> on GoUrl.io and enter the received GoUrl Public/Private Keys. Leave blank if you do not accept payments in '.$v2.'s', GOURL).'</em></td>';
+			$tmp .= '<em>'.sprintf(__('<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/Public Keys are used for communicating between your server and GoUrl.io Payment Gateway server (similar like paypal id/keys).<br>If you want to start accepting payments in <a target="_blank" href="%s">%s (%s)</a>, please create a <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0/">'.$v2.' Payment Box</a> on GoUrl.io and then enter the received free %s  Box Public/Private Keys. Leave blank if you do not accept payments in %s', GOURL), $v2, $v2, $this->coin_www[$v], $v2, $k, $v2, $v2).'</em></td>';
 			$tmp .= '</tr>';
 		}
 	
@@ -778,7 +779,10 @@ final class gourlclass
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'file_columns" id="'.GOURL.'file_columns" value="1" '.$this->chk($this->options['file_columns'], 1).' class="widefat"><br /><em>'.__('<p>Pay-Per-Download: If box is checked, display on "All Payments" statistics page two additional columns "File Downloaded By User?" and "File Downloaded Time". Use it if you sell files online (Pay-Per-Download)', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 		
-	
+		$tmp .= '<tr><th>'.__('Reverse Bitcoin Chart', GOURL).':</th>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'chart_reverse" id="'.GOURL.'chart_reverse" value="1" '.$this->chk($this->options['chart_reverse'], 1).' class="widefat"><br /><em>'.__('<a href="'.GOURL_ADMIN.GOURL.'#chart">Bitcoin Chart</a>: Reverse the X axis of time', GOURL).'</em></td>';
+		$tmp .= '</tr>';
+		
 		$tmp .= '</table>';
 	
 		$tmp .= '</div></div>';
@@ -6784,7 +6788,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.      
+ *  XXI.    
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
