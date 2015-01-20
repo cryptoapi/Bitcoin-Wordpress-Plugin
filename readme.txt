@@ -3,11 +3,11 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admin, affiliate program, affiliates, altcoin, altcoins, amazon, bitpay, btc, buy now, coinbase, commerce, content protection, content, control access, credit cards, crypto currency, cryptocurrency, currency, darkcoin, developers, digital download, digital downloads, direct debit, doge, dogecoin, donation, download, downloads, e-commerce, e-downloads, e-store, earn money, easy digital download, easy digital downloads, easy downloads, ebay, ecommerce, eshop, example, extension, feathercoin, file download, file downloads, gateway, google, gourl, invoice, litecoin, make money, member, members only, members, membership, memberships, multisite membership, official, online shop, online, osCommerce, paid content, paid downloads, paid membership, paid pages, paid video, pay per download, pay per video, pay per view, paying users, payment gateway, payment processor, payment, payments, paypal payment, paypal, plugin developers, plugin, potcoin, ppv, protection, reddcoin, register, registration, restrict access, restrict content, revenue, sale, sell online, sell products online, sell products, sell, selling, shop, shopping cart, shortcode, speedcoin, store, subscription, subscriptions, teaser, usd, vericoin, vertcoin, virtual currency, widget, woocommerce, wordPress Membership Plugin, wordpress ecommerce, wordpress membership, wordpress payment gateway, wordpress payment processor, wordpress paypal, wordpress, wp ecommerce
+Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admin, affiliate program, affiliates, altcoin, altcoins, amazon, bitpay, btc, buy now, coinbase, commerce, content protection, content, control access, credit cards, crypto currency, cryptocurrency, currency, google checkout, google wallet, payment, darkcoin, developers, digital download, digital downloads, direct debit, doge, dogecoin, donation, download, downloads, e-commerce, e-downloads, e-store, earn money, easy digital download, easy digital downloads, easy downloads, ebay, ecommerce, eshop, example, extension, feathercoin, file download, file downloads, gateway, google, gourl, invoice, litecoin, make money, member, members only, members, membership, memberships, multisite membership, official, online shop, online, osCommerce, paid content, paid downloads, paid membership, paid pages, paid video, pay per download, pay per video, pay per view, paying users, payment gateway, payment processor, payment, payments, paypal payment, paypal, plugin developers, plugin, potcoin, ppv, protection, reddcoin, register, registration, restrict access, restrict content, revenue, sale, sell online, sell products online, sell products, sell, selling, shop, shopping cart, shortcode, speedcoin, store, subscription, subscriptions, teaser, usd, vericoin, vertcoin, virtual currency, widget, woocommerce, wordPress Membership Plugin, wordpress ecommerce, wordpress membership, wordpress payment gateway, wordpress payment processor, wordpress paypal, wordpress, wp ecommerce, appthemes, app themes, premium themes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, apptheme
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.4
+Stable Tag: 1.2.5
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,9 @@ More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gou
 
 == Changelog ==
 
+= 1.2.5 =
+Support Bitcoin Payment Gateway for all AppThemes Premium Themes - Classipress, Taskerr, HireBee, Vantage, Clipper, JobRoller, Ideas, Quality Control, etc.
+
 = 1.2.4 =
 Support Bitcoin Payment Gateway for Jigoshop
 
@@ -164,7 +167,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.4 =
+= 1.2.5 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
- 
  

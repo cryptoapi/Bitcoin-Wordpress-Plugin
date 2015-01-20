@@ -29,7 +29,7 @@ final class gourlclass
 	private $languages			= array("en"=>"English", "fr"=>"French", "ru"=>"Russian", "ar"=>"Arabic", "cn"=>"Simplified Chinese", "zh"=>"Traditional Chinese", "hi"=>"Hindi");
 	private $expiry_period 		= array("NO EXPIRY", "1 HOUR", "2 HOURS", "3 HOURS", "6 HOURS", "12 HOURS", "1 DAY", "2 DAYS", "3 DAYS", "4 DAYS", "5 DAYS",  "1 WEEK", "2 WEEKS", "3 WEEKS", "4 WEEKS", "1 MONTH", "2 MONTHS", "3 MONTHS", "6 MONTHS", "12 MONTHS"); // payment expiry period
 	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
-	private $addon 				= array("gourlwoocommerce", "gourljigoshop", "gourledd");
+	private $addon 				= array("gourlwoocommerce", "gourljigoshop", "gourledd", "gourlappthemes");
 	
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");	
@@ -168,17 +168,35 @@ final class gourlclass
 	
 
 	/*
-	 *  4.
+	 * 4.
 	*/
 	public function languages()
 	{
 		return $this->languages;
 	}
 	
+
+	/*
+	 * 5.
+	*/
+	public function box_width()
+	{
+		return $this->options['box_width'];
+	}
 	
 	
 	/*
-	 *  5.
+	 * 6.
+	*/
+	public function box_height()
+	{
+		return $this->options['box_height'];
+	}
+	
+	
+	
+	/*
+	 *  7.
 	*/
 	public function page_summary()
 	{
@@ -340,6 +358,7 @@ final class gourlclass
 			if ($k == "gourlwoocommerce") 		$nme = "GoUrl WooCommerce";
 			elseif ($k == "gourljigoshop") 		$nme = "GoUrl Jigoshop";
 			elseif ($k == "gourledd") 			$nme = "GoUrl Easy Digital Downloads";
+			elseif ($k == "gourlappthemes") 	$nme = "GoUrl AppThemes";
 			elseif (strpos($k, "gourl") === 0) 	$nme = "GoUrl " . ucfirst(str_replace("gourl", "", $k));
 			else 								$nme = ucfirst($k);
 			
@@ -380,26 +399,21 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: offer paid access to your premium content/videos <a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."payperview")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in WooCommerce). <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon">Plugin installation page &#187;</a>', GOURL)."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in Jigoshop). <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+jigoshop">Plugin installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon">installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+jigoshop">installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">installation page &#187;</a>', GOURL)."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments', GOURL)."</li>";
-		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
+		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
 		$tmp .= "<li> ".__('<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and this your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).', GOURL)."</li>";
 		
 		
 		$tmp .= "<li> ".__('Free <a href="https://gourl.io/view/contact/Contact_Us.html">Wordpress Plugin Support</a> for You', GOURL)."</li>";
 		$tmp .= "</ul>";
 		
-		$tmp .= "</div>";
-
-		
-		$tmp .= "<br><br><br><br>";
-		$tmp .= "<div class='gourlnews'>";
-		$tmp .= "<div class='gourltitle'>".__('Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015)', GOURL)."</div>";
-		$tmp .= "<p>The above companies kept the client's bitcoins on their servers. And this caused the problems.<br>Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. This gives additional protection to our customers against hackers, etc.</p>";
 		$tmp .= "<a name='i3'></a>";
 		$tmp .= "</div>";
+
 		
 		
 		
@@ -485,7 +499,7 @@ final class gourlclass
 		
 		$tmp .= "<br><br><br><br><br>";
 		$tmp .= "<div class='gourltitle'>6. ".__('Bitcoin Payments with Any Other Wordpress Plugins', GOURL)."</div>";
-		$tmp .= "<p>".__('<b>Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins</b> using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). For example, see other plugin <a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php">PHP source code</a> - Bitcoin payments for WooCommerce, which uses this plugin functionality. Please ask Wordpress Plugin Developers to add a few lines of code below to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a> ) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins. GoUrl Payment Gateway will do all the work - display payment form, process received payments, etc and will submit that information to the plugin used. Around 5 seconds after cryptocoin payment is made, user will see confirmation on your webpage with any wordpress plugin that payment is received (i.e. very fast).', GOURL)."</p>";
+		$tmp .= "<p>".__('<b>Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins</b> using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). For example, see other plugin <a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php">PHP source code</a> - Bitcoin payments for Appthemes, which uses this plugin functionality. Please ask Wordpress Plugin Developers to add a few lines of code below to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a> ) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins. GoUrl Payment Gateway will do all the work - display payment form, process received payments, etc and will submit that information to the plugin used. Around 5 seconds after cryptocoin payment is made, user will see confirmation on your webpage with any wordpress plugin that payment is received (i.e. very fast).', GOURL)."</p>";
 		$tmp .= "<p>".sprintf(__('<b>Beneficial for You and other Websites.</b> Simply use this GoUrl Bitcoin Gateway wordpress plugin which will automatically be used by other plugins and you will only need to enter your bitcoin/litecoin/dogecoin wallet addresses once. No multiple times, for different plugins. Also you will see the bitcoin/altcoin payment statistics in one common table "<a href="%s">All Payments</a>" with details of all received payments. So it is easy to control everything. Of course, other plugins can also show bitcoin/altcoin transactions which link to other plugins.', GOURL), GOURL_ADMIN.GOURL."payments")."</p>";
 		
 		$tmp .= "<br/><h3>".__('Example of Bitcoin Payment Gateway code for other wordpress plugins -', GOURL)."<br/>";
@@ -562,7 +576,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  6. Get values from the options table
+	 *  8. Get values from the options table
 	*/
 	private function get_settings()
 	{
@@ -600,7 +614,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  7.
+	 *  9.
 	*/
 	private function post_settings()
 	{
@@ -616,7 +630,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  8.
+	 *  10.
 	*/	
 	private function check_settings()
 	{
@@ -661,7 +675,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  9.
+	 *  11.
 	*/
 	private function save_settings()
 	{
@@ -678,7 +692,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  10.
+	 *  12.
 	*/
 	public function page_settings()
 	{
@@ -798,7 +812,7 @@ final class gourlclass
 
 	
 	/*
-	 *  11.
+	 *  13.
 	*/
 	private function payment_box_style()
 	{
@@ -815,7 +829,7 @@ final class gourlclass
 
 	
 	/*
-	 *  12.
+	 *  14.
 	*/
 	private function payment_message_style()
 	{
@@ -836,7 +850,7 @@ final class gourlclass
 	/**************** COMMON FUNCTIONS **************************/
 	
 	/*
-	 *  13.
+	 *  15.
 	*/
 	private function get_record($page)
 	{
@@ -863,7 +877,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  14. 
+	 *  16. 
 	*/
 	private function post_record()
 	{
@@ -887,7 +901,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  15.
+	 *  17.
 	*/
 	private function check_download()
 	{
@@ -948,7 +962,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  16.
+	 *  18.
 	*/
 	private function save_download()
 	{
@@ -1023,7 +1037,7 @@ final class gourlclass
 
 	
 	/*
-	 *  17.
+	 *  19.
 	*/
 	public function page_newfile()
 	{
@@ -1284,7 +1298,7 @@ final class gourlclass
 	
 	
 	/*
-	*  18.
+	*  20.
 	*/
 	public function page_files()
 	{
@@ -1364,7 +1378,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  19.
+	 *  21.
 	*/
 	public function shortcode_download($arr)
 	{
@@ -1635,7 +1649,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  20.
+	 *  22.
 	*/
 	private function get_view()
 	{
@@ -1663,7 +1677,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  21.
+	 *  23.
 	*/
 	private function post_view()
 	{
@@ -1681,7 +1695,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  22.
+	 *  24.
 	*/
 	private function check_view()
 	{
@@ -1714,7 +1728,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  23.
+	 *  25.
 	*/
 	private function save_view()
 	{
@@ -1732,7 +1746,7 @@ final class gourlclass
 	
 
 	/*
-	 *  24.
+	 *  26.
 	*/
 	public function page_view()
 	{
@@ -1943,7 +1957,7 @@ final class gourlclass
 	
 
 	/*
-	 *  25.
+	 *  27.
 	*/
 	public function shortcode_view($arr)
 	{
@@ -1955,7 +1969,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  26.
+	 *  28.
 	*/
 	private function shortcode_view_init($image)
 	{
@@ -2269,7 +2283,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  27.
+	 *  29.
 	*/
 	private function get_membership()
 	{
@@ -2299,7 +2313,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  28.
+	 *  30.
 	*/
 	private function post_membership()
 	{
@@ -2317,7 +2331,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  29.
+	 *  31.
 	*/
 	private function check_membership()
 	{
@@ -2350,7 +2364,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  30.
+	 *  32.
 	*/
 	private function save_membership()
 	{
@@ -2371,7 +2385,7 @@ final class gourlclass
 
 
 	/*
-	 *  31.
+	 *  33.
 	*/
 	public function page_membership()
 	{
@@ -2627,7 +2641,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  32.
+	 *  34.
 	*/
 	public function shortcode_membership($arr)
 	{
@@ -2639,7 +2653,7 @@ final class gourlclass
 	
 
 	/*
-	 *  33.
+	 *  35.
 	*/
 	private function shortcode_membership_init($image)
 	{
@@ -3005,7 +3019,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  34.
+	 *  36.
 	*/
 	public function page_membership_users()
 	{
@@ -3087,7 +3101,7 @@ final class gourlclass
 	
 
 	/*
-	 *  35.
+	 *  37.
 	*/
 	public function page_membership_user()
 	{
@@ -3194,7 +3208,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  36.
+	 *  38.
 	*/
 	private function check_membership_newuser()
 	{
@@ -3213,7 +3227,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  37.
+	 *  39.
 	*/
 	private function save_membership_newuser()
 	{
@@ -3243,7 +3257,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  38.
+	 *  40.
 	*/
 	public function check_product()
 	{
@@ -3304,7 +3318,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  39.
+	 *  41.
 	*/
 	public function save_product()
 	{
@@ -3387,7 +3401,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  40.
+	 *  42.
 	*/
 	public function page_newproduct()
 	{
@@ -3664,7 +3678,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  41.
+	 *  43.
 	*/
 	public function page_products()
 	{
@@ -3744,7 +3758,7 @@ final class gourlclass
 	
 
 	/*
-	 *  42.
+	 *  44.
 	*/
 	public function shortcode_product($arr, $preview_final = false)
 	{
@@ -4000,7 +4014,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  43.
+	 *  45.
 	*/
 	public function page_payments()
 	{
@@ -4114,7 +4128,7 @@ final class gourlclass
 
 	
 	/*
-	 *  44.
+	 *  46.
 	*/
 	private function check_payment_confirmation($paymentID)
 	{
@@ -4162,7 +4176,7 @@ final class gourlclass
 
 	
 	/*
-	 *  45.
+	 *  47.
 	*/
 	public function  front_init()
 	{
@@ -4175,7 +4189,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  46.
+	 *  48.
 	*/
 	public function front_html($text)
 	{
@@ -4217,7 +4231,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  47.
+	 *  49.
 	*/
 	public function front_header()
 	{
@@ -4232,7 +4246,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  
+	 * 50.  
 	*/
 	private function login_form()
 	{
@@ -4294,7 +4308,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  48.
+	 *  51.
 	*/
 	public function admin_init()
 	{
@@ -4455,7 +4469,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  49.
+	 *  52.
 	*/
 	public function admin_header()
 	{
@@ -4503,7 +4517,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  50.
+	 *  53.
 	*/
 	public function admin_warning()
 	{
@@ -4515,7 +4529,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  51.
+	 *  54.
 	*/
 	public function admin_warning_reactivate()
 	{
@@ -4528,7 +4542,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  52.
+	 *  55.
 	*/
 	public function admin_menu()
 	{
@@ -4677,7 +4691,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  53.
+	 *  56.
 	*/
 	private function page_title($title, $type = 1) // 1 - Plugin Name, 2 - Pay-Per-Download,  3 - Pay-Per-View ,  4 - Pay-Per-Membership, 5 - Pay-Per-Product, 20 - Custom
 	{
@@ -4696,7 +4710,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  49.
+	 *  57.
 	*/
 	private function upload_file($file, $dir, $english = true)
 	{
@@ -4748,7 +4762,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  54.
+	 *  58.
 	*/
 	private function download_file($file)
 	{
@@ -4774,7 +4788,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  55.
+	 *  59.
 	*/
 	public function callback_parse_request( &$wp )
 	{
@@ -4817,7 +4831,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  56. Bitcoin Payments with Any Other Wordpress Plugins
+	 *  60. Bitcoin Payments with Any Other Wordpress Plugins
 	*/
 	public function cryptopayments ($pluginName, $amount, $amountCurrency = "USD", $orderID, $period, $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60)
 	{
@@ -4985,8 +4999,9 @@ final class gourlclass
 		if ($is_paid) 			$html .= "<br />";
 		else 					$html .= $coins_list;
 	
+
 		// Cryptocoin Payment Box
-		if ($languages_list) $html .= "<div style='margin:".($coins_list?25:50)."px 0 5px 350px;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(2).$languages_list."</div>";
+		if ($languages_list) $html .= "<div style='margin:".($coins_list?25:50)."px 0 5px ".(300+($this->options['box_width']-520))."px;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(2).$languages_list."</div>";
 		$html .= $box_html;
 		
 		
@@ -5041,7 +5056,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  58.
+	 *  61.
 	 */ 
 	private function upgrade ()
 	{
@@ -5244,7 +5259,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  58. Supported Functions
+	 *  62. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -5842,6 +5857,36 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 
 
 
+/*
+ * XVI.
+*/
+function gourl_convert_currency($from_Currency, $to_Currency, $amount)
+{
+	if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
+	if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
+	
+	$amount = urlencode($amount);
+	$from_Currency = urlencode($from_Currency);
+	$to_Currency = urlencode($to_Currency);
+
+	$url = "https://www.google.com/finance/converter?a=".$amount."&from=".$from_Currency."&to=".$to_Currency;
+
+	$ch = curl_init();
+	$timeout = 20;
+	curl_setopt ($ch, CURLOPT_URL, $url);
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)");
+	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+	curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
+	$rawdata = curl_exec($ch);
+	curl_close($ch);
+	$data = explode('bld>', $rawdata);
+	$data = explode($to_Currency, $data[1]);
+
+	return round($data[0], 2);
+}
+
 
 
 /********************************************************************/
@@ -6389,6 +6434,7 @@ class gourl_table_payments extends WP_List_Table
 					elseif (strpos($item->$column_name, "membership") === 0)	$url = GOURL_ADMIN.GOURL."paypermembership";
 					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) 	$item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
 					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
+					elseif (strpos($item->$column_name, "gourlappthemes") === 0) 	$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlappthemes.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlappthemes.order", "", $item->$column_name)."</a>"; 
 					else	$item->$column_name = str_replace(".", ", ", str_replace("gourl", "", $item->$column_name)); 
 					
 					$tmp = ($url) ? "<a href='".$url."'>".$item->$column_name."</a>" : $item->$column_name; 
@@ -6788,7 +6834,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.        
+ *  XXI.   
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
