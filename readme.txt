@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admi
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.5
+Stable Tag: 1.2.6
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +36,7 @@ GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, 
 * Support [WooCommerce Bitcoin Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin/altcoins payments in [WooCommerce](https://wordpress.org/plugins/woocommerce/))
 * Support [Jigoshop Bitcoin Processor](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin/altcoins payments in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
 * Support [Appthemes Classipress, Vantage, JobRoller, etc](https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html) (accept bitcoin/altcoins payments in all [Appthemes](http://www.appthemes.com/themes/) products)
-* Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce/blob/master/class-wc-gateway-gourl.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
+* Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
 * [Free Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
 
@@ -141,6 +141,9 @@ More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gou
 
 == Changelog ==
 
+= 1.2.6 =
+User can customize payment box images (login, disabled, etc)
+
 = 1.2.5 =
 Support Bitcoin Payment Gateway for all AppThemes Premium Themes - Classipress, Taskerr, HireBee, Vantage, Clipper, JobRoller, Ideas, Quality Control, etc.
 
@@ -170,7 +173,7 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.5 =
+= 1.2.6 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
- 
+        
  

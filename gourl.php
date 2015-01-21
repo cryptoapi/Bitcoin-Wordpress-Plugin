@@ -27,10 +27,11 @@ final class gourlclass
 	private $coin_names 		= array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'VTC' => 'vertcoin', 'FTC' => 'feathercoin', 'VRC' => 'vericoin', 'POT' => 'potcoin');
 	private $coin_www   		= array('bitcoin' => 'https://bitcoin.org/', 'litecoin'  => 'https://litecoin.org/', 'dogecoin'  => 'http://dogecoin.com/', 'speedcoin'  => 'http://speedcoin.co/', 'darkcoin'  => 'https://www.darkcoin.io/', 'vertcoin'  => 'http://vertcoin.org/', 'reddcoin'  => 'http://reddcoin.com/', 'feathercoin' => 'http://www.feathercoin.com/', 'vericoin' => 'http://www.vericoin.info/', 'potcoin' => 'http://www.potcoin.com/');
 	private $languages			= array("en"=>"English", "fr"=>"French", "ru"=>"Russian", "ar"=>"Arabic", "cn"=>"Simplified Chinese", "zh"=>"Traditional Chinese", "hi"=>"Hindi");
+	private $custom_images 		= array("img_plogin"=>"Payment Login", "img_flogin"=>"File Download Login", "img_sold"=>"Product Sold", "img_pdisable"=>"Payments Disabled", "img_fdisable"=>"File Payments Disabled", "img_nofile"=>"File Not Exists"); // custom payment box images
 	private $expiry_period 		= array("NO EXPIRY", "1 HOUR", "2 HOURS", "3 HOURS", "6 HOURS", "12 HOURS", "1 DAY", "2 DAYS", "3 DAYS", "4 DAYS", "5 DAYS",  "1 WEEK", "2 WEEKS", "3 WEEKS", "4 WEEKS", "1 MONTH", "2 MONTHS", "3 MONTHS", "6 MONTHS", "12 MONTHS"); // payment expiry period
 	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
 	private $addon 				= array("gourlwoocommerce", "gourljigoshop", "gourledd", "gourlappthemes");
-	
+			
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");	
 	
@@ -69,7 +70,7 @@ final class gourlclass
 				
 		// A. General Plugin Settings
 		$this->get_settings();
-		$this->check_settings();
+		if (!($_POST && $this->page == GOURL.'settings')) $this->check_settings();
 		
 
 		// B. Pay-Per-Download - New File
@@ -194,13 +195,29 @@ final class gourlclass
 	}
 	
 	
+	/*
+	 * 7. Return paymet box custom image 
+	*/
+	public function box_image($type = "plogin") // plogin, flogin, sold, pdisable, fdisable, nofile
+	{
+		$type = "img_" . $type;
+		if (!isset($this->custom_images[$type])) return "";
+		
+		if ($this->options[$type] == 1 && $this->options[$type."url"] && file_exists(GOURL_DIR."box/".$this->options[$type.'url'])) 
+			return GOURL_DIR2."box/".$this->options[$type.'url'];
+		else 
+			return plugins_url('/images', __FILE__)."/".$type.".png";  
+	}
+	
 	
 	/*
-	 *  7.
+	 *  8.
 	*/
 	public function page_summary()
 	{
 		global $wpdb;
+		
+		
 
 		$tmp  = "<div class='wrap ".GOURL."admin'>";
 		$tmp .= $this->page_title(__('Summary', GOURL).$this->space(1).'<a class="add-new-h2" target="_blank" href="https://gourl.io/bitcoin-wordpress-plugin.html">' . __('version ', GOURL).GOURL_VERSION.'</a>');
@@ -576,21 +593,21 @@ final class gourlclass
 	
 	
 	/*
-	 *  8. Get values from the options table
+	 *  9. Get values from the options table
 	*/
 	private function get_settings()
 	{
-		$this->options["box_width"] 	= "";
-		$this->options["box_height"] 	= "";
-		$this->options["box_border"] 	= "";
-		$this->options["box_style"] 	= "";
-		$this->options["message_border"]= "";
-		$this->options["message_style"] = "";
-		$this->options["rec_per_page"]  = "";
-		$this->options["popup_message"] = "";
-		$this->options["file_columns"]  = "";
-		$this->options["chart_reverse"]  = "";
-		
+
+		$arr = array("box_width"=>520, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"");
+		foreach($arr as $k => $v) $this->options[$k] = "";
+
+		foreach($this->custom_images as $k => $v)
+		{
+			$this->options[$k] = 0;
+			$this->options[$k."2"] = "";
+			$this->options[$k."url"] = "";
+		}
+				
 		foreach($this->coin_names as $k => $v)
 		{
 			$this->options[$v."public_key"] = "";
@@ -603,10 +620,15 @@ final class gourlclass
 		}
 		
 		// default
-		if (!$this->options["box_width"])  		$this->options["box_width"] 	= 520;
-		if (!$this->options["box_height"]) 		$this->options["box_height"] 	= 230;
-		if (!$this->options["rec_per_page"]) 	$this->options["rec_per_page"] 	= 20;
-		if (!$this->options["popup_message"]) 	$this->options["popup_message"] = __('It is a Paid Download ! Please pay below', GOURL);
+		foreach($arr as $k => $v) 
+		{
+			if (!$this->options[$k]) $this->options[$k] = $v;
+		}
+
+		foreach($this->custom_images as $k => $v)
+		{
+			if (!$this->options[$k."url"]) $this->options[$k] = 0;
+		}
 		
 		return true;
 	}
@@ -614,7 +636,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  9.
+	 *  10.
 	*/
 	private function post_settings()
 	{
@@ -630,7 +652,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  10.
+	 *  11.
 	*/	
 	private function check_settings()
 	{
@@ -668,6 +690,23 @@ final class gourlclass
 		if ($this->options["box_style"] && (in_array($this->options["box_style"][0], array("'", "\"")) || $this->options["box_style"] != preg_replace('/[^A-Za-z0-9_\-\ \.\,\:\;\!\"\'\#]/', '', $this->options["box_style"]))) $this->errors[] = __('Invalid Payment Box Style', GOURL);
 		if ($this->options["message_style"] && (in_array($this->options["message_style"][0], array("'", "\"")) || $this->options["message_style"] != preg_replace('/[^A-Za-z0-9_\-\ \.\,\:\;\!\"\'\#]/', '', $this->options["message_style"]))) $this->errors[] = __('Invalid Payment Messages Style', GOURL);
 		
+
+		// upload files
+		if ($_FILES && $_POST && $this->page == GOURL.'settings')
+		{
+			foreach($this->custom_images as $k => $v)
+			{
+				$file = (isset($_FILES[GOURL.$k."2"]["name"]) && $_FILES[GOURL.$k."2"]["name"]) ? $_FILES[GOURL.$k."2"] : "";
+				if ($file) 
+				{
+					if ($this->options[$k."url"] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) unlink(GOURL_DIR."box/".$this->options[$k.'url']);
+					$this->options[$k."url"] = $this->upload_file($file, "box");
+					
+				}
+			}
+			if ($this->record_errors) $this->errors = array_merge($this->errors, $this->record_errors); 
+		}
+		
 		return true;
 	}
 	
@@ -675,7 +714,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  11.
+	 *  12.
 	*/
 	private function save_settings()
 	{
@@ -692,7 +731,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  12.
+	 *  13.
 	*/
 	public function page_settings()
 	{
@@ -716,7 +755,7 @@ final class gourlclass
 		
 		$tmp .= $message;
 	
-		$tmp .= "<form method='post' accept-charset='utf-8' action='".GOURL_ADMIN.GOURL."settings'>";
+		$tmp .= "<form enctype='multipart/form-data' method='post' accept-charset='utf-8' action='".GOURL_ADMIN.GOURL."settings'>";
 	
 		$tmp .= "<div class='postbox'>";
 		$tmp .= "<h3 class='hndle'>".__('General Settings', GOURL)."</h3>";
@@ -725,7 +764,8 @@ final class gourlclass
 		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_settings" />';
 	
 		$tmp .= '<div class="alignright">';
-		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
+		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
+		$tmp .= '<input type="submit" onclick="this.value=\''.__('Please wait...', GOURL).'\';document.getElementById(\'gourlsubmitloading\').style.display=\'inline\';return true;" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
 		if ($this->payments) $tmp .= '<a href="'.GOURL_ADMIN.GOURL.'#i3" class="'.GOURL.'button button-secondary">'.__('Instruction', GOURL).'</a>'.$this->space();
 		$tmp .= '<a href="'.GOURL_ADMIN.GOURL.'settings">'.__('Reload Page', GOURL).'</a>';
 		$tmp .= '</div>';
@@ -752,7 +792,9 @@ final class gourlclass
 			$tmp .= '</tr>';
 		}
 	
-	
+		$tmp .= '<tr><th colspan="2"><h3>'.__('Payment Box', GOURL).'</h3></th>';
+		$tmp .= '</tr>';
+		
 		$tmp .= '<tr><th><br />'.__('Payment Box Width', GOURL).':</th>';
 		$tmp .= '<td><br /><input class="gourlnumeric" type="text" id="'.GOURL.'box_width" name="'.GOURL.'box_width" value="'.htmlspecialchars($this->options['box_width'], ENT_QUOTES).'" class="widefat"><label>'.__('px', GOURL).'</label><br /><em>'.__('Cryptocoin Payment Box Width, default 520px', GOURL).'</em></td>';
 		$tmp .= '</tr>';
@@ -781,6 +823,27 @@ final class gourlclass
 		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style.<br />Example: display:inline-block;max-width:570px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
+		$tmp .= '<tr><th colspan="2"><h3>'.__('Images for Payment Box', GOURL).'</h3></th>';
+		$tmp .= '</tr>';
+
+		
+		$i = 1;
+		foreach($this->custom_images as $k => $v)
+		{
+			$tmp .= '<tr><th>'.$i.'. '.__($v, GOURL).':</th><td>';
+			$tmp .= '<p><input type="radio" name="'.GOURL.$k.'" value="0" '.$this->chk($this->options[$k], 0).'> '.__('Default '.$v.' Image', GOURL).' -</p>';
+			$tmp .= "<img src='".plugins_url('/images', __FILE__)."/".$k.".png' border='0'>";
+			$tmp .= '<p><input type="radio" name="'.GOURL.$k.'" value="1" '.$this->chk($this->options[$k], 1).'> '.__('Custom Image', GOURL).' -</p>';
+			if ($this->options[$k.'url'] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) $tmp .= "<img src='".GOURL_DIR2."box/".$this->options[$k.'url']."' border='0'>"; else $this->options[$k.'url'] = "";
+			$tmp .= "<input type='hidden' id='".GOURL.$k."url' name='".GOURL.$k."url' value='".htmlspecialchars($this->options[$k.'url'], ENT_QUOTES)."'>"; 
+			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__('Default image size: 530px x 240px, allowed images: JPG, GIF, PNG.', GOURL).'</em>';
+			$tmp .= '</td></tr>';
+			$i++;
+		}
+		
+		$tmp .= '<tr><th colspan="2"><h3>'.__('Other', GOURL).'</h3></th>';
+		$tmp .= '</tr>';
+		
 		$tmp .= '<tr><th><br />'.__('Records Per Page', GOURL).':</th>';
 		$tmp .= '<td><br /><input class="gourlnumeric" type="text" id="'.GOURL.'rec_per_page" name="'.GOURL.'rec_per_page" value="'.htmlspecialchars($this->options['rec_per_page'], ENT_QUOTES).'" class="widefat"><label>'.__('records', GOURL).'</label><br /><em>'.__('Set number of records per page in tables "All Payments" and "All Files"', GOURL).'</em></td>';
 		$tmp .= '</tr>';
@@ -812,7 +875,7 @@ final class gourlclass
 
 	
 	/*
-	 *  13.
+	 *  14.
 	*/
 	private function payment_box_style()
 	{
@@ -829,7 +892,7 @@ final class gourlclass
 
 	
 	/*
-	 *  14.
+	 *  15.
 	*/
 	private function payment_message_style()
 	{
@@ -850,7 +913,7 @@ final class gourlclass
 	/**************** COMMON FUNCTIONS **************************/
 	
 	/*
-	 *  15.
+	 *  16.
 	*/
 	private function get_record($page)
 	{
@@ -877,7 +940,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  16. 
+	 *  17. 
 	*/
 	private function post_record()
 	{
@@ -901,7 +964,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  17.
+	 *  18.
 	*/
 	private function check_download()
 	{
@@ -962,7 +1025,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  18.
+	 *  19.
 	*/
 	private function save_download()
 	{
@@ -1037,7 +1100,7 @@ final class gourlclass
 
 	
 	/*
-	 *  19.
+	 *  20.
 	*/
 	public function page_newfile()
 	{
@@ -1298,7 +1361,7 @@ final class gourlclass
 	
 	
 	/*
-	*  20.
+	*  21.
 	*/
 	public function page_files()
 	{
@@ -1378,7 +1441,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  21.
+	 *  22.
 	*/
 	public function shortcode_download($arr)
 	{
@@ -1448,12 +1511,12 @@ final class gourlclass
 	
 		if ($userFormat == "MANUAL" && (!is_user_logged_in() || !$current_user->ID))
 		{
-			$box_html = "<div align='center'><a href='".wp_login_url(get_permalink())."'><img width='527' height='242' alt='".__('Please register or login to download this file', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_login.png' border='0'></a></div><br /><br />";
+			$box_html = "<div align='center'><a href='".wp_login_url(get_permalink())."'><img alt='".__('Please register or login to download this file', GOURL)."' src='".$this->box_image("flogin")."' border='0'></a></div><br /><br />";
 			$download_link = "onclick='alert(\"".__('Please register or login to download this file', GOURL)."\")' href='#a'";
 		}
 		else if (!$fileName || !file_exists($filePath) || !is_file($filePath))
 		{
-			$box_html = "<div align='center'><img width='527' height='242' alt='".__('File does not exist on the server', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_nofile.png' border='0'></div><br /><br />";
+			$box_html = "<div align='center'><img alt='".__('File does not exist on the server', GOURL)."' src='".$this->box_image("nofile")."' border='0'></div><br /><br />";
 			$download_link = "onclick='alert(\"".__('Error! File does not exist on the server !', GOURL)."\")' href='#a'";
 		}
 		else
@@ -1554,13 +1617,13 @@ final class gourlclass
 			if (!$is_paid && $purchases > 0 && $paymentCnt >= $purchases)
 			{
 				// A. Sold
-				$box_html = "<div align='center'><img width='527' height='242' alt='".__('Sold Out', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_sold.png' border='0'></div><br /><br />";
+				$box_html = "<div align='center'><img alt='".__('Sold Out', GOURL)."' src='".$this->box_image("sold")."' border='0'></div><br /><br />";
 					
 			}
 			elseif (!$is_paid && !$active)
 			{
 				// B. Box Not Active
-				$box_html = "<div align='center'><img width='527' height='242' alt='".__('Cryptcoin Payment Box Disabled', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_disabled.png' border='0'></div><br /><br />";
+				$box_html = "<div align='center'><img alt='".__('Cryptcoin Payments Disabled for this File', GOURL)."' src='".$this->box_image("fdisable")."' border='0'></div><br /><br />";
 			}
 			else
 			{
@@ -1649,7 +1712,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  22.
+	 *  23.
 	*/
 	private function get_view()
 	{
@@ -1677,7 +1740,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  23.
+	 *  24.
 	*/
 	private function post_view()
 	{
@@ -1695,7 +1758,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  24.
+	 *  25.
 	*/
 	private function check_view()
 	{
@@ -1728,7 +1791,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  25.
+	 *  26.
 	*/
 	private function save_view()
 	{
@@ -1746,7 +1809,7 @@ final class gourlclass
 	
 
 	/*
-	 *  26.
+	 *  27.
 	*/
 	public function page_view()
 	{
@@ -1957,7 +2020,7 @@ final class gourlclass
 	
 
 	/*
-	 *  27.
+	 *  28.
 	*/
 	public function shortcode_view($arr)
 	{
@@ -1969,7 +2032,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  28.
+	 *  29.
 	*/
 	private function shortcode_view_init($image)
 	{
@@ -2283,7 +2346,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  29.
+	 *  30.
 	*/
 	private function get_membership()
 	{
@@ -2313,7 +2376,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  30.
+	 *  31.
 	*/
 	private function post_membership()
 	{
@@ -2331,7 +2394,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  31.
+	 *  32.
 	*/
 	private function check_membership()
 	{
@@ -2364,7 +2427,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  32.
+	 *  33.
 	*/
 	private function save_membership()
 	{
@@ -2385,7 +2448,7 @@ final class gourlclass
 
 
 	/*
-	 *  33.
+	 *  34.
 	*/
 	public function page_membership()
 	{
@@ -2641,7 +2704,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  34.
+	 *  35.
 	*/
 	public function shortcode_membership($arr)
 	{
@@ -2653,7 +2716,7 @@ final class gourlclass
 	
 
 	/*
-	 *  35.
+	 *  36.
 	*/
 	private function shortcode_membership_init($image)
 	{
@@ -3019,7 +3082,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  36.
+	 *  37.
 	*/
 	public function page_membership_users()
 	{
@@ -3101,7 +3164,7 @@ final class gourlclass
 	
 
 	/*
-	 *  37.
+	 *  38.
 	*/
 	public function page_membership_user()
 	{
@@ -3208,7 +3271,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  38.
+	 *  39.
 	*/
 	private function check_membership_newuser()
 	{
@@ -3227,7 +3290,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  39.
+	 *  40.
 	*/
 	private function save_membership_newuser()
 	{
@@ -3257,7 +3320,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  40.
+	 *  41.
 	*/
 	public function check_product()
 	{
@@ -3318,7 +3381,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  41.
+	 *  42.
 	*/
 	public function save_product()
 	{
@@ -3401,7 +3464,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  42.
+	 *  43.
 	*/
 	public function page_newproduct()
 	{
@@ -3678,7 +3741,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  43.
+	 *  44.
 	*/
 	public function page_products()
 	{
@@ -3758,7 +3821,7 @@ final class gourlclass
 	
 
 	/*
-	 *  44.
+	 *  45.
 	*/
 	public function shortcode_product($arr, $preview_final = false)
 	{
@@ -3824,7 +3887,7 @@ final class gourlclass
 	
 		if (!is_user_logged_in() || !$current_user->ID)
 		{
-			$box_html = "<br /><div align='center'><a href='".wp_login_url(get_permalink())."'><img width='527' height='242' alt='".__('Please register or login to website', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_login2.png' border='0'></a></div><br /><br />";
+			$box_html = "<br /><div align='center'><a href='".wp_login_url(get_permalink())."'><img alt='".__('Please register or login to website', GOURL)."' src='".$this->box_image("plogin")."' border='0'></a></div><br /><br />";
 		}
 		else
 		{
@@ -3909,18 +3972,18 @@ final class gourlclass
 			if (!$is_paid && $purchases > 0 && $paymentCnt >= $purchases)
 			{
 				// A. Sold
-				$box_html = "<img width='527' height='242' alt='".__('Sold Out', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_sold.png' border='0'><br /><br />";
+				$box_html = "<img alt='".__('Sold Out', GOURL)."' src='".$this->box_image("sold")."' border='0'><br /><br />";
 					
 			}
 			elseif (!$is_paid && !$active)
 			{
 				// B. Box Not Active
-				$box_html = "<img width='527' height='242' alt='".__('Cryptcoin Payment Box Disabled', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_disabled2.png' border='0'><br /><br />";
+				$box_html = "<img alt='".__('Cryptcoin Payment Box Disabled', GOURL)."' src='".$this->box_image("pdisable")."' border='0'><br /><br />";
 			}
 			elseif (!$is_paid && $preview_final)
 			{
 				// C. Preview Final Screen
-				$box_html = "<img width='580' height='238' alt='".__('Cryptcoin Payment Box Preview', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_completed.png' border='0'><br /><br />";
+				$box_html = "<img width='580' height='240' alt='".__('Cryptcoin Payment Box Preview', GOURL)."' src='".plugins_url('/images', __FILE__)."/cryptobox_completed.png' border='0'><br /><br />";
 			}
 			else
 			{
@@ -4014,7 +4077,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  45.
+	 *  46.
 	*/
 	public function page_payments()
 	{
@@ -4128,7 +4191,7 @@ final class gourlclass
 
 	
 	/*
-	 *  46.
+	 *  47.
 	*/
 	private function check_payment_confirmation($paymentID)
 	{
@@ -4176,7 +4239,7 @@ final class gourlclass
 
 	
 	/*
-	 *  47.
+	 *  48.
 	*/
 	public function  front_init()
 	{
@@ -4189,7 +4252,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  48.
+	 *  49.
 	*/
 	public function front_html($text)
 	{
@@ -4231,7 +4294,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  49.
+	 *  50.
 	*/
 	public function front_header()
 	{
@@ -4246,7 +4309,7 @@ final class gourlclass
 	
 	
 	/*
-	 * 50.  
+	 * 51.  
 	*/
 	private function login_form()
 	{
@@ -4274,7 +4337,7 @@ final class gourlclass
 		$tmp .= 
 			'<div id="gourllogin">
 				<div class="login">
-					<div class="app-title"><h2>'.__('Login', GOURL).'</h2>'.$err.'</div>
+					<div class="app-title"><h3>'.__('Login', GOURL).'</h3>'.$err.'</div>
 					<form method="post" action="'.$_SERVER['REQUEST_URI'].'#info">
 						<div class="login-form">
 							<div class="control-group">
@@ -4308,7 +4371,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  51.
+	 *  52.
 	*/
 	public function admin_init()
 	{
@@ -4469,7 +4532,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  52.
+	 *  53.
 	*/
 	public function admin_header()
 	{
@@ -4517,7 +4580,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  53.
+	 *  54.
 	*/
 	public function admin_warning()
 	{
@@ -4529,7 +4592,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  54.
+	 *  55.
 	*/
 	public function admin_warning_reactivate()
 	{
@@ -4542,7 +4605,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  55.
+	 *  56.
 	*/
 	public function admin_menu()
 	{
@@ -4691,7 +4754,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  56.
+	 *  57.
 	*/
 	private function page_title($title, $type = 1) // 1 - Plugin Name, 2 - Pay-Per-Download,  3 - Pay-Per-View ,  4 - Pay-Per-Membership, 5 - Pay-Per-Product, 20 - Custom
 	{
@@ -4710,7 +4773,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  57.
+	 *  58.
 	*/
 	private function upload_file($file, $dir, $english = true)
 	{
@@ -4722,7 +4785,7 @@ final class gourlclass
 		if (mb_strpos($ext, " ")) $ext = str_replace(" ", "_", $ext);
 		
 		if (!is_uploaded_file($file["tmp_name"])) $this->record_errors[] = sprintf(__('Cannot upload file "%s" on server. Alternatively, you can upload your file to "%s" using the FTP File Manager', GOURL), $file["name"], GOURL_DIR2.$dir);
-		elseif ($dir == "images" && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__('Invalid image file "%s", supported *.gif, *.jpg, *.png files only', GOURL), $file["name"]);
+		elseif (in_array($dir, array("images", "box")) && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__('Invalid image file "%s", supported *.gif, *.jpg, *.png files only', GOURL), $file["name"]);
 		else
 		{
 			if ($english) $fileName = preg_replace('/[^A-Za-z0-9\.\_\&]/', ' ', $fileName); // allowed english symbols only
@@ -4732,7 +4795,7 @@ final class gourlclass
 			$fileName = str_replace("_.", ".", $fileName);
 			$fileName = mb_substr($fileName, 0, 95);
 			if (mb_strlen($fileName) < (mb_strlen($ext) + 3)) $fileName = date("Ymd")."_".strtotime("now").".".$ext;
-			if ($dir == "images" && is_numeric($fileName[0])) $fileName = "i".$fileName;
+			if (in_array($dir, array("images", "box")) && is_numeric($fileName[0])) $fileName = "i".$fileName;
 				
 			$i = 1;
 			$fileName1 = $this->left($fileName, ".", false);
@@ -4762,7 +4825,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  58.
+	 *  59.
 	*/
 	private function download_file($file)
 	{
@@ -4788,7 +4851,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  59.
+	 *  60.
 	*/
 	public function callback_parse_request( &$wp )
 	{
@@ -4831,7 +4894,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  60. Bitcoin Payments with Any Other Wordpress Plugins
+	 *  61. Bitcoin Payments with Any Other Wordpress Plugins
 	*/
 	public function cryptopayments ($pluginName, $amount, $amountCurrency = "USD", $orderID, $period, $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60)
 	{
@@ -5056,7 +5119,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  61.
+	 *  62.
 	 */ 
 	private function upgrade ()
 	{
@@ -5259,7 +5322,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  62. Supported Functions
+	 *  63. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -5346,6 +5409,8 @@ function gourl_retest_dir()
 	if (!file_exists(GOURL_DIR."lockimg/image1.png")) copy($dir."lockimg/image1.png", GOURL_DIR."lockimg/image1.png");
 	if (!file_exists(GOURL_DIR."lockimg/image1b.png")) copy($dir."lockimg/image1b.png", GOURL_DIR."lockimg/image1b.png");
 	if (!file_exists(GOURL_DIR."lockimg/image2.jpg")) copy($dir."lockimg/image2.jpg", GOURL_DIR."lockimg/image2.jpg");
+	
+	if (!file_exists(GOURL_DIR."box")) wp_mkdir_p(GOURL_DIR."box");
 	
 	if (!file_exists(GOURL_DIR."images"))
 	{
@@ -6834,7 +6899,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.   
+ *  XXI.    
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {

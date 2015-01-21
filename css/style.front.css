@@ -3,22 +3,22 @@
 
 #gourllogin {
 	margin: 70px 0 90px 0;
-	font-family: Arial;
+	width: 450px;
+	font-family: 'Open Sans', Arial, sans-serif;
 	box-sizing: border-box;
 	text-align: center;
 	height: auto;
 }
 
-#gourllogin h2 {
+#gourllogin h3 {
 	margin: 40px 0 30px 0;
-	color: #aaa;
 }
 
+
 #gourllogin .login {
-	background-color: #fefefe;
 	padding: 0 30px 20px 30px;
 	border: 1px solid #eee;
-	border-radius: 15px;
+	border-radius: 30px;
 	height: auto;
 }
 
@@ -59,6 +59,7 @@
 	color: #ffffff;
 	font-size: 16px;
 	line-height: 25px;
+	height: 50px;
 	padding: 10px 0;
 	text-decoration: none;
 	text-shadow: none;
@@ -76,17 +77,15 @@
 
 #gourllogin .login-link {
 	font-size: 12px;
-	color: #444;
 	display: block;
 	padding-top: 5px;
 	border-bottom: none;
 }
 
 #gourllogin .reg-link {
-	font-size: 14px;
-	color: #444;
+	font-size: 12px;
 	display: block;
-	margin-top: 12px;
+	margin-top: 10px;
 	border-bottom: none;
 }
 
@@ -120,6 +119,11 @@
 
 .gourlbox .gourlprice h3 {
 	text-align: center;
+}
+
+.gourlbox img {
+	border: none;
+	box-shadow: none;
 }
 
 .gourlfiledescription, .gourldownloadlink
@@ -201,4 +205,4 @@
 
 .gourlmembershiptext2 {
 
-} 
+}   
