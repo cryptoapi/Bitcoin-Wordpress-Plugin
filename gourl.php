@@ -836,7 +836,7 @@ final class gourlclass
 			$tmp .= '<p><input type="radio" name="'.GOURL.$k.'" value="1" '.$this->chk($this->options[$k], 1).'> '.__('Custom Image', GOURL).' -</p>';
 			if ($this->options[$k.'url'] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) $tmp .= "<img src='".GOURL_DIR2."box/".$this->options[$k.'url']."' border='0'>"; else $this->options[$k.'url'] = "";
 			$tmp .= "<input type='hidden' id='".GOURL.$k."url' name='".GOURL.$k."url' value='".htmlspecialchars($this->options[$k.'url'], ENT_QUOTES)."'>"; 
-			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__('Default image size: 530px x 240px, allowed images: JPG, GIF, PNG.', GOURL).'</em>';
+			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__('Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
 			$tmp .= '</td></tr>';
 			$i++;
 		}
@@ -1664,7 +1664,7 @@ final class gourlclass
 		// Html code
 		// ---------------------
 	
-		$tmp  = "<div class='gourlbox' style='min-width:".$box_width."px'>";
+		$tmp  = "<div class='gourlbox'".($languages_list?" style='min-width:".$box_width."px'":"").">";
 		$tmp .= "<h1>".htmlspecialchars($fileTitle, ENT_QUOTES)."</h1>";
 	
 		// Display Price in USD
@@ -4043,7 +4043,7 @@ final class gourlclass
 		// Html code
 		// ---------------------
 	
-		$tmp  = "<div class='gourlbox' style='min-width:".$box_width."px'>";
+		$tmp  = "<div class='gourlbox'".($languages_list?" style='min-width:".$box_width."px'":"").">";
 		if ($adminIntro) 	$tmp .= $adminIntro;
 		if ($productTitle) 	$tmp .= "<h1>".htmlspecialchars($productTitle, ENT_QUOTES)."</h1>";
 		if ($productText) 	$tmp .= "<div class='gourlproducttext'>".$productText."</div><br />";
@@ -6899,7 +6899,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.    
+ *  XXI.     
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
