@@ -1,7 +1,7 @@
 <?php
 
 
-if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; // Exit if accessed directly in wordpress
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; // Exit if accessed directly in wordpress                     
 
 
 final class gourlclass 
@@ -24,22 +24,24 @@ final class gourlclass
 	
 	private $lock_type		= "";			// membership or view
 	
-	private $coin_names 		= array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'VTC' => 'vertcoin', 'FTC' => 'feathercoin', 'VRC' => 'vericoin', 'POT' => 'potcoin');
-	private $coin_www   		= array('bitcoin' => 'https://bitcoin.org/', 'litecoin'  => 'https://litecoin.org/', 'dogecoin'  => 'http://dogecoin.com/', 'speedcoin'  => 'http://speedcoin.co/', 'darkcoin'  => 'https://www.darkcoin.io/', 'vertcoin'  => 'http://vertcoin.org/', 'reddcoin'  => 'http://reddcoin.com/', 'feathercoin' => 'http://www.feathercoin.com/', 'vericoin' => 'http://www.vericoin.info/', 'potcoin' => 'http://www.potcoin.com/');
-	private $languages			= array("en"=>"English", "fr"=>"French", "ru"=>"Russian", "ar"=>"Arabic", "cn"=>"Simplified Chinese", "zh"=>"Traditional Chinese", "hi"=>"Hindi");
-	private $custom_images 		= array("img_plogin"=>"Payment Login", "img_flogin"=>"File Download Login", "img_sold"=>"Product Sold", "img_pdisable"=>"Payments Disabled", "img_fdisable"=>"File Payments Disabled", "img_nofile"=>"File Not Exists"); // custom payment box images
-	private $expiry_period 		= array("NO EXPIRY", "1 HOUR", "2 HOURS", "3 HOURS", "6 HOURS", "12 HOURS", "1 DAY", "2 DAYS", "3 DAYS", "4 DAYS", "5 DAYS",  "1 WEEK", "2 WEEKS", "3 WEEKS", "4 WEEKS", "1 MONTH", "2 MONTHS", "3 MONTHS", "6 MONTHS", "12 MONTHS"); // payment expiry period
-	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
-	private $addon 				= array("gourlwoocommerce", "gourljigoshop", "gourledd", "gourlappthemes");
-			
-	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
-	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");	
+	private $coin_names     	= array();
+	private $coin_chain     	= array();
+	private $coin_www       	= array();
+	private $languages			= array();
 	
-	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvImgMaxWidth"  => 0, "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => ""); 
+	private $custom_images 		= array('img_plogin'=>'Payment Login', 'img_flogin'=>'File Download Login', 'img_sold'=>'Product Sold', 'img_pdisable'=>'Payments Disabled', 'img_fdisable'=>'File Payments Disabled', 'img_nofile'=>'File Not Exists'); // custom payment box images
+	private $expiry_period 		= array('NO EXPIRY', '10 MINUTES', '20 MINUTES', '30 MINUTES', '1 HOUR', '2 HOURS', '3 HOURS', '6 HOURS', '12 HOURS', '1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS',  '1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS', '1 MONTH', '2 MONTHS', '3 MONTHS', '6 MONTHS', '12 MONTHS'); // payment expiry period
+	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
+	private $addon 				= array("gourlwoocommerce", "gourlwpecommerce", "gourljigoshop", "gourledd", "gourlappthemes");
+			
+	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
+	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
+	
+	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.0000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvImgMaxWidth"  => 0, "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => "");
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");	
 	
-	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
+	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.0000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
 	private $fields_membership_newuser 	= array("userID" => 0, "paymentID" => 0, "startDate"  => "", "endDate" => "", "disabled" => 0, "recordCreated"  => "");
 	private $lock_level_membership 		= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
 	
@@ -51,10 +53,15 @@ final class gourlclass
 	public function __construct() 
 	{
 
+		$this->coin_names 	= self::coin_names();
+		$this->coin_chain 	= self::coin_chain();
+		$this->coin_www 	= self::coin_www();
+		$this->languages 	= self::languages();
+		
 		// compatible test
 		$ver = get_option(GOURL.'version');
 		if (!$ver || version_compare($ver, GOURL_VERSION) < 0) $this->upgrade();
-		else gourl_retest_dir();
+		elseif (is_admin()) gourl_retest_dir();
 		
 		
 		// Current Page, Record ID
@@ -82,15 +89,15 @@ final class gourlclass
 			ini_set('max_execution_time', 3600);
 			ini_set('max_input_time', 3600);
 		}
-		
-		
+
+
 		// C. Pay-Per-View
 		if ($this->page == GOURL.'payperview')
 		{
 			$this->get_view();
 			if (!$_POST) $this->check_view();
 		}
-		
+
 
 		// D. Pay-Per-Membership
 		if ($this->page == GOURL.'paypermembership')
@@ -98,7 +105,7 @@ final class gourlclass
 			$this->get_membership();
 			if (!$_POST) $this->check_membership();
 		}
-		
+
 
 		// E. Pay-Per-Membership - New User
 		if ($this->page == GOURL.'paypermembership_user')
@@ -111,8 +118,8 @@ final class gourlclass
 				if (isset($_GET['userID']) && intval($_GET['userID'])) $this->record["userID"] = intval($_GET['userID']); 
 			}
 		}
-		
-		
+
+
 		// F. Pay-Per-Product - New Product
 		if ($this->page == GOURL.'product')
 		{
@@ -120,8 +127,8 @@ final class gourlclass
 			$this->get_record('product');
 			if ($this->id && !$_POST) $this->check_product();
 		}
-		
-		
+
+	
 		// Admin
 		if (is_admin()) 
 		{
@@ -162,23 +169,41 @@ final class gourlclass
 	/*
 	 *  3.
 	*/
-	public function coin_names()
+	public static function coin_names()
 	{
-		return $this->coin_names;
+		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'SPD' => 'speedcoin', 'DOGE' => 'dogecoin', 'XPY' => 'paycoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin');
 	}
 	
-
+	
 	/*
-	 * 4.
+	 * 4.  
 	*/
-	public function languages()
+	public static function coin_chain()
 	{
-		return $this->languages;
+		return array('bitcoin' => 'https://blockchain.info/', 'litecoin'  => 'https://ltc.blockr.io/', 'speedcoin'  => 'http://speedcoin.co:2750/', 'dogecoin'  => 'https://dogechain.info/', 'paycoin'  => 'https://chainz.cryptoid.info/xpy/', 'darkcoin'  => 'https://chainz.cryptoid.info/drk/', 'reddcoin'  => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'http://explorer.feathercoin.com/', 'vertcoin'  => 'https://explorer.vertcoin.org/exp/', 'vericoin' => 'https://chainz.cryptoid.info/vrc/');
+	}
+	
+	
+	/*
+	 * 5.  
+	*/
+	public static function coin_www()
+	{
+		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin'  => 'https://litecoin.org/', 'speedcoin'  => 'http://speedcoin.co/', 'dogecoin'  => 'http://dogecoin.com/', 'paycoin'  => 'https://paycoin.com/', 'darkcoin'  => 'https://www.darkcoin.io/', 'reddcoin'  => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'http://www.feathercoin.com/', 'vertcoin'  => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/');
+	}
+	
+	
+	/*
+	 * 6.
+	*/
+	public static function languages()
+	{
+		return array('en' => 'English', 'fr' => 'French', 'ru' => 'Russian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
 	}
 	
 
 	/*
-	 * 5.
+	 * 7.
 	*/
 	public function box_width()
 	{
@@ -187,7 +212,7 @@ final class gourlclass
 	
 	
 	/*
-	 * 6.
+	 *
 	*/
 	public function box_height()
 	{
@@ -196,7 +221,7 @@ final class gourlclass
 	
 	
 	/*
-	 * 7. Return paymet box custom image 
+	 * Return paymet box custom image 
 	*/
 	public function box_image($type = "plogin") // plogin, flogin, sold, pdisable, fdisable, nofile
 	{
@@ -206,7 +231,7 @@ final class gourlclass
 		if ($this->options[$type] == 1 && $this->options[$type."url"] && file_exists(GOURL_DIR."box/".$this->options[$type.'url'])) 
 			return GOURL_DIR2."box/".$this->options[$type.'url'];
 		else 
-			return plugins_url('/images', __FILE__)."/".$type.".png";  
+			return plugins_url("/images/".$type.".png", __FILE__);  
 	}
 	
 	
@@ -225,7 +250,7 @@ final class gourlclass
 		$tmp .= "<div class='postbox'>";
 		$tmp .= "<div class='inside gourlsummary'>";
 
-		$tmp .= "<a target='_blank' href='https://gourl.io/'><img src='".plugins_url('/images/coins.png', __FILE__)."' border='0'></a>";
+		foreach($this->coin_names as $k => $v)  $tmp .= '<a target="_blank" href="'.$this->coin_www[$v].'"><img width="70" hspace="20" vspace="15" alt="'.$v.'" src="'.plugins_url('/images/'.$v.'2.png', __FILE__).'" border="0"></a>';
 		
 		// 1
 		$us_products = "";
@@ -349,9 +374,14 @@ final class gourlclass
 		}
 			
 		
+		// Re-test MySQL connection
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
+		$sql = "SELECT fileID as nme FROM crypto_files LIMIT 1";
+		run_sql($sql);
+		
 		
 		$tmp .= "<a name='i1'></a>";
-		$tmp .= "<div style='padding-top:20px' class='gourltitle'>".__('Summary', GOURL)."</div>";
+		$tmp .= "<div class='gourltitle'>".__('Summary', GOURL)."</div>";
 		$tmp .= "<div class='gourlsummaryinfo'>";
 		$tmp .= '<div style="min-width:1200px;width:100%;">';
 		
@@ -373,6 +403,7 @@ final class gourlclass
 		foreach ($us_addon as $k => $v)
 		{
 			if ($k == "gourlwoocommerce") 		$nme = "GoUrl WooCommerce";
+			elseif ($k == "gourlwpecommerce") 	$nme = "GoUrl WP eCommerce";
 			elseif ($k == "gourljigoshop") 		$nme = "GoUrl Jigoshop";
 			elseif ($k == "gourledd") 			$nme = "GoUrl Easy Digital Downloads";
 			elseif ($k == "gourlappthemes") 	$nme = "GoUrl AppThemes";
@@ -394,7 +425,25 @@ final class gourlclass
 		$tmp .= "<tr><td><a name='chart' id='chart'></a>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
 		$tmp .= "</table>";
 		
-		$tmp .= "<div style='margin:90px 0 30px 0;height:500px;'><iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=7777&amp;d=180&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd".($this->options['chart_reverse']?"":"&amp;r=1")."'></iframe></div>";
+		$charts = array('BTC' => 7777, 'LTC' => 3, 'DOGE' => 132, 'DRK' => 155, 'XPY' => 466, 'RDD' => 169, 'POT' => 173, 'FTC' => 5, 'VTC' => 151, 'VRC' => 209);		
+		$chart = (isset($_GET["chart"]) && isset($charts[$_GET["chart"]])) ? $_GET["chart"] : "BTC";
+		
+		$days = array(5=>"5 days", 10=>"10 days", 15=>"15 days", 31=>"1 month", 60=>"2 months", 90=>"3 months",120=>"4 months",180=>"6 months",240=>"9 months",360=>"1 year");
+		$day = (isset($_GET["days"]) && isset($days[$_GET["days"]])) ? $_GET["days"] : 120;
+		
+		$tmp .= "<div style='margin:90px 0 30px 0;height:auto;'>";
+		$tmp .= "<iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=".$charts[$chart]."&amp;d=".$day."&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd".($this->options['chart_reverse']?"":"&amp;r=1")."'></iframe>";
+		$tmp .= "<div>";
+		$tmp .= '<select id="'.GOURL.'chart" onchange="window.location.href = \''.admin_url('admin.php?page='.GOURL.'&amp;days='.$day).'&amp;chart=\'+this.options[this.selectedIndex].value+\'#chart\';">';
+		foreach($this->coin_names as $k => $v) if (isset($charts[$k])) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $chart).'>'.ucfirst($v).$this->space().'('.$k.')</option>';
+		$tmp .= '</select>';
+		$tmp .= '<select id="'.GOURL.'days" onchange="window.location.href = \''.admin_url('admin.php?page='.GOURL.'&amp;chart='.$chart).'&amp;days=\'+this.options[this.selectedIndex].value+\'#chart\';">';
+		foreach($days as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $day).'>'.__($v, GOURL).'</option>';
+		$tmp .= '</select>' . $this->space(3);
+		$url = ($chart == "BTC") ? "http://myip.ms/browse/market_bitcoin/Bitcoin_Price_History.html" : "http://myip.ms/view/market_coins/".$charts[$chart]."/".$this->coin_names[$chart]."_analytics.html";
+		$tmp .= "<a class='".GOURL."smalltext' target='_blank' href='".$url."'>".__(ucfirst($this->coin_names[$chart])." analytics on altcoins.wiki &#187", GOURL)."</a>";
+		$tmp .="</div>";
+		$tmp .="</div>";
 		
 		$tmp .="</div></div>";
 		
@@ -416,11 +465,12 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: offer paid access to your premium content/videos <a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."payperview")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon">installation page &#187;</a>', GOURL)."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="/wp-admin/plugin-install.php?tab=search&type=term&s=gourl+jigoshop">installation page &#187;</a>', GOURL)."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">installation page &#187;</a>', GOURL)."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wp-ecommerce.html">WP eCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/wp-e-commerce/">WP eCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+wpecommerce+addon'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+appthemes'))."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
-		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments', GOURL)."</li>";
+		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments', GOURL)."</li>";
 		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
 		$tmp .= "<li> ".__('<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and this your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).', GOURL)."</li>";
 		
@@ -490,12 +540,6 @@ final class gourlclass
 						Pay-Per-Membership will show a message that the user needs to login/register on your website first and after show a payment box for logged in users only.', GOURL)."</li>";
 		$tmp .= "</ul>";
 		
-		$tmp .= "<div style='float:right; margin: 0 20px 50px 70px'>";
-		$tmp .= __('Buttons For Your Website: ', GOURL)."<br/>";
-		$tmp .= '<img vspace="10" src="'.plugins_url('/images/bitcoin_accepted.png', __FILE__).'" border="0"><br/>';
-		$tmp .= '<img src="'.plugins_url('/images/btc_accepted.png', __FILE__).'" border="0">';
-		$tmp .= "</div>";
-		
 		$tmp .= "<br><p>";
 		$tmp .= sprintf(__("For example, you might offer paid access to your 50 website pages/posts for the price of 1 USD for 2 DAYS giving unlimited access to all locked pages for website visitors (<span class='gourlnowrap'>non-registered</span> visitors or registered users). You can add simple shortcode <a href='%s'>[".GOURL_TAG_VIEW."]</a> or <a href='%s'>[".GOURL_TAG_MEMBERSHIP."]</a> for all those fifty WordPress pages/posts. When visitors go on any of those pages, they will see automatic cryptocoin payment box (the original page content will be hidden). After visitor makes their payment, they will get access to original pages content/videos and after 2 days will see a new payment box. Visitor needs to make payment on any locked page and they will get access to all other locked pages also.<br>- Do not use [".GOURL_TAG_VIEW."] and [".GOURL_TAG_MEMBERSHIP."] together on the same page.<br>- Website Editors / Admins will have all the time full access to locked pages and see original page content", GOURL), GOURL_ADMIN.GOURL."payperview", GOURL_ADMIN.GOURL."paypermembership");
 		$tmp .= "<a name='i5'></a>";
@@ -508,6 +552,7 @@ final class gourlclass
 		$tmp .= "<p>".sprintf(__('Optional - You can use additional actions after a payment has been received (for example create/update database records, etc) using gourl instant payment notification system. Simply edit php file <a href="%s">gourl_ipn.php</a> in directory %s and add section with your order_ID in function <b>gourl_successful_payment</b>($user_ID = 0, $order_ID = "", $payment_details = array(), $box_status = "").', GOURL), plugins_url('/images/dir/gourl_ipn.default.txt', __FILE__), GOURL_DIR2."files/"); 
 		$tmp .= __('This function will appear every time when a new payment from any user is received successfully. Function gets user_ID - user who made payment, current order_ID (the same value as at the bottom of record edit page) and payment details as array. ', GOURL)."</p>";
 		$tmp .= "<p>".__('If you have other plugin with gourl payment gateway (<a href="#i6">read more</a>), please create inside your plugin php file function <b>$pluginname."_gourlcallback"</b> ($user_ID = 0, $order_ID = "", $payment_details = array(), $box_status = "") That function will appear when a payment is received. Variables sent to that plugin function identically  to variables sent in function gourl_successful_payment()', GOURL)."</p>";
+		
 		$tmp .= "<p><a target='_blank' href='https://gourl.io/affiliates.html#wordpress'><img alt='".__('Example of PHP code', GOURL)."' src='".plugins_url('/images/output.png', __FILE__)."' border='0'></a>";
 		$tmp .= "<a name='i6'></a></p>";
 		
@@ -533,32 +578,45 @@ final class gourlclass
 
 		$btc = "1KPBVmXLeY6MCDMPJfKHcTnf4P2SW3b46U";
 		$ltc = "LarmyXoQpydpUCYHx9DZeYoxcQ4YzMfHDt";
-		$doge = "DNhHdAxV7CCqjPuwg2W4qTESd5jkF7iC1C";
-		$drk = "XfMTeciUUZEvRRHB49qaY9Jzi1E5HAJawJ";
-		$ftc = "6otKdaB1aasmQ5kA9wKBXJM5mi9e19VxYQ";
-		$rdd = "RmB8ysK4YG4D3axNPHsKEoqxvg5KwySSJz";
 		$spd = "SiDHas473qf8JPJFvFLcNuAAnwXhxtvv9s";
+		$doge = "DNhHdAxV7CCqjPuwg2W4qTESd5jkF7iC1C";
+		$pay = "PMLDPeS1j7W5e4mYRwgsqs3a7Bnv2LKkx9";
+		$drk = "XfMTeciUUZEvRRHB49qaY9Jzi1E5HAJawJ";
+		$rdd = "RmB8ysK4YG4D3axNPHsKEoqxvg5KwySSJz";
+		$pot = "PKwNNWo6YdweQk2F87UDGp84TQK878PWho";
+		$ftc = "6otKdaB1aasmQ5kA9wKBXJM5mi9e19VxYQ";
 		$vtc = "VeRUojCEkZn9u8AswqiKvpfHW4BW8Uas7V";
 		$vrc = "VMr4YsLufTgx5ForMV7nP2sQJSSbec593f";
-		$pot = "PKwNNWo6YdweQk2F87UDGp84TQK878PWho";
 		
 		$tmp .= "<p>".__('Please contact us with any questions - ', GOURL)."<a href='https://gourl.io/view/contact/Contact_Us.html'>https://gourl.io/view/contact/Contact_Us.html</a></p>";
 		
 		$tmp .= "<p>".__("A great way to get involved in open source is to contribute to the existing projects you're using. GitHub is home to more than 5 million open source projects. <a target='_blank' href='http://readwrite.com/2014/07/02/github-pull-request-etiquette'>A pull request</a> is a method of submitting contributions to an open development project. You can create a pull request with your new addons/code for this plugin <a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Wordpress-Plugin'>here &#187;</a>", GOURL) ."</p>";
 		
+		$tmp .= "<div style='float:right;margin:20px 20px 100px 0;width:570px'>";
+		$tmp .= "<h3>".__('Buttons For Your Website -', GOURL)."</h3>";
+		$tmp .= '<img hspace="10" vspace="10" src="'.plugins_url('/images/gourl.png', __FILE__).'" border="0">';
+		$tmp .= '<img hspace="10" vspace="10" src="'.plugins_url('/images/gourlpayments.png', __FILE__).'" border="0"><br/>';
+		$tmp .= '<img hspace="10" vspace="10" src="'.plugins_url('/images/bitcoin_accepted.png', __FILE__).'" border="0">';
+		$tmp .= '<img hspace="10" vspace="10" src="'.plugins_url('/images/bitcoin_donate.png', __FILE__).'" border="0"><br/>';
+		foreach($this->coin_names as $k => $v)  $tmp .= '<img width="70" hspace="10" vspace="10" alt="'.$v.'" src="'.plugins_url('/images/'.$v.'2.png', __FILE__).'" border="0"> ';
+		$tmp .= "<br><br><br>";
+		$tmp .= "<img width='570' src='".plugins_url('/images/coins.png', __FILE__)."' border='0'>";
+		$tmp .= "</div>";
 		
-		$tmp .= "<p>".__('Our Donation Addresses - ', GOURL)."</p>";
+		$tmp .= "<div style='margin:50px 0'>";
+		$tmp .= "<h3>".__('Our Project Donation Addresses -', GOURL)."</h3>";
 		$tmp .= "<p>Bitcoin: &#160; <a href='bitcoin:".$btc."?label=Donation'>".$btc."</a></p>";
 		$tmp .= "<p>Litecoin: &#160; <a href='litecoin:".$ltc."?label=Donation'>".$ltc."</a></p>";
-		$tmp .= "<p>Dogecoin: &#160; <a href='dogecoin:".$doge."?label=Donation'>".$doge."</a></p>";
-		$tmp .= "<p>Reddcoin: &#160; <a href='reddcoin:".$rdd."?label=Donation'>".$rdd."</a></p>";
 		$tmp .= "<p>Speedcoin: &#160; <a href='speedcoin:".$spd."?label=Donation'>".$spd."</a></p>";
+		$tmp .= "<p>Dogecoin: &#160; <a href='dogecoin:".$doge."?label=Donation'>".$doge."</a></p>";
+		$tmp .= "<p>Paycoin: &#160; <a href='paycoin:".$pay."?label=Donation'>".$pay."</a></p>";
 		$tmp .= "<p>Darkcoin: &#160; <a href='darkcoin:".$drk."?label=Donation'>".$drk."</a></p>";
+		$tmp .= "<p>Reddcoin: &#160; <a href='reddcoin:".$rdd."?label=Donation'>".$rdd."</a></p>";
+		$tmp .= "<p>Potcoin: &#160; <a href='potcoin:".$pot."?label=Donation'>".$pot."</a></p>";
 		$tmp .= "<p>Feathercoin: &#160; <a href='feathercoin:".$ftc."?label=Donation'>".$ftc."</a></p>";
 		$tmp .= "<p>Vertcoin: &#160; <a href='vertcoin:".$vtc."?label=Donation'>".$vtc."</a></p>";
 		$tmp .= "<p>Vericoin: &#160; <a href='vericoin:".$vrc."?label=Donation'>".$vrc."</a></p>";
-		$tmp .= "<p>Potcoin: &#160; <a href='potcoin:".$pot."?label=Donation'>".$pot."</a></p>";
-		$tmp .= "<br><br><br><br>";
+		$tmp .= "</div>";
 		
 		
 		
@@ -784,7 +842,7 @@ final class gourlclass
 		{
 			$v2 = ucfirst($v);
 	
-			$tmp .= '<tr><th>'.$v2.' '.__('Payments', GOURL).':<br /><a target="_blank" href="https://gourl.io/'.$v.'-payment-gateway-api.html"><img title="'.$v2.' Payment API" src="'.plugins_url('/images/'.$v.'.png', __FILE__).'" border="0"></a></th>';
+			$tmp .= '<tr><th>'.$v2.' '.__('Payments', GOURL).':<br /><a target="_blank" href="'.$this->coin_www[$v].'"><img title="'.$v2.' Payment API" src="'.plugins_url('/images/'.$v.'.png', __FILE__).'" border="0"></a></th>';
 			$tmp .= '<td>';
 			$tmp .= '<div>'.$v2.' '.__('Box Public Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'public_key" name="'.GOURL.$v.'public_key" value="'.htmlspecialchars($this->options[$v.'public_key'], ENT_QUOTES).'" class="widefat">';
 			$tmp .= '<div>'.$v2.' '.__('Box Private Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'private_key" name="'.GOURL.$v.'private_key" value="'.htmlspecialchars($this->options[$v.'private_key'], ENT_QUOTES).'" class="widefat">';
@@ -810,7 +868,7 @@ final class gourlclass
 		$tmp .= '<input type="radio" name="'.GOURL.'box_border" value="2" '.$this->chk($this->options['box_border'], 2).'> '.__('Box without Border', GOURL);
 		$tmp .= '</p>';
 		$tmp .= '<p><input type="radio" name="'.GOURL.'box_border" value="3" '.$this->chk($this->options['box_border'], 3).'> '.__('Custom Style', GOURL).' -</p>';
-		$tmp .= '<textarea id="'.GOURL.'box_style" name="'.GOURL.'box_style" class="widefat" style="height: 60px;">'.htmlspecialchars($this->options['box_style'], ENT_QUOTES).'</textarea><br /><em>'.__('Optional, Payment Box Visual CSS Style.<br />Example: border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px', GOURL).'</em></td>';
+		$tmp .= '<textarea id="'.GOURL.'box_style" name="'.GOURL.'box_style" class="widefat" style="height: 60px;">'.htmlspecialchars($this->options['box_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Box Visual CSS Style. <a href="%s">See screenshot</a><br />Example: border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Payment Messages Style', GOURL).':</th><td>';
@@ -820,7 +878,7 @@ final class gourlclass
 		$tmp .= '<input type="radio" name="'.GOURL.'message_border" value="2" '.$this->chk($this->options['message_border'], 2).'> '.__('Messages without Border', GOURL);
 		$tmp .= '</p>';
 		$tmp .= '<p><input type="radio" name="'.GOURL.'message_border" value="3" '.$this->chk($this->options['message_border'], 3).'> '.__('Custom Style', GOURL).' -</p>';
-		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style.<br />Example: display:inline-block;max-width:570px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL).'</em></td>';
+		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style. <a href="%s">See screenshot</a><br />Example: display:inline-block;max-width:580px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th colspan="2"><h3>'.__('Images for Payment Box', GOURL).'</h3></th>';
@@ -835,8 +893,11 @@ final class gourlclass
 			$tmp .= "<img src='".plugins_url('/images', __FILE__)."/".$k.".png' border='0'>";
 			$tmp .= '<p><input type="radio" name="'.GOURL.$k.'" value="1" '.$this->chk($this->options[$k], 1).'> '.__('Custom Image', GOURL).' -</p>';
 			if ($this->options[$k.'url'] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) $tmp .= "<img src='".GOURL_DIR2."box/".$this->options[$k.'url']."' border='0'>"; else $this->options[$k.'url'] = "";
-			$tmp .= "<input type='hidden' id='".GOURL.$k."url' name='".GOURL.$k."url' value='".htmlspecialchars($this->options[$k.'url'], ENT_QUOTES)."'>"; 
-			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__('Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
+			$tmp .= "<input type='hidden' id='".GOURL.$k."url' name='".GOURL.$k."url' value='".htmlspecialchars($this->options[$k.'url'], ENT_QUOTES)."'>";
+			if ($k == "img_plogin") 	$hint = "This image will be displayed if website registration is needed for the buyer before paying for a product/service. ";
+			elseif ($k == "img_flogin") $hint = "This image will be displayed if only registered users can buy/download your paid files. ";
+			else $hint = "";
+			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__($hint.'Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
 			$tmp .= '</td></tr>';
 			$i++;
 		}
@@ -899,8 +960,8 @@ final class gourlclass
 		$opt = $this->options["message_border"];
 	
 		if (!$opt) $tmp = "";
-		elseif ($opt == 1) $tmp = "display:inline-block;max-width:570px;padding:15px 20px;border:1px solid #eee;margin:7px;line-height:25px;";
-		elseif ($opt == 2) $tmp = "display:inline-block;max-width:570px;padding:15px 20px;margin:7px;line-height:25px;";
+		elseif ($opt == 1) $tmp = "display:inline-block;max-width:580px;padding:15px 20px;border:1px solid #eee;margin:7px;line-height:25px;";
+		elseif ($opt == 2) $tmp = "display:inline-block;max-width:580px;padding:15px 20px;margin:7px;line-height:25px;";
 		elseif ($opt == 3) $tmp = $this->options["message_style"];
 	
 		return $tmp;
@@ -992,14 +1053,15 @@ final class gourlclass
 		if ($this->record["priceUSD"] == 0 && $this->record["priceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->record["priceUSD"] != 0 && $this->record["priceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->record["priceUSD"] != 0 && (!is_numeric($this->record["priceUSD"]) || round($this->record["priceUSD"], 2) != $this->record["priceUSD"] || $this->record["priceUSD"] < 0.01 || $this->record["priceUSD"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->record["priceUSD"]);
-		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 3) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.001 %s. Allow 3 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
+		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
 		
 		if ($this->record["priceLabel"] && !isset($this->coin_names[$this->record["priceLabel"]])) $this->record_errors[] = sprintf(__('Price label "%s" - invalid value', GOURL), $this->record["priceLabel"]);
 		
 		if ($this->record["purchases"] && (!is_numeric($this->record["purchases"]) || round($this->record["purchases"]) != $this->record["purchases"] || $this->record["purchases"] < 0)) $this->record_errors[] = __('Purchase Limit - invalid value', GOURL);
 
-		if (!$this->record["expiryPeriod"] || strlen($this->record["expiryPeriod"]) > 15) $this->record_errors[] = __('Field "Expiry Period" - cannot be empty', GOURL);
-
+		if (!$this->record["expiryPeriod"]) $this->record_errors[] = __('Field "Expiry Period" - cannot be empty', GOURL);
+		elseif (!in_array($this->record["expiryPeriod"], $this->expiry_period))	$this->record_errors[] = __('Field "Expiry Period" - invalid value', GOURL);
+		
 		if (!in_array($this->record["userFormat"], $this->store_visitorid)) $this->record_errors[] = __('Store Visitor IDs - invalid value', GOURL);
 			
 		if (!isset($this->languages[$this->record["lang"]])) $this->record_errors[] = __('PaymentBox Language - invalid value', GOURL);
@@ -1231,7 +1293,7 @@ final class gourlclass
 	$tmp .= '<td><select name="'.GOURL.'expiryPeriod" id="'.GOURL.'expiryPeriod">';
 
 		foreach($this->expiry_period as $v)
-			$tmp .= '<option value="'.$v.'"'.$this->sel($v, $this->record['expiryPeriod']).'>'.$v.'</option>';
+			if (!stripos($v, "minute")) $tmp .= '<option value="'.$v.'"'.$this->sel($v, $this->record['expiryPeriod']).'>'.$v.'</option>';
 
 	$tmp .= '</select>';
 	$tmp .= '<br /><em>'.__('Period after which the payment becomes obsolete and new Cryptocoin Payment Box will be shown for this file (you can use it to take new payments from users periodically on daily/monthly basis).<br/>If Expiry Period > 2days, please use option - Store Visitor IDs: "Registered Users"; because "Cookie/Session" not safety for long expiry period', GOURL).'</em></td>';
@@ -1405,7 +1467,7 @@ final class gourlclass
 		echo $this->page_title(__('All Paid Files', GOURL).$this->space(1).'<a class="add-new-h2" href="'.GOURL_ADMIN.GOURL.'file">' . __('Add New File', GOURL) . '</a>', 2);
 		echo "<div class='".GOURL."intro postbox'>";
 		echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-		echo '<p>'.__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php">Example</a>', GOURL).'</p>';
+		echo '<p>'.__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php">Example</a>', GOURL).'</p>';
 		echo '<p>'.sprintf(__('Create <a href="%sfile">New Paid File Downloads</a> and place new generated <a href="%s">shortcode</a> on your public page/post. Done!', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 		echo sprintf(__('<a href="%s#i3">Read more</a>', GOURL), GOURL_ADMIN.GOURL).'</p>';
 		echo  "</div>";
@@ -1511,7 +1573,7 @@ final class gourlclass
 	
 		if ($userFormat == "MANUAL" && (!is_user_logged_in() || !$current_user->ID))
 		{
-			$box_html = "<div align='center'><a href='".wp_login_url(get_permalink())."'><img alt='".__('Please register or login to download this file', GOURL)."' src='".$this->box_image("flogin")."' border='0'></a></div><br /><br />";
+			$box_html = "<div align='center'><a href='".wp_login_url(get_permalink())."'><img title='".__('Please register or login to download this file', GOURL)."' alt='".__('Please register or login to download this file', GOURL)."' src='".$this->box_image("flogin")."' border='0'></a></div><br /><br />";
 			$download_link = "onclick='alert(\"".__('Please register or login to download this file', GOURL)."\")' href='#a'";
 		}
 		else if (!$fileName || !file_exists($filePath) || !is_file($filePath))
@@ -1671,7 +1733,7 @@ final class gourlclass
 		if ($priceShow)
 		{
 			$tmp .= "<h3> &#160; ".__('File', GOURL).": &#160; <a class='gourlfilename' style='text-decoration:none;color:inherit;' ".$download_link.">".$fileName."</a>".$this->space(2)."<small style='white-space:nowrap'>".__('size', GOURL).": ".gourl_byte_format($fileSize)."</small></h3>";
-			$tmp .= "<div class='gourlprice'>".__('Price', GOURL).": ".($priceUSD>0?"~".$priceUSD." ".__('USD', GOURL):gourl_number_format($priceCoin, 3)." ".$priceLabel)."</div>";
+			$tmp .= "<div class='gourlprice'>".__('Price', GOURL).": ".($priceUSD>0?"~".$priceUSD." ".__('USD', GOURL):gourl_number_format($priceCoin, 4)." ".$priceLabel)."</div>";
 		}
 	
 		// Download Link
@@ -1769,7 +1831,7 @@ final class gourlclass
 		if ($this->options2["ppvPrice"] == 0 && $this->options2["ppvPriceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->options2["ppvPrice"] != 0 && $this->options2["ppvPriceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->options2["ppvPrice"] != 0 && (!is_numeric($this->options2["ppvPrice"]) || round($this->options2["ppvPrice"], 2) != $this->options2["ppvPrice"] || $this->options2["ppvPrice"] < 0.01 || $this->options2["ppvPrice"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->options2["ppvPrice"]);
-		if ($this->options2["ppvPriceCoin"] != 0 && (!is_numeric($this->options2["ppvPriceCoin"]) || round($this->options2["ppvPriceCoin"], 3) != $this->options2["ppvPriceCoin"] || $this->options2["ppvPriceCoin"] < 0.001 || $this->options2["ppvPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.001 %s. Allow 3 digits max after floating point', GOURL), $this->options2["ppvPriceCoin"], $this->options2["ppvPriceLabel"], $this->options2["ppvPriceLabel"]);
+		if ($this->options2["ppvPriceCoin"] != 0 && (!is_numeric($this->options2["ppvPriceCoin"]) || round($this->options2["ppvPriceCoin"], 4) != $this->options2["ppvPriceCoin"] || $this->options2["ppvPriceCoin"] < 0.0001 || $this->options2["ppvPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options2["ppvPriceCoin"], $this->options2["ppvPriceLabel"], $this->options2["ppvPriceLabel"]);
 		
 		if (!in_array($this->options2["ppvExpiry"], $this->expiry_view))	$this->record_errors[] = __('Field "Expiry Period" - invalid value', GOURL);
 		if ($this->lock_level_view && !in_array($this->options2["ppvLevel"], array_keys($this->lock_level_view)))	$this->record_errors[] = __('Lock Page Level - invalid value', GOURL);
@@ -2405,7 +2467,7 @@ final class gourlclass
 		if ($this->options3["ppmPrice"] == 0 && $this->options3["ppmPriceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->options3["ppmPrice"] != 0 && $this->options3["ppmPriceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->options3["ppmPrice"] != 0 && (!is_numeric($this->options3["ppmPrice"]) || round($this->options3["ppmPrice"], 2) != $this->options3["ppmPrice"] || $this->options3["ppmPrice"] < 0.01 || $this->options3["ppmPrice"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->options3["ppmPrice"]);
-		if ($this->options3["ppmPriceCoin"] != 0 && (!is_numeric($this->options3["ppmPriceCoin"]) || round($this->options3["ppmPriceCoin"], 3) != $this->options3["ppmPriceCoin"] || $this->options3["ppmPriceCoin"] < 0.001 || $this->options3["ppmPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.001 %s. Allow 3 digits max after floating point', GOURL), $this->options3["ppmPriceCoin"], $this->options3["ppmPriceLabel"], $this->options3["ppmPriceLabel"]);
+		if ($this->options3["ppmPriceCoin"] != 0 && (!is_numeric($this->options3["ppmPriceCoin"]) || round($this->options3["ppmPriceCoin"], 4) != $this->options3["ppmPriceCoin"] || $this->options3["ppmPriceCoin"] < 0.0001 || $this->options3["ppmPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options3["ppmPriceCoin"], $this->options3["ppmPriceLabel"], $this->options3["ppmPriceLabel"]);
 		
 		if (!in_array($this->options3["ppmExpiry"], $this->expiry_period))	$this->record_errors[] = __('Membership Period - invalid value', GOURL);
 		if ($this->lock_level_membership && !in_array($this->options3["ppmLevel"], array_keys($this->lock_level_membership)))	$this->record_errors[] = __('Lock Page Level - invalid value', GOURL);
@@ -2570,7 +2632,7 @@ final class gourlclass
 		$tmp .= '<td><select name="'.GOURL.'ppmExpiry" id="'.GOURL.'ppmExpiry">';
 	
 		foreach($this->expiry_period as $v)
-			$tmp .= '<option value="'.$v.'"'.$this->sel($v, $this->options3['ppmExpiry']).'>'.$v.'</option>';
+			if (!stripos($v, "minute")) $tmp .= '<option value="'.$v.'"'.$this->sel($v, $this->options3['ppmExpiry']).'>'.$v.'</option>';
 	
 		$tmp .= '</select>';
 		$tmp .= '<br /><em>'.__('Period after which the payment becomes obsolete and new Cryptocoin Payment Box will be shown.', GOURL).'</em></td>';
@@ -2589,7 +2651,7 @@ final class gourlclass
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Add to User Profile', GOURL).':</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmProfile" id="'.GOURL.'ppmProfile" value="1" '.$this->chk($this->options3['ppmProfile'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, users will see own membership status on user profile page (<a href="/wp-admin/profile.php">profile.php</a>)', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmProfile" id="'.GOURL.'ppmProfile" value="1" '.$this->chk($this->options3['ppmProfile'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, users will see own membership status on user profile page (<a href="%s">profile.php</a>)', GOURL), admin_url('profile.php')).'</em></td>';
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th>'.__('PaymentBox Language', GOURL).':</th>';
@@ -2968,7 +3030,7 @@ final class gourlclass
 				if ($imageWidthMax>0) $imageWidthMax .= "px";
 				if ($this->right($image, "/", false) == "image1.png")
 				{ 
-					$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 3)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
+					$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 4)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
 					if (is_user_logged_in() && $current_user->ID) $image = str_replace("image1.png", "image1b.png", $image);
 					$imageWidthMax = "none";
 				}
@@ -3336,13 +3398,14 @@ final class gourlclass
 		if ($this->record["priceUSD"] == 0 && $this->record["priceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->record["priceUSD"] != 0 && $this->record["priceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->record["priceUSD"] != 0 && (!is_numeric($this->record["priceUSD"]) || round($this->record["priceUSD"], 2) != $this->record["priceUSD"] || $this->record["priceUSD"] < 0.01 || $this->record["priceUSD"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->record["priceUSD"]);
-		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 3) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.001 %s. Allow 3 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
+		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
 							
 		if ($this->record["priceLabel"] && !isset($this->coin_names[$this->record["priceLabel"]])) $this->record_errors[] = sprintf(__('Price label "%s" - invalid value', GOURL), $this->record["priceLabel"]);
 		
 		if ($this->record["purchases"] && (!is_numeric($this->record["purchases"]) || round($this->record["purchases"]) != $this->record["purchases"] || $this->record["purchases"] < 0)) $this->record_errors[] = __('Purchase Limit - invalid value', GOURL);
 		
-		if (!$this->record["expiryPeriod"] || strlen($this->record["expiryPeriod"]) > 15) $this->record_errors[] = __('Field "Expiry Period" - cannot be empty', GOURL);
+		if (!$this->record["expiryPeriod"]) $this->record_errors[] = __('Field "Expiry Period" - cannot be empty', GOURL);
+		elseif (!in_array($this->record["expiryPeriod"], $this->expiry_period))	$this->record_errors[] = __('Field "Expiry Period" - invalid value', GOURL);
 		
 		if (!isset($this->languages[$this->record["lang"]])) $this->record_errors[] = __('PaymentBox Language - invalid value', GOURL);
 		
@@ -3498,9 +3561,9 @@ final class gourlclass
 			if ($preview_email)
 			{
 				$txt_from = array("{user_fullname}", "{user_username}", "{user_id}", "{user_email}", "{user_url}", "{paid_amount}", "{paid_amount_usd}", "{payment_id}", "{payment_url}", "{transaction_id}", "{transaction_time}");
-				$txt_to = array("John Smith", "john2", 7, "john@example.com", get_bloginfo("wpurl")."/wp-admin/user-edit.php?user_id=7", "0.335301 BTC", "~112.3 USD", 11, GOURL_ADMIN.GOURL."payments&s=payment_11", "2bed6fb8bb35d42842519d445b099fdee6da5d65280167333342d879b4ab93a1", "18 Dec 2014, 11:15:48 am");
+				$txt_to = array("John Smith", "john2", 1, "john@example.com", admin_url("user-edit.php?user_id=1"), "0.335301 BTC", "~112.3 USD", 11, GOURL_ADMIN.GOURL."payments&s=payment_11", "2bed6fb8bb35d42842519d445b099fdee6da5d65280167333342d879b4ab93a1", "18 Dec 2014, 11:15:48 am");
 				
-				$tmp .= "<p>".__('Used template tags for preview:', GOURL)."<br/><i><b>{user_fullname}</b> - John Smith, <b>{user_username}</b> - john2, <b>{user_id}</b> - 7, <b>{user_email}</b> - john@example.com, <b>{user_url}</b> - ".get_bloginfo("wpurl")."/wp-admin/user-edit.php?user_id=7, <b>{paid_amount}</b> - 0.335301 BTC, <b>{paid_amount_usd}</b> - ~112.3 USD, <b>{payment_id}</b> - 11, <b>{payment_url}</b> - ".GOURL_ADMIN.GOURL."payments&s=payment_11, <b>{transaction_id}</b> - 2bed6fb8bb35d42842519d445b099fdee6da5d65280167333342d879b4ab93a1, <b>{transaction_time}</b> - 18 Dec 2014, 11:15:48 am</i></p>";
+				$tmp .= "<p>".__('Used template tags for preview:', GOURL)."<br/><i><b>{user_fullname}</b> - John Smith, <b>{user_username}</b> - john2, <b>{user_id}</b> - 1, <b>{user_email}</b> - john@example.com, <b>{user_url}</b> - ".admin_url("user-edit.php?user_id=1").", <b>{paid_amount}</b> - 0.335301 BTC, <b>{paid_amount_usd}</b> - ~112.3 USD, <b>{payment_id}</b> - 11, <b>{payment_url}</b> - ".GOURL_ADMIN.GOURL."payments&s=payment_11, <b>{transaction_id}</b> - 2bed6fb8bb35d42842519d445b099fdee6da5d65280167333342d879b4ab93a1, <b>{transaction_time}</b> - 18 Dec 2014, 11:15:48 am</i></p>";
 				
 				
 				$subject = (mb_strpos($this->record['emailUserTitle'], "{")=== false) ? $this->record['emailUserTitle'] : str_replace($txt_from, $txt_to, $this->record['emailUserTitle']);
@@ -3609,7 +3672,7 @@ final class gourlclass
 			$tmp .= '<option value="'.$v.'"'.$this->sel($v, $this->record['expiryPeriod']).'>'.$v.'</option>';
 
 		$tmp .= '</select>';
-		$tmp .= '<br /><em>'.__('Period after which the payment becomes obsolete and new Product Payment Box will be shown for this product (you can use it to take new payments from users periodically on monthly basis)', GOURL).'</em></td>';
+		$tmp .= '<br /><em>'.sprintf(__('Period after which the payment becomes obsolete and new Product Payment Box will be shown for this product (you can use it to take new payments from users periodically on daily/monthly basis)<br>For quickly repeated purchases you can use <a href="%s">WooCommerce</a> with <a href="%s">GoUrl WooCommerce Addon</a> also', GOURL), "https://wordpress.org/plugins/woocommerce/", admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')).'</em></td>';
 		$tmp .= '</tr>';
 
 
@@ -3887,7 +3950,7 @@ final class gourlclass
 	
 		if (!is_user_logged_in() || !$current_user->ID)
 		{
-			$box_html = "<br /><div align='center'><a href='".wp_login_url(get_permalink())."'><img alt='".__('Please register or login to website', GOURL)."' src='".$this->box_image("plogin")."' border='0'></a></div><br /><br />";
+			$box_html = "<br /><div align='center'><a href='".wp_login_url(get_permalink())."'><img title='".__('You need first to login or register on the website to make Bitcoin/Altcoin Payments', GOURL)."' alt='".__('You need first to login or register on the website to make Bitcoin/Altcoin Payments', GOURL)."' src='".$this->box_image("plogin")."' border='0'></a></div><br /><br />";
 		}
 		else
 		{
@@ -4120,6 +4183,7 @@ final class gourlclass
 				$key = get_country_name($s, true); 
 				if ($key) $s = $key;
 				if (substr(strtoupper($s), -4) == " USD") $s = substr($s, 0, -4);
+				elseif (strtolower($s) == "wp ecommerce") $s = "wpecommerce";
 				$s = esc_sql($s);
 				$search = " && (orderID LIKE '%".$s."%' || userID LIKE '%".$s."%' || countryID LIKE '%".$s."%' || coinLabel LIKE '%".$s."%' || amount LIKE '%".$s."%' || amountUSD LIKE '%".$s."%' || addr LIKE '%".$s."%' || txID LIKE '%".$s."%' || DATE_FORMAT(txDate, '%d %M %Y') LIKE '%".$s."%')";
 			}
@@ -4910,7 +4974,7 @@ final class gourlclass
 		
 		$amountCurrency = trim(strtoupper($amountCurrency));
 		if ($amountCurrency == "USD" && (!is_numeric($amount) ||  $amount < 0.01 || $amount > 1000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value for USD: 0.01", GOURL), $amount));
-		if ($amountCurrency != "USD" && (!is_numeric($amount) ||  $amount < 0.001 || $amount > 50000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value: 0.001", GOURL), $amount));
+		if ($amountCurrency != "USD" && (!is_numeric($amount) ||  $amount < 0.0001 || $amount > 50000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value: 0.0001", GOURL), $amount));
 		if ($amountCurrency != "USD" && !isset($this->coin_names[$amountCurrency])) return array("error" => sprintf(__("Error. Invalid amountCurrency - %s. Allowed: USD, %s", GOURL), $amountCurrency, implode(", ", array_keys($this->coin_names))));
 
 		if (!$orderID || preg_replace('/[^A-Za-z0-9\_\-]/', '', $orderID) != $orderID || strlen($orderID) > 32) return array("error" => sprintf(__("Error. Invalid Order ID - %s. Max size: 32 symbols. Allowed symbols: a..Z0..9_-", GOURL), $orderID));
@@ -4932,7 +4996,7 @@ final class gourlclass
 		
 		if (!$userID || $userID == "auto") $userID = get_current_user_id();
 		if ($userID && $userID != "guest" && (!is_numeric($userID) || preg_replace('/[^0-9]/', '', $userID) != $userID)) return array("error" => sprintf(__("Error. Invalid User ID - %s. Allowed numeric values or 'guest' value", GOURL), $userID));
-		if (!$userID) return array("error" => __("Error. You need to login or register on website first", GOURL));
+		if (!$userID) return array("error" => __("Error. You need first to login or register on the website to make Bitcoin/Altcoin Payments", GOURL));
 	
 		if (!$this->payments) return array("error" => __("Error. Please try a different payment method. GoUrl Bitcoin Plugin not configured - need setup payment box keys on GoUrl Bitcoin Gateway Options page", GOURL));
 		
@@ -5094,7 +5158,7 @@ final class gourlclass
 						"orderID"       	=> $orderID,
 						"userID"        	=> $userID,
 						"usercountry"		=> ($is_paid ? $obj->countryID : ""),
-						"userLink"        	=> ($userID=="guest"?"":get_bloginfo("wpurl")."/wp-admin/user-edit.php?user_id=".$userID),
+						"userLink"        	=> ($userID=="guest"?"": admin_url("user-edit.php?user_id=".$userID)),
 						
 						"is_processed"		=> ($is_paid ? $obj->processed : ""),	// first time after payment received return TRUE, later return FALSE
 						"processedDate"		=> ($is_paid && $obj->processed ? $obj->processedDate : ""),
@@ -5125,6 +5189,8 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+		// TABLE 1 - crypto_files
+		// ---------------------------
 		if($wpdb->get_var("SHOW TABLES LIKE 'crypto_files'") != 'crypto_files')
 		{
 			$sql = "CREATE TABLE `crypto_files` (
@@ -5135,7 +5201,7 @@ final class gourlclass
 			  `fileSize` double(15,0) NOT NULL DEFAULT '0',
 			  `fileText` text,
 			  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
-			  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
+			  `priceCoin` double(17,5) NOT NULL DEFAULT '0.00000',
 			  `priceLabel` varchar(6) NOT NULL DEFAULT '',
 			  `purchases` mediumint(8) NOT NULL DEFAULT '0',
 			  `userFormat` enum('MANUAL','COOKIE','SESSION','IPADDRESS') NOT NULL,
@@ -5178,12 +5244,19 @@ final class gourlclass
 		// upgrade
 		elseif ($wpdb->query("select priceCoin from crypto_files limit 1") === false)
 		{
-			$wpdb->query("alter table crypto_files add `priceCoin` double(15,3) NOT NULL DEFAULT '0.000' after priceUSD");
+			$wpdb->query("alter table crypto_files add `priceCoin` double(17,5) NOT NULL DEFAULT '0.00000' after priceUSD");
 			$wpdb->query("alter table crypto_files add `priceLabel` varchar(6) NOT NULL DEFAULT '' after priceCoin");
 			$wpdb->query("alter table crypto_files add key `priceCoin` (priceCoin)");
 			$wpdb->query("alter table crypto_files add key `priceLabel` (priceLabel)");
 		}
+		elseif (true === version_compare(get_option(GOURL.'version'), '1.2.7', '<'))
+		{
+			$wpdb->query("ALTER TABLE `crypto_files` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
+		}
+		
 	
+		// TABLE 2 - crypto_payments
+		// ------------------------------
 		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_payments'") != 'crypto_payments')
 		{
 			$sql = "CREATE TABLE `crypto_payments` (
@@ -5232,6 +5305,8 @@ final class gourlclass
 		}
 	
 	
+		// TABLE 3 - crypto_membership
+		// ------------------------------
 		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_membership'") != 'crypto_membership')
 		{
 			$sql = "CREATE TABLE `crypto_membership` (
@@ -5255,6 +5330,8 @@ final class gourlclass
 		}
 	
 	
+		// TABLE 4 - crypto_products
+		// ------------------------------
 		if ($wpdb->get_var("SHOW TABLES LIKE 'crypto_products'") != 'crypto_products')
 		{
 			$sql = "CREATE TABLE `crypto_products` (
@@ -5262,7 +5339,7 @@ final class gourlclass
 				  `productTitle` varchar(100) NOT NULL DEFAULT '',
 				  `active` tinyint(1) NOT NULL DEFAULT '1',
 				  `priceUSD` double(10,2) NOT NULL DEFAULT '0.00',
-				  `priceCoin` double(15,3) NOT NULL DEFAULT '0.000',
+				  `priceCoin` double(17,5) NOT NULL DEFAULT '0.00000',
 				  `priceLabel` varchar(6) NOT NULL DEFAULT '',
 				  `purchases` mediumint(8) NOT NULL DEFAULT '0',
 				  `expiryPeriod` varchar(15) NOT NULL DEFAULT '',
@@ -5305,7 +5382,11 @@ final class gourlclass
 	
 			$wpdb->query($sql);
 		}
-	
+		elseif (true === version_compare(get_option(GOURL.'version'), '1.2.7', '<')) 
+		{
+			$wpdb->query("ALTER TABLE `crypto_products` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
+		} 
+		
 	
 		// current version
 		update_option(GOURL.'version', GOURL_VERSION);
@@ -5508,7 +5589,7 @@ function gourl_userdetails($val, $br = true)
 		if ($userID)
 		{	
 			$obj =  get_userdata($userID);
-			if ($obj && $obj->data->user_nicename) $tmp = "user".$userID." - <a href='/wp-admin/user-edit.php?user_id=".$userID."'>".$obj->data->user_nicename . ($br?"<br/>":", &#160; ") . $obj->data->user_email . "</a>";
+			if ($obj && $obj->data->user_nicename) $tmp = "user".$userID." - <a href='".admin_url("user-edit.php?user_id=".$userID)."'>".$obj->data->user_nicename . ($br?"<br/>":", &#160; ") . $obj->data->user_email . "</a>";
 			else $tmp = "user".$userID;
 		}	
 	}
@@ -5725,7 +5806,7 @@ function cryptobox_new_payment($paymentID, $arr, $box_status)
 						"orderID"       	=> $order_id,
 						"userID"        	=> $user_id,
 						"usercountry"		=> $arr["usercountry"],
-						"userLink"        	=> (strpos($arr["user"], "user")===0 ? get_bloginfo("wpurl")."/wp-admin/user-edit.php?user_id=".$user_id : "")
+						"userLink"        	=> (strpos($arr["user"], "user")===0 ? admin_url("user-edit.php?user_id=".$user_id) : "")
 				);
 	
 		$func_callback($user_id, $order_id, $payment_details, $box_status);
@@ -5847,7 +5928,7 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 	if (!$productID || !$paymentID || !$transaction_id || !$type) return false;
 	
 	
-	$coin_chain = array('bitcoin' => 'https://blockchain.info/', 'litecoin'  => 'http://ltc.blockr.io/', 'dogecoin'  => 'https://dogechain.info/', 'speedcoin'  => 'http://speedcoin.co:2750/', 'darkcoin'  => 'http://explorer.darkcoin.io/', 'vertcoin'  => 'http://cryptexplorer.com/chain/VertCoin/', 'reddcoin'  => 'http://live.reddcoin.com/', 'feathercoin' => 'https://explorer.feathercoin.com/chain/Feathercoin/', 'vericoin' => 'http://bitinfocharts.com/vericoin/', 'potcoin' => 'http://www.potchain.net/');
+	$coin_chain     	= gourlclass::coin_chain();
 	if ($transaction_id && isset($coin_chain[$details["coinname"]])) $transaction_id = "<a href='".$coin_chain[$details["coinname"]].'tx/'.$transaction_id."' target='_blank'>".$transaction_id."</a>"; 
 	
 	$txt_to 			= array($user_fullname, $user_username, $user_id, $user_email, $user_url, $paid_amount, $paid_amount_usd, $payment_id, $payment_url, $transaction_id, $transaction_time);
@@ -5872,7 +5953,7 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 					$user_fullname  = trim($user_info->first_name." ".$user_info->last_name);
 					$user_username 	= $user_info->user_login;
 					$user_email 	= $user_info->user_email;
-					$user_url 		= get_bloginfo("wpurl")."/wp-admin/user-edit.php?user_id=".$user_id;
+					$user_url 		= admin_url("user-edit.php?user_id=".$user_id);
 					$user_url 		= "<a href='".$user_url."'>".$user_url."</a>";
 					
 					if (!$user_fullname) $user_fullname =  $user_username;
@@ -5973,13 +6054,15 @@ if( ! class_exists( 'WP_List_Table' ) ) {
 
 class gourl_table_files extends WP_List_Table 
 {
-	private $coin_names = array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'VTC' => 'vertcoin', 'FTC' => 'feathercoin', 'VRC' => 'vericoin', 'POT' => 'potcoin');
-	private $languages	= array("en"=>"English", "fr"=>"French", "ru"=>"Russian", "ar"=>"Arabic", "cn"=>"Simplified Chinese", "zh"=>"Traditional Chinese", "hi"=>"Hindi");
+	private $coin_names = array();
+	private $languages	= array();
 	private $search = '';
 
 	function __construct($search = '', $rec_per_page = 20)
 	{
 
+		$this->coin_names 	= gourlclass::coin_names();
+		$this->languages	= gourlclass::languages(); 
 		$this->search 		= $search;
 		$this->rec_per_page = $rec_per_page;
 		if ($this->rec_per_page < 5) $this->rec_per_page = 20;
@@ -6020,7 +6103,7 @@ class gourl_table_files extends WP_List_Table
 			case 'priceCoin':
 				if ($item->$column_name > 0 && $item->priceUSD <= 0)
 				{
-					$num = gourl_number_format($item->$column_name, 3);
+					$num = gourl_number_format($item->$column_name, 4);
 					$tmp = $num . ' ' . $item->priceLabel;
 				}
 				break;
@@ -6221,13 +6304,14 @@ class gourl_table_files extends WP_List_Table
 
 class gourl_table_products extends WP_List_Table
 {
-	private $coin_names = array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'VTC' => 'vertcoin', 'FTC' => 'feathercoin', 'VRC' => 'vericoin', 'POT' => 'potcoin');
-	private $languages	= array("en"=>"English", "fr"=>"French", "ru"=>"Russian", "ar"=>"Arabic", "cn"=>"Simplified Chinese", "zh"=>"Traditional Chinese", "hi"=>"Hindi");
-	private $search = '';
+	private $coin_names = array();
+	private $languages	= array();
+	private $search 	= '';
 
 	function __construct($search = '', $rec_per_page = 20)
 	{
-
+		$this->coin_names 	= gourlclass::coin_names();
+		$this->languages	= gourlclass::languages(); 
 		$this->search 		= $search;
 		$this->rec_per_page = $rec_per_page;
 		if ($this->rec_per_page < 5) $this->rec_per_page = 20;
@@ -6265,7 +6349,7 @@ class gourl_table_products extends WP_List_Table
 			case 'priceCoin':
 				if ($item->$column_name > 0 && $item->priceUSD <= 0)
 				{
-					$num = gourl_number_format($item->$column_name, 3);
+					$num = gourl_number_format($item->$column_name, 4);
 					$tmp = $num . ' ' . $item->priceLabel;
 				}
 				break;
@@ -6436,8 +6520,8 @@ class gourl_table_products extends WP_List_Table
 // ----------------------------------------
 class gourl_table_payments extends WP_List_Table
 {
-	private $coin_names = array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'VTC' => 'vertcoin', 'FTC' => 'feathercoin', 'VRC' => 'vericoin', 'POT' => 'potcoin');
-	private $coin_chain = array('bitcoin' => 'https://blockchain.info/', 'litecoin'  => 'http://ltc.blockr.io/', 'dogecoin'  => 'https://dogechain.info/', 'speedcoin'  => 'http://speedcoin.co:2750/', 'darkcoin'  => 'http://explorer.darkcoin.io/', 'vertcoin'  => 'http://cryptexplorer.com/chain/VertCoin/', 'reddcoin'  => 'http://live.reddcoin.com/', 'feathercoin' => 'https://explorer.feathercoin.com/chain/Feathercoin/', 'vericoin' => 'http://bitinfocharts.com/vericoin/', 'potcoin' => 'http://www.potchain.net/');
+	private $coin_names = array();
+	private $coin_chain = array();
 	
 	private $search = '';
 	private $file_columns = false;
@@ -6445,6 +6529,9 @@ class gourl_table_payments extends WP_List_Table
 	function __construct($search = '', $rec_per_page = 20, $file_columns = false)
 	{
 
+		$this->coin_names 	= gourlclass::coin_names();
+		$this->coin_chain	= gourlclass::coin_chain();
+		
 		$this->search = $search;
 		$this->file_columns = $file_columns;
 		$this->rec_per_page = $rec_per_page;
@@ -6497,9 +6584,10 @@ class gourl_table_payments extends WP_List_Table
 					elseif (strpos($item->$column_name, "file_") === 0) 		$url = GOURL_ADMIN.GOURL."file&id=".substr($item->$column_name, 5)."&gourlcryptocoin=".$this->coin_names[$item->coinLabel]."&preview=true";
 					elseif ($item->$column_name == "payperview") 				$url = GOURL_ADMIN.GOURL."payperview";
 					elseif (strpos($item->$column_name, "membership") === 0)	$url = GOURL_ADMIN.GOURL."paypermembership";
-					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) 	$item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
-					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
-					elseif (strpos($item->$column_name, "gourlappthemes") === 0) 	$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='/wp-admin/post.php?post=".str_replace("gourlappthemes.order", "", $item->$column_name)."&action=edit'>".__('order', GOURL)." ".str_replace("gourlappthemes.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) 	$item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourlwpecommerce") === 0) 	$item->$column_name = __('wp ecommerce', GOURL).", <a class='gourlnowrap' href='".admin_url("index.php?page=wpsc-purchase-logs&c=item_details&id=".str_replace("gourlwpecommerce.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlwpecommerce.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit")."'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
+					elseif (strpos($item->$column_name, "gourlappthemes") === 0) 	$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace("gourlappthemes.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlappthemes.order", "", $item->$column_name)."</a>"; 
 					else	$item->$column_name = str_replace(".", ", ", str_replace("gourl", "", $item->$column_name)); 
 					
 					$tmp = ($url) ? "<a href='".$url."'>".$item->$column_name."</a>" : $item->$column_name; 
@@ -6816,7 +6904,7 @@ class gourl_table_premiumusers extends WP_List_Table
 		$actions = array(
 			'edit'  	=> '<a onclick="if (confirm(\''.($enabled?__('Are you sure you want to DISABLE Premium Membership?', GOURL):__('Are you sure you want to ENABLE Premium Membership?', GOURL)).'\')) location.href=\''.GOURL_ADMIN.GOURL.($enabled?'premiumuser_disable':'premiumuser_enable').'&id='.$item->membID.'\'; else return false;" href="#a">'.($enabled?__('Disable', GOURL):__('Enable', GOURL)).'</a>',
 			'delete'	=> '<a onclick="if (confirm(\''.__('Are you sure you want to DELETE this record?', GOURL).'\')) location.href=\''.GOURL_ADMIN.GOURL.'premiumuser_delete&id='.$item->membID.'\'; else return false;" href="#a">'.__('Delete', GOURL).'</a>',
-			'download'	=> '<a href="/wp-admin/user-edit.php?user_id='.$item->userID.'">'.__('Profile', GOURL).'</a>'
+			'download'	=> '<a href="'.admin_url('user-edit.php?user_id='.$item->userID).'">'.__('Profile', GOURL).'</a>'
 		);
 		
 		if ($item->paymentID > 0) unset($actions['delete']);
@@ -6886,9 +6974,9 @@ function gourl_action_links($links, $file)
 	}
 
 	if ($file == $this_plugin) {
-		$payments_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page='.GOURL.'payments">'.__( 'All Payments', GOURL ).'</a>';
-		$unrecognised_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page='.GOURL.'payments&s=unrecognised">'.__( 'Unrecognised', GOURLWC ).'</a>';
-		$settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page='.GOURL.'">'.__( 'Summary', GOURL ).'</a>';
+		$payments_link = '<a href="'.admin_url('admin.php?page='.GOURL.'payments').'">'.__( 'All Payments', GOURL ).'</a>';
+		$unrecognised_link = '<a href="'.admin_url('admin.php?page='.GOURL.'payments&s=unrecognised').'">'.__( 'Unrecognised', GOURLWC ).'</a>';
+		$settings_link = '<a href="'.admin_url('admin.php?page='.GOURL).'">'.__( 'Summary', GOURL ).'</a>';
 		array_unshift($links, $unrecognised_link);
 		array_unshift($links, $payments_link);
 		array_unshift($links, $settings_link);
@@ -6899,7 +6987,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.     
+ *  XXI.
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -6918,10 +7006,9 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			} elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
 				return true;
 			}
-		}
-
+		}              
+	
 		return false;
 	}
-}
-
+}       
 

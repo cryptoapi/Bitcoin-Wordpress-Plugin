@@ -2,16 +2,19 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.2.6
+Version 1.2.7
 
 
-**GoUrl Official Bitcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Darkcoin, Reddcoin, etc Payments Online**
+**GoUrl Official Bitcoin/Altcoins Payment Gateway for Wordpress 3.5 or higher version**
+
+Accept Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments on your Wordpress Website Online. It's Easy! 
 
 * Author URI: [https://gourl.io](https://gourl.io)
-* Plugin URI: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+* Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+* Wordpress Page: [https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership](https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership/)
 * Requires at least: 3.5
 * Tested up to: 4.2
-* Stable Tag: 1.2.6
+* Stable Tag: 1.2.7
 * License: GNU Version 2 or Any Later Version
 
 
@@ -22,7 +25,7 @@ Version 1.2.6
 Our Payment Gateway with Instant Checkout allows you to easily organise your website -
 
 * 100% Free Open Source on Github.com
-* Accept Bitcoin, Litecoin, Dogecoin, Speedcoin, Darkcoin, Vertcoin, Reddcoin, Feathercoin, Vericoin, Potcoin payments Online on your Wordpress website
+* Accept Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments on your Wordpress website online
 * No Monthly Fee, Transaction Fee from 0%.
 * [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc
 * [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads
@@ -33,12 +36,13 @@ Our Payment Gateway with Instant Checkout allows you to easily organise your web
 * Direct Integration on your website (iframe), no external payment pages opens (as other payment gateways offer)
 * User will see successful payment result typically within 5 seconds after the payment has been sent
 * Global, Anonymous, Secure, Zero Risk, No Chargebacks, No visitor registration is needed.
-* Support [WooCommerce Bitcoin Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin/altcoins payments in [WooCommerce](https://wordpress.org/plugins/woocommerce/))
-* Support [Jigoshop Bitcoin Processor](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin/altcoins payments in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
-* Support [Appthemes Classipress, Vantage, JobRoller, etc](https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html) (accept bitcoin/altcoins payments in all [Appthemes](http://www.appthemes.com/themes/) products)
+* Support [WooCommerce Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin/altcoin payments in [WooCommerce](https://wordpress.org/plugins/woocommerce/))
+* Support [WP eCommerce Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin/altcoin payments in [WP eCommerce](https://wordpress.org/plugins/wp-e-commerce/))
+* Support [Jigoshop Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin/altcoins payment in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
+* Support [Appthemes Classipress, Vantage, JobRoller, etc](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/) (accept bitcoin/altcoin payments in all [Appthemes](http://www.appthemes.com/themes/) products)
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
-* [Free Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
+* [Free Tech Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
 
 
 
@@ -65,9 +69,11 @@ Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/b
 
 WooCommerce Addon: [https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/)
 
+WP eCommerce Addon: [https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/](https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/)
+
 Jigoshop Addon: [https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/)
 
-Appthemes Addon: [https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html](https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html)
+Appthemes Addon: [https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/)
 
 Demo: [http://gourl.io/lib/examples/pay-per-download-multi.php](http://gourl.io/lib/examples/pay-per-download-multi.php)
 
@@ -97,7 +103,7 @@ Installation
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
-In the search field type "GoUrl" and click Search Plugins. Once you've found our plugin you can view details about it such as the the rating and description. Most importantly, of course, you can install it by simply clicking Install Now.
+In the search field type "GoUrl" and click Search Plugins. Once you've found our plugin you can view details about it such as the rating and description. Most importantly, of course, you can install it by simply clicking Install Now.
 
 **1.2 Manual Installation**
 
@@ -126,7 +132,7 @@ The minimum account balance on GoUrl.io which our system will automatically tran
 
 
 
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)     
-                
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html) 
 
+  
  

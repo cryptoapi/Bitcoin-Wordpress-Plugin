@@ -44,6 +44,11 @@
 	color: #666;
 }
 
+.gourlsmalltext {
+	font-size: 14px;
+	text-decoration: none;
+}
+
 
 .gourladmin .postbox {
 	padding: 10px 20px;
@@ -412,7 +417,7 @@
 	-webkit-box-shadow: 0 0 10px #eee;
 	box-shadow: 0 0 10px #eee;
 	padding: 5px 30px 10px 40px;
-	color: #0db14b;
+	color: #0db14b;  
 }
 
 .gourladmin  .gourlnews  p {
