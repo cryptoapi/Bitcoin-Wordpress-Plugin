@@ -115,7 +115,7 @@ final class gourlclass
 			{
 				$this->record["startDate"] = gmdate("Y-m-d");
 				$this->record["endDate"] = gmdate("Y-m-d", strtotime("+1 month"));
-				if (isset($_GET['userID']) && intval($_GET['userID'])) $this->record["userID"] = intval($_GET['userID']); 
+				if (isset($_GET['userID']) && intval($_GET['userID'])) $this->record["userID"] = intval($_GET['userID']);
 			}
 		}
 
@@ -130,7 +130,7 @@ final class gourlclass
 
 	
 		// Admin
-		if (is_admin()) 
+		if (is_admin())
 		{
 			if ($this->errors) add_action('admin_notices', array(&$this, 'admin_warning'));
 			if (!file_exists(GOURL_DIR."files") || !file_exists(GOURL_DIR."images") || !file_exists(GOURL_DIR."lockimg")) add_action('admin_notices', array(&$this, 'admin_warning_reactivate'));
@@ -249,7 +249,7 @@ final class gourlclass
 		
 		$tmp .= "<div class='postbox'>";
 		$tmp .= "<div class='inside gourlsummary'>";
-
+		
 		foreach($this->coin_names as $k => $v)  $tmp .= '<a target="_blank" href="'.$this->coin_www[$v].'"><img width="70" hspace="20" vspace="15" alt="'.$v.'" src="'.plugins_url('/images/'.$v.'2.png', __FILE__).'" border="0"></a>';
 		
 		// 1
@@ -425,7 +425,7 @@ final class gourlclass
 		$tmp .= "<tr><td><a name='chart' id='chart'></a>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
 		$tmp .= "</table>";
 		
-		$charts = array('BTC' => 7777, 'LTC' => 3, 'DOGE' => 132, 'DRK' => 155, 'XPY' => 466, 'RDD' => 169, 'POT' => 173, 'FTC' => 5, 'VTC' => 151, 'VRC' => 209);		
+		$charts = array('BTC' => 7777, 'LTC' => 3, 'DOGE' => 132, 'DRK' => 155, 'XPY' => 466, 'RDD' => 169, 'POT' => 173, 'FTC' => 5, 'VTC' => 151, 'VRC' => 209);
 		$chart = (isset($_GET["chart"]) && isset($charts[$_GET["chart"]])) ? $_GET["chart"] : "BTC";
 		
 		$days = array(5=>"5 days", 10=>"10 days", 15=>"15 days", 31=>"1 month", 60=>"2 months", 90=>"3 months",120=>"4 months",180=>"6 months",240=>"9 months",360=>"1 year");
@@ -521,12 +521,12 @@ final class gourlclass
 		$tmp .= "<p>a. <a href='#i6'>".__('Accept Bitcoin Payments in Other Wordpress Plugins', GOURL)."</a> &#160; | &#160; b. <a target='_blank' href='https://gourl.io/view/newurl/Cryptocoin_Monetiser_Make_Money_Online.html'>".__('GoUrl Monetiser Online', GOURL)."</a>";
 		$tmp .= "<a name='i4'></a>";
 		$tmp .= "</p>";
-		
-
-		
+	
+	
+	
 		$tmp .= "<br><br><br><br><br><br>";
 		$tmp .= "<div class='gourltitle'>4. ".__('Differences between Pay-Per-View and Pay-Per-Membership', GOURL)."</div>";
-		
+	
 		
 		$tmp .= "<ul class='gourllist'>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-View</a> - shortcode <b>['.GOURL_TAG_VIEW.']</b> - you can use it for unregistered website visitors. Plugin will automatically generate a unique user identification for every user and save it in user browser cookies.
@@ -854,7 +854,7 @@ final class gourlclass
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th><br />'.__('Payment Box Width', GOURL).':</th>';
-		$tmp .= '<td><br /><input class="gourlnumeric" type="text" id="'.GOURL.'box_width" name="'.GOURL.'box_width" value="'.htmlspecialchars($this->options['box_width'], ENT_QUOTES).'" class="widefat"><label>'.__('px', GOURL).'</label><br /><em>'.__('Cryptocoin Payment Box Width, default 530px', GOURL).'</em></td>';
+		$tmp .= '<td><br /><input class="gourlnumeric" type="text" id="'.GOURL.'box_width" name="'.GOURL.'box_width" value="'.htmlspecialchars($this->options['box_width'], ENT_QUOTES).'" class="widefat"><label>'.__('px', GOURL).'</label><br /><em>'.sprintf(__('Cryptocoin Payment Box Width, default 530px. <a href="%s">See screenshot &#187;</a>', GOURL), plugins_url("/images/sizes.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Payment Box Height', GOURL).':</th>';
@@ -868,7 +868,7 @@ final class gourlclass
 		$tmp .= '<input type="radio" name="'.GOURL.'box_border" value="2" '.$this->chk($this->options['box_border'], 2).'> '.__('Box without Border', GOURL);
 		$tmp .= '</p>';
 		$tmp .= '<p><input type="radio" name="'.GOURL.'box_border" value="3" '.$this->chk($this->options['box_border'], 3).'> '.__('Custom Style', GOURL).' -</p>';
-		$tmp .= '<textarea id="'.GOURL.'box_style" name="'.GOURL.'box_style" class="widefat" style="height: 60px;">'.htmlspecialchars($this->options['box_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Box Visual CSS Style. <a href="%s">See screenshot</a><br />Example: border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
+		$tmp .= '<textarea id="'.GOURL.'box_style" name="'.GOURL.'box_style" class="widefat" style="height: 60px;">'.htmlspecialchars($this->options['box_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Box Visual CSS Style. <a href="%s">See screenshot &#187;</a><br />Example: border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Payment Messages Style', GOURL).':</th><td>';
@@ -878,7 +878,7 @@ final class gourlclass
 		$tmp .= '<input type="radio" name="'.GOURL.'message_border" value="2" '.$this->chk($this->options['message_border'], 2).'> '.__('Messages without Border', GOURL);
 		$tmp .= '</p>';
 		$tmp .= '<p><input type="radio" name="'.GOURL.'message_border" value="3" '.$this->chk($this->options['message_border'], 3).'> '.__('Custom Style', GOURL).' -</p>';
-		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style. <a href="%s">See screenshot</a><br />Example: display:inline-block;max-width:580px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
+		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style. <a href="%s">See screenshot &#187;</a><br />Example: display:inline-block;max-width:580px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th colspan="2"><h3>'.__('Images for Payment Box', GOURL).'</h3></th>';
@@ -7006,7 +7006,7 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			} elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
 				return true;
 			}
-		}   
+		}
 
 		return false;
 	}

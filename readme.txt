@@ -157,7 +157,7 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 == Changelog ==
 
 = 1.2.7 =
-Added new coin Paycoin XPY to GoUrl Payment Gateway
+Added new coin Paycoin XPY to GoUrl Payment Gateway. 
 Support Bitcoin/Altcoins Payment Gateway for WP eCommerce
 
 = 1.2.6 =
@@ -195,4 +195,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 = 1.2.7 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
   
-                   
+                 
