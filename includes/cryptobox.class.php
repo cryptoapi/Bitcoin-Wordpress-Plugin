@@ -570,7 +570,7 @@ class Cryptobox {
 
 	
 	
-	/* 15. Function coin_label()
+	/* 15. Function iframe_id()
 	 *
 	 * Returns payment box frame id   
 	*/
@@ -1184,5 +1184,5 @@ class Cryptobox {
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 		
 		unset($v); unset($cryptobox_private_keys);
-	}
+	} 
 ?>

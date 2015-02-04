@@ -495,7 +495,7 @@ final class gourlclass
 		$tmp .= "<li> ".__('Free <a target="_blank" href="https://gourl.io/view/registration">Register</a> or <a target="_blank" href="https://gourl.io/info/memberarea/My_Account.html">Login</a> on GoUrl.io - Global Bitcoin Payment Gateway', GOURL)."</li>";
 		$tmp .= "<li> ".__('Create <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">Payment Box</a> Records for all coin types you will accept on your website', GOURL)."</li>";
 		$tmp .= "<li> ".sprintf(__('You will need to place Callback URL on Gourl.io, please use: <b>%s</b> (this gourl plugin should be activated beforehand)', GOURL), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
-		$tmp .= "<li> ".sprintf(__('You will get Free GoUrl Public/Private keys, save them on <a href="%s">Settings Page</a>'), GOURL_ADMIN.GOURL."settings")."</li>";
+		$tmp .= "<li> ".sprintf(__('You will get Free GoUrl Public/Private keys from new created <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">payment box</a>, save them on <a href="%s">Settings Page</a>'), GOURL_ADMIN.GOURL."settings")."</li>";
 		$tmp .= "</ul>";
 		
 		$tmp .= "<p>".__('THAT\'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!', GOURL)."</p>";
@@ -5926,10 +5926,10 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 	$user_url 			= "";
 	
 	if (!$productID || !$paymentID || !$transaction_id || !$type) return false;
-	
+
 	
 	$coin_chain     	= gourlclass::coin_chain();
-	if ($transaction_id && isset($coin_chain[$details["coinname"]])) $transaction_id = "<a href='".$coin_chain[$details["coinname"]].'tx/'.$transaction_id."' target='_blank'>".$transaction_id."</a>"; 
+	if ($transaction_id && isset($coin_chain[$details["coinname"]])) $transaction_id = "<a href='".$coin_chain[$details["coinname"]].(stripos($coin_chain[$details["coinname"]],'cryptoid.info')?'tx.dws?':'tx/').$transaction_id."' target='_blank'>".$transaction_id."</a>"; 
 	
 	$txt_to 			= array($user_fullname, $user_username, $user_id, $user_email, $user_url, $paid_amount, $paid_amount_usd, $payment_id, $payment_url, $transaction_id, $transaction_time);
 	$txt_from 			= array("{user_fullname}", "{user_username}", "{user_id}", "{user_email}", "{user_url}", "{paid_amount}", "{paid_amount_usd}", "{payment_id}", "{payment_url}", "{transaction_id}", "{transaction_time}");
@@ -6636,12 +6636,12 @@ class gourl_table_payments extends WP_List_Table
 				
 			
 			case 'txID':
-				if ($item->$column_name) $tmp = "<a title='".__('Transaction Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].'tx/'.$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
+				if ($item->$column_name) $tmp = "<a title='".__('Transaction Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].(stripos($this->coin_chain[$this->coin_names[$item->coinLabel]],'cryptoid.info')?'tx.dws?':'tx/').$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
 				break;
 
 			
 			case 'addr':
-				if ($item->$column_name) $tmp = "<a title='".__('Wallet Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].'address/'.$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
+				if ($item->$column_name) $tmp = "<a title='".__('Wallet Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].(stripos($this->coin_chain[$this->coin_names[$item->coinLabel]],'cryptoid.info')?'address.dws?':'address/').$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
 				break;
 				
 			
@@ -7009,6 +7009,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		}
 
 		return false;
-	}
+	}                                         
 }
 
