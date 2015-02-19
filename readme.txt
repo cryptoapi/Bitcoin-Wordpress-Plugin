@@ -3,11 +3,11 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payment, bitcoin payments, bitcoins, access-control, admin, affiliate program, cryptocurrency, crypto currency, affiliates, altcoin, altcoins, amazon, bitpay, btc, buy now, coinbase, commerce, content protection, content, control access, credit cards, crypto currency, cryptocurrency, currency, google checkout, google wallet, payment, darkcoin, developers, digital download, digital downloads, direct debit, doge, dogecoin, donation, download, downloads, e-commerce, e-downloads, e-store, earn money, easy digital download, easy digital downloads, easy downloads, ebay, ecommerce, eshop, example, extension, feathercoin, file download, file downloads, gateway, google, gourl, invoice, litecoin, make money, member, members only, members, membership, memberships, multisite membership, official, online shop, online, osCommerce, paid content, paid downloads, paid membership, paid pages, paid video, pay per download, pay per video, pay per view, paying users, paycoin, xpy, payment gateway, payment processor, payment, payments, paypal payment, paypal, plugin developers, plugin, potcoin, ppv, protection, reddcoin, register, registration, restrict access, restrict content, revenue, sale, sell online, sell products online, sell products, sell, selling, shop, shopping cart, shortcode, speedcoin, store, subscription, subscriptions, teaser, usd, vericoin, vertcoin, virtual currency, widget, woocommerce, wordPress Membership Plugin, wordpress ecommerce, wordpress membership, wordpress payment gateway, wordpress payment processor, wordpress paypal, wordpress, wp ecommerce, wpecommerce, wp e-commerce, authorize, cart, e-commerce, ecommerce, paypal, shipping, shop, stock control, tax, appthemes, app themes, premium themes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, apptheme
+Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoin, altcoins, bitpay, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, darkcoin, developer, digital downloads, direct debit, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, payments, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.7
+Stable Tag: 1.2.8
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,7 @@ GoUrl Official Bitcoin/Altcoins Payment Gateway for Wordpress. Accept Bitcoin, L
 .
 
 
-= Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015) = 
+= Our Statement about Bitstamp, Mt Gox Bitcoin Exchanges (January 2015) =
 
 The above companies kept the client's bitcoins on their servers. And this caused the problems.
 Our GoUrl.io Bitcoin Payment Gateway is Fully Secure and as additional security we do not keep any client's money (bitcoins, altcoins) on our servers. All received payments are automatically forwarded to client's external wallet addresses within the next 30 minutes. We use industry-leading technology (such as SSL encryption) to keep your transaction information safe. This gives additional protection to our customers against hackers, etc.
@@ -156,6 +156,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.2.8 =
+Support Bitcoin/Altcoins Payment Gateway for WPMU DEV Marketpress
+
 = 1.2.7 =
 Added new coin Paycoin XPY to GoUrl Payment Gateway. 
 Support Bitcoin/Altcoins Payment Gateway for WP eCommerce
@@ -192,7 +195,7 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.7 =
+= 1.2.8 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
   
                  

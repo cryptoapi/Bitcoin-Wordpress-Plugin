@@ -32,7 +32,7 @@ final class gourlclass
 	private $custom_images 		= array('img_plogin'=>'Payment Login', 'img_flogin'=>'File Download Login', 'img_sold'=>'Product Sold', 'img_pdisable'=>'Payments Disabled', 'img_fdisable'=>'File Payments Disabled', 'img_nofile'=>'File Not Exists'); // custom payment box images
 	private $expiry_period 		= array('NO EXPIRY', '10 MINUTES', '20 MINUTES', '30 MINUTES', '1 HOUR', '2 HOURS', '3 HOURS', '6 HOURS', '12 HOURS', '1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS',  '1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS', '1 MONTH', '2 MONTHS', '3 MONTHS', '6 MONTHS', '12 MONTHS'); // payment expiry period
 	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
-	private $addon 				= array("gourlwoocommerce", "gourlwpecommerce", "gourljigoshop", "gourledd", "gourlappthemes");
+	private $addon 				= array("gourlwoocommerce", "gourlwpecommerce", "gourljigoshop", "gourledd", "gourlappthemes", "gourlmarketpress", "marketpress");
 			
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
@@ -171,7 +171,7 @@ final class gourlclass
 	*/
 	public static function coin_names()
 	{
-		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'SPD' => 'speedcoin', 'DOGE' => 'dogecoin', 'XPY' => 'paycoin', 'DRK' => 'darkcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin');
+		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'XPY' => 'paycoin', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'DRK' => 'darkcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin');
 	}
 	
 	
@@ -386,18 +386,22 @@ final class gourlclass
 		$tmp .= '<div style="min-width:1200px;width:100%;">';
 		
 		$tmp .= "<table border='0'>";
-		// 1
-		$tmp .= "<tr><td>GoUrl Pay-Per-Product</td><td><a href='".GOURL_ADMIN.GOURL."products'>".sprintf(__('%s  paid products', GOURL), $all_products)."</a></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=products'>".$tr_products."</a> ".__('payments', GOURL).$us_products."</small></td><td><small>".$dt_products."</small></td></tr>";
-		// 2
-		$tmp .= "<tr><td>GoUrl Pay-Per-Download</td><td><a href='".GOURL_ADMIN.GOURL."files'>".sprintf(__('%s  paid files', GOURL), $all_files)."</a></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=files'>".$tr_files."</a> ".__('payments', GOURL).$us_files."</small></td><td><small>".$dt_files."</small></td></tr>";
-		// 3		
-		$tmp .= "<tr><td>GoUrl Pay-Per-Membership</td><td><a href='".GOURL_ADMIN.GOURL."paypermembership_users&s=active'>".sprintf(__('%s  premium users', GOURL), $all_users)."</a></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=membership'>".$tr_membership."</a> ".__('payments', GOURL).$us_membership."</small></td><td><small>".$dt_membership."</small></td></tr>";
-		// 4
-		$tmp .= "<tr><td>GoUrl Pay-Per-View</td><td></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=payperview'>".$tr_payperview."</a> ".__('payments', GOURL).$us_payperview."</small></td><td><small>".$dt_payperview."</small></td></tr>";
+		
+		if ($tr_products || $tr_files || $tr_membership || $tr_payperview || !$all_payments)
+		{	
+			// 1
+			$tmp .= "<tr><td>GoUrl Pay-Per-Product</td><td><a href='".GOURL_ADMIN.GOURL."products'>".sprintf(__('%s  paid products', GOURL), $all_products)."</a></td>
+					<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=products'>".$tr_products."</a> ".__('payments', GOURL).$us_products."</small></td><td><small>".$dt_products."</small></td></tr>";
+			// 2
+			$tmp .= "<tr><td>GoUrl Pay-Per-Download</td><td><a href='".GOURL_ADMIN.GOURL."files'>".sprintf(__('%s  paid files', GOURL), $all_files)."</a></td>
+					<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=files'>".$tr_files."</a> ".__('payments', GOURL).$us_files."</small></td><td><small>".$dt_files."</small></td></tr>";
+			// 3		
+			$tmp .= "<tr><td>GoUrl Pay-Per-Membership</td><td><a href='".GOURL_ADMIN.GOURL."paypermembership_users&s=active'>".sprintf(__('%s  premium users', GOURL), $all_users)."</a></td>
+					<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=membership'>".$tr_membership."</a> ".__('payments', GOURL).$us_membership."</small></td><td><small>".$dt_membership."</small></td></tr>";
+			// 4
+			$tmp .= "<tr><td>GoUrl Pay-Per-View</td><td></td>
+					<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=payperview'>".$tr_payperview."</a> ".__('payments', GOURL).$us_payperview."</small></td><td><small>".$dt_payperview."</small></td></tr>";
+		}
 
 		// 5
 		foreach ($us_addon as $k => $v)
@@ -407,19 +411,21 @@ final class gourlclass
 			elseif ($k == "gourljigoshop") 		$nme = "GoUrl Jigoshop";
 			elseif ($k == "gourledd") 			$nme = "GoUrl Easy Digital Downloads";
 			elseif ($k == "gourlappthemes") 	$nme = "GoUrl AppThemes";
+			elseif ($k == "gourlmarketpress") 	$nme = "GoUrl MarketPress";
+			elseif ($k == "marketpress") 		$nme = "GoUrl MarketPress";
 			elseif (strpos($k, "gourl") === 0) 	$nme = "GoUrl " . ucfirst(str_replace("gourl", "", $k));
 			else 								$nme = ucfirst($k);
 			
 			$tmp .= "<tr><td>".$nme."</td><td></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=".$k."'>".$tr_addon[$k]."</a> ".__('payments', GOURL).$us_addon[$k]."</small></td><td><small>".$dt_addon[$k]."</small></td></tr>";
+				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=".$k."'>".$tr_addon[$k]." ".__('payments', GOURL)."</a> ".$us_addon[$k]."</small></td><td><small>".$dt_addon[$k]."</small></td></tr>";
 		}	
 		
 		// 6
 		$tmp .= "<tr><td>".__('Other Plugins with GoUrl', GOURL)."</td><td></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=plugins'>".$tr_other."</a> ".__('payments', GOURL).$us_other."</small></td><td><small>".$dt_other."</small></td></tr>";
+				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=plugins'>".$tr_other." ".__('payments', GOURL)."</a> ".$us_other."</small></td><td><small>".$dt_other."</small></td></tr>";
 		// 7
 		$tmp .= "<tr><td>".__('Unrecognised Payments', GOURL)."</td><td></td>
-				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=unrecognised'>".$tr_unrecognised."</a> ".__('payments', GOURL).$us_unrecognised."</small></td><td><small>".$dt_unrecognised."</small></td></tr>";
+				<td><small><a href='".GOURL_ADMIN.GOURL."payments&s=unrecognised'>".$tr_unrecognised." ".__('payments', GOURL)."</a> ".$us_unrecognised."</small></td><td><small>".$dt_unrecognised."</small></td></tr>";
 		// 8
 		$tmp .= "<tr><td><small>---------</small><br />".__('Total Received', GOURL)."</td><td colspan='2'><br /><a href='".GOURL_ADMIN.GOURL."payments'>".sprintf(__('%s payments', GOURL), $all_payments)."</a>".$all_details."</td></tr>";
 		$tmp .= "<tr><td><a name='chart' id='chart'></a>".__('Recent Payment', GOURL)."</td><td colspan='3'>".$dt_last."</td></tr>";
@@ -465,9 +471,10 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: offer paid access to your premium content/videos <a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."payperview")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
-		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon'))."</li>";
-		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wp-ecommerce.html">WP eCommerce Bitcoin Gateway</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/wp-e-commerce/">WP eCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+wp+ecommerce+addon'))."</li>";
-		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept bitcoin/altcoins payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wp-ecommerce.html">WP eCommerce Bitcoin Gateway</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wp-e-commerce/">WP eCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+wp+ecommerce+addon'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop'))."</li>";
+		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wpmudev-marketpress.html">Marketpress Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wordpress-ecommerce/">WPMU DEV MarketPress</a>)', GOURL)."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+appthemes'))."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments', GOURL)."</li>";
@@ -4188,7 +4195,7 @@ final class gourlclass
 				$search = " && (orderID LIKE '%".$s."%' || userID LIKE '%".$s."%' || countryID LIKE '%".$s."%' || coinLabel LIKE '%".$s."%' || amount LIKE '%".$s."%' || amountUSD LIKE '%".$s."%' || addr LIKE '%".$s."%' || txID LIKE '%".$s."%' || DATE_FORMAT(txDate, '%d %M %Y') LIKE '%".$s."%')";
 			}
 		}	
-		
+
 		$res = $wpdb->get_row("SELECT sum(amountUSD) as total from crypto_payments WHERE 1".$search, OBJECT);
 		$total = $res->total; 
 		$total = number_format($total, 2);
@@ -4324,8 +4331,11 @@ final class gourlclass
 	
 		$m = $v = false;
 	
-		if (has_shortcode($post->post_content, GOURL_TAG_MEMBERSHIP)) 	$m = true;
-		elseif (has_shortcode($post->post_content, GOURL_TAG_VIEW)) 	$v = true;
+		if (isset($post->post_content))
+		{
+			if (has_shortcode($post->post_content, GOURL_TAG_MEMBERSHIP)) 	$m = true;
+			elseif (has_shortcode($post->post_content, GOURL_TAG_VIEW)) 	$v = true;
+		}
 			
 		if ($m || $v)
 		{
@@ -4696,6 +4706,14 @@ final class gourlclass
 		, array(&$this, 'page_summary')
 		);
 		
+		add_submenu_page(
+		GOURL
+		, __('&#149; All Payments', GOURL)
+		, __('&#149; All Payments', GOURL)
+		, GOURL_PERMISSION
+		, GOURL."payments"
+				, array(&$this, 'page_payments')
+		);
 		
 		add_submenu_page(
 		GOURL
@@ -4774,16 +4792,6 @@ final class gourlclass
 				, array(&$this, 'page_membership_user')
 		);
 		
-		
-		add_submenu_page(
-		GOURL
-				, __('All Payments', GOURL)
-				, __('All Payments', GOURL)
-				, GOURL_PERMISSION
-				, GOURL."payments"
-				, array(&$this, 'page_payments')
-		);
-	
 		add_submenu_page(
 		GOURL
 				, __('Settings', GOURL)
@@ -4969,7 +4977,7 @@ final class gourlclass
 		if (!$pluginName) 																												return array("error" => __("Error. Please place in variable \$YourPluginName - your plugin name", GOURL));
 		if (preg_replace('/[^a-z0-9\_\-]/', '', $pluginName) != $pluginName || strlen($pluginName) < 5 || strlen($pluginName) > 17) return array("error" => sprintf(__("Error. Invalid plugin name - %s. Size: 5-17 symbols. Allowed symbols: a..Z0..9_-", GOURL), $pluginName));
 		if (stripos($pluginName, "product") === 0 || stripos($pluginName, "file") === 0 || stripos($pluginName, "pay") === 0 || stripos($pluginName, "membership") === 0 || stripos($pluginName, "user") === 0) return array("error" => __("Error. Please change plugin name. Plugin name can not begin with: 'file..', 'product..', 'pay..', 'membership..', 'user..'", GOURL));
-		if (stripos($pluginName, "gourl") !== false && $affiliate_key != "gourl") return array("error" => __("Error. Please change plugin name. Plugin name can not use in name '..gourl..'", GOURL));
+		if (stripos($pluginName, "gourl") !== false && $pluginName != "gourlwoocommerce" && $affiliate_key != "gourl") return array("error" => __("Error. Please change plugin name. Plugin name can not use in name '..gourl..'", GOURL));
 		$pluginName = strtolower(substr($pluginName, 0, 17));
 		
 		$amountCurrency = trim(strtoupper($amountCurrency));
@@ -5128,8 +5136,14 @@ final class gourlclass
 	
 
 		// Cryptocoin Payment Box
-		if ($languages_list) $html .= "<div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-90)."px;min-width:".$this->options['box_width']."px;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div>";
-		$html .= $box_html;
+		if ($languages_list) 
+		{
+			$html .= "<table cellspacing='0' cellpadding='0' border='0' style='border:0;margin:0;padding:0'>";
+			$html .= "<tr><td style='border:0;margin:0;padding:0'><div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-115)."px;min-width:100%;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div></td></tr>";
+			$html .= "<tr><td style='border:0;margin:0;padding:0'>".$box_html."</td></tr>";
+			$html .= "</table>";
+		}
+		else $html .= $box_html;
 		
 		
 		// Result
@@ -6588,6 +6602,8 @@ class gourl_table_payments extends WP_List_Table
 					elseif (strpos($item->$column_name, "gourlwpecommerce") === 0) 	$item->$column_name = __('wp ecommerce', GOURL).", <a class='gourlnowrap' href='".admin_url("index.php?page=wpsc-purchase-logs&c=item_details&id=".str_replace("gourlwpecommerce.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlwpecommerce.order", "", $item->$column_name)."</a>"; 
 					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit")."'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
 					elseif (strpos($item->$column_name, "gourlappthemes") === 0) 	$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace("gourlappthemes.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlappthemes.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourlmarketpress") === 0) 	$item->$column_name = __('marketpress', GOURL).", <a class='gourlnowrap' href='".admin_url("edit.php?post_type=product&page=marketpress-orders&s=".str_replace("gourlmarketpress.", "", $item->$column_name))."'>".__('order', GOURL)." ".str_replace("gourlmarketpress.", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "marketpress") === 0) 		$item->$column_name = __('marketpress', GOURL).", <a class='gourlnowrap' href='".admin_url("edit.php?post_type=product&page=marketpress-orders&s=".str_replace("marketpress.", "", $item->$column_name))."'>".__('order', GOURL)." ".str_replace("marketpress.", "", $item->$column_name)."</a>"; 
 					else	$item->$column_name = str_replace(".", ", ", str_replace("gourl", "", $item->$column_name)); 
 					
 					$tmp = ($url) ? "<a href='".$url."'>".$item->$column_name."</a>" : $item->$column_name; 
@@ -6975,7 +6991,7 @@ function gourl_action_links($links, $file)
 
 	if ($file == $this_plugin) {
 		$payments_link = '<a href="'.admin_url('admin.php?page='.GOURL.'payments').'">'.__( 'All Payments', GOURL ).'</a>';
-		$unrecognised_link = '<a href="'.admin_url('admin.php?page='.GOURL.'payments&s=unrecognised').'">'.__( 'Unrecognised', GOURLWC ).'</a>';
+		$unrecognised_link = '<a href="'.admin_url('admin.php?page='.GOURL.'payments&s=unrecognised').'">'.__( 'Unrecognised', GOURL ).'</a>';
 		$settings_link = '<a href="'.admin_url('admin.php?page='.GOURL).'">'.__( 'Summary', GOURL ).'</a>';
 		array_unshift($links, $unrecognised_link);
 		array_unshift($links, $payments_link);
@@ -6987,7 +7003,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.
+ *  XXI.             
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
