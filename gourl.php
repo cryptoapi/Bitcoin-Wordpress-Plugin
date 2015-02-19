@@ -132,11 +132,12 @@ final class gourlclass
 		// Admin
 		if (is_admin())
 		{
-			if ($this->errors) add_action('admin_notices', array(&$this, 'admin_warning'));
+			if ($this->errors && $this->page != 'gourlsettings') add_action('admin_notices', array(&$this, 'admin_warning'));
 			if (!file_exists(GOURL_DIR."files") || !file_exists(GOURL_DIR."images") || !file_exists(GOURL_DIR."lockimg")) add_action('admin_notices', array(&$this, 'admin_warning_reactivate'));
 			add_action('admin_menu', 			array(&$this, 'admin_menu'));
 			add_action('init', 					array(&$this, 'admin_init'));
 			add_action('admin_head', 			array(&$this, 'admin_header'), 15);
+			if (in_array($this->page, array("gourl", "gourlpayments", "gourlproducts", "gourlproduct", "gourlfiles", "gourlfile", "gourlpayperview", "gourlpaypermembership", "gourlpaypermembership_users", "gourlpaypermembership_user", "gourlsettings"))) add_action('admin_footer_text', array(&$this, 'admin_footer_text'), 15);
 		} 
 		else 
 		{
@@ -501,7 +502,7 @@ final class gourlclass
 		$tmp .= "<ul class='gourllist'>";
 		$tmp .= "<li> ".__('Free <a target="_blank" href="https://gourl.io/view/registration">Register</a> or <a target="_blank" href="https://gourl.io/info/memberarea/My_Account.html">Login</a> on GoUrl.io - Global Bitcoin Payment Gateway', GOURL)."</li>";
 		$tmp .= "<li> ".__('Create <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">Payment Box</a> Records for all coin types you will accept on your website', GOURL)."</li>";
-		$tmp .= "<li> ".sprintf(__('You will need to place Callback URL on Gourl.io, please use: <b>%s</b> (this gourl plugin should be activated beforehand)', GOURL), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
+		$tmp .= "<li> ".sprintf(__('You will need to place Callback URL on Gourl.io, please use: <b>%s</b>', GOURL), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
 		$tmp .= "<li> ".sprintf(__('You will get Free GoUrl Public/Private keys from new created <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">payment box</a>, save them on <a href="%s">Settings Page</a>'), GOURL_ADMIN.GOURL."settings")."</li>";
 		$tmp .= "</ul>";
 		
@@ -4650,6 +4651,14 @@ final class gourlclass
 	
 
 	
+	/*
+	 * 
+	*/
+	public function admin_footer_text()
+	{
+		return sprintf( __( 'If you like <strong>GoUrl Bitcoin/Altcoins Gateway</strong> please leave us a <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating on <a href="%1$s" target="_blank">WordPress.org</a>. A huge thank you from GoUrl  in advance!', GOURL ), 'https://wordpress.org/support/view/plugin-reviews/gourl-bitcoin-payment-gateway-paid-downloads-membership?filter=5#postform');
+	}
+	
 	
 	
 	
@@ -6160,7 +6169,7 @@ class gourl_table_files extends WP_List_Table
 			case 'createtime':
 				$tmp = ($item->$column_name != '0000-00-00 00:00:00') ? date("d M Y, H:i A", strtotime($item->$column_name)) : '-';
 				break;
-				
+		
 			default:
 				$tmp = $item->$column_name;
 				break;
@@ -6387,7 +6396,7 @@ class gourl_table_products extends WP_List_Table
 			case 'purchases':
 				$tmp = ($item->$column_name == 0) ?  __('unlimited', GOURL) : $item->$column_name . ' ' . __('copies', GOURL);
 				break;
-
+	
 			case 'paymentTime':
 			case 'updatetime':
 			case 'createtime':
@@ -6461,7 +6470,7 @@ class gourl_table_products extends WP_List_Table
 				'edit'      => sprintf('<a href="'.GOURL_ADMIN.GOURL.'product&id='.$item->productID.'">'.__('Edit', GOURL).'</a>',$_REQUEST['page'],'edit',$item->productID),
 				'delete'    => sprintf('<a href="'.GOURL_ADMIN.GOURL.'product&id='.$item->productID.'&gourlcryptocoin='.$this->coin_names[$item->defCoin].'&gourlcryptolang='.$item->lang.'&preview=true">'.__('Preview', GOURL).'</a>',$_REQUEST['page'],'preview',$item->productID),
 		);
-
+	
 		return sprintf('%1$s %2$s', $item->productTitle, $this->row_actions($actions) );
 	}
 
@@ -6499,7 +6508,7 @@ class gourl_table_products extends WP_List_Table
 				"total_pages" => $totalpages,
 				"per_page" => $this->rec_per_page,
 		) );
-
+	
 		$columns  = $this->get_columns();
 		$hidden   = array();
 		$sortable = $this->get_sortable_columns();
@@ -6539,7 +6548,7 @@ class gourl_table_payments extends WP_List_Table
 	
 	private $search = '';
 	private $file_columns = false;
-
+	
 	function __construct($search = '', $rec_per_page = 20, $file_columns = false)
 	{
 
@@ -6631,7 +6640,7 @@ class gourl_table_payments extends WP_List_Table
 				$num = gourl_number_format($item->$column_name, 8);
 				$tmp = $num . ' ' . $item->coinLabel;
 				break;
-
+			
 			
 			case 'coinLabel':
 				if ($item->$column_name)
@@ -6648,8 +6657,7 @@ class gourl_table_payments extends WP_List_Table
 					$tmp = "<a title='".__('Show Only Visitors from this Country', GOURL)."' href='".GOURL_ADMIN.GOURL."payments&s=".$item->$column_name."'><img width='16' border='0' style='margin-right:7px' alt='".$item->$column_name."' src='".plugins_url('/images/flags/'.$item->$column_name.'.png', __FILE__)."' border='0'></a>" . get_country_name($item->$column_name);
 				}
 				break;
-
-				
+			
 			
 			case 'txID':
 				if ($item->$column_name) $tmp = "<a title='".__('Transaction Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].(stripos($this->coin_chain[$this->coin_names[$item->coinLabel]],'cryptoid.info')?'tx.dws?':'tx/').$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
@@ -6744,9 +6752,9 @@ class gourl_table_payments extends WP_List_Table
 	function column_txConfirmed($item)
 	{
 		$tmp = gourl_checked_image($item->txConfirmed);
-		
+	
 		if ($item->txConfirmed || !$item->userID) return $tmp;
-		
+	
 		$actions = array(
 				'edit' => sprintf('<a title="'.__('Re-check Payment Status', GOURL).'" href="'.GOURL_ADMIN.GOURL.'payments&b='.$item->paymentID.'">'.__('Check', GOURL).'</a>',$_REQUEST['page'],'edit',$item->paymentID)
 		);
@@ -6759,25 +6767,25 @@ class gourl_table_payments extends WP_List_Table
 	function prepare_items()
 	{
 		global $wpdb, $_wp_column_headers;
-
+	
 		$screen = get_current_screen();
-
+	
 		$query = "SELECT * FROM crypto_payments WHERE 1 ".$this->search;
-
+	
 		$orderby = !empty($_GET["orderby"]) ? esc_sql($_GET["orderby"]) : 'ASC';
 		$order = !empty($_GET["order"]) ? esc_sql($_GET["order"]) : '';
 		if(!empty($orderby) & !empty($order)){ $query.=' ORDER BY '.$orderby.' '.$order; }
 		else $query.=' ORDER BY txDate DESC';
-
-
+	
+	
 		$totalitems = $wpdb->query($query);
-
+	
 		$paged = !empty($_GET["paged"]) ? esc_sql($_GET["paged"]) : '';
 
 		if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
 
 		$totalpages = ceil($totalitems/$this->rec_per_page);
-
+		
 		if(!empty($paged) && !empty($this->rec_per_page))
 		{
 			$offset=($paged-1)*$this->rec_per_page;
@@ -7003,7 +7011,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.             
+ *  XXI.
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7025,6 +7033,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		}
 
 		return false;
-	}                                         
+	}
 }
 
