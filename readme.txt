@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.8
+Stable Tag: 1.2.9
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -157,6 +157,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.2.9 =
+Pay-Per-View and Pay-Per-Membership - allow to use video preview
+
 = 1.2.8 =
 Support Bitcoin/Altcoins Payment Gateway for WPMU DEV Marketpress
 
@@ -196,7 +199,7 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.8 =
+= 1.2.9 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended.
-  
+                
  

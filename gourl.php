@@ -1,7 +1,7 @@
 <?php
 
 
-if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; // Exit if accessed directly in wordpress
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; // Exit if accessed directly
 
 
 final class gourlclass 
@@ -37,11 +37,11 @@ final class gourlclass
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	
-	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.0000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvImgMaxWidth"  => 0, "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => "");
+	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.0000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => "");
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");	
 	
-	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.0000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmImgMaxWidth"  => 0, "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
+	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.0000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
 	private $fields_membership_newuser 	= array("userID" => 0, "paymentID" => 0, "startDate"  => "", "endDate" => "", "disabled" => 0, "recordCreated"  => "");
 	private $lock_level_membership 		= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
 	
@@ -467,7 +467,7 @@ final class gourlclass
 		$tmp .= "<ul>";
 		$tmp .= "<li> ".__('100% Free Open Source on <a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Wordpress-Plugin">Github.com</a>', GOURL)."</li>";
 		$tmp .= "<li> ".__('Accept Bitcoin Payments Online on your Wordpress website', GOURL)."</li>";
-		$tmp .= "<li> ".__('No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD', GOURL)."</li>";
+		$tmp .= "<li> ".sprintf(__('No Monthly Fee, Transaction Fee from 0%%. Set your own prices in USD, <a href="%s">EUR, CNY, RUB, IDR... (100 currencies)</a>', GOURL), "https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Download</a> - simple solution for your <b>unregistered</b> visitors: make money on file downloads <a target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."files")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: offer paid access to your premium content/videos <a target="_blank" href="http://gourl.io/lib/examples/pay-per-page-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."payperview")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content/etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."paypermembership")."</li>";
@@ -1793,7 +1793,7 @@ final class gourlclass
 			$this->options2[$key] = get_option(GOURL.$key);
 			if (!$this->options2[$key])
 			{
-				if ($value || $key == "ppvImgMaxWidth") $this->options2[$key] = $value; // default
+				if ($value) $this->options2[$key] = $value; // default
 				elseif ($key == "ppvCoin" && $this->payments)
 				{
 					$values = array_keys($this->payments);
@@ -1852,10 +1852,6 @@ final class gourlclass
 		
 		if ($this->options2["ppvPriceCoin"] != 0 && !$this->options2["ppvOneCoin"]) $this->record_errors[] = sprintf(__('Field "Use Default Coin Only" - check this field because you have entered price in %s. Please use price in USD if you want to accept multiple coins', GOURL), $this->coin_names[$this->options2["ppvPriceLabel"]]);
 		
-	
-		if ($this->options2["ppvImgMaxWidth"] == "") $this->options2["ppvImgMaxWidth"] = 0;
-		if (!is_numeric($this->options2["ppvImgMaxWidth"]) ||  round($this->options2["ppvImgMaxWidth"]) != $this->options2["ppvImgMaxWidth"] || $this->options2["ppvImgMaxWidth"] > 2000)	$this->record_errors[] = __('Max Image Width - invalid value', GOURL);
-	
 		return true;
 	}
 	
@@ -1899,15 +1895,19 @@ final class gourlclass
 	
 		if ($preview)
 		{
-			$example 	= ($_GET["example"] == "2") ? 2 : 1;
-			$short_code = '['.GOURL_TAG_VIEW.' img="image'.$example.'.jpg"]';
+			$example = $_GET["example"];
+			if ($example == 1 || $example == 2) $short_code = '['.GOURL_TAG_VIEW.' img="image'.$example.'.jpg"]';
+			else $short_code = '['.GOURL_TAG_VIEW.' frame="https://www.youtube.com/embed/Eg58KaXjCFI" w="800" h="480"]';
 				
 			$tmp .= "<div class='postbox'>";
 			$tmp .= "<h3 class='hndle'>".sprintf(__('Preview Shortcode &#160; &#160; %s', GOURL), $short_code);
 			$tmp .= "<a href='".GOURL_ADMIN.GOURL."payperview' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
 			$tmp .= "</h3>";
-			$tmp .= "<div class='inside'>";
-			$tmp .= $this->shortcode_view_init("image".$example.".jpg");
+			$tmp .= "<div class='inside'><br /><br />";
+			
+			if ($example == 1 || $example == 2) $tmp .= $this->shortcode_view_init("image".$example.".jpg");
+			else $tmp .= $this->shortcode_view_init("", "https://www.youtube.com/embed/Eg58KaXjCFI", 800, 480);
+			
 			$tmp .= "</div>";
 			$tmp .= '<div class="gourlright"><small>'.__('Shortcode', GOURL).': &#160; '.$short_code.'</small></div>';
 			$tmp .= "</div>";
@@ -1925,18 +1925,21 @@ final class gourlclass
 			$tmp .= __('Your unregistered anonymous website visitors  will need to send you a set amount of cryptocoins for access to your website\'s specific pages & videos during a specific time. All will be in automatic mode - allowing you to receive payments, open webpage access to your visitors, when payment expired a new payment box will appear, payment notifications to your email, etc.', GOURL);
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('<a href="%s#i4">Read how it works</a> and differences between Pay-Per-View and Pay-Per-Membership.', GOURL), GOURL_ADMIN.GOURL).$this->space();
-			$tmp .= __('You can customize lock image for each page or no images at all. Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
+			$tmp .= __('You can customize lock image / preview video for each page or no image/video preview at all. Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
 			$tmp .= "<br /><br />";
-			$tmp .= __('Shortcode: ', GOURL);
-			$tmp .= '<span class="gourlshortcode">['.GOURL_TAG_VIEW.' img="image1.jpg"]</span>';
-			$tmp .= sprintf(__('- place this tag <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_payperview_full.png', __FILE__));
+			$tmp .= __('Shortcodes with preview image and preview video: ', GOURL);
+			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_VIEW.' img="image1.jpg"]</div>';
+			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_VIEW.' frame="..url.." w="640" h="480"]</div>';
+			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_payperview_full.png', __FILE__));
 			$tmp .= "<br /><br />";
 			$tmp .= __('Ready to use shortcodes: ', GOURL);
 			$tmp .= "<ol>";
 			$tmp .= '<li>['.GOURL_TAG_VIEW.' img="image1.jpg"] &#160; - <small>'.__('lock page with default page lock image', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_VIEW.' img="image2.jpg"] &#160; - <small>'.__('lock page with default video lock image', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_VIEW.' img="my_image_etc.jpg"] &#160; - <small>'.sprintf(__('lock page with any custom lock image stored in directory %slockimg', GOURL), GOURL_DIR2).'</small></li>';
+			$tmp .= '<li>['.GOURL_TAG_VIEW.' img="my_image_etc.jpg" w="400" h="200"] &#160; - <small>'.__('lock page with custom lock image and image width=400px height=200px', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_VIEW.' img="http://....."] &#160; - <small>'.__('lock page with any custom lock image', GOURL).'</small></li>';
+			$tmp .= '<li>['.GOURL_TAG_VIEW.' frame="http://..." w="800" h="440"] &#160; - <small>'.__('lock page with any custom video preview, etc (iframe). Iframe width=800px, height=440px', GOURL).'</small></li>';
 			$tmp .= "</ol>";
 			$tmp .= "</div>";
 		}
@@ -1963,6 +1966,7 @@ final class gourlclass
 		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
 		if ($example != 2 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."payperview&gourlcryptocoin=".$this->coin_names[$this->options2['ppvCoin']]."&gourlcryptolang=".$this->options2['ppvLang']."&example=2&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 1', GOURL)."</a>";
 		if ($example != 1 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."payperview&gourlcryptocoin=".$this->coin_names[$this->options2['ppvCoin']]."&gourlcryptolang=".$this->options2['ppvLang']."&example=1&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 2', GOURL)."</a>";
+		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."payperview&gourlcryptocoin=".$this->coin_names[$this->options2['ppvCoin']]."&gourlcryptolang=".$this->options2['ppvLang']."&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Video Preview 3', GOURL)."</a>";
 		$tmp .= "<a target='_blank' href='".plugins_url('/images/tagexample_payperview_full.png', __FILE__)."' class='".GOURL."button button-secondary'>".__('Instruction', GOURL)."</a>".$this->space();
 		$tmp .= '</div><br /><br />';
 	
@@ -2031,12 +2035,10 @@ final class gourlclass
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvOneCoin" id="'.GOURL.'ppvOneCoin" value="1" '.$this->chk($this->options2['ppvOneCoin'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, payment box will accept payments in one default coin "PaymentBox Coin" (no multiple coins)', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
-	
-		$tmp .= '<tr><th>'.__('Max Image Width', GOURL).':</th>';
-		$tmp .= '<td><input type="text" class="gourlnumeric" name="'.GOURL.'ppvImgMaxWidth" id="'.GOURL.'ppvImgMaxWidth" value="'.htmlspecialchars($this->options2['ppvImgMaxWidth'], ENT_QUOTES).'"><label>'.__('px', GOURL).'</label><br /><em>'.__('Optional, Set the maximum width of your custom lock images in ['.GOURL_TAG_VIEW.' img="my_image_etc.jpg"] or use "0" - if you don\'t want to use it', GOURL).'</em></td>';
+		$tmp .= '<tr><th>'.__('PaymentBox Style:', GOURL).'</th>';
+		$tmp .= '<td>'.sprintf(__( 'Payment Box <a target="_blank" href="%s">sizes</a> and border <a target="_blank" href="%s">shadow</a> you can change <a href="%s">here &#187;</a>', GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlvericoinprivate_key").'<br /><br /><br /><br /></td>';
 		$tmp .= '</tr>';
-	
-	
+		
 		$tmp .= '<tr><th>'.__('Text - Above Payment Box', GOURL).':</th><td>';
 		echo $tmp;
 		wp_editor( $this->options2['ppvTextAbove'], GOURL.'ppvTextAbove', array('textarea_name' => GOURL.'ppvTextAbove', 'quicktags' => true, 'media_buttons' => true, 'wpautop' => false));
@@ -2094,8 +2096,11 @@ final class gourlclass
 	*/
 	public function shortcode_view($arr)
 	{
-		$image = (isset($arr["img"])) ? trim($arr["img"]) : "";
-		return $this->shortcode_view_init($image);
+		$image   = (isset($arr["img"])) 	? trim($arr["img"]) 	: "";
+		$frame  = (isset($arr["frame"])) 	? trim($arr["frame"]) 	: "";
+		$iwidth  = (isset($arr["w"])) 		? trim($arr["w"]) 		: "";
+		$iheight = (isset($arr["h"])) 		? trim($arr["h"]) 		: "";
+		return $this->shortcode_view_init($image, $frame, $iwidth, $iheight);
 	}
 	
 	
@@ -2104,7 +2109,7 @@ final class gourlclass
 	/*
 	 *  29.
 	*/
-	private function shortcode_view_init($image)
+	private function shortcode_view_init($image = "", $frame = "", $iwidth = "", $iheight = "")
 	{
 		global $wpdb, $current_user;
 		static $html = "-1";
@@ -2120,13 +2125,25 @@ final class gourlclass
 	
 		// not available activated coins
 		if (!$this->payments) return "";
-	
-	
+
+		// shortcode options
 		$orig = $image;
 		if ($image && strpos($image, "/") === false) $image = GOURL_DIR2 . "lockimg/" . $image;
 		if ($image && strpos($image, "//") === false && (!file_exists(ABSPATH.$image) || !is_file(ABSPATH.$image))) $image = "";
+		if ($image && $frame) $frame = "";
+		
+		if ($frame && strpos($frame, "//") === false) $frame = "http://" . $frame;
 	
-		$short_code 	= '['.GOURL_TAG_VIEW.($image?' img="<b>'.$orig.'</b>':'').'"]';
+		$short_code = '['.GOURL_TAG_VIEW.($image?' img="<b>'.$orig.'</b>':'').($frame?' frame="<b>'.$frame.'</b>':'').($iwidth?' w="<b>'.$iwidth.'</b>':'').($iheight?' h="<b>'.$iheight.'</b>':'').'"]';
+
+		$iwidth = str_replace("px", "", $iwidth);
+		if (!$iwidth || !is_numeric($iwidth) || $iwidth < 50) 	 $iwidth = "";
+		$iheight = str_replace("px", "", $iheight);
+		if (!$iheight || !is_numeric($iheight) || $iheight < 50) $iheight = "";
+		
+		if ($frame && !$iwidth)  $iwidth  = "640";
+		if ($frame && !$iheight) $iheight = "480";
+		
 	
 	
 		$is_paid		= false;
@@ -2158,7 +2175,6 @@ final class gourlclass
 		$defShow		= $this->options2["ppvOneCoin"];
 	
 		$level			= $this->options2["ppvLevel"];
-		$imageWidthMax	= $this->options2["ppvImgMaxWidth"];
 		$textAbove		= $this->options2["ppvTextAbove"];
 		$textBelow		= $this->options2["ppvTextBelow"];
 		$hideCurTitle	= $this->options2["ppvTitle2"];
@@ -2290,7 +2306,7 @@ final class gourlclass
 		// ----------------------
 	
 		// Coins selection list (html code)
-		$coins_list = (count($available_coins) > 1) ? display_currency_box($available_coins, $defCoin, $lang, 60, "margin:60px 0 30px 0;text-align:center;font-weight:normal;", plugins_url('/images', __FILE__), $anchor) : "";
+		$coins_list = (count($available_coins) > 1) ? display_currency_box($available_coins, $defCoin, $lang, 60, "margin:60px 0 15px 0;text-align:center;font-weight:normal;", plugins_url('/images', __FILE__), $anchor) : "";
 	
 	
 		// Language selection list for payment box (html code)
@@ -2309,28 +2325,34 @@ final class gourlclass
 		// ---------------------
 	
 		$tmp  = "<br />";
-	
-		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlviewtext'>".$textAbove."</div>".($image ? "<br /><br />" : ""); else $tmp .= "<br />";
-	
-		$tmp .= "<div class='gourlbox' style='min-width:".$box_width."px'>";
-	
+		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlviewtext'>".$textAbove."</div>".($image || $frame ? "<br /><br />" : ""); else $tmp .= "<br />";
+		
+		// Start
+		$tmp .= "<div align='center'>";
+		
 		if (!$is_paid)
 		{
-			if ($image) $tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax>0?"style='max-width:".$imageWidthMax."px'":"")." title='".__('Page Content Locked! Please pay below ', GOURL)."' alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
+			if ($image) 	$tmp .= "<a href='#".$anchor."'><img style='border:none;box-shadow:none;max-width:100%;".($iwidth?"width:".$iwidth."px;":"").($iheight?"height:".$iheight."px;":"")."' title='".__('Page Content Locked! Please pay below ', GOURL)."' alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br />";
+			elseif ($frame) $tmp .= "<iframe style='max-width:100%' width='".$iwidth."' height='".$iheight."' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' allowfullscreen src='".htmlspecialchars($frame)."'></iframe><br />";
+			
 			$tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
 		}	
 	
 		if ($is_paid) 			$tmp .= "<br /><br /><br />";
 		elseif (!$coins_list) 	$tmp .= "<br /><br />";
-		else 					$tmp .= $coins_list;
+		else 					$tmp .= "<br />".$coins_list;
+	
+		$tmp .= "<div class='gourlbox' style='min-width:".$box_width."px;'>";
 	
 		// Cryptocoin Payment Box
 		if ($languages_list) $tmp .= "<div style='margin:20px 0 5px 290px;font-family:\"Open Sans\",sans-serif;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(2).$languages_list."</div>";
 		$tmp .= $box_html;
 	
+		$tmp .= "</div>";
+		
 		// End
 		$tmp .= "</div>";
-	
+		
 	
 		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br /><div class='gourlviewtext'>".$textBelow."</div>";
 	
@@ -2427,7 +2449,7 @@ final class gourlclass
 			$this->options3[$key] = get_option(GOURL.$key);
 			if (!$this->options3[$key])
 			{
-				if ($value || $key == "ppmImgMaxWidth") $this->options3[$key] = $value; // default
+				if ($value) $this->options3[$key] = $value; // default
 				elseif ($key == "ppmCoin" && $this->payments)
 				{
 					$values = array_keys($this->payments);
@@ -2489,9 +2511,6 @@ final class gourlclass
 		if ($this->options3["ppmPriceCoin"] != 0 && !$this->options3["ppmOneCoin"]) $this->record_errors[] = sprintf(__('Field "Use Default Coin Only" - check this field because you have entered price in %s. Please use price in USD if you want to accept multiple coins', GOURL), $this->coin_names[$this->options3["ppmPriceLabel"]]);
 		
 	
-		if ($this->options3["ppmImgMaxWidth"] == "") $this->options3["ppmImgMaxWidth"] = 0;
-		if (!is_numeric($this->options3["ppmImgMaxWidth"]) ||  round($this->options3["ppmImgMaxWidth"]) != $this->options3["ppmImgMaxWidth"] || $this->options3["ppmImgMaxWidth"] > 2000)	$this->record_errors[] = __('Max Image Width - invalid value', GOURL);
-	
 		return true;
 	}
 	
@@ -2540,10 +2559,10 @@ final class gourlclass
 	
 		if ($preview)
 		{
-			if ($_GET["example"] == "3")
+			if ($_GET["example"] == "4")
 			{
 				$tmp .= "<div class='postbox'>";
-				$tmp .= "<h3 class='hndle'>".__('Preview - Your unregistered visitors/non-logged users will see on premium pages - login form with custom text/images', GOURL);
+				$tmp .= "<h3 class='hndle'>".__('Unregistered visitors / non-logged users will see on your premium pages - login form with custom text', GOURL);
 				$tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
 				$tmp .= "</h3>";
 				$tmp .= "<br><br><div class='inside' align='center'>";
@@ -2555,15 +2574,19 @@ final class gourlclass
 			}
 			else
 			{
-				$example 	= ($_GET["example"] == "2") ? 2 : 1;
-				$short_code = '['.GOURL_TAG_MEMBERSHIP.' img="image'.$example.($example==2?'.jpg':'.png').'"]';
-		
+				$example = $_GET["example"];
+				if ($example == 1 || $example == 2) $short_code = '['.GOURL_TAG_MEMBERSHIP.' img="image'.$example.($example==2?'.jpg':'.png').'"]';
+				else $short_code = '['.GOURL_TAG_MEMBERSHIP.' frame="https://www.youtube.com/embed/_YEyzvtMx3s" w="700" h="380"]';
+
 				$tmp .= "<div class='postbox'>";
 				$tmp .= "<h3 class='hndle'>".sprintf(__('Preview Shortcode &#160; &#160; %s', GOURL), $short_code);
 				$tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership' class='gourlright ".GOURL."button button-primary'>".__('Close Preview', GOURL)."</a>";
 				$tmp .= "</h3>";
-				$tmp .= "<div class='inside'>";
-				$tmp .= $this->shortcode_membership_init("image".$example.($example==2?'.jpg':'.png'));
+				$tmp .= "<div class='inside'><br /><br />";
+				
+				if ($example == 1 || $example == 2) $tmp .= $this->shortcode_membership_init("image".$example.($example==2?'.jpg':'.png'));
+				else $tmp .= $this->shortcode_membership_init("", "https://www.youtube.com/embed/_YEyzvtMx3s", 700, 380);
+				
 				$tmp .= "</div>";
 				$tmp .= '<div class="gourlright"><small>'.__('Shortcode', GOURL).': &#160; '.$short_code.'</small></div>';
 				$tmp .= "</div>";
@@ -2580,18 +2603,22 @@ final class gourlclass
 			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> - <a target="_blank" href="http://gourl.io/lib/examples/pay-per-membership-multi.php">Example</a> - similar to <a href="%s">pay-per-view</a> but for registered website users only. Your <b>registered</b> website users will need to send you a set amount of cryptocoins for access to your website\'s specific pages & videos during a specific time. All will be in automatic mode. <span class="gourlnowrap">Pay-Per-Membership</span> is very easy to use and it supports ONE paid membership level for all website. For few membership levels (ex. basic, pro, premium, etc) please use <a class="gourlnowrap" href="%s">Pay-Per-Product</a>.', GOURL), GOURL_ADMIN.GOURL."payperview", GOURL_ADMIN.GOURL."products");
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('Pay-Per-Membership - is a better safety solution than pay-per-view because plugin uses registered userID not cookies. And a membership period from 1 hour to 1 year of your choice. You need to have website registration enabled. <a href="%s#i4">Read how it works</a> and differences between Pay-Per-View and Pay-Per-Membership.', GOURL), GOURL_ADMIN.GOURL).$this->space();
-			$tmp .= __('You can customize lock image for each page or no images at all. Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
+			$tmp .= __('You can customize lock image / preview video for each page or no image/video preview at all. Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
 			$tmp .= "<br /><br />";
-			$tmp .= __('Shortcode: ', GOURL);
-			$tmp .= '<span class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' img="image1.png"]</span>';
-			$tmp .= sprintf(__('- place this tag <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__));
+			$tmp .= __('Shortcodes with preview image and preview video: ', GOURL);
+			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' img="image1.png"]</div>';
+			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' frame="..url.." w="700" h="380"]</div>';
+			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__));
 			$tmp .= "<br /><br />";
 			$tmp .= __('Ready to use shortcodes: ', GOURL);
 			$tmp .= "<ol>";
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="image1.png"] &#160; - <small>'.__('lock page with default page lock image; visible for unpaid logged-in users', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="image2.jpg"] &#160; - <small>'.__('lock page with default video lock image', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="my_image_etc.jpg"] &#160; - <small>'.sprintf(__('lock page with any custom lock image stored in directory %slockimg', GOURL), GOURL_DIR2).'</small></li>';
+			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="my_image_etc.jpg" w="400" h="200"] &#160; - <small>'.__('lock page with custom lock image and image width=400px height=200px', GOURL).'</small></li>';
 			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' img="http://....."] &#160; - <small>'.__('lock page with any custom lock image', GOURL).'</small></li>';
+			$tmp .= '<li>['.GOURL_TAG_MEMBERSHIP.' frame="http://..." w="750" h="410"] &#160; - <small>'.__('lock page with any custom video preview, etc (iframe). Iframe width=750px, height=410px', GOURL).'</small></li>';
+				
 			$tmp .= "</ol>";
 			$tmp .= "</div>";
 		}
@@ -2617,9 +2644,10 @@ final class gourlclass
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
+		if ($example != 4 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&example=4&preview=true' class='".GOURL."button button-secondary'>".__('Screen for non-logged users', GOURL)."</a>";
 		if ($example != 1 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=1&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 1', GOURL)."</a>";
 		if ($example != 2 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=2&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 2', GOURL)."</a>";
-		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Preview 3 - Unregistered users', GOURL)."</a>";
+		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppvCoin']]."&gourlcryptolang=".$this->options3['ppvLang']."&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Video Preview 3', GOURL)."</a>";
 		$tmp .= "<a target='_blank' href='".plugins_url('/images/tagexample_membership_full.png', __FILE__)."' class='".GOURL."button button-secondary'>".__('Instruction', GOURL)."</a>".$this->space();
 		$tmp .= '</div><br /><br />';
 	
@@ -2688,10 +2716,10 @@ final class gourlclass
 		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmOneCoin" id="'.GOURL.'ppmOneCoin" value="1" '.$this->chk($this->options3['ppmOneCoin'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, payment box will accept payments in one default coin "PaymentBox Coin" (no multiple coins)', GOURL).'</em></td>';
 		$tmp .= '</tr>';
 	
-	
-		$tmp .= '<tr><th>'.__('Max Image Width', GOURL).':</th>';
-		$tmp .= '<td><input type="text" class="gourlnumeric" name="'.GOURL.'ppmImgMaxWidth" id="'.GOURL.'ppmImgMaxWidth" value="'.htmlspecialchars($this->options3['ppmImgMaxWidth'], ENT_QUOTES).'"><label>'.__('px', GOURL).'</label><br /><em>'.__('Optional, Set the maximum width of your custom lock images in ['.GOURL_TAG_MEMBERSHIP.' img="my_image_etc.jpg"] or use "0" - if you don\'t want to use it', GOURL).'</em></td>';
+		$tmp .= '<tr><th>'.__('PaymentBox Style:', GOURL).'</th>';
+		$tmp .= '<td>'.sprintf(__( 'Payment Box <a target="_blank" href="%s">sizes</a> and border <a target="_blank" href="%s">shadow</a> you can change <a href="%s">here &#187;</a>', GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlvericoinprivate_key").'<br /><br /><br /></td>';
 		$tmp .= '</tr>';
+		
 	
 		$tmp .= '<tr><th colspan="2"><br/>';
 		$tmp .= '<h3>'.__('A. Unregistered Users will see Login Form with custom text/images -', GOURL).'</h3>';
@@ -2778,8 +2806,11 @@ final class gourlclass
 	*/
 	public function shortcode_membership($arr)
 	{
-		$image = (isset($arr["img"])) ? trim($arr["img"]) : "";
-		return $this->shortcode_membership_init($image);
+		$image   = (isset($arr["img"])) 	? trim($arr["img"]) 	: "";
+		$frame  = (isset($arr["frame"]))	? trim($arr["frame"]) 	: "";
+		$iwidth  = (isset($arr["w"])) 		? trim($arr["w"]) 		: "";
+		$iheight = (isset($arr["h"])) 		? trim($arr["h"]) 		: "";
+		return $this->shortcode_membership_init($image, $frame, $iwidth, $iheight);
 	}
 	
 	
@@ -2788,7 +2819,7 @@ final class gourlclass
 	/*
 	 *  36.
 	*/
-	private function shortcode_membership_init($image)
+	private function shortcode_membership_init($image = "", $frame = "", $iwidth = "", $iheight = "")
 	{
 		global $wpdb, $current_user;
 		static $html = "-1";
@@ -2817,12 +2848,25 @@ final class gourlclass
 		if (!$preview_mode && $logged && $wpdb->get_row("SELECT membID FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && disabled = 0 LIMIT 1", OBJECT)) return "";
 		
 		
-		
+		// shortcode options
 		$orig = $image;
 		if ($image && strpos($image, "/") === false) $image = GOURL_DIR2 . "lockimg/" . $image;
 		if ($image && strpos($image, "//") === false && (!file_exists(ABSPATH.$image) || !is_file(ABSPATH.$image))) $image = "";
-	
-		$short_code 	= '['.GOURL_TAG_MEMBERSHIP.($image?' img="<b>'.$orig.'</b>':'').'"]';
+		if ($image && $frame) $frame = "";
+		
+		if ($frame && strpos($frame, "//") === false) $frame = "http://" . $frame;
+		
+		$short_code 	= '['.GOURL_TAG_MEMBERSHIP.($image?' img="<b>'.$orig.'</b>':'').($frame?' frame="<b>'.$frame.'</b>':'').($iwidth?' w="<b>'.$iwidth.'</b>':'').($iheight?' h="<b>'.$iheight.'</b>':'').'"]';
+		
+		$iwidth = str_replace("px", "", $iwidth);
+		if (!$iwidth || !is_numeric($iwidth) || $iwidth < 50) 	 $iwidth = "";
+		$iheight = str_replace("px", "", $iheight);
+		if (!$iheight || !is_numeric($iheight) || $iheight < 50) $iheight = "";
+		
+		if ($frame && !$iwidth)  $iwidth  = "640";
+		if ($frame && !$iheight) $iheight = "480";
+		
+		
 	
 	
 		$is_paid		= false;
@@ -2855,7 +2899,6 @@ final class gourlclass
 		$defShow		= $this->options3["ppmOneCoin"];
 	
 		$level			= $this->options3["ppmLevel"];
-		$imageWidthMax	= $this->options3["ppmImgMaxWidth"];
 		$textAbove		= ($logged) ? $this->options3["ppmTextAbove"] : $this->options3["ppmTextAbove2"];
 		$textBelow		= ($logged) ? $this->options3["ppmTextBelow"] : $this->options3["ppmTextBelow2"];
 		$hideCurTitle	= $this->options3["ppmTitle2"];
@@ -3010,7 +3053,7 @@ final class gourlclass
 		// ----------------------
 	
 		// Coins selection list (html code)
-		$coins_list = (count($available_coins) > 1) ? display_currency_box($available_coins, $defCoin, $lang, 60, "margin:60px 0 30px 0;text-align:center;font-weight:normal;", plugins_url('/images', __FILE__), $anchor) : "";
+		$coins_list = (count($available_coins) > 1) ? display_currency_box($available_coins, $defCoin, $lang, 60, "margin:60px 0 15px 0;text-align:center;font-weight:normal;", plugins_url('/images', __FILE__), $anchor) : "";
 	
 	
 		// Language selection list for payment box (html code)
@@ -3027,38 +3070,48 @@ final class gourlclass
 	
 		$tmp  = "<br />";
 	
-		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image ? "<br /><br />" : ""); else $tmp .= "<br />";
+		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image || $frame ? "<br /><br />" : ""); else $tmp .= "<br />";
 	
-		$tmp .= "<div align='center'><div class='gourlbox' style='min-width:".$box_width."px;".($image && $this->right($image,"/",false)=="image1.png"?"max-width:555px;":"")."'>";
-	
+
+		// Start
+		$tmp .= "<div align='center'>";
+		
 		if (!$is_paid)
 		{
 			if ($image) 
 			{
-				if ($imageWidthMax>0) $imageWidthMax .= "px";
+				$imageWidthMax = "100%;";
 				if ($this->right($image, "/", false) == "image1.png")
 				{ 
-					$tmp .= "<div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 4)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div>";
+					$tmp .= "<div align='center' style='width:555px;'><div class='".($priceUSD>0 || $expiryPeriod=="NO EXPIRY"?"gourlmembershipprice":"gourlmembershipprice2")."'>".($priceUSD>0?"$".$priceUSD:gourl_number_format($priceCoin, 4)." ".$priceLabel).($expiryPeriod!="NO EXPIRY"?($priceUSD>0?" <span>/":"<br><span>").$expiryPeriod."</span>":"")."</div></div>";
 					if (is_user_logged_in() && $current_user->ID) $image = str_replace("image1.png", "image1b.png", $image);
-					$imageWidthMax = "none";
+					$imageWidthMax = "none;";
+					$iwidth = 555;
 				}
-				$tmp .= "<a href='#".$anchor."'><img ".($imageWidthMax?"style='max-width:".$imageWidthMax."'":"")." alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br/>";
+				$tmp .= "<a href='#".$anchor."'><img style='border:none;box-shadow:none;max-width:".$imageWidthMax.($iwidth?"width:".$iwidth."px;":"").($iheight?"height:".$iheight."px;":"")."' title='".__('Page Content Locked! Please pay below ', GOURL)."' alt='".__('Page Content Locked! Please pay below ', GOURL)."' border='0' src='".$image."'></a><br />";
 			}
+			elseif ($frame) $tmp .= "<iframe style='max-width:100%' width='".$iwidth."' height='".$iheight."' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' allowfullscreen src='".htmlspecialchars($frame)."'></iframe><br />";
+			
 			$tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
 		}
 		elseif ($is_paid && $preview_mode) $tmp .= sprintf(__("<b>ADMIN NOTE:</b> Your test payment received successfully.<br>Please <a href='%s'>disable your test membership</a> and you will see payment box again", GOURL), GOURL_ADMIN.GOURL."paypermembership_users&s=user".$current_user->ID);
-		
-	
+
 		if ($is_paid) 			$tmp .= "<br /><br /><br />";
 		elseif (!$coins_list) 	$tmp .= "<br /><br />";
-		else 					$tmp .= $coins_list;
-	
+		else 					$tmp .= "<br />".$coins_list;
+		
+		
+		$tmp .= "<div class='gourlbox' style='min-width:".$box_width."px;'>";
+		
 		// Cryptocoin Payment Box
 		if ($languages_list) $tmp .= "<div style='margin:20px 0 5px 290px;font-family:\"Open Sans\",sans-serif;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(2).$languages_list."</div>";
 		$tmp .= $box_html;
 	
+		$tmp .= "</div>";
+		
+		
 		// End
-		$tmp .= "</div></div>";
+		$tmp .= "</div>";
 	
 	
 		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
@@ -4340,24 +4393,37 @@ final class gourlclass
 			
 		if ($m || $v)
 		{
-			$img = array(GOURL_TAG_MEMBERSHIP => "",  GOURL_TAG_VIEW => "");
+			$img 	 = array(GOURL_TAG_MEMBERSHIP => "",  GOURL_TAG_VIEW => "");
+			$frame   = array(GOURL_TAG_MEMBERSHIP => "",  GOURL_TAG_VIEW => "");
+			$iwidth  = array(GOURL_TAG_MEMBERSHIP => "",  GOURL_TAG_VIEW => "");
+			$iheight = array(GOURL_TAG_MEMBERSHIP => "",  GOURL_TAG_VIEW => "");
+			
 			preg_match_all( '/' . get_shortcode_regex() . '/s', $post->post_content, $matches, PREG_SET_ORDER );
 			foreach ($matches as $v)
 				if (GOURL_TAG_MEMBERSHIP === $v[2] || GOURL_TAG_VIEW === $v[2])
 				{
-					preg_match('/(img(.*)=(.*)["\'](.*?)["\'])/', $v[0], $match);
+					preg_match('/(img(\s*)=(\s*)["\'](.*?)["\'])/', $v[3], $match);
 					if (isset($match["4"])) $img[$v[2]] = trim($match["4"]);
+					
+					preg_match('/(frame(\s*)=(\s*)["\'](.*?)["\'])/', $v[3], $match);
+					if (isset($match["4"])) $frame[$v[2]] = trim($match["4"]);
+						
+					preg_match('/(w(\s*)=(\s*)["\'](.*?)["\'])/', $v[3], $match);
+					if (isset($match["4"])) $iwidth[$v[2]] = trim($match["4"]);
+					
+					preg_match('/(h(\s*)=(\s*)["\'](.*?)["\'])/', $v[3], $match);
+					if (isset($match["4"])) $iheight[$v[2]] = trim($match["4"]);
 				}
 					
 				if ($m) 
 				{
 					$this->lock_type = GOURL_TAG_MEMBERSHIP;
-					$this->shortcode_membership_init($img[GOURL_TAG_MEMBERSHIP]);
+					$this->shortcode_membership_init($img[GOURL_TAG_MEMBERSHIP], $frame[GOURL_TAG_MEMBERSHIP], $iwidth[GOURL_TAG_MEMBERSHIP], $iheight[GOURL_TAG_MEMBERSHIP]);
 				}
 				elseif ($v) 	
 				{
 					$this->lock_type = GOURL_TAG_VIEW;
-					$this->shortcode_view_init($img[GOURL_TAG_VIEW]);
+					$this->shortcode_view_init($img[GOURL_TAG_VIEW], $frame[GOURL_TAG_VIEW], $iwidth[GOURL_TAG_VIEW], $iheight[GOURL_TAG_VIEW]);
 				}
 		}
 	
@@ -4415,11 +4481,11 @@ final class gourlclass
 					<div class="app-title"><h3>'.__('Login', GOURL).'</h3>'.$err.'</div>
 					<form method="post" action="'.$_SERVER['REQUEST_URI'].'#info">
 						<div class="login-form">
-							<div class="control-group">
+							<div class="control-group" align="center">
 								<input type="text" class="login-field" value="" placeholder="username" name="login_name" id="login_name">
 								<label class="login-field-icon fui-user" for="login_name"></label>
 							</div>
-							<div class="control-group">
+							<div class="control-group" align="center">
 								<input type="password" class="login-field" value="" placeholder="password" name="login_password" id="login_password">
 								<label class="login-field-icon fui-lock" for="login_password"></label>
 							</div>
@@ -5147,9 +5213,9 @@ final class gourlclass
 		// Cryptocoin Payment Box
 		if ($languages_list) 
 		{
-			$html .= "<table cellspacing='0' cellpadding='0' border='0' style='border:0;margin:0;padding:0'>";
-			$html .= "<tr><td style='border:0;margin:0;padding:0'><div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-115)."px;min-width:100%;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div></td></tr>";
-			$html .= "<tr><td style='border:0;margin:0;padding:0'>".$box_html."</td></tr>";
+			$html .= "<table cellspacing='0' cellpadding='0' border='0' width='100%' style='border:0;box-shadow:none;margin:0;padding:0;background-color:transparent'>";
+			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'><div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-115)."px;min-width:100%;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div></td></tr>";
+			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'>".$box_html."</td></tr>";
 			$html .= "</table>";
 		}
 		else $html .= $box_html;
@@ -7011,7 +7077,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.
+ *  XXI.        
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7033,6 +7099,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		}
 
 		return false;
-	}
+	}  
 }
 
