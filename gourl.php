@@ -504,6 +504,7 @@ final class gourlclass
 		$tmp .= "<li> ".__('Create <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">Payment Box</a> Records for all coin types you will accept on your website', GOURL)."</li>";
 		$tmp .= "<li> ".sprintf(__('You will need to place Callback URL on Gourl.io, please use: <b>%s</b>', GOURL), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
 		$tmp .= "<li> ".sprintf(__('You will get Free GoUrl Public/Private keys from new created <a target="_blank" href="https://gourl.io/editrecord/coin_boxes/0">payment box</a>, save them on <a href="%s">Settings Page</a>'), GOURL_ADMIN.GOURL."settings")."</li>";
+		$tmp .= "<li> ".sprintf(__('Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image (if your site requires registration, or use Pay-Per-Product, Pay-Per-Membership...)'), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images")."</li>";
 		$tmp .= "</ul>";
 		
 		$tmp .= "<p>".__('THAT\'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!', GOURL)."</p>";
@@ -889,7 +890,7 @@ final class gourlclass
 		$tmp .= '<textarea id="'.GOURL.'message_style" name="'.GOURL.'message_style" class="widefat" style="height: 50px;">'.htmlspecialchars($this->options['message_style'], ENT_QUOTES).'</textarea><br /><em>'.sprintf(__('Optional, Payment Notifications (when user click on payment button) Visual CSS Style. <a href="%s">See screenshot &#187;</a><br />Example: display:inline-block;max-width:580px;padding:15px 20px;box-shadow:0 0 3px #aaa;margin:7px;line-height:25px;', GOURL), plugins_url("/images/styles.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
-		$tmp .= '<tr><th colspan="2"><h3>'.__('Images for Payment Box', GOURL).'</h3></th>';
+		$tmp .= '<tr id="images"><th colspan="2"><h3>'.__('Images for Payment Box', GOURL).'</h3></th>';
 		$tmp .= '</tr>';
 
 		
@@ -902,7 +903,7 @@ final class gourlclass
 			$tmp .= '<p><input type="radio" name="'.GOURL.$k.'" value="1" '.$this->chk($this->options[$k], 1).'> '.__('Custom Image', GOURL).' -</p>';
 			if ($this->options[$k.'url'] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) $tmp .= "<img src='".GOURL_DIR2."box/".$this->options[$k.'url']."' border='0'>"; else $this->options[$k.'url'] = "";
 			$tmp .= "<input type='hidden' id='".GOURL.$k."url' name='".GOURL.$k."url' value='".htmlspecialchars($this->options[$k.'url'], ENT_QUOTES)."'>";
-			if ($k == "img_plogin") 	$hint = "This image will be displayed if website registration is needed for the buyer before paying for a product/service. ";
+			if ($k == "img_plogin") 	$hint = "This image will be displayed if your site requires registration for the buyer before paying for a product/service. ";
 			elseif ($k == "img_flogin") $hint = "This image will be displayed if only registered users can buy/download your paid files. ";
 			else $hint = "";
 			$tmp .= '<input type="file" accept="image/*" id="'.GOURL.$k.'2" name="'.GOURL.$k.'2" class="widefat"><br /><em>'.__($hint.'Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
@@ -1475,7 +1476,7 @@ final class gourlclass
 		echo $this->page_title(__('All Paid Files', GOURL).$this->space(1).'<a class="add-new-h2" href="'.GOURL_ADMIN.GOURL.'file">' . __('Add New File', GOURL) . '</a>', 2);
 		echo "<div class='".GOURL."intro postbox'>";
 		echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-		echo '<p>'.__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php">Example</a>', GOURL).'</p>';
+		echo '<p>'.sprintf(__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="%s">Example</a><br>Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image (if your site requires registration).', GOURL), "http://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
 		echo '<p>'.sprintf(__('Create <a href="%sfile">New Paid File Downloads</a> and place new generated <a href="%s">shortcode</a> on your public page/post. Done!', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 		echo sprintf(__('<a href="%s#i3">Read more</a>', GOURL), GOURL_ADMIN.GOURL).'</p>';
 		echo  "</div>";
@@ -2002,8 +2003,11 @@ final class gourlclass
 			$tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->options2['ppvLevel']).'>'.$v.'</option>';
 	
 		$tmp .= '</select>';
-		$tmp .= '<br /><em>'.__('Select Visitors/Users level who will see lock page/blog contents and need to make payment for unlock.
-								 Website Editors / Admins will have all the time full access to locked pages and see original page content.', GOURL).'</em></td>';
+		$tmp .= '<br /><em>'.sprintf(__('Select Visitors/Users level who will see lock page/blog contents and need to make payment for unlock.
+								Website Editors / Admins will have all the time full access to locked pages and see original page content.<br>
+								Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image 
+								(if your site requires registration)	
+				', GOURL), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images").'</em></td>';
 		$tmp .= '</tr>';
 	
 	
@@ -2647,7 +2651,7 @@ final class gourlclass
 		if ($example != 4 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&example=4&preview=true' class='".GOURL."button button-secondary'>".__('Screen for non-logged users', GOURL)."</a>";
 		if ($example != 1 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=1&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 1', GOURL)."</a>";
 		if ($example != 2 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=2&preview=true' class='".GOURL."button button-secondary'>".__('Show Preview 2', GOURL)."</a>";
-		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppvCoin']]."&gourlcryptolang=".$this->options3['ppvLang']."&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Video Preview 3', GOURL)."</a>";
+		if ($example != 3 && !$this->record_errors) $tmp .= "<a href='".GOURL_ADMIN.GOURL."paypermembership&gourlcryptocoin=".$this->coin_names[$this->options3['ppmCoin']]."&gourlcryptolang=".$this->options3['ppmLang']."&example=3&preview=true' class='".GOURL."button button-secondary'>".__('Video Preview 3', GOURL)."</a>";
 		$tmp .= "<a target='_blank' href='".plugins_url('/images/tagexample_membership_full.png', __FILE__)."' class='".GOURL."button button-secondary'>".__('Instruction', GOURL)."</a>".$this->space();
 		$tmp .= '</div><br /><br />';
 	
@@ -2682,8 +2686,10 @@ final class gourlclass
 			$tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->options3['ppmLevel']).'>'.$v.'</option>';
 	
 		$tmp .= '</select>';
-		$tmp .= '<br /><em>'.__('Select Users level who will see lock page/blog contents and need to make payment for unlock.
-								 Website Editors / Admins will have all the time full access to locked pages and see original page content.', GOURL).'</em></td>';
+		$tmp .= '<br /><em>'.sprintf(__('Select Users level who will see lock page/blog contents and need to make payment for unlock.
+								 	Website Editors / Admins will have all the time full access to locked pages and see original page content.<br> 
+									Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image	
+				', GOURL), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images").'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Add to User Profile', GOURL).':</th>';
@@ -3909,7 +3915,7 @@ final class gourlclass
 		echo "<div class='".GOURL."intro postbox'>";
 		echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php"><img hspace="10" width="240" height="95" title="Example - Pay Per Product" src="'.plugins_url('/images/pay-per-product.png', __FILE__).'" border="0"></a>';
 		echo '<p>'.__('Use "Pay-Per-product" - sell any of your products online to registered users online, custom bill payments, invoices. No Monthly Fee, Transaction Fee from 0%. Email notifications to Buyer/Seller. User will see successful payment result on your webpage typically within 5 seconds after the payment has been sent (very fast). &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">Example</a>', GOURL) . '</p>';
-		echo '<p>'.sprintf(__('You will need to <a href="%sproduct">create a new product record</a> of what you are selling, you get custom WordPress shortcode, <a href="%s">place that shortcode</a> on any of your WordPress pages and user will see the automatic payment box.', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_product_full.png', __FILE__)).$this->space(1);
+		echo '<p>'.sprintf(__('You will need to <a href="%sproduct">create a new product record</a> of what you are selling, you get custom WordPress shortcode, <a href="%s">place that shortcode</a> on any of your WordPress pages and user will see the automatic payment box. Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image for Pay-Per-Product. ', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_product_full.png', __FILE__), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images").$this->space(1);
 		echo sprintf(__('<a href="%s#i3">Read more</a>', GOURL), GOURL_ADMIN.GOURL) . '</p>';
 		echo  "</div>";
 	
@@ -7077,7 +7083,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.        
+ *  XXI.   
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
