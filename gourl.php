@@ -6682,7 +6682,11 @@ class gourl_table_payments extends WP_List_Table
 					elseif (strpos($item->$column_name, "gourlwoocommerce") === 0) 	$item->$column_name = __('woocommerce', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace("gourlwoocommerce.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlwoocommerce.order", "", $item->$column_name)."</a>"; 
 					elseif (strpos($item->$column_name, "gourlwpecommerce") === 0) 	$item->$column_name = __('wp ecommerce', GOURL).", <a class='gourlnowrap' href='".admin_url("index.php?page=wpsc-purchase-logs&c=item_details&id=".str_replace("gourlwpecommerce.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlwpecommerce.order", "", $item->$column_name)."</a>"; 
 					elseif (strpos($item->$column_name, "gourljigoshop") === 0) 	$item->$column_name = __('jigoshop', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".$gourl->left($gourl->right($item->$column_name, ".order"), "_")."&action=edit")."'>".__('order', GOURL)." ".str_replace("_", " (", str_replace("gourljigoshop.order", "", $item->$column_name)).")"."</a>"; 
-					elseif (strpos($item->$column_name, "gourlappthemes") === 0) 	$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace("gourlappthemes.order", "", $item->$column_name)."&action=edit")."'>".__('order', GOURL)." ".str_replace("gourlappthemes.order", "", $item->$column_name)."</a>"; 
+					elseif (strpos($item->$column_name, "gourlappthemes") === 0)
+					{
+						$escrow = (strpos($item->$column_name, "gourlappthemes.escrow") === 0) ? true : false;
+						$item->$column_name = __('appthemes', GOURL).", <a class='gourlnowrap' href='".admin_url("post.php?post=".str_replace(array( "gourlappthemes.order", "gourlappthemes.escrow"), array("", ""), $item->$column_name)."&action=edit")."'>".($escrow?__('escrow', GOURL):__('order', GOURL))." ".str_replace(array( "gourlappthemes.order", "gourlappthemes.escrow"), array("", ""), $item->$column_name)."</a>";
+					} 
 					elseif (strpos($item->$column_name, "gourlmarketpress") === 0) 	$item->$column_name = __('marketpress', GOURL).", <a class='gourlnowrap' href='".admin_url("edit.php?post_type=product&page=marketpress-orders&s=".str_replace("gourlmarketpress.", "", $item->$column_name))."'>".__('order', GOURL)." ".str_replace("gourlmarketpress.", "", $item->$column_name)."</a>"; 
 					elseif (strpos($item->$column_name, "marketpress") === 0) 		$item->$column_name = __('marketpress', GOURL).", <a class='gourlnowrap' href='".admin_url("edit.php?post_type=product&page=marketpress-orders&s=".str_replace("marketpress.", "", $item->$column_name))."'>".__('order', GOURL)." ".str_replace("marketpress.", "", $item->$column_name)."</a>"; 
 					else	$item->$column_name = str_replace(".", ", ", str_replace("gourl", "", $item->$column_name)); 
@@ -7083,7 +7087,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.   
+ *  XXI.                       
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
