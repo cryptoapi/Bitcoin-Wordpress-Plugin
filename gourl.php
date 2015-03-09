@@ -474,8 +474,8 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a href="%s">Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">'.$img.'</a>', GOURL), GOURL_ADMIN.GOURL."products")."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-woocommerce.html">WooCommerce Bitcoin Gateway</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon'))."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wp-ecommerce.html">WP eCommerce Bitcoin Gateway</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wp-e-commerce/">WP eCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+wp+ecommerce+addon'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wpmudev-marketpress.html">Marketpress Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wordpress-ecommerce/">WPMU DEV MarketPress</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+marketpress'))."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop'))."</li>";
-		$tmp .= "<li> ".__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wpmudev-marketpress.html">Marketpress Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wordpress-ecommerce/">WPMU DEV MarketPress</a>)', GOURL)."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+appthemes'))."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments', GOURL)."</li>";
@@ -7087,7 +7087,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.                       
+ *  XXI.
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
