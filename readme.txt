@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.9
+Stable Tag: 1.2.10
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,8 @@ Jigoshop Addon: [https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-ga
 MarketPress Addon: [https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/](https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/)
 
 Appthemes Addon: [https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/)
+
+Paid Membership Pro with Bitcoin/Altcoins: [https://gourl.io/bitcoin-payments-paid-memberships-pro.html](https://gourl.io/bitcoin-payments-paid-memberships-pro.html)
 
 Demo: [http://gourl.io/lib/examples/pay-per-download-multi.php](http://gourl.io/lib/examples/pay-per-download-multi.php)
 
@@ -160,6 +162,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.2.10 =
+Several new enhancements
+
 = 1.2.9 =
 Pay-Per-View and Pay-Per-Membership - allow to use video preview
 
@@ -202,6 +207,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.9 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended
+= 1.2.10 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended    
 
