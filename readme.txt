@@ -37,9 +37,9 @@ GoUrl Official Bitcoin/Altcoins Payment Gateway for Wordpress. Accept Bitcoin, L
 * Support [WP eCommerce Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/) (accept payments in [WP eCommerce](https://wordpress.org/plugins/wp-e-commerce/))
 * Support [Jigoshop Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept payments in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
 * Support [Marketpress Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/) (accept payments in [Marketpress](https://wordpress.org/plugins/wordpress-ecommerce/))
-* Support [Paid Memberships Pro Bitcoin Gateway](https://gourl.io/bitcoin-payments-paid-memberships-pro.html) (accept payments in [Paid Memberships Pro](https://wordpress.org/plugins/paid-memberships-pro/))
+* Support [bbPress Premium Membership](https://gourl.io/bbpress-premium-membership.html) (add premium membership mode to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
 * Support [Appthemes Classipress, Vantage, JobRoller, etc](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/) (accept bitcoin payments in all [Appthemes](http://www.appthemes.com/themes/) products)
-* Support [bbPress Premium Membership](https://gourl.io/bbpress-premium-membership.html) (add premium membership to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
+* Support [Paid Memberships Pro Bitcoin Gateway](https://gourl.io/bitcoin-payments-paid-memberships-pro.html) (accept payments in [Paid Memberships Pro](https://wordpress.org/plugins/paid-memberships-pro/))
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
 * [Free Tech Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
@@ -215,4 +215,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 = 1.2.11 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended
-  
+       
