@@ -148,6 +148,7 @@ final class gourlclass
 			add_shortcode(GOURL_TAG_PRODUCT, 	array(&$this, "shortcode_product"));
 			add_shortcode(GOURL_TAG_VIEW, 	  	array(&$this, "shortcode_view"));
 			add_shortcode(GOURL_TAG_MEMBERSHIP, array(&$this, "shortcode_membership"));
+			add_shortcode(GOURL_TAG_MEMCHECKOUT,array(&$this, "shortcode_memcheckout"));
 		}
 		
 		
@@ -477,8 +478,9 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wp-ecommerce.html">WP eCommerce Bitcoin Gateway</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wp-e-commerce/">WP eCommerce</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+wp+ecommerce+addon'))."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-wpmudev-marketpress.html">Marketpress Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/wordpress-ecommerce/">WPMU DEV MarketPress</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+marketpress'))."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-jigoshop.html">Jigoshop Bitcoin Processor</a> Add-on (accept payments in <a target="_blank" href="https://wordpress.org/plugins/jigoshop/">Jigoshop</a>). Plugin <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop'))."</li>";
-		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-paid-memberships-pro.html">Paid Memberships Pro Bitcoin Gateway</a> (accept payments in <a target="_blank" href="https://wordpress.org/plugins/paid-memberships-pro/">Paid Memberships Pro</a>). Download <a href="%s">PaidMembershipsPro with Bitcoin Gateway</a>', GOURL), "https://coins.gourl.io/lib/paidmembershipspro-bitcoin.zip")."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bbpress-premium-membership.html">bbPress Premium Membership</a> Add-on (add premium membership mode to forum <a target="_blank" href="https://wordpress.org/plugins/bbpress/">bbPress</a> and accept bitcoins). Plugin <a href="%s">installation page &#187;</a>', GOURL), 'https://gourl.io/bbpress-premium-membership.html')."</li>";
 		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html">Appthemes Classipress, Vantage, JobRoller, etc</a> Add-on (accept bitcoin payments in all <a target="_blank" href="http://www.appthemes.com/themes/">Appthemes</a> products). Plugin  <a href="%s">installation page &#187;</a>', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=gourl+appthemes'))."</li>";
+		$tmp .= "<li> ".sprintf(__('<a target="_blank" href="https://gourl.io/bitcoin-payments-paid-memberships-pro.html">Paid Memberships Pro Bitcoin Gateway</a> (accept payments in <a target="_blank" href="https://wordpress.org/plugins/paid-memberships-pro/">Paid Memberships Pro</a>). Download <a href="%s">PaidMembershipsPro with Bitcoin Gateway</a>', GOURL), "https://coins.gourl.io/lib/paidmembershipspro-bitcoin.zip")."</li>";
 		$tmp .= "<li> ".__('No Chargebacks, Global, Secure, Anonymous. All in automatic mode', GOURL)."</li>";
 		$tmp .= "<li> ".__('Support Bitcoin, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments', GOURL)."</li>";
 		$tmp .= "<li> ".__('Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins (<a target="_blank" href="https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php">example</a>) using this plugin with payment gateway functionality (for example, you can offer premium membership for bitcoins/altcoins using other wordpress membership plugins). Please ask Wordpress Plugin Developers to add <a href="#i6">a few lines of code below</a> to their plugins (gourl bitcoin payment gateway with <a target="_blank" href="https://gourl.io/affiliates.html">Affiliate Program - 33.3% lifetime revenue share</a>) and bitcoin/litecoin/dogecoin/etc payments will be automatically used in their plugins.', GOURL)."</li>";
@@ -1447,6 +1449,15 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+
+		if (isset($_GET["intro"]))
+		{
+			$intro = intval($_GET["intro"]);
+			update_option(GOURL."page_files_intro", $intro);
+		}
+		else $intro = get_option(GOURL."page_files_intro");
+		
+		
 		$search = "";
 		if (isset($_GET["s"]) && trim($_GET["s"]))
 		{
@@ -1480,17 +1491,25 @@ final class gourlclass
 	
 		$wp_list_table = new  gourl_table_files($search, $this->options['rec_per_page']);
 		$wp_list_table->prepare_items();
-	
+		
+		
 		echo "<div class='wrap ".GOURL."admin'>";
 		echo $this->page_title(__('All Paid Files', GOURL).$this->space(1).'<a class="add-new-h2" href="'.GOURL_ADMIN.GOURL.'file">' . __('Add New File', GOURL) . '</a>', 2);
-		echo "<div class='".GOURL."intro postbox'>";
-		echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-		echo '<p>'.sprintf(__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="%s">Example</a><br>Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image (if your site requires registration).', GOURL), "http://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
-		echo '<p>'.sprintf(__('Create <a href="%sfile">New Paid File Downloads</a> and place new generated <a href="%s">shortcode</a> on your public page/post. Done!', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
-		echo sprintf(__('<a href="%s#i3">Read more</a>', GOURL), GOURL_ADMIN.GOURL).'</p>';
-		echo  "</div>";
+		
+		if (!$intro)
+		{
+			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'files&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
+			echo "<div class='".GOURL."intro postbox'>";
+			echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
+			echo '<p>'.sprintf(__('Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept <b>Bitcoin</b>, Litecoin, Speedcoin, Dogecoin, Paycoin, Darkcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target="_blank" href="%s">Example</a><br>Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image (if your site requires registration).', GOURL), "http://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
+			echo '<p>'.sprintf(__('Create <a href="%sfile">New Paid File Downloads</a> and place new generated <a href="%s">shortcode</a> on your public page/post. Done!', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
+			echo sprintf(__('<a href="%s#i3">Read more</a>', GOURL), GOURL_ADMIN.GOURL).'</p>';
+			echo  "</div>";
+		}
 	
+		
 		echo '<form class="gourlsearch" method="get" accept-charset="utf-8" action="">';
+		if ($intro) echo '<a href="'.GOURL_ADMIN.GOURL.'files&intro=0" class="'.GOURL.'button button-secondary">'.__('Show Introduction', GOURL).' &#8593;</a> &#160; &#160; ';
 		echo '<input type="hidden" name="page" value="'.$this->page.'" />';
 		$wp_list_table->search_box( 'search', 'search_id' );
 		echo '</form>';
@@ -1813,7 +1832,8 @@ final class gourlclass
 	
 		}
 		if ($this->options2["ppvPrice"] == 0 && $this->options2["ppvPriceCoin"] == 0) $this->options2["ppvPrice"] = 1;
-	
+		if (!$this->options2["ppvExpiry"]) $this->options2["ppvExpiry"] = "1 MONTH";
+		
 		return true;
 	}
 	
@@ -1891,6 +1911,14 @@ final class gourlclass
 	{
 		$example = 0;
 		$preview = (isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
+
+		if (isset($_GET["intro"]))
+		{
+			$intro = intval($_GET["intro"]);
+			update_option(GOURL."page_payperview_intro", $intro);
+		}
+		else $intro = get_option(GOURL."page_payperview_intro");
+		
 	
 		if ($this->record_errors) $message = "<div class='error'>".__('Please fix errors below:', GOURL)."<ul><li>- ".implode("</li><li>- ", $this->record_errors)."</li></ul></div>";
 		elseif ($this->updated)  $message = '<div class="updated"><p>'.__('Pay-Per-View Settings have been updated <strong>successfully</strong>', GOURL).'</p></div>';
@@ -1922,8 +1950,13 @@ final class gourlclass
 			$tmp .= '<div class="gourlright"><small>'.__('Shortcode', GOURL).': &#160; '.$short_code.'</small></div>';
 			$tmp .= "</div>";
 		}
+		elseif ($intro)
+		{
+			$tmp .= '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'payperview&intro=0" class="'.GOURL.'button button-secondary">'.__('Show Introduction', GOURL).' &#8593;</a></div>';
+		}
 		else
 		{
+			$tmp .= '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'payperview&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			$tmp .= "<div class='".GOURL."intro postbox'>";
 			$tmp .= "<div class='gourlimgright'>";
 			$tmp .= "<div align='center'>";
@@ -2103,6 +2136,45 @@ final class gourlclass
 	
 	
 	
+	
+	/*
+	 *  Display or not payperview upgrade payment box
+	*/
+	public function is_need_payperview_upgrade ()
+	{
+		global $wpdb, $current_user;
+		static $need = "-1";
+	
+		if ($need !== "-1") return $need;
+
+		$logged	= (is_user_logged_in() && $current_user->ID) ? true : false;
+
+		$level = get_option(GOURL."ppvLevel");
+		if (!$level || !in_array($level, array_keys($this->lock_level_view))) $level = 0;
+		
+		// Wordpress roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
+		$_administrator =  $_editor = $_author = $_contributor = false;
+		if ($logged)
+		{
+			$_administrator = in_array('administrator', $current_user->roles);
+			$_editor 		= in_array('editor', 		$current_user->roles);
+			$_author 		= in_array('author', 		$current_user->roles);
+			$_contributor 	= in_array('contributor', 	$current_user->roles);
+		}
+		
+		$need = false;
+		if (!$logged) 															 			 $need = true;  // Unregistered Visitors will see lock screen all time
+		elseif ($level == 0 && !$logged) 													 $need = true; 	// Unregistered Visitors
+		elseif ($level == 1 && !$_administrator && !$_editor && !$_author && !$_contributor) $need = true; 	// Unregistered Visitors + Registered Subscribers
+		elseif ($level == 2 && !$_administrator && !$_editor && !$_author) 					 $need = true; 	// Unregistered Visitors + Registered Subscribers/Contributors
+		elseif ($level == 3 && !$_administrator && !$_editor) 					 			 $need = true; 	// Unregistered Visitors + Registered Subscribers/Contributors/Authors
+		
+		return $need;
+	}
+	
+	
+	
+	
 
 	/*
 	 *  28.
@@ -2133,11 +2205,24 @@ final class gourlclass
 		// empty by dafault
 		$html = "";
 	
+
 		// another tag [gourl-membership] with hgh priority exists on page 
 		if ($this->lock_type == GOURL_TAG_MEMBERSHIP) return ""; 
 	
 		// not available activated coins
 		if (!$this->payments) return "";
+		
+		
+		// preview admin mode
+		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpayperview") ? true : false;
+		
+		
+		// if user already bought pay-per-view
+		if (!$preview_mode && !$this->is_need_payperview_upgrade()) return "";
+		
+				
+		
+	
 
 		// shortcode options
 		$orig = $image;
@@ -2163,7 +2248,6 @@ final class gourlclass
 		$coins_list 	= "";
 		$languages_list	= "";
 	
-		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpayperview") ? true : false;
 	
 	
 		// Current Settings
@@ -2187,7 +2271,6 @@ final class gourlclass
 		$defCoin		= $this->coin_names[$this->options2["ppvCoin"]];
 		$defShow		= $this->options2["ppvOneCoin"];
 	
-		$level			= $this->options2["ppvLevel"];
 		$textAbove		= $this->options2["ppvTextAbove"];
 		$textBelow		= $this->options2["ppvTextBelow"];
 		$hideCurTitle	= $this->options2["ppvTitle2"];
@@ -2201,39 +2284,11 @@ final class gourlclass
 		$userID 		= "";	// We use randomly generated strings as user identification and this is saved in user cookies
 		$orderID 		= "payperview";
 		$anchor 		= "gbx".$this->icrc32($orderID);
+		$dt 			= gmdate('Y-m-d H:i:s');
+		
 	
 	
 	
-		// Default Values
-		if (!$expiryPeriod) $expiryPeriod = "1 DAY";
-		if (!$level || !in_array($level, array_keys($this->lock_level_view))) $level = 0;
-	
-	
-	
-	
-	
-		// Wordprtess roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
-		$_administrator =  $_editor = $_author = $_contributor = false;
-		if (is_user_logged_in())
-		{
-			$_administrator = in_array('administrator', $current_user->roles);
-			$_editor 		= in_array('editor', 		$current_user->roles);
-			$_author 		= in_array('author', 		$current_user->roles);
-			$_contributor 	= in_array('contributor', 	$current_user->roles);
-		}
-	
-	
-	
-			
-		$activate = false;
-		if (!$level && !is_user_logged_in()) $activate = true;  												// Unregistered Visitors will see lock screen all time
-		elseif ($level == 1 && !$_administrator && !$_editor && !$_author && !$_contributor) $activate = true; 	// Unregistered Visitors + Registered Subscribers
-		elseif ($level == 2 && !$_administrator && !$_editor && !$_author) 					 $activate = true; 	// Unregistered Visitors + Registered Subscribers/Contributors
-		elseif ($level == 3 && !$_administrator && !$_editor) 					 			 $activate = true; 	// Unregistered Visitors + Registered Subscribers/Contributors/Authors
-	
-	
-	
-		if (!$activate && !$preview_mode) return "";
 	
 	
 	
@@ -2453,7 +2508,7 @@ final class gourlclass
 	/*
 	 *  30.
 	*/
-	private function get_membership()
+	public function get_membership()
 	{
 		$this->options3 = array();
 	
@@ -2473,9 +2528,10 @@ final class gourlclass
 		
 		}
 		if ($this->options3["ppmPrice"] == 0 && $this->options3["ppmPriceCoin"] == 0) $this->options3["ppmPrice"] = 10;
+		if (!$this->options3["ppmExpiry"]) $this->options3["ppmExpiry"] = "1 MONTH";
 		
 	
-		return true;
+		return $this->options3;
 	}
 	
 	
@@ -2558,6 +2614,14 @@ final class gourlclass
 		
 		$example = 0;
 		$preview = (isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
+		
+		if (isset($_GET["intro"]))
+		{
+			$intro = intval($_GET["intro"]);
+			update_option(GOURL."page_membership_intro", $intro);
+		}
+		else $intro = get_option(GOURL."page_membership_intro");
+		
 	
 		if ($this->record_errors) $message = "<div class='error'>".__('Please fix errors below:', GOURL)."<ul><li>- ".implode("</li><li>- ", $this->record_errors)."</li></ul></div>";
 		elseif ($this->updated)  $message = '<div class="updated"><p>'.__('Pay-Per-Membership Settings have been updated <strong>successfully</strong>', GOURL).'</p></div>';
@@ -2605,8 +2669,13 @@ final class gourlclass
 				$tmp .= "</div>";
 			}	
 		}
+		elseif ($intro)
+		{
+			$tmp .= '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'paypermembership&intro=0" class="'.GOURL.'button button-secondary">'.__('Show Introduction', GOURL).' &#8593;</a></div>';
+		}
 		else
 		{
+			$tmp .= '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'paypermembership&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			$tmp .= "<div class='".GOURL."intro postbox'>";
 			$tmp .= "<div class='gourlimgright'>";
 			$tmp .= "<div align='center'>";
@@ -2617,8 +2686,7 @@ final class gourlclass
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('Pay-Per-Membership - is a better safety solution than pay-per-view because plugin uses registered userID not cookies. And a membership period from 1 hour to 1 year of your choice. You need to have website registration enabled. <a href="%s#i4">Read how it works</a> and differences between Pay-Per-View and Pay-Per-Membership.', GOURL), GOURL_ADMIN.GOURL).$this->space();
 			$tmp .= __('You can customize lock image / preview video for each page or no image/video preview at all. Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
-			$tmp .= '<p class="updated"><b>-----------------<br>'.sprintf(__('ADVANCED Membership - Alternatively, you can use free <a target="_blank" href="%s">Paid Membership Pro</a> plugin with our <a target="_blank" href="%s">Bitcoin/Altcoin Gateway</a> addon', GOURL), 'https://wordpress.org/plugins/paid-memberships-pro/', 'https://gourl.io/bitcoin-payments-paid-memberships-pro.html') . '</b><br>-----------------</p>';
-			$tmp .= __('Shortcodes with preview image and preview video: ', GOURL);
+			$tmp .= '<br><br>'.__('Shortcodes with preview image and preview video: ', GOURL);
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' img="image1.png"]</div>';
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' frame="..url.." w="700" h="380"]</div>';
 			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__));
@@ -2697,8 +2765,8 @@ final class gourlclass
 		$tmp .= '</select>';
 		$tmp .= '<br /><em>'.sprintf(__('Select Users level who will see lock page/blog contents and need to make payment for unlock.
 								 	Website Editors / Admins will have all the time full access to locked pages and see original page content.<br> 
-									Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">login</a> image	
-				', GOURL), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images").'</em></td>';
+									Please activate website registration ( General Settings &#187; Membership - <a href="%s">Anyone can register</a> )	
+				', GOURL), admin_url('options-general.php')).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Add to User Profile', GOURL).':</th>';
@@ -2815,26 +2883,74 @@ final class gourlclass
 	
 	
 	
+	/*
+	 *  Display or not membership upgrade payment box 
+	*/
+	public function is_need_membership_upgrade ()
+	{
+		global $wpdb, $current_user;
+		static $need = "-1";
+	
+		if ($need !== "-1") return $need;
+	
+		$logged	= (is_user_logged_in() && $current_user->ID) ? true : false;
+		
+		$level = get_option(GOURL."ppmLevel");
+		if (!$level || !in_array($level, array_keys($this->lock_level_membership))) $level = 0;
+	
+		// Wordpress roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
+		$_administrator =  $_editor = $_author = $_contributor = false;
+		if ($logged)
+		{
+			$_administrator = in_array('administrator', $current_user->roles);
+			$_editor 		= in_array('editor', 		$current_user->roles);
+			$_author 		= in_array('author', 		$current_user->roles);
+			$_contributor 	= in_array('contributor', 	$current_user->roles);
+		}
+		
+		$need = false;
+		if 		(!$logged) 															 		 $need = true;  // Unregistered Visitors will see lock screen/login all time
+		elseif  ($level == 0 && !$_administrator && !$_editor && !$_author && !$_contributor)$need = true; 	// Registered Subscribers will see lock screen
+		elseif 	($level == 1 && !$_administrator && !$_editor && !$_author) 				 $need = true; 	// Registered Subscribers/Contributors will see lock screen
+		elseif 	($level == 2 && !$_administrator && !$_editor) 					 			 $need = true; 	// Registered Subscribers/Contributors/Authors will see lock screen
+	
+		// if premium user already
+		$dt = gmdate('Y-m-d H:i:s');
+		if ($need && $logged && $wpdb->get_row("SELECT membID FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && disabled = 0 LIMIT 1", OBJECT)) $need = false;
+	
+		return $need;
+	}
+	
+
 	
 	/*
 	 *  35.
 	*/
-	public function shortcode_membership($arr)
+	public function shortcode_membership($arr, $checkout = false)
 	{
 		$image   = (isset($arr["img"])) 	? trim($arr["img"]) 	: "";
 		$frame  = (isset($arr["frame"]))	? trim($arr["frame"]) 	: "";
 		$iwidth  = (isset($arr["w"])) 		? trim($arr["w"]) 		: "";
 		$iheight = (isset($arr["h"])) 		? trim($arr["h"]) 		: "";
-		return $this->shortcode_membership_init($image, $frame, $iwidth, $iheight);
+		return $this->shortcode_membership_init($image, $frame, $iwidth, $iheight, $checkout);
 	}
 	
+	
+	
+	/*
+	 * 
+	*/
+	public function shortcode_memcheckout($arr)
+	{
+		return $this->shortcode_membership($arr, true);
+	}
 	
 	
 
 	/*
 	 *  36.
 	*/
-	private function shortcode_membership_init($image = "", $frame = "", $iwidth = "", $iheight = "")
+	private function shortcode_membership_init($image = "", $frame = "", $iwidth = "", $iheight = "", $checkout = false)
 	{
 		global $wpdb, $current_user;
 		static $html = "-1";
@@ -2854,13 +2970,15 @@ final class gourlclass
 		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpaypermembership") ? true : false;
 		
 
+		// if premium user already or don't need upgade user membership 
+		if (!$preview_mode && !$checkout && !$this->is_need_membership_upgrade()) return "";
+		
+		
 		// user logged or not
 		$logged	= (is_user_logged_in() && $current_user->ID) ? true : false;
 		
 		
-		// if premium user already
-		$dt = gmdate('Y-m-d H:i:s');
-		if (!$preview_mode && $logged && $wpdb->get_row("SELECT membID FROM crypto_membership WHERE userID = ".$current_user->ID." && startDate <= '$dt' && endDate >= '$dt' && disabled = 0 LIMIT 1", OBJECT)) return "";
+		
 		
 		
 		// shortcode options
@@ -2913,7 +3031,6 @@ final class gourlclass
 		$defCoin		= $this->coin_names[$this->options3["ppmCoin"]];
 		$defShow		= $this->options3["ppmOneCoin"];
 	
-		$level			= $this->options3["ppmLevel"];
 		$textAbove		= ($logged) ? $this->options3["ppmTextAbove"] : $this->options3["ppmTextAbove2"];
 		$textBelow		= ($logged) ? $this->options3["ppmTextBelow"] : $this->options3["ppmTextBelow2"];
 		$hideCurTitle	= $this->options3["ppmTitle2"];
@@ -2927,41 +3044,13 @@ final class gourlclass
 		$userID 		= "user_".$current_user->ID;
 		$orderID 		= "membership";
 		$anchor 		= "gbx".$this->icrc32($orderID);
-	
-	
-	
-		// Default Values
-		if (!$expiryPeriod) $expiryPeriod = "1 MONTH";
-		if (!$level || !in_array($level, array_keys($this->lock_level_membership))) $level = 0;
+		$dt 			= gmdate('Y-m-d H:i:s');
 	
 	
 	
 	
 	
-		// Wordprtess roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
-		$_administrator =  $_editor = $_author = $_contributor = false;
-		if ($logged)
-		{
-			$_administrator = in_array('administrator', $current_user->roles);
-			$_editor 		= in_array('editor', 		$current_user->roles);
-			$_author 		= in_array('author', 		$current_user->roles);
-			$_contributor 	= in_array('contributor', 	$current_user->roles);
-		}
 	
-	
-	
-			
-		$activate = false;
-		if 		(!$level && !$_administrator && !$_editor && !$_author && !$_contributor) 	$activate = true; 		// Registered Subscribers
-		elseif 	($level == 1 && !$_administrator && !$_editor && !$_author) 				$activate = true; 		// Registered Subscribers/Contributors
-		elseif 	($level == 2 && !$_administrator && !$_editor) 					 			$activate = true; 		// Registered Subscribers/Contributors/Authors
-	
-	
-		if (!$activate && !$preview_mode) return "";
-	
-		
-		
-		
 	if (!$logged)
 	{
 		// Html code
@@ -3060,7 +3149,7 @@ final class gourlclass
 	
 			
 		// Paid Already
-		if ($is_paid && !$preview_mode) return "";
+		if ($is_paid && !$preview_mode && !$checkout) return "";
 	
 	
 	
@@ -3083,15 +3172,24 @@ final class gourlclass
 		// Html code
 		// ---------------------
 	
-		$tmp  = "<br />";
-	
-		if (!$is_paid && $textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image || $frame ? "<br /><br />" : ""); else $tmp .= "<br />";
+		$checkout_done = ($checkout && !current_user_can('manage_options') && !$this->is_need_membership_upgrade()) ? true : false;
+		
+		$tmp  = "";
+		if (!$checkout_done)
+		{
+			$tmp  .= "<br />";
+			if (!$is_paid && $textAbove) $tmp .= "<div class='gourlmembershiptext'>".$textAbove."</div>" . ($image || $frame ? "<br /><br />" : ""); else $tmp .= "<br />";
+		}
 	
 
 		// Start
 		$tmp .= "<div align='center'>";
 		
-		if (!$is_paid)
+		if ($checkout_done)
+		{ 
+			$tmp .= "<p><b>".__("Thank you.")."</b></p><p>".__("Your Premium membership is active.")."</p>";
+		}
+		elseif (!$is_paid)
 		{
 			if ($image) 
 			{
@@ -3109,8 +3207,8 @@ final class gourlclass
 			
 			$tmp .= "<a id='".$anchor."' name='".$anchor."'></a>";
 		}
-		elseif ($is_paid && $preview_mode) $tmp .= sprintf(__("<b>ADMIN NOTE:</b> Your test payment received successfully.<br>Please <a href='%s'>disable your test membership</a> and you will see payment box again", GOURL), GOURL_ADMIN.GOURL."paypermembership_users&s=user".$current_user->ID);
-
+		elseif ($is_paid && $preview_mode) 	$tmp .= sprintf(__("<b>ADMIN NOTE:</b> Your test payment received successfully.<br>Please <a href='%s'>disable your test membership</a> and you will see payment box again", GOURL), GOURL_ADMIN.GOURL."paypermembership_users&s=user".$current_user->ID);
+		
 		if ($is_paid) 			$tmp .= "<br /><br /><br />";
 		elseif (!$coins_list) 	$tmp .= "<br /><br />";
 		else 					$tmp .= "<br />".$coins_list;
@@ -3129,7 +3227,7 @@ final class gourlclass
 		$tmp .= "</div>";
 	
 	
-		if (!$is_paid && $textBelow) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
+		if (!$is_paid && $textBelow && !$checkout_done) $tmp .= "<br /><br /><br />" . "<div class='gourlmembershiptext'>".$textBelow."</div>";
 	}
 	
 	
@@ -3137,7 +3235,7 @@ final class gourlclass
 	
 		// Lock Page
 		// -----------------------
-		if (!$is_paid && !$preview_mode)
+		if (!$is_paid && !$preview_mode && !$checkout)
 		{
 			$tmp = GOURL_LOCK_START.$tmp.GOURL_LOCK_END;
 	
@@ -3886,6 +3984,14 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+		if (isset($_GET["intro"]))
+		{
+			$intro = intval($_GET["intro"]);
+			update_option(GOURL."page_products_intro", $intro);
+		}
+		else $intro = get_option(GOURL."page_products_intro");
+		
+		
 		$search = "";
 		if (isset($_GET["s"]) && trim($_GET["s"]))
 		{
@@ -3921,16 +4027,22 @@ final class gourlclass
 	
 		echo "<div class='wrap ".GOURL."admin'>";
 		echo $this->page_title(__('All Paid Products', GOURL).$this->space(1).'<a class="add-new-h2" href="'.GOURL_ADMIN.GOURL.'product">' . __('Add New Product', GOURL) . '</a>', 5);
-		echo "<div class='".GOURL."intro postbox'>";
-		echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php"><img hspace="10" width="240" height="95" title="Example - Pay Per Product" src="'.plugins_url('/images/pay-per-product.png', __FILE__).'" border="0"></a>';
-		echo '<p>'.__('Use "Pay-Per-product" - sell any of your products online to registered users online, custom bill payments, invoices. No Monthly Fee, Transaction Fee from 0%. Email notifications to Buyer/Seller. User will see successful payment result on your webpage typically within 5 seconds after the payment has been sent (very fast). &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">Example</a>', GOURL) . '</p>';
-		echo '<p>'.sprintf(__('You will need to <a href="%sproduct">create a new product record</a> of what you are selling, you get custom WordPress shortcode, <a href="%s">place that shortcode</a> on any of your WordPress pages and user will see the automatic payment box.). ', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_product_full.png', __FILE__)).'</p>';
-		echo '<p><b>'.sprintf(__('Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">Login Image</a> or choose to display <a href="%s">Login Form</a> for unregistered visitors. ', GOURL), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images", GOURL_ADMIN.GOURL."settings#images").'</b></p>';
-		echo '<p class="updated"><b>-----------------<br>'.sprintf(__('ADVANCED SHOPPING CART - Alternatively, you can use free <a href="%s">WooCommerce</a> plugin with our <a href="%s">Woocommerce Bitcoin/Altcoin Gateway</a> addon', GOURL), 'https://wordpress.org/plugins/woocommerce/', admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')) . '</b><br>-----------------</p>';
-		echo '<p>'.sprintf(__('See also - <a href="%s#i3">Installation Instruction</a>', GOURL), GOURL_ADMIN.GOURL) . '</p>';
-		echo  "</div>";
+		
+		if (!$intro)
+		{
+			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'products&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
+			echo "<div class='".GOURL."intro postbox'>";
+			echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php"><img hspace="10" width="240" height="95" title="Example - Pay Per Product" src="'.plugins_url('/images/pay-per-product.png', __FILE__).'" border="0"></a>';
+			echo '<p>'.__('Use "Pay-Per-product" - sell any of your products online to registered users online, custom bill payments, invoices. No Monthly Fee, Transaction Fee from 0%. Email notifications to Buyer/Seller. User will see successful payment result on your webpage typically within 5 seconds after the payment has been sent (very fast). &#160; <a target="_blank" href="http://gourl.io/lib/examples/pay-per-product-multi.php">Example</a>', GOURL) . '</p>';
+			echo '<p>'.sprintf(__('You will need to <a href="%sproduct">create a new product record</a> of what you are selling, you get custom WordPress shortcode, <a href="%s">place that shortcode</a> on any of your WordPress pages and user will see the automatic payment box.). ', GOURL), GOURL_ADMIN.GOURL, plugins_url('/images/tagexample_product_full.png', __FILE__)).'</p>';
+			echo '<p><b>'.sprintf(__('Please activate website registration (General Settings &#187; Membership - <a href="%s">Anyone can register</a>) and customize <a href="%s">Login Image</a> or choose to display <a href="%s">Login Form</a> for unregistered visitors. ', GOURL), admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images", GOURL_ADMIN.GOURL."settings#images").'</b></p>';
+			echo '<p class="updated"><b>-----------------<br>'.sprintf(__('ADVANCED SHOPPING CART - Alternatively, you can use free <a href="%s">WooCommerce</a> plugin with our <a href="%s">Woocommerce Bitcoin/Altcoin Gateway</a> addon', GOURL), 'https://wordpress.org/plugins/woocommerce/', admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')) . '</b><br>-----------------</p>';
+			echo '<p>'.sprintf(__('See also - <a href="%s#i3">Installation Instruction</a>', GOURL), GOURL_ADMIN.GOURL) . '</p>';
+			echo  "</div>";
+		}	
 	
 		echo '<form class="gourlsearch" method="get" accept-charset="utf-8" action="">';
+		if ($intro) echo '<a href="'.GOURL_ADMIN.GOURL.'products&intro=0" class="'.GOURL.'button button-secondary">'.__('Show Introduction', GOURL).' &#8593;</a> &#160; &#160; ';
 		echo '<input type="hidden" name="page" value="'.$this->page.'" />';
 		$wp_list_table->search_box( 'search', 'search_id' );
 		echo '</form>';
@@ -4701,7 +4813,7 @@ final class gourlclass
 		
 		// File Preview Downloads
 		
-		// Wordprtess roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
+		// Wordpress roles - array('administrator', 'editor', 'author', 'contributor', 'subscriber')
 		$_administrator = $_editor = false;
 		if (is_user_logged_in())
 		{
@@ -4779,8 +4891,6 @@ final class gourlclass
 	public function admin_menu()
 	{
 		global $submenu;
-		
-		define("GOURL_PERMISSION", "add_users");
 		
 		add_menu_page(
 				__("GoUrl Bitcoin", GOURL)		
@@ -7102,7 +7212,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.
+ *  XXI. 
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {

@@ -34,6 +34,11 @@
 	float: right;
 }
 
+.gourlintro_btn
+{
+	margin: -15px 0 10px 30px;
+}
+
 .gourlintro {
 	margin: 0 20px 30px 20px;
 	padding: 15px 20px;

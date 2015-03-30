@@ -3,11 +3,11 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, darkcoin, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, payments, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control
+Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, darkcoin, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, payments, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, discussion, forums, forum
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.2.10
+Stable Tag: 1.2.11
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,7 @@ GoUrl Official Bitcoin/Altcoins Payment Gateway for Wordpress. Accept Bitcoin, L
 * Support [Marketpress Bitcoin/Altcoins Gateway](https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/) (accept payments in [Marketpress](https://wordpress.org/plugins/wordpress-ecommerce/))
 * Support [Paid Memberships Pro Bitcoin Gateway](https://gourl.io/bitcoin-payments-paid-memberships-pro.html) (accept payments in [Paid Memberships Pro](https://wordpress.org/plugins/paid-memberships-pro/))
 * Support [Appthemes Classipress, Vantage, JobRoller, etc](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/) (accept bitcoin payments in all [Appthemes](http://www.appthemes.com/themes/) products)
+* Support [bbPress Premium Membership](https://gourl.io/bbpress-premium-membership.html) (add premium membership to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
 * [Free Tech Support](https://gourl.io/view/contact/Contact_Us.html) in the integration of our GoUrl Crypto Payment Gateway in your scripts/plugins/website
@@ -71,6 +72,8 @@ MarketPress Addon: [https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitc
 Appthemes Addon: [https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/)
 
 Paid Membership Pro with Bitcoin/Altcoins: [https://gourl.io/bitcoin-payments-paid-memberships-pro.html](https://gourl.io/bitcoin-payments-paid-memberships-pro.html)
+
+bbPress Forum Addon: [https://gourl.io/bbpress-premium-membership.html](https://gourl.io/bbpress-premium-membership.html)
 
 Demo: [http://gourl.io/lib/examples/pay-per-download-multi.php](http://gourl.io/lib/examples/pay-per-download-multi.php)
 
@@ -162,6 +165,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.2.11 =
+Support bbPress Forum - Premium Membership Mode with Bitcoin/Altcoins Payments
+
 = 1.2.10 =
 Several new enhancements
 
@@ -207,6 +213,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.2.10 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended    
-
+= 1.2.11 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended
+  
