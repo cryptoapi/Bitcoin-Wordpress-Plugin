@@ -149,8 +149,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 == Changelog ==
 
 = 1.3 =
-Added Peercoin
-Spanish payment box localisation
+Added Peercoin. 
+Spanish payment box localisation. 
+Darkcoin Rebranding to Dash. 
 
 = 1.2.11 =
 Support bbPress Forum - Premium Membership Mode with Bitcoin/Altcoin Payments
@@ -201,5 +202,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended    
-      
+This update includes several new features, enhancements, and bugfixes. Updating is recommended   
