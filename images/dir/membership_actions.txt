@@ -1,0 +1,19 @@
+<?php
+	// You can use custom actions with Pay-Per-Membership on your website (premium and free webpages).
+	// For example, hide ads for premium users on webpages, php code below -
+	
+	global $gourl;
+
+	if (is_object($gourl) && $gourl->is_premium_user())
+	{
+		// hide ads for Premium/Paid User
+		echo "Hide Ads";
+	}
+	else
+	{
+		// show ads - Free/Not-logged User 
+		echo "Show Ads";
+		if (is_user_logged_in()) 
+			echo "<br><a href='..any_premium_page_with_paymentbox..'>Upgrade Your Membership</a>";
+	}
+?>

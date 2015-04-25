@@ -120,6 +120,23 @@
 	text-decoration: underline;
 }
 
+
+.gourladmin .gourltable-addons td,
+.gourladmin .gourltable-addons th {
+	padding: 30px 10px;
+	font-size:16px;
+}
+	
+.gourladmin .gourldesc {
+	padding: 35px 35px 20px 60px !important;
+	line-height: 22px;
+}
+
+.gourladmin .gourltable-addons td.gourlnum {
+	font-size:14px;
+	vertical-align: middle;
+}
+
 .gourladmin .alignright a {
 	margin-right: 40px;
 }

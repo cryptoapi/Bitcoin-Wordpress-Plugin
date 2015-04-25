@@ -1,0 +1,17 @@
+<?php
+	// Pay-Per-View: You can use this php code on any of your website pages
+
+	global $gourl;
+	
+	if (is_object($gourl) && $gourl->is_premium_payperview_user()) 
+	{
+		// hide ads for Premium Pay-Per-View User
+		echo "Hide Ads";
+	}
+	else 
+	{
+		// show ads - Free User
+		echo "Show Ads";
+		echo "<br><a href='..any_payperview_page_with_paymentbox..'>Upgrade Your Membership</a>";
+	}
+?>

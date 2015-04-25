@@ -4,7 +4,7 @@ if (!defined( 'ABSPATH' ) || !defined( 'GOURL_IPN' )) exit; // Exit if accessed 
 
 /**
 	---------------------------------------------------------------------------------
-	GoUrl.io IPN (Instant Payment Notification) for Bitcoin/Altcoins Payment Gateway
+	GoUrl.io IPN (Instant Payment Notification) for Bitcoin/Altcoin Payment Gateway
 	
 	Optional. You can use additional actions after a payment has been received (update database records, etc).
 	Accept IPN for GoUrl Pay-Per-Product, Pay-Per-Download, Pay-Per-Membership, Pay-Per-View only.
@@ -170,7 +170,7 @@ if (!function_exists('gourl_successful_payment'))
 				"userLink":				""
 			);
 
-	// Second time function will appear with $box_status = "cryptobox_updated" and $payment_details["is_confirmed"] = 1. Other values will be the same
+	// Second time function will appear with $box_status = "cryptobox_updated" and $payment_details["is_confirmed"] = 1. Other values will be the same 
       
 ************************************/
   

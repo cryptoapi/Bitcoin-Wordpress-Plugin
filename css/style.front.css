@@ -26,6 +26,10 @@
 	margin-bottom: 30px;
 }
 
+#gourllogin .app-title h3 {
+	font-size: 18px;
+}
+
 #gourllogin .login-form {
 	text-align: center;
 }
