@@ -151,10 +151,11 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 = 1.3 =
 Added Peercoin. 
 Spanish payment box localisation. 
-Darkcoin Rebranding to Dash. 
+Darkcoin rebranded to Dash. 
 
 = 1.2.11 =
-Support bbPress Forum - Premium Membership Mode with Bitcoin/Altcoin Payments
+Supports bbPress Forum - Premium Membership Mode with Bitcoin/Altcoin Payments. 
+You can add premium user support to your web site using bbPress. Any user can place questions (create new topic in bbPress), and only paid/premium users will see your answers.
 
 = 1.2.10 =
 Several new enhancements
@@ -163,20 +164,20 @@ Several new enhancements
 Pay-Per-View and Pay-Per-Membership - allow to use video preview
 
 = 1.2.8 =
-Support Bitcoin/Altcoin Payment Gateway for WPMU DEV Marketpress
+Supports Bitcoin/Altcoin Payment Gateway for WPMU DEV Marketpress
 
 = 1.2.7 =
 Added new coin Paycoin XPY to GoUrl Payment Gateway. 
-Support Bitcoin/Altcoin Payment Gateway for WP eCommerce
+Supports Bitcoin/Altcoin Payment Gateway for WP eCommerce
 
 = 1.2.6 =
 User can customize payment box images (login, disabled, etc)
 
 = 1.2.5 =
-Support Bitcoin/Altcoin Payment Gateway for all AppThemes Premium Themes - Classipress, Taskerr, HireBee, Vantage, Clipper, JobRoller, Ideas, Quality Control, etc.
+Supports Bitcoin/Altcoin Payment Gateway for all AppThemes Premium Themes - Classipress, Taskerr, HireBee, Vantage, Clipper, JobRoller, Ideas, Quality Control, etc.
 
 = 1.2.4 =
-Support Bitcoin/Altcoin Payment Gateway for Jigoshop
+Supports Bitcoin/Altcoin Payment Gateway for Jigoshop
 
 = 1.2.3 =
 New in Pay-Per-Membership: display login form on any premium page for unregistered users
@@ -188,7 +189,7 @@ Several new enhancements
 Several new enhancements
 
 = 1.2.0 =
-Support Bitcoin/Altcoin Payment Gateway for WooCommerce
+Supports Bitcoin/Altcoin Payment Gateway for WooCommerce
 
 = 1.1.0 =
 Added Pay-Per-Product, Pay-Per-Membership
