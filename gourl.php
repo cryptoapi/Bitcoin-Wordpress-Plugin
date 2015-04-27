@@ -1983,7 +1983,7 @@ final class gourlclass
 			$tmp .= "<br />";
 			$tmp .= __('Your unregistered anonymous website visitors  will need to send you a set amount of cryptocoins for access to your website\'s specific pages & videos during a specific time. All will be in automatic mode - allowing you to receive payments, open webpage access to your visitors, when payment expired a new payment box will appear, payment notifications to your email, etc.', GOURL);
 			$tmp .= "<br /><br />";
-			$tmp .= sprintf(__('Pay-Per-View supports <a href="%s">custom actions</a> (for example, show ads for free users on all website pages, <a href="%s">see code</a>)', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/payperview_actions.txt', __FILE__)) . "<br>";
+			$tmp .= sprintf(__('Pay-Per-View supports <a href="%s">custom actions</a> (for example, show ads to free users on all website pages, <a href="%s">see code</a>)', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/payperview_actions.txt', __FILE__)) . "<br>";
 			$tmp .= sprintf(__('<a href="%s#i4">Read how it works</a> and differences between Pay-Per-View and Pay-Per-Membership.', GOURL), GOURL_ADMIN.GOURL).$this->space();
 			$tmp .= "<br /><br />";
 			$tmp .= "<b>".__('Pay-Per-View Pages -', GOURL)."</b>";
@@ -2793,7 +2793,7 @@ final class gourlclass
 			$tmp .= "</div>";
 			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> - Your <b>registered</b> website users will need to send you a set amount of cryptocoins for access to your website\'s specific pages & videos during a specific time. All will be in automatic mode. Pay-Per-Membership - is a better safety solution than pay-per-view because plugin uses registered userID not cookies. You need to have website registration <a href="%s">enabled</a>.', GOURL), admin_url('options-general.php'));
 			$tmp .= "<br /><br />";
-			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> supports <a href="%s">custom actions</a> (for example, show ads for free users on all website pages, <a href="%s">see code</a>)<br>and it integrated with <a href="%s">bbPress Forum/Customer Support</a> ( use our <a href="%s">GoUrl bbPress Addon</a> ). You can mark some topics on your bbPress as Premium and can easily monetise it with Bitcoins/altcoins. &#160; <a href="%s">More info</a>', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/membership_actions.txt', __FILE__), admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics'), GOURL_ADMIN.GOURL."#i4");
+			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> supports <a href="%s">custom actions</a> (for example, show ads to free users on all website pages, <a href="%s">see code</a>)<br>and it integrated with <a href="%s">bbPress Forum/Customer Support</a> ( use our <a href="%s">GoUrl bbPress Addon</a> ). You can mark some topics on your bbPress as Premium and can easily monetise it with Bitcoins/altcoins. &#160; <a href="%s">More info</a>', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/membership_actions.txt', __FILE__), admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics'), GOURL_ADMIN.GOURL."#i4");
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('Pay-Per-Membership supports ONE paid membership level for website.<br>For few membership levels (ex. basic, pro, premium), alternatively you can use <a class="gourlnowrap" href="%s">Paid Memberships Pro</a> with our <a class="gourlnowrap" href="%s">GoUrl Gateweay PMP Addon</a>.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=paid+memberships+pro+easiest+level'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon'));
 			$tmp .= "<br /><br />";
@@ -7346,7 +7346,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.
+ *  XXI.  
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
