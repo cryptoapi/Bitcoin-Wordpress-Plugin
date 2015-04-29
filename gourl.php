@@ -558,14 +558,14 @@ final class gourlclass
 		$tmp .= "<a href='".plugins_url('/images/dir/payperview_actions.txt', __FILE__)."'><img src='".plugins_url('/images/payperview_code.png', __FILE__)."'></a>";
 		$tmp .= "</li>";
 		$tmp .= "<li> ".sprintf(__('<b>Pay-Per-Membership</b> integrated with <a href="%s">bbPress Forum/Customer Support</a> also ( use our <a href="%s">GoUrl bbPress Addon</a> ). You can mark some topics on your bbPress as Premium and can easily monetise it with Bitcoins/altcoins.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics'))."</li>";
-		$tmp .= "<li> ".__('<b>Both solutions</b> - Pay-Per-Membership and Pay-Per-View hide content on premium pages from unpaid users/visitors and allow to use custom actions on free website pages; Pay-Per-Membership provided premium membership mode in <a href="https://wordpress.org/plugins/bbpress/">bbPress</a> also.', GOURL)."</li>";
+		$tmp .= "<li> ".__('<b>Both solutions</b> - Pay-Per-Membership and Pay-Per-View hide content on premium pages from unpaid users/visitors and allow to use custom actions on free website pages; Pay-Per-Membership provides premium membership mode in <a href="https://wordpress.org/plugins/bbpress/">bbPress</a> also.', GOURL)."</li>";
 		$tmp .= "<li> ".__('If a visitor goes to a premium page and have not logged in -<br>
 						Pay-Per-View will show a payment box and accept payments from the unregistered visitor.<br>
 						Pay-Per-Membership will show a message that the user needs to login/register on your website first and after show a payment box for logged in users only.', GOURL)."</li>";
 		$tmp .= "</ul>";
 		
 		$tmp .= "<br><p>";
-		$tmp .= sprintf(__("For example, you might offer paid access to your 50 website premium pages/posts for the price of 1 USD for 2 DAYS giving unlimited access to all locked pages for website visitors (<span class='gourlnowrap'>non-registered</span> visitors or registered users). You can add simple shortcode <a href='%s'>[".GOURL_TAG_VIEW."]</a> or <a href='%s'>[".GOURL_TAG_MEMBERSHIP."]</a> for all those fifty WordPress premium pages/posts. When visitors go on any of those pages, they will see automatic cryptocoin payment box (the original page content will be hidden). After visitor makes their payment, they will get access to original pages content/videos and after 2 days will see a new payment box. Visitor needs to make payment on any locked page and they will get access to all other locked pages also.<br>Also you can show ads for unpaid users on free webpages, etc.<br>Notes:<br>- Do not use [".GOURL_TAG_VIEW."] and [".GOURL_TAG_MEMBERSHIP."] together on the same page.<br>- Website Editors / Admins will have all the time full access to locked pages and see original page content", GOURL), GOURL_ADMIN.GOURL."payperview", GOURL_ADMIN.GOURL."paypermembership");
+		$tmp .= sprintf(__("For example, you might offer paid access to your 50 website premium pages/posts for the price of 1 USD for 2 DAYS giving unlimited access to all locked pages for website visitors (<span class='gourlnowrap'>non-registered</span> visitors or registered users). You can add simple shortcode <a href='%s'>[".GOURL_TAG_VIEW."]</a> or <a href='%s'>[".GOURL_TAG_MEMBERSHIP."]</a> or <a href='%s'>your custom code</a> for all those fifty WordPress premium pages/posts. When visitors go on any of those pages, they will see automatic cryptocoin payment box (the original page content will be hidden). After visitor makes their payment, they will get access to original pages content/videos and after 2 days will see a new payment box. Visitor needs to make payment on any locked page and they will get access to all other locked pages also.<br>Also you can <a href='%s'>show ads</a> for unpaid users on free webpages, etc.<br><br><b>Notes:</b><br>- Do not use [".GOURL_TAG_VIEW."] and [".GOURL_TAG_MEMBERSHIP."] together on the same page.<br>- Website Editors / Admins will have all the time full access to locked pages and see original page content", GOURL), GOURL_ADMIN.GOURL."payperview", GOURL_ADMIN.GOURL."paypermembership", plugins_url('/images/paypermembership_code.png', __FILE__), plugins_url('/images/paypermembership_code.png', __FILE__));
 		$tmp .= "<a name='i5'></a>";
 		$tmp .= "</p>";
 		
@@ -1993,7 +1993,7 @@ final class gourlclass
 			$tmp .= __('Shortcodes with preview image and preview video: ', GOURL);
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_VIEW.' img="image1.jpg"]</div>';
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_VIEW.' frame="..url.." w="640" h="480"]</div>';
-			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_payperview_full.png', __FILE__));
+			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts or use <a href="%s">your custom code</a>', GOURL), plugins_url('/images/tagexample_payperview_full.png', __FILE__), plugins_url('/images/payperview_code.png', __FILE__));
 			$tmp .= "<br /><br />";
 			$tmp .= __('Ready to use shortcodes: ', GOURL);
 			$tmp .= "<ol>";
@@ -2804,7 +2804,7 @@ final class gourlclass
 			$tmp .= __('Shortcodes with preview image and preview video for premium pages: ', GOURL);
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' img="image1.png"]</div>';
 			$tmp .= '<div class="gourlshortcode">['.GOURL_TAG_MEMBERSHIP.' frame="..url.." w="700" h="380"]</div>';
-			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts', GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__));
+			$tmp .= sprintf(__('Place one of that tags <a target="_blank" href="%s">anywhere</a> in the original text on your premium pages/posts or use <a href="%s">your custom code</a>', GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__), plugins_url('/images/paypermembership_code.png', __FILE__));
 			$tmp .= "<br /><br />";
 			$tmp .= __('Ready to use shortcodes: ', GOURL);
 			$tmp .= "<ol>";
@@ -7346,7 +7346,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.  
+ *  XXI. 
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
