@@ -2,7 +2,7 @@
 
 #gourllogin {
 	margin: 70px 0 90px 0;
-	width: 450px;
+	max-width: 430px;
 	font-family: 'Open Sans', Arial, sans-serif;
 	box-sizing: border-box;
 	text-align: center;
@@ -15,7 +15,7 @@
 
 
 #gourllogin .login {
-	padding: 0 30px 20px 30px;
+	padding: 0 10px 20px 10px;
 	border: 1px solid #eee;
 	border-radius: 30px;
 	height: auto;
@@ -209,4 +209,4 @@
 
 .gourlmembershiptext2 {
 
-}   
+}      
