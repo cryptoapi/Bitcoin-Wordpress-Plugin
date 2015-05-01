@@ -2118,23 +2118,23 @@ final class gourlclass
 		$tmp .= '</td></tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Page Title ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle2" id="'.GOURL.'ppvTitle2" value="1" '.$this->chk($this->options2['ppvTitle2'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see current page title', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle2" id="'.GOURL.'ppvTitle2" value="1" '.$this->chk($this->options2['ppvTitle2'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see current page title (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppv_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th>'.__('Hide Menu Titles ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle" id="'.GOURL.'ppvTitle" value="1" '.$this->chk($this->options2['ppvTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvTitle" id="'.GOURL.'ppvTitle" value="1" '.$this->chk($this->options2['ppvTitle'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see any link titles on premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppv_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Comments Authors ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentAuthor" id="'.GOURL.'ppvCommentAuthor" value="1" '.$this->chk($this->options2['ppvCommentAuthor'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see authors of comments on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentAuthor" id="'.GOURL.'ppvCommentAuthor" value="1" '.$this->chk($this->options2['ppvCommentAuthor'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see authors of comments on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppv_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Comments Body ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentBody" id="'.GOURL.'ppvCommentBody" value="1" '.$this->chk($this->options2['ppvCommentBody'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see comments body on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentBody" id="'.GOURL.'ppvCommentBody" value="1" '.$this->chk($this->options2['ppvCommentBody'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see comments body on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppv_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Disable Comments Reply ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentReply" id="'.GOURL.'ppvCommentReply" value="1" '.$this->chk($this->options2['ppvCommentReply'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users cannot reply/add comments on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppvCommentReply" id="'.GOURL.'ppvCommentReply" value="1" '.$this->chk($this->options2['ppvCommentReply'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users cannot reply/add comments on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppv_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Custom Actions', GOURL).':</th>';
@@ -2795,7 +2795,7 @@ final class gourlclass
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> supports <a href="%s">custom actions</a> (for example, show ads to free users on all website pages, <a href="%s">see code</a>)<br>and it integrated with <a href="%s">bbPress Forum/Customer Support</a> ( use our <a href="%s">GoUrl bbPress Addon</a> ). You can mark some topics on your bbPress as Premium and can easily monetise it with Bitcoins/altcoins. &#160; <a href="%s">More info</a>', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/membership_actions.txt', __FILE__), admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics'), GOURL_ADMIN.GOURL."#i4");
 			$tmp .= "<br /><br />";
-			$tmp .= sprintf(__('Pay-Per-Membership supports ONE paid membership level for website.<br>For few membership levels (ex. basic, pro, premium), alternatively you can use <a class="gourlnowrap" href="%s">Paid Memberships Pro</a> with our <a class="gourlnowrap" href="%s">GoUrl Gateweay PMP Addon</a>.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=paid+memberships+pro+easiest+level'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon'));
+			$tmp .= sprintf(__('Pay-Per-Membership supports ONE paid membership level for website.<br>For few membership levels (ex. basic, pro, premium), alternatively you can use <a class="gourlnowrap" href="%s">Paid Memberships Pro</a> plugin with our <a class="gourlnowrap" href="%s">GoUrl Gateweay PMP Addon</a>.<br>Pay-Per-Membership shortcode (current page settings) is not compatible with external PaidMembershipsPro plugin. Don\'t use them together on your website.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=paid+memberships+pro+easiest+level'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon'));
 			$tmp .= "<br /><br />";
 			$tmp .= "<b>".__('Premium Pages -', GOURL)."</b>";
 			$tmp .= "<br />";
@@ -2961,23 +2961,23 @@ final class gourlclass
 		$tmp .= '</tr>';
 
 		$tmp .= '<tr><th>'.__('Hide Page Title ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle2" id="'.GOURL.'ppmTitle2" value="1" '.$this->chk($this->options3['ppmTitle2'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see current page title', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle2" id="'.GOURL.'ppmTitle2" value="1" '.$this->chk($this->options3['ppmTitle2'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see current page title (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppm_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th>'.__('Hide Menu Titles ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle" id="'.GOURL.'ppmTitle" value="1" '.$this->chk($this->options3['ppmTitle'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see any link titles on premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmTitle" id="'.GOURL.'ppmTitle" value="1" '.$this->chk($this->options3['ppmTitle'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see any link titles on premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppm_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Comments Authors ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentAuthor" id="'.GOURL.'ppmCommentAuthor" value="1" '.$this->chk($this->options3['ppmCommentAuthor'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see authors of comments on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentAuthor" id="'.GOURL.'ppmCommentAuthor" value="1" '.$this->chk($this->options3['ppmCommentAuthor'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see authors of comments on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppm_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Hide Comments Body ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentBody" id="'.GOURL.'ppmCommentBody" value="1" '.$this->chk($this->options3['ppmCommentBody'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users will not see comments body on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentBody" id="'.GOURL.'ppmCommentBody" value="1" '.$this->chk($this->options3['ppmCommentBody'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users will not see comments body on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppm_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Disable Comments Reply ?', GOURL).'</th>';
-		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentReply" id="'.GOURL.'ppmCommentReply" value="1" '.$this->chk($this->options3['ppmCommentReply'], 1).' class="widefat"><br /><em>'.__('<p>If box is checked, unpaid users cannot reply/add comments on bottom of premium pages', GOURL).'</em></td>';
+		$tmp .= '<td><input type="checkbox" name="'.GOURL.'ppmCommentReply" id="'.GOURL.'ppmCommentReply" value="1" '.$this->chk($this->options3['ppmCommentReply'], 1).' class="widefat"><br /><em>'.sprintf(__('<p>If box is checked, unpaid users cannot reply/add comments on bottom of premium pages (<a href="%s">screenshot</a>)', GOURL), plugins_url('/images/ppm_settings.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Custom Actions', GOURL).':</th>';
@@ -7346,7 +7346,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI. 
+ *  XXI.       
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {

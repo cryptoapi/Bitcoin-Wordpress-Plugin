@@ -40,6 +40,16 @@ GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. See Screenshots - 
 
 .
 
+As additional security we do not keep any customer's money (bitcoins/altcoins) on our servers. 
+All received payments are automatically forwarded to customer's external wallet addresses within the next 30 minutes. 
+We use industry-leading technology (such as SSL encryption) to keep transaction information safe. 
+This gives additional protection to our customers against hackers, etc.
+
+Instruction - How to convert received Bitcoin/Altcoins to USD/EUR/etc - https://gourl.io/#section8
+.
+
+
+
 = Free GoUrl Bitcoin Gateway Add-ons =
 
 The following Add-ons extend the functionality of GoUrl -
@@ -203,4 +213,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended   
+This update includes several new features, enhancements, and bugfixes. Updating is recommended  

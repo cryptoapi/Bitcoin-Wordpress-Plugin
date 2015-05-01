@@ -138,7 +138,7 @@
 }
 
 .gourladmin .alignright a {
-	margin-right: 40px;
+	margin: 0 40px 15px 0;
 }
 
 .gourladmin  #gourlsubmitloading {
@@ -444,5 +444,5 @@
 
 .gourladmin  .gourlnews  p {
 	font-family: 'Open Sans', sans-serif;
-	line-height: 35px;
+	line-height: 35px;  
 }   
