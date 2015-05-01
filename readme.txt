@@ -3,7 +3,7 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, payments, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, peercoin
+Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, peercoin, bitcoin, payments
 
 Requires at least: 3.5
 Tested up to: 4.2
@@ -46,8 +46,8 @@ We use industry-leading technology (such as SSL encryption) to keep transaction 
 This gives additional protection to our customers against hackers, etc.
 
 Instruction - How to convert received Bitcoin/Altcoins to USD/EUR/etc - https://gourl.io/#section8
-.
 
+.
 
 
 = Free GoUrl Bitcoin Gateway Add-ons =
@@ -213,4 +213,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended  
+This update includes several new features, enhancements, and bugfixes. Updating is recommended   
