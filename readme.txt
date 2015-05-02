@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.3
+Stable Tag: 1.3.1
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.1 =
+Several new enhancements
+
 = 1.3 =
 Added Peercoin. 
 Spanish payment box localisation. 
@@ -212,5 +215,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3 =
+= 1.3.1 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended   

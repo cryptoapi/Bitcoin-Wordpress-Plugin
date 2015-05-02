@@ -2795,10 +2795,10 @@ final class gourlclass
 			$tmp .= "<br /><br />";
 			$tmp .= sprintf(__('<b>Pay-Per-Membership</b> supports <a href="%s">custom actions</a> (for example, show ads to free users on all website pages, <a href="%s">see code</a>)<br>and it integrated with <a href="%s">bbPress Forum/Customer Support</a> ( use our <a href="%s">GoUrl bbPress Addon</a> ). You can mark some topics on your bbPress as Premium and can easily monetise it with Bitcoins/altcoins. &#160; <a href="%s">More info</a>', GOURL), GOURL_ADMIN.GOURL."#i4", plugins_url('/images/dir/membership_actions.txt', __FILE__), admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics'), GOURL_ADMIN.GOURL."#i4");
 			$tmp .= "<br /><br />";
-			$tmp .= sprintf(__('Pay-Per-Membership supports ONE paid membership level for website.<br>For few membership levels (ex. basic, pro, premium), alternatively you can use <a class="gourlnowrap" href="%s">Paid Memberships Pro</a> plugin with our <a class="gourlnowrap" href="%s">GoUrl Gateweay PMP Addon</a>.<br>Pay-Per-Membership shortcode (current page settings) is not compatible with external PaidMembershipsPro plugin. Don\'t use them together on your website.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=paid+memberships+pro+easiest+level'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon'));
+			$tmp .= sprintf(__('Pay-Per-Membership supports ONE paid membership level for website.<br>For few membership levels (ex. basic, pro, premium), alternatively you can use <a class="gourlnowrap" href="%s">Paid Memberships Pro</a> plugin with our <a class="gourlnowrap" href="%s">GoUrl Gateweay PMP Addon</a>.<br>Therefore you can use one of two membership systems - Paid Memberships Pro or Pay-Per-Membership shortcodes (current page). Please use one of them only (not both) on your website, because these different membership systems are not compatible.', GOURL), admin_url('plugin-install.php?tab=search&type=term&s=paid+memberships+pro+easiest+level'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon'));
 			$tmp .= "<br /><br />";
-			$tmp .= "<b>".__('Premium Pages -', GOURL)."</b>";
-			$tmp .= "<br />";
+			$tmp .= "<b>".__('Pay-Per-Membership Premium Pages -', GOURL)."</b>";
+			$tmp .= "<br />----------------------<br />";
 			$tmp .= __('You can customize lock image / preview video for each premium page or no image/video preview at all.<br>Default image directory: <b class="gourlnowrap">'.GOURL_DIR2.'lockimg</b> or use full image path (http://...)', GOURL);
 			$tmp .= "<br /><br />";
 			$tmp .= __('Shortcodes with preview image and preview video for premium pages: ', GOURL);
@@ -7346,7 +7346,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI.       
+ *  XXI. 
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
