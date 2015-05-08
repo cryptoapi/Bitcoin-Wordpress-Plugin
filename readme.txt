@@ -24,7 +24,7 @@ GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. See Screenshots - 
 
 * 100% Free Open Source on [Github.com](https://github.com/cryptoapi/Bitcoin-Wordpress-Plugin) 
 * Accept Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin payments Online on your Wordpress website 
-* No Monthly Fee, Transaction Fee from 0%. 
+* No Monthly Fee, No Bank Account Needed, Transaction Fee from 0%. 
 * [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc 
 * [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads 
 * [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos 
@@ -121,7 +121,7 @@ More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gou
 
 Yes, You can sell your products on your website for Bitcoins/altcoins without user registration also.
 
-You have five choices - 
+You have five choices -
 
 1. Use [Woocommerce](https://wordpress.org/plugins/woocommerce/) with our [GoUrl Woocommerce Bitcoin/Altcoins Add-on](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/)
 2. Use [WP eCommerce](https://wordpress.org/plugins/wp-e-commerce/) with our [GoUrl WP eCommerce Bitcoin/Altcoins Add-on](https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/)
@@ -216,4 +216,4 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3.1 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended   
+This update includes several new features, enhancements, and bugfixes. Updating is recommended

@@ -794,6 +794,13 @@ final class gourlclass
 			if ($this->record_errors) $this->errors = array_merge($this->errors, $this->record_errors); 
 		}
 		
+		
+		// system re-test
+		if (!function_exists( 'curl_init' ))			 $this->errors[] = __('Please enable CURL extension in PHP - <a href="http://www.tomjepson.co.uk/enabling-curl-in-php-php-ini-wamp-xamp-ubuntu/">Read here &#187;</a>', GOURL);
+		if (!function_exists( 'mysqli_connect' )) 		 $this->errors[] = __('Please enable MySQLi extension in PHP - <a href="http://crybit.com/how-to-enable-mysqli-extension-on-web-server/">Read here &#187;</a>', GOURL);
+		if (version_compare(phpversion(), '5.4.0', '<')) $this->errors[] = __('You need PHP 5.4.0 (or greater). Current php version: ', GOURL) . phpversion();
+		
+		
 		return true;
 	}
 	
@@ -7346,7 +7353,7 @@ function gourl_action_links($links, $file)
 
 
 /*
- *  XXI. 
+ *  XXI.       
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
