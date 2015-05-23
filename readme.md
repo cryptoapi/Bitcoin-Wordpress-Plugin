@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.3.1
+Version 1.3.2
 
 
 **GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress 3.5 or higher version**
@@ -16,7 +16,7 @@ Accept Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin,
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
 * Requires at least: 3.5
 * Tested up to: 4.2
-* Stable Tag: 1.3.1
+* Stable Tag: 1.3.2
 * License: GNU Version 2 or Any Later Version
 
 

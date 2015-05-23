@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.2
-Stable Tag: 1.3.1
+Stable Tag: 1.3.2
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,17 +158,16 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
-= 1.3.1 =
-Several new enhancements
+= 1.3.2 =
+Localisation - You can easy change/localize any text in plugin
 
 = 1.3 =
-Added Peercoin. 
-Spanish payment box localisation. 
-Darkcoin rebranded to Dash. 
+* Add Peercoin [PPC] cryptocurrency
+* Darkcoin rebranded to Dash cryptocurrency
+* Add Spanish Payment Box translation (Thanks to Alberto)
 
 = 1.2.11 =
-Supports bbPress Forum - Premium Membership Mode with Bitcoin/Altcoin Payments. 
-You can add premium user support to your web site using bbPress. Any user can place questions (create new topic in bbPress), and only paid/premium users will see your answers.
+Supports bbPress Forum - Premium Membership Mode with Bitcoin/Altcoin Payments. You can add premium user support to your web site using bbPress. Any user can place questions (create new topic in bbPress), and only paid/premium users will see your answers
 
 = 1.2.10 =
 Several new enhancements
@@ -180,8 +179,8 @@ Pay-Per-View and Pay-Per-Membership - allow to use video preview
 Supports Bitcoin/Altcoin Payment Gateway for WPMU DEV Marketpress
 
 = 1.2.7 =
-Added new coin Paycoin XPY to GoUrl Payment Gateway. 
-Supports Bitcoin/Altcoin Payment Gateway for WP eCommerce
+* Add Paycoin [XPY] cryptocurrency
+* Supports Bitcoin/Altcoin Payment Gateway for WP eCommerce
 
 = 1.2.6 =
 User can customize payment box images (login, disabled, etc)
@@ -205,7 +204,7 @@ Several new enhancements
 Supports Bitcoin/Altcoin Payment Gateway for WooCommerce
 
 = 1.1.0 =
-Added Pay-Per-Product, Pay-Per-Membership
+Add Pay-Per-Product, Pay-Per-Membership
 
 = 1.0.0 =
 This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin
@@ -215,5 +214,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3.1 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended
+= 1.3.2 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended   
+   
