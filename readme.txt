@@ -36,6 +36,7 @@ GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. See Screenshots - 
 * Global, Anonymous, Secure, Zero Risk, No Chargebacks, No visitor registration is needed. 
 * Other wordpress plugin developers can easily integrate Bitcoin payments to their own plugins ([example](https://github.com/cryptoapi/Bitcoin-Payments-Appthemes/blob/master/gourl-appthemes.php)) using this plugin with payment gateway functionality (for example, offer premium membership for bitcoins/altcoins in their own plugins, etc). [Instruction and Affiliate Program for Developers](https://gourl.io/affiliates.html) - 33.3% lifetime revenue share.
 * Auto Synchronization - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour).
+* If you intend plugin to be used in a language other than English, see the [Language Translations page](https://gourl.io/languages.html)
 * [Free Tech Support](https://gourl.io/view/contact/Contact_Us.html) for you
 
 .
@@ -215,5 +216,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3.2 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended   
+This update includes several new features, enhancements, and bugfixes. Updating is recommended     
    

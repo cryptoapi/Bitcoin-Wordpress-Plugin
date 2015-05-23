@@ -62,6 +62,11 @@ msgstr ""
 msgid "USD"
 msgstr ""
 
+# Please do NOT translate variable '%s'.
+# Correctly -
+# --------------
+# English: %s paid products
+# French: %s produits payés
 #: gourl.php:396
 #, php-format
 msgid "%s  paid products"
@@ -115,6 +120,12 @@ msgstr ""
 msgid "Example"
 msgstr ""
 
+# Please do NOT translate or change HTML tags.
+# Correctly -
+# --------------
+# English - 100%% Free Open Source on <a target='_blank' href='%s'>Github.com</a>
+# ---
+# French - 100%% libre et open source sur <a target='_blank' href='%s'>Github</a>
 #: gourl.php:470
 #, php-format
 msgid "100%% Free Open Source on <a target='_blank' href='%s'>Github.com</a>"
@@ -122,8 +133,8 @@ msgstr ""
 
 #: gourl.php:471
 msgid ""
-"Accept Bitcoin/Altcoin Payments Online on your Website and use our Bitcoin "
-"<a href='#addon'>Free Add-ons</a>"
+"Accept Bitcoin/Altcoin Payments Online on your Website and use our Bitcoin <a "
+"href='#addon'>Free Add-ons</a>"
 msgstr ""
 
 #: gourl.php:472
@@ -136,8 +147,8 @@ msgstr ""
 #: gourl.php:473
 #, php-format
 msgid ""
-"<a href='%s'>Pay-Per-Download</a> - simple solution for your "
-"<b>unregistered</b> visitors: make money on file downloads"
+"<a href='%s'>Pay-Per-Download</a> - simple solution for your <b>unregistered</"
+"b> visitors: make money on file downloads"
 msgstr ""
 
 #: gourl.php:474
@@ -150,8 +161,8 @@ msgstr ""
 #: gourl.php:475
 #, php-format
 msgid ""
-"<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: "
-"offer paid access to your premium content, custom <a href='%s'>actions</a>"
+"<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: offer "
+"paid access to your premium content, custom <a href='%s'>actions</a>"
 msgstr ""
 
 #: gourl.php:476
@@ -164,8 +175,8 @@ msgstr ""
 
 #: gourl.php:477
 msgid ""
-"<a href='#addon'>Working with third-party plugins</a> - good support for "
-"third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)"
+"<a href='#addon'>Working with third-party plugins</a> - good support for third "
+"party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)"
 msgstr ""
 
 #: gourl.php:478
@@ -181,17 +192,17 @@ msgstr ""
 #: gourl.php:480
 msgid ""
 "<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io "
-"account and your Website. If GoUrl attempts to deliver a payment "
-"notification/transaction confirmation but your website is unavailable, the "
-"notification is stored on the queue, and delivered to the your website when "
-"it becomes available (re-check connection with your website every hour)"
+"account and your Website. If GoUrl attempts to deliver a payment notification/"
+"transaction confirmation but your website is unavailable, the notification is "
+"stored on the queue, and delivered to the your website when it becomes "
+"available (re-check connection with your website every hour)"
 msgstr ""
 
 #: gourl.php:481
 #, php-format
 msgid ""
-"Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> "
-"for You"
+"Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> for "
+"You"
 msgstr ""
 
 #: gourl.php:489
@@ -233,8 +244,8 @@ msgstr ""
 #: gourl.php:497
 #, php-format
 msgid ""
-"Provides a GoUrl Bitcoin/Altcoin Payment Gateway for wordpress E-Commerce - "
-"<a target='_blank' href='%s'>WooCommerce 2.1+</a>"
+"Provides a GoUrl Bitcoin/Altcoin Payment Gateway for wordpress E-Commerce - <a "
+"target='_blank' href='%s'>WooCommerce 2.1+</a>"
 msgstr ""
 
 #: gourl.php:497 gourl.php:498 gourl.php:499 gourl.php:500 gourl.php:501
@@ -271,12 +282,12 @@ msgstr ""
 msgid ""
 "This addon will add Premium Membership and Bitcoin payment gateway to <a "
 "target='_blank' href='%s'>bbPress 2.5+</a> Forum / Customer Support System."
-"<br>You can mark some topics on your forum/customer support system as "
-"Premium and can easily monetise it with Bitcoins/altcoins - user pay to "
-"read / pay to create / add new replies to the topic, etc.<br>You can add "
-"premium user support to your web site using <a target='_blank' "
-"href='%s'>bbPress</a>. Any user can place questions (create new premium "
-"topic in bbPress), and only paid/premium users will see your answers, etc."
+"<br>You can mark some topics on your forum/customer support system as Premium "
+"and can easily monetise it with Bitcoins/altcoins - user pay to read / pay to "
+"create / add new replies to the topic, etc.<br>You can add premium user "
+"support to your web site using <a target='_blank' href='%s'>bbPress</a>. Any "
+"user can place questions (create new premium topic in bbPress), and only paid/"
+"premium users will see your answers, etc."
 msgstr ""
 
 #: gourl.php:498
@@ -287,9 +298,9 @@ msgstr ""
 #, php-format
 msgid ""
 "Bitcoin/Altcoin & Paypal Donations in Wordpress. Provides a GoUrl Bitcoin/"
-"Altcoin Payment Gateway for <a target='_blank' href='%s'>Give 0.8+</a> - "
-"easy to use wordpress donation plugin for accepting bitcoins, altcoins, "
-"paypal, authorize.net, stripe, paymill donations directly onto your website."
+"Altcoin Payment Gateway for <a target='_blank' href='%s'>Give 0.8+</a> - easy "
+"to use wordpress donation plugin for accepting bitcoins, altcoins, paypal, "
+"authorize.net, stripe, paymill donations directly onto your website."
 msgstr ""
 
 #: gourl.php:499
@@ -300,8 +311,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway and Escrow for all <a "
-"target='_blank' href='%s'>AppThemes Premium Themes</a> - Classipress, "
-"Vantage, JobRoller, Clipper, Taskerr, HireBee, Ideas, Quality Control, etc."
+"target='_blank' href='%s'>AppThemes Premium Themes</a> - Classipress, Vantage, "
+"JobRoller, Clipper, Taskerr, HireBee, Ideas, Quality Control, etc."
 msgstr ""
 
 #: gourl.php:500
@@ -312,8 +323,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for advanced wordpress "
-"membership plugin - <a target='_blank' href='%s'>Paid Memberships Pro "
-"1.8.4+</a>"
+"membership plugin - <a target='_blank' href='%s'>Paid Memberships Pro 1.8.4+</"
+"a>"
 msgstr ""
 
 #: gourl.php:501
@@ -400,23 +411,23 @@ msgstr ""
 #: gourl.php:526
 #, php-format
 msgid ""
-"Create <a target='_blank' href='%s'>Payment Box</a> Records for all coin "
-"types you will accept on your website"
+"Create <a target='_blank' href='%s'>Payment Box</a> Records for all coin types "
+"you will accept on your website"
 msgstr ""
 
 #: gourl.php:527
 #, php-format
 msgid ""
-"You will need to place <a href='%s'>Callback URL</a> on Gourl.io, please "
-"use: <b>%s</b>"
+"You will need to place <a href='%s'>Callback URL</a> on Gourl.io, please use: "
+"<b>%s</b>"
 msgstr ""
 
 #: gourl.php:528
 #, php-format
 msgid ""
 "You will get Free GoUrl Public/Private keys from new created <a "
-"target='_blank' href='%s'>payment box</a>, save them on <a "
-"href='%s'>Settings Page</a>"
+"target='_blank' href='%s'>payment box</a>, save them on <a href='%s'>Settings "
+"Page</a>"
 msgstr ""
 
 #: gourl.php:531
@@ -426,8 +437,8 @@ msgstr ""
 #: gourl.php:533
 #, php-format
 msgid ""
-"<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 "
-"free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing"
+"<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 free "
+"Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing"
 msgstr ""
 
 #: gourl.php:541
@@ -448,19 +459,19 @@ msgid ""
 "<a href='%s'>Pay-Per-View</a> - shortcode <b>[%s]</b> - you can use it for "
 "unregistered website visitors. Plugin will automatically generate a unique "
 "user identification for every user and save it in user browser cookies. User "
-"can have a maximum of 2 days membership with Pay-Per-View and after they "
-"will need to pay again. Because if a user clears browser cookies, they will "
-"lose their membership and a new payment box will be displayed."
+"can have a maximum of 2 days membership with Pay-Per-View and after they will "
+"need to pay again. Because if a user clears browser cookies, they will lose "
+"their membership and a new payment box will be displayed."
 msgstr ""
 
 #: gourl.php:550
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-Membership</a> - shortcode <b>[%s]</b> - similar to pay-"
-"per-view but for registered users only. It is a better safety solution "
-"because plugin uses registered userID not cookies. And a membership period "
-"from 1 hour to 1 year of your choice. You need to have website <a "
-"href='%s'>registration enabled</a>."
+"per-view but for registered users only. It is a better safety solution because "
+"plugin uses registered userID not cookies. And a membership period from 1 hour "
+"to 1 year of your choice. You need to have website <a href='%s'>registration "
+"enabled</a>."
 msgstr ""
 
 #: gourl.php:551
@@ -471,17 +482,16 @@ msgid ""
 msgstr ""
 
 #: gourl.php:554
-msgid ""
-"You can use <b>custom actions with Pay-Per-View</b> on your website too -"
+msgid "You can use <b>custom actions with Pay-Per-View</b> on your website too -"
 msgstr ""
 
 #: gourl.php:557
 #, php-format
 msgid ""
-"<b>Pay-Per-Membership</b> integrated with <a href='%s'>bbPress Forum/"
-"Customer Support</a> also ( use our <a href='%s'>GoUrl bbPress Addon</a> ). "
-"You can mark some topics on your bbPress as Premium and can easily monetise "
-"it with Bitcoins/altcoins."
+"<b>Pay-Per-Membership</b> integrated with <a href='%s'>bbPress Forum/Customer "
+"Support</a> also ( use our <a href='%s'>GoUrl bbPress Addon</a> ). You can "
+"mark some topics on your bbPress as Premium and can easily monetise it with "
+"Bitcoins/altcoins."
 msgstr ""
 
 #: gourl.php:558
@@ -489,8 +499,8 @@ msgstr ""
 msgid ""
 "<b>Both solutions</b> - Pay-Per-Membership and Pay-Per-View hide content on "
 "premium pages from unpaid users/visitors and allow to use custom actions on "
-"free website pages; Pay-Per-Membership provides premium membership mode in "
-"<a href='%s'>bbPress</a> also."
+"free website pages; Pay-Per-Membership provides premium membership mode in <a "
+"href='%s'>bbPress</a> also."
 msgstr ""
 
 #: gourl.php:559
@@ -505,18 +515,17 @@ msgstr ""
 #: gourl.php:563
 #, php-format
 msgid ""
-"For example, you might offer paid unlimited access to your 50 website "
-"premium pages/posts for the price of 1 USD for 2 DAYS to all your website "
-"visitors (<span class='gourlnowrap'>non-registered</span> visitors or "
-"registered users). Simple <a href='%s'>add</a> shortcode <a href='%s'>[%s]</"
-"a> or <a href='%s'>[%s]</a> for all those fifty your premium pages/posts. "
-"When visitors go on any of those pages, they will see automatic cryptocoin "
-"payment box (the original page content will be hidden). After visitor makes "
-"their payment, they will get access to original pages content/videos and "
-"after 2 days will see a new payment box. Visitor can make payment on any "
-"your premium page and they will get access to all other premium pages also."
-"<br>Optional - You can <a href='%s'>show ads</a> for unpaid users on other "
-"your free webpages, etc."
+"For example, you might offer paid unlimited access to your 50 website premium "
+"pages/posts for the price of 1 USD for 2 DAYS to all your website visitors "
+"(<span class='gourlnowrap'>non-registered</span> visitors or registered "
+"users). Simple <a href='%s'>add</a> shortcode <a href='%s'>[%s]</a> or <a "
+"href='%s'>[%s]</a> for all those fifty your premium pages/posts. When visitors "
+"go on any of those pages, they will see automatic cryptocoin payment box (the "
+"original page content will be hidden). After visitor makes their payment, they "
+"will get access to original pages content/videos and after 2 days will see a "
+"new payment box. Visitor can make payment on any your premium page and they "
+"will get access to all other premium pages also.<br>Optional - You can <a "
+"href='%s'>show ads</a> for unpaid users on other your free webpages, etc."
 msgstr ""
 
 #: gourl.php:565
@@ -533,26 +542,25 @@ msgstr ""
 
 #: gourl.php:573
 msgid ""
-"Using for Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-"
-"Membership only"
+"Using for Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-Membership "
+"only"
 msgstr ""
 
 #: gourl.php:574
 #, php-format
 msgid ""
 "Optional - You can use additional actions after a payment has been received "
-"(for example create/update database records, etc) using gourl instant "
-"payment notification system. Simply edit php file <a href='%s'>gourl_ipn."
-"php</a> in directory %s and add section with your order_ID in function <b>"
-"%s</b>."
+"(for example create/update database records, etc) using gourl instant payment "
+"notification system. Simply edit php file <a href='%s'>gourl_ipn.php</a> in "
+"directory %s and add section with your order_ID in function <b>%s</b>."
 msgstr ""
 
 #: gourl.php:575
 msgid ""
 "This function will appear every time when a new payment from any user is "
-"received successfully. Function gets user_ID - user who made payment, "
-"current order_ID (the same value as at the bottom of record edit page Pay-"
-"Per-Product, Pay-Per-Download, etc.) and payment details as array."
+"received successfully. Function gets user_ID - user who made payment, current "
+"order_ID (the same value as at the bottom of record edit page Pay-Per-Product, "
+"Pay-Per-Download, etc.) and payment details as array."
 msgstr ""
 
 #: gourl.php:577 gourl.php:590
@@ -564,8 +572,8 @@ msgstr ""
 msgid ""
 "P.S. If you use <a href='#addon'>additional plugins/add-ons</a> with gourl "
 "payment gateway, you can add your custom actions inside of function %s. That "
-"function will appear when a payment is received. Variable values received "
-"that add-on function identically to values received function "
+"function will appear when a payment is received. Variable values received that "
+"add-on function identically to values received function "
 "gourl_successful_payment(), see <a href='%s'>screenshot</a> above."
 msgstr ""
 
@@ -576,20 +584,20 @@ msgstr ""
 #: gourl.php:586
 #, php-format
 msgid ""
-"<b>Other wordpress plugin developers can easily integrate Bitcoin payments "
-"to their own plugins</b> using this plugin with cryptocurrency payment "
-"gateway functionality. For example, see other add-on <a target='_blank' "
-"href='%s'>PHP source code</a> and <a target='_blank' href='%s'>result</a> - "
-"Bitcoin payments for <a target='_blank' href='%s'>WooCommerce</a>, which "
-"uses this plugin functionality. Please ask Wordpress Plugin Developers to "
-"add a few lines of code below to their plugins (gourl bitcoin payment "
-"gateway with optional <a target='_blank' href='%s'>Bitcoin Affiliate Program "
-"- 33.3%% lifetime revenue share</a> for them ) and bitcoin/altcoin payments "
-"will be automatically used in their plugins. GoUrl Payment Gateway will do "
-"all the work - display payment form, process received payments, etc and will "
-"submit that information to the plugin used. Around 5 seconds after "
-"cryptocoin payment is made, user will see confirmation on your webpage with "
-"any wordpress plugin that payment is received (i.e. very fast)."
+"<b>Other wordpress plugin developers can easily integrate Bitcoin payments to "
+"their own plugins</b> using this plugin with cryptocurrency payment gateway "
+"functionality. For example, see other add-on <a target='_blank' href='%s'>PHP "
+"source code</a> and <a target='_blank' href='%s'>result</a> - Bitcoin payments "
+"for <a target='_blank' href='%s'>WooCommerce</a>, which uses this plugin "
+"functionality. Please ask Wordpress Plugin Developers to add a few lines of "
+"code below to their plugins (gourl bitcoin payment gateway with optional <a "
+"target='_blank' href='%s'>Bitcoin Affiliate Program - 33.3%% lifetime revenue "
+"share</a> for them ) and bitcoin/altcoin payments will be automatically used "
+"in their plugins. GoUrl Payment Gateway will do all the work - display payment "
+"form, process received payments, etc and will submit that information to the "
+"plugin used. Around 5 seconds after cryptocoin payment is made, user will see "
+"confirmation on your webpage with any wordpress plugin that payment is "
+"received (i.e. very fast)."
 msgstr ""
 
 #: gourl.php:587
@@ -597,13 +605,13 @@ msgstr ""
 msgid ""
 "<b>Beneficial for You and other users.</b> Simply use this GoUrl Bitcoin/"
 "Altcoin Gateway for Wordpress which will automatically be used by other "
-"plugins and you will only need to enter your bitcoin/litecoin/dogecoin "
-"wallet addresses once. No multiple times, for different plugins. Also you "
-"will see the bitcoin/altcoin payment statistics in one common table <a "
-"href='%s'>All Payments</a> with details of all received payments. So it is "
-"easy to control everything. Of course, other plugins also can show bitcoin/"
-"altcoin transactions which linked with them, using data from that common "
-"'All Payments' table."
+"plugins and you will only need to enter your bitcoin/litecoin/dogecoin wallet "
+"addresses once. No multiple times, for different plugins. Also you will see "
+"the bitcoin/altcoin payment statistics in one common table <a href='%s'>All "
+"Payments</a> with details of all received payments. So it is easy to control "
+"everything. Of course, other plugins also can show bitcoin/altcoin "
+"transactions which linked with them, using data from that common 'All "
+"Payments' table."
 msgstr ""
 
 #: gourl.php:589
@@ -634,9 +642,9 @@ msgid ""
 "A great way to get involved in open source is to contribute to the existing "
 "projects you're using. GitHub is home to more than 5 million open source "
 "projects. <a target='_blank' href='%s'>A pull request</a> is a method of "
-"submitting contributions to an open development project. You can create a "
-"pull request with your new add-ons/php code for this free open source plugin "
-"<a target='_blank' href='%s'>here</a>"
+"submitting contributions to an open development project. You can create a pull "
+"request with your new add-ons/php code for this free open source plugin <a "
+"target='_blank' href='%s'>here</a>"
 msgstr ""
 
 #: gourl.php:620
@@ -687,8 +695,7 @@ msgid "Invalid Records Per Page value. Allowed 5..200"
 msgstr ""
 
 #: gourl.php:772
-msgid ""
-"Invalid Popup Message text size. Allowed 15 - 400 characters text length"
+msgid "Invalid Popup Message text size. Allowed 15 - 400 characters text length"
 msgstr ""
 
 #: gourl.php:774
@@ -706,8 +713,7 @@ msgstr ""
 
 #: gourl.php:797
 #, php-format
-msgid ""
-"Please enable MySQLi extension in PHP - <a href='%s'>Read here &#187;</a>"
+msgid "Please enable MySQLi extension in PHP - <a href='%s'>Read here &#187;</a>"
 msgstr ""
 
 #: gourl.php:798
@@ -731,9 +737,8 @@ msgstr ""
 #: gourl.php:843
 #, php-format
 msgid ""
-"Simple register on <a target='_blank' href='%s'>GoUrl.io</a> and get your "
-"Free Public/Private Payment Box keys. &#160; <a href='%s'>Read more &#187;</"
-"a>"
+"Simple register on <a target='_blank' href='%s'>GoUrl.io</a> and get your Free "
+"Public/Private Payment Box keys. &#160; <a href='%s'>Read more &#187;</a>"
 msgstr ""
 
 #: gourl.php:852
@@ -743,11 +748,10 @@ msgstr ""
 #: gourl.php:857
 #, php-format
 msgid ""
-"If you use multiple websites online, please create separate <a "
-"target='_blank' href='%s'>GoUrl Payment Box</a> records (with unique payment "
-"box public/private keys) for each of your websites. Do not use the same "
-"GoUrl Payment Box with the same public/private keys on your different "
-"websites."
+"If you use multiple websites online, please create separate <a target='_blank' "
+"href='%s'>GoUrl Payment Box</a> records (with unique payment box public/"
+"private keys) for each of your websites. Do not use the same GoUrl Payment Box "
+"with the same public/private keys on your different websites."
 msgstr ""
 
 #: gourl.php:858
@@ -801,13 +805,13 @@ msgstr ""
 #: gourl.php:881
 #, php-format
 msgid ""
-"<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/"
-"Public Keys are used for communicating between your website and GoUrl.io "
-"Payment Gateway server (similar like paypal id/keys).<br>If you want to "
-"start accepting payments in <a target='_blank' href='%s'>%s (%s)</a>, please "
-"create a <a target='_blank' href='%s'>%s Payment Box</a> on GoUrl.io and "
-"then enter the received free GoUrl %s Box Public/Private Keys. Leave field "
-"blank if you do not accept payments in %s"
+"<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/Public "
+"Keys are used for communicating between your website and GoUrl.io Payment "
+"Gateway server (similar like paypal id/keys).<br>If you want to start "
+"accepting payments in <a target='_blank' href='%s'>%s (%s)</a>, please create "
+"a <a target='_blank' href='%s'>%s Payment Box</a> on GoUrl.io and then enter "
+"the received free GoUrl %s Box Public/Private Keys. Leave field blank if you "
+"do not accept payments in %s"
 msgstr ""
 
 #: gourl.php:885
@@ -825,8 +829,8 @@ msgstr ""
 #: gourl.php:889
 #, php-format
 msgid ""
-"Cryptocoin Payment Box Width, default 530px. <a href='%s'>See screenshot "
-"&#187;</a>"
+"Cryptocoin Payment Box Width, default 530px. <a href='%s'>See screenshot &#187;"
+"</a>"
 msgstr ""
 
 #: gourl.php:892
@@ -909,8 +913,8 @@ msgstr ""
 #: gourl.php:923
 #, php-format
 msgid ""
-"Unregistered visitors will see that on your webpages with <a href='%s'>Pay-"
-"Per-Product</a> items"
+"Unregistered visitors will see that on your webpages with <a href='%s'>Pay-Per-"
+"Product</a> items"
 msgstr ""
 
 #: gourl.php:931
@@ -960,8 +964,8 @@ msgstr ""
 #: gourl.php:952
 msgid ""
 "Pay-Per-Download: A pop-up message that a visitor will see when trying to "
-"download a paid file without payment<br>Default text: It is a Paid "
-"Download ! Please pay below It"
+"download a paid file without payment<br>Default text: It is a Paid Download ! "
+"Please pay below It"
 msgstr ""
 
 #: gourl.php:955
@@ -970,9 +974,9 @@ msgstr ""
 
 #: gourl.php:956
 msgid ""
-"Pay-Per-Download: If box is checked, display on 'All Payments' statistics "
-"page two additional columns 'File Downloaded By User?' and 'File Downloaded "
-"Time'. Use it if you sell files online (Pay-Per-Download)"
+"Pay-Per-Download: If box is checked, display on 'All Payments' statistics page "
+"two additional columns 'File Downloaded By User?' and 'File Downloaded Time'. "
+"Use it if you sell files online (Pay-Per-Download)"
 msgstr ""
 
 #: gourl.php:959
@@ -1022,8 +1026,8 @@ msgstr ""
 #: gourl.php:1095 gourl.php:1892 gourl.php:2678 gourl.php:3691
 #, php-format
 msgid ""
-"Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max "
-"after floating point"
+"Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after "
+"floating point"
 msgstr ""
 
 #: gourl.php:1097 gourl.php:3693
@@ -1068,8 +1072,8 @@ msgstr ""
 #: gourl.php:1114 gourl.php:1901 gourl.php:2687 gourl.php:3705
 #, php-format
 msgid ""
-"Field 'PaymentBox Coin' - please select '%s' because you have entered price "
-"in %s"
+"Field 'PaymentBox Coin' - please select '%s' because you have entered price in "
+"%s"
 msgstr ""
 
 #: gourl.php:1119
@@ -1165,9 +1169,9 @@ msgstr ""
 #: gourl.php:1307
 #, php-format
 msgid ""
-"If the file has already been uploaded to the server, you can select that "
-"file from this drop-down list (files folder %s)<br><strong>OR</strong><br> "
-"upload new file below -"
+"If the file has already been uploaded to the server, you can select that file "
+"from this drop-down list (files folder %s)<br><strong>OR</strong><br> upload "
+"new file below -"
 msgstr ""
 
 #: gourl.php:1308
@@ -1189,9 +1193,9 @@ msgstr ""
 #: gourl.php:1320 gourl.php:2050 gourl.php:2860 gourl.php:3952
 #, php-format
 msgid ""
-"Please specify price in USD or in Cryptocoins. You cannot place prices in "
-"two boxes together. If you want to accept multiple coins - please use price "
-"in USD, payment box will automatically convert that USD amount to cryptocoin "
+"Please specify price in USD or in Cryptocoins. You cannot place prices in two "
+"boxes together. If you want to accept multiple coins - please use price in "
+"USD, payment box will automatically convert that USD amount to cryptocoin "
 "amount using today live cryptocurrency exchange rates (updated every 30min). "
 "Using that functionality (price in USD), you don't need to worry if "
 "cryptocurrency prices go down or go up. Visitors will pay you all times the "
@@ -1221,8 +1225,8 @@ msgstr ""
 
 #: gourl.php:1328
 msgid ""
-"The maximum number of times a file may be purchased/downloaded. Leave blank "
-"or set to 0 for unlimited number of purchases/downloads"
+"The maximum number of times a file may be purchased/downloaded. Leave blank or "
+"set to 0 for unlimited number of purchases/downloads"
 msgstr ""
 
 #: gourl.php:1331 gourl.php:2053 gourl.php:3960
@@ -1231,11 +1235,11 @@ msgstr ""
 
 #: gourl.php:1338
 msgid ""
-"Period after which the payment becomes obsolete and new Cryptocoin Payment "
-"Box will be shown for this file (you can use it to take new payments from "
-"users periodically on daily/monthly basis).<br>If Expiry Period more than "
-"'2days', please use option - Store Visitor IDs: 'Registered Users'; because "
-"'Cookie/Session' not safety for long expiry period"
+"Period after which the payment becomes obsolete and new Cryptocoin Payment Box "
+"will be shown for this file (you can use it to take new payments from users "
+"periodically on daily/monthly basis).<br>If Expiry Period more than '2days', "
+"please use option - Store Visitor IDs: 'Registered Users'; because 'Cookie/"
+"Session' not safety for long expiry period"
 msgstr ""
 
 #: gourl.php:1342 gourl.php:6531
@@ -1244,15 +1248,15 @@ msgstr ""
 
 #: gourl.php:1349
 msgid ""
-"For Unregistered Your Website Visitors - Save auto-generated unique visitor "
-"ID in cookies, sessions or use the IP address to decide unique visitors "
-"(without use cookies).<br>If you use 'session', value in field - Expiry "
-"Period will be ignored.  PHP sessions have default life time until the "
-"browser is closed.<br>-----<br>If you have registration on the website "
-"enabled, <u>please use option 'Registered Users'</u> - only registered users "
-"can pay/download this file (Gourl will use wordpress userID instead of "
-"cookies for user identification). It is much better to use 'Registered "
-"users' than 'Cookie/Session/Ipaddress'"
+"For Unregistered Your Website Visitors - Save auto-generated unique visitor ID "
+"in cookies, sessions or use the IP address to decide unique visitors (without "
+"use cookies).<br>If you use 'session', value in field - Expiry Period will be "
+"ignored.  PHP sessions have default life time until the browser is closed."
+"<br>-----<br>If you have registration on the website enabled, <u>please use "
+"option 'Registered Users'</u> - only registered users can pay/download this "
+"file (Gourl will use wordpress userID instead of cookies for user "
+"identification). It is much better to use 'Registered users' than 'Cookie/"
+"Session/Ipaddress'"
 msgstr ""
 
 #: gourl.php:1354 gourl.php:2076 gourl.php:2888 gourl.php:3971
@@ -1348,8 +1352,8 @@ msgstr ""
 #: gourl.php:1442 gourl.php:2141 gourl.php:2981 gourl.php:4081
 #, php-format
 msgid ""
-"Optional - add in file gourl_ipn.php code below. <a href='%s'>Read more "
-"&#187;</a>"
+"Optional - add in file gourl_ipn.php code below. <a href='%s'>Read more &#187;"
+"</a>"
 msgstr ""
 
 #: gourl.php:1517 gourl.php:5073 gourl.php:5074
@@ -1363,12 +1367,12 @@ msgstr ""
 #: gourl.php:1524
 #, php-format
 msgid ""
-"Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on "
-"your WordPress site/blog and accept %s payments online. No Chargebacks, "
-"Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in "
-"automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your "
-"site requires registration - activate website registration (General Settings "
-"&#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a "
+"Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your "
+"WordPress site/blog and accept %s payments online. No Chargebacks, Global, "
+"Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. "
+"&#160; <a target='_blank' href='%s'>Example</a><br>If your site requires "
+"registration - activate website registration (General Settings &#187; "
+"Membership - <a href='%s'>Anyone can register</a>) and customize <a "
 "href='%s'>login</a> image."
 msgstr ""
 
@@ -1475,15 +1479,15 @@ msgstr ""
 #: gourl.php:1900 gourl.php:2686
 #, php-format
 msgid ""
-"Field 'PaymentBox Coin' - payments in %s not available. Please click on "
-"'Save Settings' button"
+"Field 'PaymentBox Coin' - payments in %s not available. Please click on 'Save "
+"Settings' button"
 msgstr ""
 
 #: gourl.php:1903 gourl.php:2689
 #, php-format
 msgid ""
-"Field 'Use Default Coin Only' - check it because you have entered price in "
-"%s. Please use price in USD if you want to accept multiple coins"
+"Field 'Use Default Coin Only' - check it because you have entered price in %s. "
+"Please use price in USD if you want to accept multiple coins"
 msgstr ""
 
 #: gourl.php:1944
@@ -1500,8 +1504,8 @@ msgid ""
 "Your unregistered anonymous website visitors  will need to send you a set "
 "amount of cryptocoins for access to your website's specific pages & videos "
 "during a specific time. All will be in automatic mode - allowing you to "
-"receive payments, open webpage access to your visitors, when payment expired "
-"a new payment box will appear, payment notifications to your email, etc."
+"receive payments, open webpage access to your visitors, when payment expired a "
+"new payment box will appear, payment notifications to your email, etc."
 msgstr ""
 
 #: gourl.php:1990
@@ -1525,8 +1529,8 @@ msgstr ""
 #: gourl.php:1995 gourl.php:2802
 #, php-format
 msgid ""
-"You can customize lock-image / preview video for each page or not use "
-"preview at all.<br>Default image directory: %s or use full image path %s"
+"You can customize lock-image / preview video for each page or not use preview "
+"at all.<br>Default image directory: %s or use full image path %s"
 msgstr ""
 
 #: gourl.php:1997 gourl.php:2804
@@ -1591,12 +1595,12 @@ msgstr ""
 #: gourl.php:2060
 #, php-format
 msgid ""
-"Period after which the payment becomes obsolete and new Cryptocoin Payment "
-"Box will be shown (you can use it to take new payments from users "
-"periodically on daily basis). We use randomly generated strings as user "
-"identification and this is saved in user cookies. If user clears browser "
-"cookies, new payment box will be displayed. Therefore max expiry period is 2 "
-"DAYS. If you need more, please use <a href='%s'>pay-per-membership</a>"
+"Period after which the payment becomes obsolete and new Cryptocoin Payment Box "
+"will be shown (you can use it to take new payments from users periodically on "
+"daily basis). We use randomly generated strings as user identification and "
+"this is saved in user cookies. If user clears browser cookies, new payment box "
+"will be displayed. Therefore max expiry period is 2 DAYS. If you need more, "
+"please use <a href='%s'>pay-per-membership</a>"
 msgstr ""
 
 #: gourl.php:2064 gourl.php:2874
@@ -1606,12 +1610,12 @@ msgstr ""
 #: gourl.php:2071
 #, php-format
 msgid ""
-"Select user access level who will see lock premium page/blog and need to "
-"make payment for unlock and view original page content. Website Editors / "
-"Admins will have all the time full access to premium pages and see original "
-"page content.<br>If your site requires registration - activate website "
-"registration (General Settings &#187; Membership - <a href='%s'>Anyone can "
-"register</a>) and customize <a href='%s'>login</a> image"
+"Select user access level who will see lock premium page/blog and need to make "
+"payment for unlock and view original page content. Website Editors / Admins "
+"will have all the time full access to premium pages and see original page "
+"content.<br>If your site requires registration - activate website registration "
+"(General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) "
+"and customize <a href='%s'>login</a> image"
 msgstr ""
 
 #: gourl.php:2100 gourl.php:2911 gourl.php:3997
@@ -1628,8 +1632,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Payment Box <a target='_blank' href='%s'>sizes</a> and border <a "
-"target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;"
-"</a>"
+"target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;</"
+"a>"
 msgstr ""
 
 #: gourl.php:2107 gourl.php:2944
@@ -1638,8 +1642,8 @@ msgstr ""
 
 #: gourl.php:2110 gourl.php:2947
 msgid ""
-"Your Custom Text and Image above Payment Box on Locked premium pages "
-"(original pages content will be hidden)"
+"Your Custom Text and Image above Payment Box on Locked premium pages (original "
+"pages content will be hidden)"
 msgstr ""
 
 #: gourl.php:2114 gourl.php:2951
@@ -1648,8 +1652,8 @@ msgstr ""
 
 #: gourl.php:2117 gourl.php:2954
 msgid ""
-"Your Custom Text and Image below Payment Box on Locked premium pages "
-"(original pages content will be hidden)"
+"Your Custom Text and Image below Payment Box on Locked premium pages (original "
+"pages content will be hidden)"
 msgstr ""
 
 #: gourl.php:2120 gourl.php:2960
@@ -1670,8 +1674,8 @@ msgstr ""
 #: gourl.php:2125 gourl.php:2965
 #, php-format
 msgid ""
-"If box is checked, unpaid users will not see any link titles on premium "
-"pages (<a href='%s'>screenshot</a>)"
+"If box is checked, unpaid users will not see any link titles on premium pages "
+"(<a href='%s'>screenshot</a>)"
 msgstr ""
 
 #: gourl.php:2128 gourl.php:2968
@@ -1681,8 +1685,8 @@ msgstr ""
 #: gourl.php:2129 gourl.php:2969
 #, php-format
 msgid ""
-"If box is checked, unpaid users will not see authors of comments on bottom "
-"of premium pages (<a href='%s'>screenshot</a>)"
+"If box is checked, unpaid users will not see authors of comments on bottom of "
+"premium pages (<a href='%s'>screenshot</a>)"
 msgstr ""
 
 #: gourl.php:2132 gourl.php:2972
@@ -1703,8 +1707,8 @@ msgstr ""
 #: gourl.php:2137 gourl.php:2977
 #, php-format
 msgid ""
-"If box is checked, unpaid users cannot reply/add comments on bottom of "
-"premium pages (<a href='%s'>screenshot</a>)"
+"If box is checked, unpaid users cannot reply/add comments on bottom of premium "
+"pages (<a href='%s'>screenshot</a>)"
 msgstr ""
 
 #: gourl.php:2512 gourl.php:3320
@@ -1729,12 +1733,12 @@ msgstr ""
 #: gourl.php:2794
 #, php-format
 msgid ""
-"<b>Pay-Per-Membership</b> - Your <b>registered</b> website users will need "
-"to send you a set amount of cryptocoins for access to your website's "
-"specific premium pages & videos during a specific time. All will be in "
-"automatic mode. Pay-Per-Membership - is a better safety solution than pay-"
-"per-view because plugin uses registered userID not cookies. You need to have "
-"website registration <a href='%s'>enabled</a>."
+"<b>Pay-Per-Membership</b> - Your <b>registered</b> website users will need to "
+"send you a set amount of cryptocoins for access to your website's specific "
+"premium pages & videos during a specific time. All will be in automatic mode. "
+"Pay-Per-Membership - is a better safety solution than pay-per-view because "
+"plugin uses registered userID not cookies. You need to have website "
+"registration <a href='%s'>enabled</a>."
 msgstr ""
 
 #: gourl.php:2796
@@ -1742,23 +1746,22 @@ msgstr ""
 msgid ""
 "<b>Pay-Per-Membership</b> supports <a href='%s'>custom actions</a> (for "
 "example, show ads to free users on all website pages, <a href='%s'>see code</"
-"a>)<br>and it integrated with <a href='%s'>bbPress Forum/Customer Support</"
-"a> ( use our <a href='%s'>GoUrl bbPress Addon</a> ). You can mark some "
-"topics on your bbPress as Premium and can easily monetise it with Bitcoins/"
-"altcoins. &#160; <a href='%s'>More info</a>"
+"a>)<br>and it integrated with <a href='%s'>bbPress Forum/Customer Support</a> "
+"( use our <a href='%s'>GoUrl bbPress Addon</a> ). You can mark some topics on "
+"your bbPress as Premium and can easily monetise it with Bitcoins/altcoins. "
+"&#160; <a href='%s'>More info</a>"
 msgstr ""
 
 #: gourl.php:2798
 #, php-format
 msgid ""
-"Pay-Per-Membership supports ONE paid membership level for website.<br>For "
-"few membership levels (ex. basic, pro, premium), alternatively you can use "
-"<a class='gourlnowrap' href='%s'>Paid Memberships Pro</a> plugin with our <a "
+"Pay-Per-Membership supports ONE paid membership level for website.<br>For few "
+"membership levels (ex. basic, pro, premium), alternatively you can use <a "
+"class='gourlnowrap' href='%s'>Paid Memberships Pro</a> plugin with our <a "
 "class='gourlnowrap' href='%s'>GoUrl Gateweay PMP Addon</a>.<br>Therefore you "
 "can use one of two membership systems - Paid Memberships Pro or Pay-Per-"
 "Membership shortcodes (current page). Please use one of them only (not both) "
-"on your website, because these different membership systems are not "
-"compatible."
+"on your website, because these different membership systems are not compatible."
 msgstr ""
 
 #: gourl.php:2800
@@ -1799,18 +1802,18 @@ msgstr ""
 
 #: gourl.php:2870
 msgid ""
-"Period after which the payment becomes obsolete and new Cryptocoin Payment "
-"Box will be shown."
+"Period after which the payment becomes obsolete and new Cryptocoin Payment Box "
+"will be shown."
 msgstr ""
 
 #: gourl.php:2881
 #, php-format
 msgid ""
-"Select user access level who will see lock premium page/blog and need to "
-"make payment for unlock and view original page content. Website Editors / "
-"Admins will have all the time full access to locked pages and see original "
-"page content.<br>Please activate website registration ( General Settings "
-"&#187; Membership - <a href='%s'>Anyone can register</a> )"
+"Select user access level who will see lock premium page/blog and need to make "
+"payment for unlock and view original page content. Website Editors / Admins "
+"will have all the time full access to locked pages and see original page "
+"content.<br>Please activate website registration ( General Settings &#187; "
+"Membership - <a href='%s'>Anyone can register</a> )"
 msgstr ""
 
 #: gourl.php:2884
@@ -1832,8 +1835,8 @@ msgstr ""
 msgid ""
 "You can separate the content your logged-in users see from what your "
 "unregistered users see; things like a log-in form + custom text A for "
-"unregistered users &#160;or&#160; payment box + other custom text B for "
-"unpaid logged-in users."
+"unregistered users &#160;or&#160; payment box + other custom text B for unpaid "
+"logged-in users."
 msgstr ""
 
 #: gourl.php:2922
@@ -1849,8 +1852,8 @@ msgstr ""
 
 #: gourl.php:2929
 msgid ""
-"Your Custom Text and Image For Unregistered Users (original pages content "
-"will be hidden). This text will publish <b>Above</b> Login Form"
+"Your Custom Text and Image For Unregistered Users (original pages content will "
+"be hidden). This text will publish <b>Above</b> Login Form"
 msgstr ""
 
 #: gourl.php:2933
@@ -1859,8 +1862,8 @@ msgstr ""
 
 #: gourl.php:2936
 msgid ""
-"Your Custom Text and Image For Unregistered Users (original pages content "
-"will be hidden). This text will publish <b>Below</b> Login Form"
+"Your Custom Text and Image For Unregistered Users (original pages content will "
+"be hidden). This text will publish <b>Below</b> Login Form"
 msgstr ""
 
 #: gourl.php:2940
@@ -1952,9 +1955,9 @@ msgstr ""
 #: gourl.php:3598
 #, php-format
 msgid ""
-"Select User. &#160; Current lock pages level: <a href='%s'>%s</a>."
-"<br>Website Editors / Admins will have all the time full access to premium "
-"pages and see original page content."
+"Select User. &#160; Current lock pages level: <a href='%s'>%s</a>.<br>Website "
+"Editors / Admins will have all the time full access to premium pages and see "
+"original page content."
 msgstr ""
 
 #: gourl.php:3601
@@ -2134,8 +2137,8 @@ msgstr ""
 
 #: gourl.php:3957
 msgid ""
-"The maximum number of times a product may be purchased. Leave blank or set "
-"to 0 for unlimited number of product purchases"
+"The maximum number of times a product may be purchased. Leave blank or set to "
+"0 for unlimited number of product purchases"
 msgstr ""
 
 #: gourl.php:3967
@@ -2222,8 +2225,7 @@ msgid "Sale Notification - From"
 msgstr ""
 
 #: gourl.php:4038
-msgid ""
-"Email to Seller: This will act as the 'from' and 'reply-to' email address"
+msgid "Email to Seller: This will act as the 'from' and 'reply-to' email address"
 msgstr ""
 
 #: gourl.php:4041
@@ -2245,8 +2247,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Email to Seller: Enter the sale notification email that is sent to seller/"
-"admin after user completing a successful purchase.<br>Available template "
-"tags: %s"
+"admin after user completing a successful purchase.<br>Available template tags: "
+"%s"
 msgstr ""
 
 #: gourl.php:4050
@@ -2265,15 +2267,15 @@ msgstr ""
 
 #: gourl.php:4155
 msgid ""
-"Use 'Pay-Per-product' - sell any of your products online to registered "
-"users. Email notifications to Buyer/Seller."
+"Use 'Pay-Per-product' - sell any of your products online to registered users. "
+"Email notifications to Buyer/Seller."
 msgstr ""
 
 #: gourl.php:4156
 #, php-format
 msgid ""
-"You will need to <a href='%s'>create a new product record</a> of what you "
-"are selling, you get custom WordPress shortcode, <a href='%s'>place that "
+"You will need to <a href='%s'>create a new product record</a> of what you are "
+"selling, you get custom WordPress shortcode, <a href='%s'>place that "
 "shortcode</a> on any of your website pages and user will see the product "
 "payment box."
 msgstr ""
@@ -2281,10 +2283,10 @@ msgstr ""
 #: gourl.php:4157
 #, php-format
 msgid ""
-"Please activate website registration (General Settings &#187; Membership - "
-"<a href='%s'>Anyone can register</a>). &#160; For unregistered visitors - "
-"you can customize <a href='%s'>Login Image</a> or choose to display <a "
-"href='%s'>Login Form</a>"
+"Please activate website registration (General Settings &#187; Membership - <a "
+"href='%s'>Anyone can register</a>). &#160; For unregistered visitors - you can "
+"customize <a href='%s'>Login Image</a> or choose to display <a href='%s'>Login "
+"Form</a>"
 msgstr ""
 
 #: gourl.php:4158
@@ -2295,8 +2297,8 @@ msgstr ""
 #: gourl.php:4159
 #, php-format
 msgid ""
-"Alternatively, you can use free <a href='%s'>WooCommerce</a> plugin "
-"(advanced shopping plugin with 'GUEST CHECKOUT' option) with our <a "
+"Alternatively, you can use free <a href='%s'>WooCommerce</a> plugin (advanced "
+"shopping plugin with 'GUEST CHECKOUT' option) with our <a "
 "href='%s'>Woocommerce Bitcoin/Altcoin Gateway</a> addon"
 msgstr ""
 
@@ -2384,16 +2386,15 @@ msgstr ""
 #: gourl.php:4976
 #, php-format
 msgid ""
-"If you like <strong>GoUrl Bitcoin/Altcoins Gateway</strong> please leave us "
-"a %s rating on %s. A huge thank you from GoUrl  in advance!"
+"If you like <strong>GoUrl Bitcoin/Altcoins Gateway</strong> please leave us a "
+"%s rating on %s. A huge thank you from GoUrl  in advance!"
 msgstr ""
 
 #: gourl.php:4987
 #, php-format
 msgid ""
-"<strong>%s Plugin is almost ready to use!</strong> All you need to do is to "
-"<a style='text-decoration:underline' href='%s'>update your plugin settings</"
-"a>"
+"<strong>%s Plugin is almost ready to use!</strong> All you need to do is to <a "
+"style='text-decoration:underline' href='%s'>update your plugin settings</a>"
 msgstr ""
 
 #: gourl.php:4987 gourl.php:4999 gourl.php:5169
@@ -2405,8 +2406,8 @@ msgstr ""
 msgid ""
 "<strong>Please deactivate %s Plugin,<br>manually set folder %s permission to "
 "0777 and activate it again.</strong><br><br>if you have already done so "
-"before, please create three folders below manually and set folder "
-"permissions to 0777:<br>- %s<br>- %s<br>- %s"
+"before, please create three folders below manually and set folder permissions "
+"to 0777:<br>- %s<br>- %s<br>- %s"
 msgstr ""
 
 #: gourl.php:5015 gourl.php:5016
@@ -2476,8 +2477,8 @@ msgstr ""
 #: gourl.php:5191
 #, php-format
 msgid ""
-"Cannot upload file '%s' on server. Alternatively, you can upload your file "
-"to '%s' using the FTP File Manager"
+"Cannot upload file '%s' on server. Alternatively, you can upload your file to "
+"'%s' using the FTP File Manager"
 msgstr ""
 
 #: gourl.php:5192
@@ -2547,8 +2548,7 @@ msgstr ""
 #: gourl.php:5320
 #, php-format
 msgid ""
-"Error. Invalid Order ID - %s. Max size: 32 symbols. Allowed symbols: a.."
-"Z0..9_-"
+"Error. Invalid Order ID - %s. Max size: 32 symbols. Allowed symbols: a..Z0..9_-"
 msgstr ""
 
 #: gourl.php:5325
@@ -2584,8 +2584,7 @@ msgstr ""
 #: gourl.php:5341
 msgid ""
 "Error. Please try a different payment method. GoUrl Bitcoin Plugin not "
-"configured - need setup payment box keys on GoUrl Bitcoin Gateway Options "
-"page"
+"configured - need setup payment box keys on GoUrl Bitcoin Gateway Options page"
 msgstr ""
 
 #: gourl.php:5384
@@ -2658,8 +2657,7 @@ msgstr ""
 
 #: gourl.php:6248
 #, php-format
-msgid ""
-"<h1>Feed not available, please visit our <a href='%s'>Home Page</a>!</h1>"
+msgid "<h1>Feed not available, please visit our <a href='%s'>Home Page</a>!</h1>"
 msgstr ""
 
 #: gourl.php:6472 gourl.php:6715 gourl.php:6982
