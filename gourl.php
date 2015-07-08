@@ -174,7 +174,7 @@ final class gourlclass
 	*/
 	public static function coin_names()
 	{
-		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'XPY' => 'paycoin', 'DOGE' => 'dogecoin', 'DASH' => 'dash', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin', 'PPC' => 'peercoin');
+		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'XPY' => 'paycoin', 'DOGE' => 'dogecoin', 'DASH' => 'dash', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin', 'PPC' => 'peercoin', 'MUE' => 'monetaryunit');
 	}
 	
 	
@@ -183,7 +183,7 @@ final class gourlclass
 	*/
 	public static function coin_chain()
 	{
-		return array('bitcoin' => 'https://blockchain.info/', 'litecoin' => 'https://bchain.info/LTC/', 'paycoin' => 'https://chainz.cryptoid.info/xpy/', 'dogecoin' => 'https://dogechain.info/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'speedcoin' => 'http://speedcoin.co:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'http://explorer.feathercoin.com/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'vericoin' => 'https://chainz.cryptoid.info/vrc/', 'peercoin' => 'https://bkchain.org/ppc/');
+		return array('bitcoin' => 'https://blockchain.info/', 'litecoin' => 'https://bchain.info/LTC/', 'paycoin' => 'https://chainz.cryptoid.info/xpy/', 'dogecoin' => 'https://dogechain.info/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'speedcoin' => 'http://speedcoin.co:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'http://explorer.feathercoin.com/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'vericoin' => 'https://chainz.cryptoid.info/vrc/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/');
 	}
 	
 	
@@ -192,7 +192,7 @@ final class gourlclass
 	*/
 	public static function coin_www()
 	{
-		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'http://speedcoin.co/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'http://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/');
+		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'http://speedcoin.co/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'http://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/');
 	}
 	
 	
@@ -468,15 +468,15 @@ final class gourlclass
 		$img  = "<img title='".__('Example', GOURL)."' class='gourlimgpreview' src='".plugins_url('/images/example.png', __FILE__)."' border='0'>";
 		$tmp .= "<ul>";
 		$tmp .= "<li> ".sprintf(__("100%% Free Open Source on <a target='_blank' href='%s'>Github.com</a>", GOURL), "https://github.com/cryptoapi/")."</li>";
-		$tmp .= "<li> ".__("Accept Bitcoin/Altcoin Payments Online on your Website and use our Bitcoin <a href='#addon'>Free Add-ons</a>", GOURL)."</li>";
-		$tmp .= '<li> '.sprintf(__("No Monthly Fee, Transaction Fee from 0%%. Set your own prices in USD, <a href='%s'>EUR, CNY, RUB, IDR... (100 currencies)</a>", GOURL), 'https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/').'</li>';
+		$tmp .= '<li> '.sprintf(__("No Monthly Fee, Transaction Fee from 0%%. Set your own prices in USD, <a href='%s'>EUR, GBP, RUB, AUD (100 currencies)</a>", GOURL), 'https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/').'</li>';
+		$tmp .= "<li> ".sprintf(__("No ID Required, No Bank Account Needed. Global, Anonymous, Secure, No Chargebacks, Zero Risk", GOURL), "https://gourl.io/#usd")."</li>";
+		$tmp .= "<li> ".sprintf(__("Get payments straight to your bitcoin/altcoin wallets and convert to <a target='_blank' href='%s'>USD/EUR/etc</a> later. All in automatic mode", GOURL), "https://gourl.io/#usd")."</li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Download</a> - simple solution for your <b>unregistered</b> visitors: make money on file downloads", GOURL), GOURL_ADMIN.GOURL.'files')." <a target='_blank' href='http://gourl.io/lib/examples/pay-per-download-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: offer paid access to your premium content/videos", GOURL), GOURL_ADMIN.GOURL.'payperview')." <a target='_blank' href='http://gourl.io/lib/examples/pay-per-page-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content, custom <a href='%s'>actions</a>", GOURL), GOURL_ADMIN.GOURL.'paypermembership', plugins_url("/images/dir/membership_actions.txt", __FILE__))." <a target='_blank' href='http://gourl.io/lib/examples/pay-per-membership-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc", GOURL), GOURL_ADMIN.GOURL.'products')." <a target='_blank' href='http://gourl.io/lib/examples/pay-per-product-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.__("<a href='#addon'>Working with third-party plugins</a> - good support for third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)", GOURL).'</li>';
-		$tmp .= '<li> '.__("No Chargebacks, Global, Secure, Anonymous. All in automatic mode", GOURL).'</li>';
-		$tmp .= '<li> '.__("Support Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin payments", GOURL).'</li>';
+		$tmp .= '<li> '.__("Support payments in Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit", GOURL).'</li>';
 		$tmp .= '<li> '.__("<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour)", GOURL).'</li>';
 		$tmp .= '<li> '.sprintf(__("Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> for You", GOURL), "https://gourl.io/view/contact/Contact_Us.html").'</li>';
 		$tmp .= "</ul>";
@@ -525,7 +525,7 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__("Free <a target='_blank' href='%s'>Register</a> or <a target='_blank' href='%s'>Login</a> on GoUrl.io - Global Bitcoin Payment Gateway", GOURL), "https://gourl.io/view/registration", "https://gourl.io/info/memberarea/My_Account.html")."</li>";
 		$tmp .= "<li> ".sprintf(__("Create <a target='_blank' href='%s'>Payment Box</a> Records for all coin types you will accept on your website", GOURL), "https://gourl.io/editrecord/coin_boxes/0")."</li>";
 		$tmp .= "<li> ".sprintf(__("You will need to place <a href='%s'>Callback URL</a> on Gourl.io, please use: <b>%s</b>", GOURL), plugins_url('/images/callback_field.png', __FILE__), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
-		$tmp .= "<li> ".sprintf(__("You will get Free GoUrl Public/Private keys from new created <a target='_blank' href='%s'>payment box</a>, save them on <a href='%s'>Settings Page</a>", GOURL), "https://gourl.io/editrecord/coin_boxes/0", GOURL_ADMIN.GOURL."settings")."</li>";
+		$tmp .= "<li> ".sprintf(__("You will get Free GoUrl <a href='%s'>Public/Private keys</a> from new created <a target='_blank' href='%s'>payment box</a>, save them on <a href='%s'>Settings Page</a>", GOURL), plugins_url('/images/keys_field.png', __FILE__), "https://gourl.io/editrecord/coin_boxes/0", GOURL_ADMIN.GOURL."settings")."</li>";
 		$tmp .= "</ul>";
 		
 		$tmp .= "<p>".__("THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!", GOURL)."</p>";
@@ -609,6 +609,7 @@ final class gourlclass
 		$ftc = "6otKdaB1aasmQ5kA9wKBXJM5mi9e19VxYQ";
 		$vtc = "VeRUojCEkZn9u8AswqiKvpfHW4BW8Uas7V";
 		$vrc = "VMr4YsLufTgx5ForMV7nP2sQJSSbec593f";
+		$mue = "7SA3Ht7CvoVueRvnKqqRR7fW6xg5hZk8TX";
 		$ppc = "PUxNprg24a8JjgG5pETKqesSiC5HprutvB";
 		
 		$tmp .= "<p>".sprintf(__('Please contact us with any questions - %s', GOURL), "<a href='https://gourl.io/view/contact/Contact_Us.html'>https://gourl.io/view/contact/Contact_Us.html</a>")."</p>";
@@ -640,6 +641,7 @@ final class gourlclass
 		$tmp .= "<p>Feathercoin: &#160; <a href='feathercoin:".$ftc."?label=Donation'>".$ftc."</a></p>";
 		$tmp .= "<p>Vertcoin: &#160; <a href='vertcoin:".$vtc."?label=Donation'>".$vtc."</a></p>";
 		$tmp .= "<p>Vericoin: &#160; <a href='vericoin:".$vrc."?label=Donation'>".$vrc."</a></p>";
+		$tmp .= "<p>MonetaryUnit: &#160; <a href='monetaryunit:".$mue."?label=Donation'>".$mue."</a></p>";
 		$tmp .= "<p>Peercoin: &#160; <a href='peercoin:".$ppc."?label=Donation'>".$ppc."</a></p>";
 		$tmp .= "</div>";
 		$tmp .= "<br><br><br><br><br><br><br>";
@@ -1521,7 +1523,7 @@ final class gourlclass
 			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'files&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			echo "<div class='".GOURL."intro postbox'>";
 			echo '<a style="float:right" target="_blank" href="http://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin", "http://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
+			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, MonetaryUnit, Peercoin", "http://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
 			echo '<p>'.sprintf(__("Create <a href='%s'>New Paid File Downloads</a> and place new generated <a href='%s'>shortcode</a> on your public page/post. Done!", GOURL), GOURL_ADMIN.GOURL.'file', plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 			echo sprintf(__("<a href='%s'>Read more</a>", GOURL), GOURL_ADMIN.GOURL."#i3").'</p>';
 			echo  "</div>";
@@ -2101,7 +2103,7 @@ final class gourlclass
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('PaymentBox Style:', GOURL).'</th>';
-		$tmp .= '<td>'.sprintf(__("Payment Box <a target='_blank' href='%s'>sizes</a> and border <a target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;</a>", GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlpeercoinprivate_key").'<br><br><br><br></td>';
+		$tmp .= '<td>'.sprintf(__("Payment Box <a target='_blank' href='%s'>sizes</a> and border <a target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;</a>", GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlmonetaryunitprivate_key").'<br><br><br><br></td>';
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th>'.__('Text - Above Payment Box', GOURL).':</th><td>';
@@ -2912,7 +2914,7 @@ final class gourlclass
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('PaymentBox Style:', GOURL).'</th>';
-		$tmp .= '<td>'.sprintf(__("Payment Box <a target='_blank' href='%s'>sizes</a> and border <a target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;</a>", GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlpeercoinprivate_key").'<br><br><br></td>';
+		$tmp .= '<td>'.sprintf(__("Payment Box <a target='_blank' href='%s'>sizes</a> and border <a target='_blank' href='%s'>shadow</a> you can change <a href='%s'>here &#187;</a>", GOURL ), plugins_url("/images/sizes.png", __FILE__), plugins_url("/images/styles.png", __FILE__), GOURL_ADMIN.GOURL."settings#gourlmonetaryunitprivate_key").'<br><br><br></td>';
 		$tmp .= '</tr>';
 		
 	
@@ -5261,7 +5263,7 @@ final class gourlclass
 	{
 		global $wp;
 	
-		if (in_array(strtolower($this->right($_SERVER["REQUEST_URI"], "/", false)), array("?cryptobox.callback.php", "index.php?cryptobox.callback.php")))
+		if (in_array(strtolower($this->right($_SERVER["REQUEST_URI"], "/", false)), array("?cryptobox.callback.php", "index.php?cryptobox.callback.php", "?cryptobox_callback_php", "index.php?cryptobox_callback_php", "?cryptobox-callback-php", "index.php?cryptobox-callback-php")))
 		{
 			ob_clean();
 			
@@ -7355,7 +7357,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.       
+ *  XXII.
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7376,6 +7378,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false;
+		return false; 
 	}
 }
