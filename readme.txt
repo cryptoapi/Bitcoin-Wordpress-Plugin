@@ -3,11 +3,11 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, litecoin, dogecoin, darkcoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, paycoin, monetaryunit, peercoin
+Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, darkcoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, paycoin, monetaryunit, peercoin
 
 Requires at least: 3.5
 Tested up to: 4.3
-Stable Tag: 1.3.3
+Stable Tag: 1.3.4
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,9 +55,10 @@ Instruction - How to convert received Bitcoin/Altcoins to USD/EUR/etc - https://
 The following Add-ons extend the functionality of GoUrl -
 
 * [WooCommerce Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin payments in [WooCommerce](https://wordpress.org/plugins/woocommerce/))
-* [Bitcoin & Paypal Donations in Wordpress](https://gourl.io/bitcoin-donations-wordpress-plugin.html) (accept bitcoin donations in [Give](https://wordpress.org/plugins/give/))
-* [bbPress Premium Membership with Bitcoin Payments](https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/) (add premium membership mode to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
+* [Bitcoin & Paypal Donations in Wordpress](https://wordpress.org/plugins/gourl-bitcoin-paypal-donations-give-addon/) (accept bitcoin donations in [Give](https://wordpress.org/plugins/give/))
+* [Easy Digital Downloads Bitcoin Gateway](https://wordpress.org/plugins/gourl-bitcoin-easy-digital-downloads-edd/) (accept bitcoin payments in [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/))
 * [Paid Memberships Pro Bitcoin Gateway](https://wordpress.org/plugins/gourl-bitcoin-paid-memberships-pro/) (accept bitcoin payments in [Paid Memberships Pro](https://wordpress.org/plugins/gourl-bitcoin-paid-memberships-pro/))
+* [bbPress Premium Membership with Bitcoin Payments](https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/) (add premium membership mode to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
 * [Appthemes Classipress, Vantage, JobRoller, etc](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/) (accept bitcoin payments in all [Appthemes](http://www.appthemes.com/themes/) products)
 * [Jigoshop Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin payments in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
 * [Marketpress Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/) (accept bitcoin payments in [Marketpress](https://wordpress.org/plugins/wordpress-ecommerce/))
@@ -139,7 +140,7 @@ GoUrl uses a standard Bitcoin URI. Clicking a Bitcoin URI should launch a prefer
 
 = Can you help me to integrate bitcoin/altcoin payments to my wordpress plugin/website ? =
 
-Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.html) and [Bitcoin/Altcoins Affiliate Program](https://gourl.io/affiliates.html#wordpress) for web developers
+Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.html) and [Bitcoin/Altcoins Affiliate Program](https://gourl.io/affiliate-bitcoin-wordpress-plugins.html) for web developers
 
 
 == Screenshots ==
@@ -162,6 +163,10 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 
 == Changelog ==
+
+= 1.3.4 =
+* Add Dutch Payment Box translation (Thanks to Erik)
+* Supports Bitcoin/Altcoin Payment Gateway for Easy Digital Downloads
 
 = 1.3.3 =
 Add MonetaryUnit [MUE] cryptocurrency
@@ -222,6 +227,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3.3 =
+= 1.3.4 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended
-

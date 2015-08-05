@@ -210,3 +210,7 @@
 .gourlmembershiptext2 {
 
 }      
+
+.edd-order-tx-id span {
+word-break: break-all;
+}

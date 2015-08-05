@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.3.3
+Version 1.3.4
 
 
 **GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress 3.5 or higher version**
@@ -16,7 +16,7 @@ Accept Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin,
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
 * Requires at least: 3.5
 * Tested up to: 4.3
-* Stable Tag: 1.3.3
+* Stable Tag: 1.3.4
 * License: GNU Version 2 or Any Later Version
 
 
@@ -49,15 +49,15 @@ Accept Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin,
 The following Add-ons extend the functionality of GoUrl -
 
 * [WooCommerce Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin payments in [WooCommerce](https://wordpress.org/plugins/woocommerce/))
-* [Bitcoin & Paypal Donations in Wordpress](https://gourl.io/bitcoin-donations-wordpress-plugin.html) (accept bitcoin donations in [Give](https://wordpress.org/plugins/give/))
-* [bbPress Premium Membership with Bitcoin Payments](https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/) (add premium membership mode to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
+* [Bitcoin & Paypal Donations in Wordpress](https://wordpress.org/plugins/gourl-bitcoin-paypal-donations-give-addon/) (accept bitcoin donations in [Give](https://wordpress.org/plugins/give/))
+* [Easy Digital Downloads Bitcoin Gateway](https://wordpress.org/plugins/gourl-bitcoin-easy-digital-downloads-edd/) (accept bitcoin payments in [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/))
 * [Paid Memberships Pro Bitcoin Gateway](https://wordpress.org/plugins/gourl-bitcoin-paid-memberships-pro/) (accept bitcoin payments in [Paid Memberships Pro](https://wordpress.org/plugins/gourl-bitcoin-paid-memberships-pro/))
+* [bbPress Premium Membership with Bitcoin Payments](https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/) (add premium membership mode to [bbPress Forum](https://wordpress.org/plugins/bbpress/) and accept bitcoins)
 * [Appthemes Classipress, Vantage, JobRoller, etc](https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/) (accept bitcoin payments in all [Appthemes](http://www.appthemes.com/themes/) products)
 * [Jigoshop Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/) (accept bitcoin payments in [Jigoshop](https://wordpress.org/plugins/jigoshop/))
 * [Marketpress Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-wpmudev-marketpress-bitcoin-payment-gateway-addon/) (accept bitcoin payments in [Marketpress](https://wordpress.org/plugins/wordpress-ecommerce/))
 * [WP eCommerce Bitcoin/Altcoin Gateway](https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/) (accept bitcoin payments in [WP eCommerce](https://wordpress.org/plugins/wp-e-commerce/))
 * [Webmaster Spelling Notifications](https://wordpress.org/plugins/gourl-spelling-notifications/) - send notification of spelling errors to the webmaster ([live demo](https://gourl.io/php-spelling-notifications.html))
-
 
 
 .
