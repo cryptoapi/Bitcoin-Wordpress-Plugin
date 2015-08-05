@@ -154,7 +154,7 @@ final class gourlclass
 		
 		
 		// Process Callbacks from GoUrl.io Payment Server
-		add_action('parse_request', array(&$this, 'callback_parse_request'));
+		add_action('parse_request', array(&$this, 'callback_parse_request'), 1);
 		
 	}
 	
@@ -7382,6 +7382,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false;      
+		return false;   
 	}
 }
