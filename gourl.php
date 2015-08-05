@@ -154,7 +154,7 @@ final class gourlclass
 		
 		
 		// Process Callbacks from GoUrl.io Payment Server
-		add_action('parse_request', array(&$this, 'callback_parse_request'), 1);
+		add_action('init', array(&$this, 'callback_parse_request'), 1);
 		
 	}
 	
@@ -5262,10 +5262,8 @@ final class gourlclass
 	/*
 	 *  60.
 	*/
-	public function callback_parse_request( &$wp )
+	public function callback_parse_request()
 	{
-		global $wp;
-	
 		if (in_array(strtolower($this->right($_SERVER["REQUEST_URI"], "/", false)), array("?cryptobox.callback.php", "index.php?cryptobox.callback.php", "?cryptobox_callback_php", "index.php?cryptobox_callback_php", "?cryptobox-callback-php", "index.php?cryptobox-callback-php")))
 		{
 			ob_clean();
@@ -7361,7 +7359,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.
+ *  XXII.     
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7382,6 +7380,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false;   
+		return false; 
 	}
 }
