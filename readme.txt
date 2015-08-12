@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.3
-Stable Tag: 1.3.4
+Stable Tag: 1.3.5
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,6 +164,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.5 =
+Several new enhancements
+
 = 1.3.4 =
 * Add Dutch Payment Box translation (Thanks to Erik)
 * Supports Bitcoin/Altcoin Payment Gateway for Easy Digital Downloads
@@ -207,9 +210,6 @@ Supports Bitcoin/Altcoin Payment Gateway for Jigoshop
 = 1.2.3 =
 New in Pay-Per-Membership: display login form on any premium page for unregistered users
 
-= 1.2.2 =
-Several new enhancements
-
 = 1.2.1 =
 Several new enhancements
 
@@ -227,5 +227,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3.4 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended
+= 1.3.5 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended          

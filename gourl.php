@@ -154,7 +154,11 @@ final class gourlclass
 		
 		
 		// Process Callbacks from GoUrl.io Payment Server
-		add_action('init', array(&$this, 'callback_parse_request'), 1);
+		add_action('parse_request', array(&$this, 'callback_parse_request'), 1);
+		
+		
+		// Force Login - external plugins
+		add_filter('v_forcelogin_whitelist', array(&$this, "v_forcelogin_whitelist"), 10, 1); // https://wordpress.org/plugins/wp-force-login/
 		
 	}
 	
@@ -5750,9 +5754,27 @@ final class gourlclass
 	
 	
 	
+	/*
+	 *  63. Make Compatible with Force Login plugin
+	 */ 
+	public function v_forcelogin_whitelist ($arr)
+	{
+		$url = trim(get_site_url(), "/ ") . "/";	
+			
+		$arr[] = $url . "?cryptobox.callback.php";
+		$arr[] = $url . "index.php?cryptobox.callback.php";
+		$arr[] = $url . "?cryptobox_callback_php";
+		$arr[] = $url . "index.php?cryptobox_callback_php";
+		$arr[] = $url . "?cryptobox-callback-php";
+		$arr[] = $url . "index.php?cryptobox-callback-php";
+		
+		return $arr;
+	}
+	
+	
 	
 	/*
-	 *  63. Supported Functions
+	 *  64. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -7380,6 +7402,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false; 
+		return false;  
 	}
 }
