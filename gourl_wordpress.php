@@ -54,13 +54,15 @@ unset($dir_arr);
 
 require_once(plugin_dir_path( __FILE__ )."/gourl.php");
 
-register_deactivation_hook(__FILE__, "gourl_uninstall");
+
+register_activation_hook(__FILE__, "gourl_activate");
+register_deactivation_hook(__FILE__, "gourl_deactivate");
 
 add_action('show_user_profile', 	'gourl_show_user_profile');
 add_action('edit_user_profile', 	'gourl_edit_user_profile');
 add_filter('plugin_action_links', 	'gourl_action_links', 10, 2);
 add_action('plugins_loaded', 		'gourl_load_textdomain');
 
-$gourl = new gourlclass();
+$gourl = new gourlclass();    
    
      
