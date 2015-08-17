@@ -5833,8 +5833,8 @@ final class gourlclass
 function gourl_activate()
 {
 	if (!function_exists( 'mb_stripos' ) || !function_exists( 'mb_strripos' ))  { echo sprintf(__("Error. Please enable <a target='_blank' href='%s'>MBSTRING extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.mbstring.php", "http://www.knowledgebase-script.com/kb/article/how-to-enable-mbstring-in-php-46.html"); die(); }
-	if (!function_exists( 'curl_init' ) && !extension_loaded( 'curl' )) 		{ echo sprintf(__("Error. Please enable <a target='_blank' href='%s'>CURL extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.curl.php", "http://stackoverflow.com/questions/1347146/how-to-enable-curl-in-php-xampp"); die(); }
-	if (!function_exists('mysqli_connect') && !extension_loaded( 'mysqli' )) 	{ echo sprintf(__("Error. Please enable <a target='_blank' href='%s'>MySQLi extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.mysqli.php", "http://crybit.com/how-to-enable-mysqli-extension-on-web-server/"); die(); }
+	if (!function_exists( 'curl_init' )) 										{ echo sprintf(__("Error. Please enable <a target='_blank' href='%s'>CURL extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.curl.php", "http://stackoverflow.com/questions/1347146/how-to-enable-curl-in-php-xampp"); die(); }
+	if (!function_exists( 'mysqli_connect' )) 									{ echo sprintf(__("Error. Please enable <a target='_blank' href='%s'>MySQLi extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.mysqli.php", "http://crybit.com/how-to-enable-mysqli-extension-on-web-server/"); die(); }
 	if (version_compare(phpversion(), '5.4.0', '<')) 							{ echo sprintf(__("Error. You need PHP 5.4.0 (or greater). Current php version: %s", GOURL), phpversion()); die(); }
 }
 
@@ -7392,7 +7392,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.     
+ *  XXII.    
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7413,6 +7413,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false;   
+		return false;
 	}
 }

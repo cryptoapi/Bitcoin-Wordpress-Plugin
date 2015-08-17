@@ -63,6 +63,6 @@ add_action('edit_user_profile', 	'gourl_edit_user_profile');
 add_filter('plugin_action_links', 	'gourl_action_links', 10, 2);
 add_action('plugins_loaded', 		'gourl_load_textdomain');
 
-$gourl = new gourlclass();    
+if (function_exists( 'mb_stripos' ) && function_exists( 'mb_strripos' ) && function_exists( 'curl_init' ) && function_exists( 'mysqli_connect' ) && version_compare(phpversion(), '5.4.0', '>=')) $gourl = new gourlclass();   
    
      
