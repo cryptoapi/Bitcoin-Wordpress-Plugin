@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.3.5
+Version 1.3.6
 
 
 **GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress 3.5 or higher version**
@@ -15,8 +15,8 @@ Accept Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin,
 * Wordpress Page: [https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership](https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership/)
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
 * Requires at least: 3.5
-* Tested up to: 4.3
-* Stable Tag: 1.3.5
+* Tested up to: 4.5
+* Stable Tag: 1.3.6
 * License: GNU Version 2 or Any Later Version
 
 
@@ -86,11 +86,13 @@ Read more: https://gourl.io/affiliates.html
 
 Installation
 -------------------
+
 **1.1 Automatic installation**
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
 In the search field type "GoUrl" and click Search Plugins. Once you've found our plugin you can view details about it such as the rating and description. Most importantly, of course, you can install it by simply clicking Install Now.
+
 
 **1.2 Manual Installation**
 
@@ -99,6 +101,8 @@ In the search field type "GoUrl" and click Search Plugins. Once you've found our
 * Upload the zipped gourl_wordpress file and click "Upload Now"
 * Go to Installed Plugins
 * Activate the "GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership"
+
+
 
 **2. Activate Bitcoin/Altcoin Payments in Plugin**
 
@@ -111,14 +115,29 @@ In the search field type "GoUrl" and click Search Plugins. Once you've found our
 THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
 
-**3. Testing environment**
+
+** 3. Move plugin data from one server to another server **
+
+GoUrl wordpress plugin stores the data in four MySQL tables -
+
+* crypto_files
+* crypto_payments
+* crypto_membership
+* crypto_products
+
+* Dump mysql tables either using mysqldump or if you are using PHPMyAdmin then Export the structure and data.
+* Also copy gourl directory to new server - www.yourwebsite.com/wp-content/uploads/gourl/* 
+
+
+
+**4. Testing environment**
 
 You can use 110 free Speedcoins or Dogecoins for testing.
-Url: http://speedcoin.co/info/free_coins/Free_Speedcoins.html
+Url: [https://speedcoin.org/info/free_coins/Free_Speedcoins.html](https://speedcoin.org/info/free_coins/Free_Speedcoins.html)
 The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
 
 
 
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html) 
    
  

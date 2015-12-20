@@ -6,8 +6,8 @@ Author URI: https://gourl.io
 Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, darkcoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, paycoin, monetaryunit, peercoin
 
 Requires at least: 3.5
-Tested up to: 4.3
-Stable Tag: 1.3.5
+Tested up to: 4.5
+Stable Tag: 1.3.6
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,13 +107,27 @@ In the search field type "GoUrl" and click Search Plugins. Once you've found our
 THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
 
-= 3. Testing environment =
+= 3. Move plugin data from one server to another server =
+
+GoUrl wordpress plugin stores the data in four MySQL tables -
+
+* crypto_files
+* crypto_payments
+* crypto_membership
+* crypto_products
+
+* Dump mysql tables either using mysqldump or if you are using PHPMyAdmin then Export the structure and data.
+* Also copy gourl directory to new server - www.yourwebsite.com/wp-content/uploads/gourl/* 
+
+
+= 4. Testing environment =
 
 You can use 110 free Speedcoins or Dogecoins for testing.
-Url: [http://speedcoin.co/info/free_coins/Free_Speedcoins.html](http://speedcoin.co/info/free_coins/Free_Speedcoins.html)
+Url: [https://speedcoin.org/info/free_coins/Free_Speedcoins.html](https://speedcoin.org/info/free_coins/Free_Speedcoins.html)
 The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
 
 More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
+
 
 
 == Frequently asked questions ==
@@ -164,7 +178,7 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
-= 1.3.5 =
+= 1.3.6 =
 Several new enhancements
 
 = 1.3.4 =
@@ -227,5 +241,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3.5 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended          
+= 1.3.6 =
+This update includes several new features, enhancements, and bugfixes. Updating is recommended   
+    
