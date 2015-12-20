@@ -116,7 +116,7 @@ THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!
 
 
 
-** 3. Move plugin data from one server to another server **
+**3. Move plugin data from one server to another server**
 
 GoUrl wordpress plugin stores the data in four MySQL tables -
 
@@ -138,6 +138,6 @@ The minimum account balance on GoUrl.io which our system will automatically tran
 
 
 
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html) 
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)   
    
  
