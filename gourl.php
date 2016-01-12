@@ -205,7 +205,7 @@ final class gourlclass
 	*/
 	public static function languages()
 	{
-		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'ru' => 'Russian', 'nl' => 'Dutch', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
+		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'ru' => 'Russian', 'nl' => 'Dutch', 'fa' => 'Persian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
 	}
 	
 
@@ -7413,6 +7413,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false; 
+		return false;    
 	}
 }

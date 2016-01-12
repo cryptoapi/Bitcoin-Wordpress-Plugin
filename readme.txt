@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.5
-Stable Tag: 1.3.6
+Stable Tag: 1.3.7
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,9 @@ GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Accept Bitcoin, Li
 
 == Description ==
 
-GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. See Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
+GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. See [Screenshots](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot). 
+We believe there is no better measure of our success than the trust our customers place in our services. 
+Our customers list - [https://gourl.io#customers](https://gourl.io#customers)
 
 = Features of the plugin =
 
@@ -178,6 +180,10 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.7 =
+* Added German and Persian Languages
+* Supporting Right-to-Left Languages
+
 = 1.3.6 =
 Several new enhancements
 
@@ -241,6 +247,6 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 == Upgrade Notice ==
 
-= 1.3.6 =
+= 1.3.7 =
 This update includes several new features, enhancements, and bugfixes. Updating is recommended   
-    
+        
