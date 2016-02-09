@@ -448,9 +448,9 @@ final class gourlclass
 		$tmp .= "<div style='margin:90px 0 30px 0;height:auto;'>";
 		$tmp .= "<iframe width='1200' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://myip.ms/crypto.php?m=".$charts[$chart]."&amp;d=".$day."&amp;a=2&amp;c18=dddddd&amp;c19=dddddd&amp;h=500&amp;w=1200&amp;t=usd".($this->options['chart_reverse']?"":"&amp;r=1")."'></iframe>";
 		$tmp .= "<div>";
-		$tmp .= '<select id="'.GOURL.'chart" onchange="window.location.href = \''.admin_url('admin.php?page='.GOURL.'&amp;days='.$day).'&amp;chart=\'+this.options[this.selectedIndex].value+\'#chart\';">';
-		foreach($this->coin_names as $k => $v) if (isset($charts[$k])) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $chart).'>'.ucfirst($v).$this->space().'('.$k.')</option>';
-		$tmp .= '</select>';
+		// $tmp .= '<select id="'.GOURL.'chart" onchange="window.location.href = \''.admin_url('admin.php?page='.GOURL.'&amp;days='.$day).'&amp;chart=\'+this.options[this.selectedIndex].value+\'#chart\';">';
+		// foreach($this->coin_names as $k => $v) if (isset($charts[$k])) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $chart).'>'.ucfirst($v).$this->space().'('.$k.')</option>';
+		// $tmp .= '</select>'; 
 		$tmp .= '<select id="'.GOURL.'days" onchange="window.location.href = \''.admin_url('admin.php?page='.GOURL.'&amp;chart='.$chart).'&amp;days=\'+this.options[this.selectedIndex].value+\'#chart\';">';
 		foreach($days as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $day).'>'.__($v, GOURL).'</option>';
 		$tmp .= '</select>' . $this->space(3);
@@ -6392,12 +6392,18 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 {
 	if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
 	if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
+
+	$key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
 	
-	$amount = urlencode($amount);
+	// update exchange rate one time per 30 min
+	$arr = get_option($key);
+	if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 0.5*60*60) > strtotime("now")) return round($arr["price"]*$amount, 2);
+	
+	
 	$from_Currency = urlencode($from_Currency);
 	$to_Currency = urlencode($to_Currency);
 
-	$url = "https://www.google.com/finance/converter?a=".$amount."&from=".$from_Currency."&to=".$to_Currency;
+	$url = "https://www.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
 
 	$ch = curl_init();
 	$timeout = 20;
@@ -6412,7 +6418,21 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 	$data = explode('bld>', $rawdata);
 	$data = explode($to_Currency, $data[1]);
 
-	return round($data[0], 2);
+	
+	// save exchange rate on next 30min
+	if ($data[0] > 0)
+	{
+	    $arr = array("price" => $data[0], "time" => strtotime("now"));
+	    update_option($key, $arr);
+	    
+	    return round($data[0]*$amount, 2);
+	}
+	elseif ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 4*60*60) > strtotime("now")) 
+	{
+	   return round($arr["price"]*$amount, 2);
+	}
+	
+	return 0;
 }
 
 
@@ -7392,7 +7412,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.    
+ *  XXII.
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
@@ -7413,6 +7433,6 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 			}
 		}
 	
-		return false;    
+		return false;
 	}
 }
