@@ -1,7 +1,7 @@
 <?php
 
 
-if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; 
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit;
 
 
 final class gourlclass 
@@ -205,7 +205,7 @@ final class gourlclass
 	*/
 	public static function languages()
 	{
-		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'ru' => 'Russian', 'nl' => 'Dutch', 'fa' => 'Persian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
+		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'ru' => 'Russian', 'nl' => 'Dutch', 'pt' => 'Portuguese', 'fa' => 'Persian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
 	}
 	
 
@@ -536,7 +536,7 @@ final class gourlclass
 		
 		$tmp .= "<p>".__("THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!", GOURL)."</p>";
 		
-		$tmp .= "<br><p>".sprintf(__("<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing", GOURL), "https://speedcoin.org/info/free_coins/Free_Speedcoins.html", "http://goo.gl/L8H9gG");
+		$tmp .= "<br><p>".sprintf(__("<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing", GOURL), "https://speedcoin.org/info/free_coins/Free_Speedcoins.html", "https://poloniex.com/");
 		$tmp .= "<a name='i4'></a>";
 		$tmp .= "</p>";
 		
@@ -1324,7 +1324,7 @@ final class gourlclass
 	$tmp .= '<select name="'.GOURL.'priceLabel" id="'.GOURL.'priceLabel">';
 	foreach($this->coin_names as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->record['priceLabel']).'>'.$k.$this->space().'('.$v.')</option>';
 	$tmp .= '</select>';
-	$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Cryptsy 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "http://goo.gl/L8H9gG").'</em>';
+	$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Poloniex 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "https://poloniex.com/").'</em>';
 	$tmp .= '</td></tr>';
 
 	$tmp .= '<tr><th>'.__('Show File Name/Price', GOURL).':</th>';
@@ -2055,7 +2055,7 @@ final class gourlclass
 		$tmp .= '<select name="'.GOURL.'ppvPriceLabel" id="'.GOURL.'ppvPriceLabel">';
 		foreach($this->coin_names as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->options2['ppvPriceLabel']).'>'.$k.$this->space().'('.$v.')</option>';
 		$tmp .= '</select>';
-		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Cryptsy 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "http://goo.gl/L8H9gG").'</em>';
+		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Poloniex 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "https://poloniex.com/").'</em>';
 		$tmp .= '</td></tr>';
 		
 		$tmp .= '<tr><th>'.__('Expiry Period', GOURL).':</th>';
@@ -2865,7 +2865,7 @@ final class gourlclass
 		$tmp .= '<select name="'.GOURL.'ppmPriceLabel" id="'.GOURL.'ppmPriceLabel">';
 		foreach($this->coin_names as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->options3['ppmPriceLabel']).'>'.$k.$this->space().'('.$v.')</option>';
 		$tmp .= '</select>';
-		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Cryptsy 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "http://goo.gl/L8H9gG").'</em>';
+		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Poloniex 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "https://poloniex.com/").'</em>';
 		$tmp .= '</td></tr>';
 			
 		$tmp .= '<tr><th>'.__('Membership Period', GOURL).':</th>';
@@ -3957,7 +3957,7 @@ final class gourlclass
 		$tmp .= '<select name="'.GOURL.'priceLabel" id="'.GOURL.'priceLabel">';
 		foreach($this->coin_names as $k => $v) $tmp .= '<option value="'.$k.'"'.$this->sel($k, $this->record['priceLabel']).'>'.$k.$this->space().'('.$v.')</option>';
 		$tmp .= '</select>';
-		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Cryptsy 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "http://goo.gl/L8H9gG").'</em>';
+		$tmp .= '<br><em>'.sprintf(__("Please specify price in USD or in Cryptocoins. You cannot place prices in two boxes together. If you want to accept multiple coins - please use price in USD, payment box will automatically convert that USD amount to cryptocoin amount using today live cryptocurrency exchange rates (updated every 30min). Using that functionality (price in USD), you don't need to worry if cryptocurrency prices go down or go up. Visitors will pay you all times the actual price which is linked on daily exchange price in USD on the time of purchase. Also you can use <a target='_blank' href='%s'>Poloniex 'autosell' feature</a> (auto trade your cryptocoins to USD).", GOURL), "https://poloniex.com/").'</em>';
 		$tmp .= '</td></tr>';
 		
 
