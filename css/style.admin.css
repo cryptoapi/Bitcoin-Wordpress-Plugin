@@ -58,6 +58,7 @@
 .gourladmin .postbox {
 	padding: 10px 20px;
 	position: relative;
+	width: 97%;
 	height: 100%;
 	overflow: hidden;
 }
@@ -447,7 +448,7 @@
 	color: #0db14b;  
 }
 
-.gourladmin  .gourlnews  p {
+.gourladmin  .gourlnews  p {                
 	font-family: 'Open Sans', sans-serif;
 	line-height: 35px;  
 } 
