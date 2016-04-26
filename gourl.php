@@ -885,7 +885,7 @@ final class gourlclass
 			$tmp .= '<td>';
 			$tmp .= '<div>GoUrl '.$v2.' '.__('Box Public Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'public_key" name="'.GOURL.$v.'public_key" value="'.htmlspecialchars($this->options[$v.'public_key'], ENT_QUOTES).'" class="widefat">';
 			$tmp .= '<div>GoUrl '.$v2.' '.__('Box Private Key', GOURL).' -</div><input type="text" id="'.GOURL.$v.'private_key" name="'.GOURL.$v.'private_key" value="'.htmlspecialchars($this->options[$v.'private_key'], ENT_QUOTES).'" class="widefat">';
-			if ($this->options[$v.'public_key'] && $this->options[$v.'private_key'] && !$this->errors) $tmp .= '<em><span class="gourlpayments">'.sprintf(__("Activated %s Payments", GOURL), $v2).'</span></em>';
+			if ($this->options[$v.'public_key'] && $this->options[$v.'private_key'] && !$this->errors) $tmp .= '<em><span class="gourlpayments">'.sprintf(__("%s payments are active!", GOURL), $v2).'</span></em>';
 			else $tmp .= '<em>'.sprintf(__("<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/Public Keys are used for communicating between your website and GoUrl.io Payment Gateway server (similar like paypal id/keys).<br>If you want to start accepting payments in <a target='_blank' href='%s'>%s (%s)</a>, please create a <a target='_blank' href='%s'>%s Payment Box</a> on GoUrl.io and then enter the received free GoUrl %s Box Public/Private Keys. Leave field blank if you do not accept payments in %s", GOURL), $v2, $v2, $this->coin_www[$v], $v2, $k, "https://gourl.io/editrecord/coin_boxes/0/", $v2, $v2, $v2).'</em>';
 			$tmp .= '</td></tr>';
 		}
@@ -6393,7 +6393,8 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 {
 	if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
 	if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
-
+	if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
+	
 	$key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
 	
 	// update exchange rate one time per 30 min
@@ -7413,7 +7414,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.    
+ *  XXII.  
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {
