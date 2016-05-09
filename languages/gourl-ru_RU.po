@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: GoUrl Bitcoin Payment Gateway & Paid Downloads & "
 "Membership\n"
 "POT-Creation-Date: 2016-04-07 11:16+0100\n"
-"PO-Revision-Date: 2016-04-07 11:16+0100\n"
+"PO-Revision-Date: 2016-05-09 15:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -1073,10 +1073,10 @@ msgstr "px"
 #: gourl.php:897
 #, php-format
 msgid ""
-"Cryptocoin Payment Box Width, default 530px. <a href='%s'>See screenshot "
+"Cryptocoin Payment Box Width, default 540px. <a href='%s'>See screenshot "
 "&#187;</a>"
 msgstr ""
-"Cryptocoin Payment Box ширина, по умолчанию 530px. <a href='%s'>Смотрите "
+"Cryptocoin Payment Box ширина, по умолчанию 540px. <a href='%s'>Смотрите "
 "скриншот »</a>"
 
 #: gourl.php:900

@@ -205,7 +205,7 @@ final class gourlclass
 	*/
 	public static function languages()
 	{
-		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'ru' => 'Russian', 'nl' => 'Dutch', 'pt' => 'Portuguese', 'fa' => 'Persian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
+		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'ru' => 'Russian', 'nl' => 'Dutch', 'pt' => 'Portuguese', 'fa' => 'Persian', 'ko' => 'Korean', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
 	}
 	
 
@@ -690,7 +690,7 @@ final class gourlclass
 	private function get_settings()
 	{
 
-		$arr = array("box_width"=>530, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"");
+		$arr = array("box_width"=>540, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"");
 		foreach($arr as $k => $v) $this->options[$k] = "";
 
 		foreach($this->custom_images as $k => $v)
@@ -894,7 +894,7 @@ final class gourlclass
 		$tmp .= '</tr>';
 		
 		$tmp .= '<tr><th><br>'.__('Payment Box Width', GOURL).':</th>';
-		$tmp .= '<td><br><input class="gourlnumeric" type="text" id="'.GOURL.'box_width" name="'.GOURL.'box_width" value="'.htmlspecialchars($this->options['box_width'], ENT_QUOTES).'" class="widefat"><label>'.__('px', GOURL).'</label><br><em>'.sprintf(__("Cryptocoin Payment Box Width, default 530px. <a href='%s'>See screenshot &#187;</a>", GOURL), plugins_url("/images/sizes.png", __FILE__)).'</em></td>';
+		$tmp .= '<td><br><input class="gourlnumeric" type="text" id="'.GOURL.'box_width" name="'.GOURL.'box_width" value="'.htmlspecialchars($this->options['box_width'], ENT_QUOTES).'" class="widefat"><label>'.__('px', GOURL).'</label><br><em>'.sprintf(__("Cryptocoin Payment Box Width, default 540px. <a href='%s'>See screenshot &#187;</a>", GOURL), plugins_url("/images/sizes.png", __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 	
 		$tmp .= '<tr><th>'.__('Payment Box Height', GOURL).':</th>';
@@ -7414,7 +7414,7 @@ function gourl_load_textdomain()
 
 
 /*
- *  XXII.  
+ *  XXII.    
 */
 if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version'), "3.6") < 0)
 {

@@ -859,7 +859,7 @@ msgstr ""
 #: gourl.php:897
 #, php-format
 msgid ""
-"Cryptocoin Payment Box Width, default 530px. <a href='%s'>See screenshot "
+"Cryptocoin Payment Box Width, default 540px. <a href='%s'>See screenshot "
 "&#187;</a>"
 msgstr ""
 
