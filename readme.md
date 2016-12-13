@@ -2,12 +2,12 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.3.12
+Version 1.3.13
 
 
 **GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress 3.5 or higher version**
 
-Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit payments on your Wordpress Website Online. It's Easy! 
+Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin payments on your Wordpress Website Online. It's Easy! 
 
 
 * Author URI: [https://gourl.io](https://gourl.io)
@@ -15,8 +15,8 @@ Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Featherc
 * Wordpress Page: [https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership](https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership/)
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
 * Requires at least: 3.5
-* Tested up to: 4.7
-* Stable Tag: 1.3.12
+* Tested up to: 4.8
+* Stable Tag: 1.3.13
 * License: GNU Version 2 or Any Later Version
 
 
@@ -30,7 +30,7 @@ Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Featherc
 * No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD, [EUR, GBP, RUB, AUD (100 currencies)](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/)
 * No ID Required, No Bank Account Needed. Global, Anonymous, Secure, No Chargebacks, Zero Risk
 * Get payments straight to your bitcoin/altcoin wallets and convert to [USD/EUR/etc](https://gourl.io/#usd) later. All in automatic mode
-* Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit payments Online on your Wordpress website 
+* Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin payments Online on your Wordpress website 
 * [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, etc 
 * [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads 
 * [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos 

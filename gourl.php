@@ -178,7 +178,7 @@ final class gourlclass
 	*/
 	public static function coin_names()
 	{
-		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'DASH' => 'dash', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'XPY' => 'paycoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin', 'PPC' => 'peercoin', 'MUE' => 'monetaryunit');
+		return array('BTC' => 'bitcoin', 'LTC' => 'litecoin', 'DOGE' => 'dogecoin', 'DASH' => 'dash', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'XPY' => 'paycoin', 'VTC' => 'vertcoin', 'VRC' => 'vericoin', 'PPC' => 'peercoin', 'MUE' => 'monetaryunit', 'SCN' => 'swiscoin');
 	}
 	
 	
@@ -187,7 +187,7 @@ final class gourlclass
 	*/
 	public static function coin_chain()
 	{
-		return array('bitcoin' => 'https://blockchain.info/', 'litecoin' => 'https://bchain.info/LTC/', 'paycoin' => 'https://chainz.cryptoid.info/xpy/', 'dogecoin' => 'https://dogechain.info/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'http://explorer.feathercoin.com/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'vericoin' => 'https://chainz.cryptoid.info/vrc/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/');
+		return array('bitcoin' => 'https://blockchain.info/', 'litecoin' => 'https://bchain.info/LTC/', 'paycoin' => 'https://chainz.cryptoid.info/xpy/', 'dogecoin' => 'https://dogechain.info/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'http://explorer.feathercoin.com/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'vericoin' => 'https://chainz.cryptoid.info/vrc/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'swiscoin' => 'https://scnblockchain.com/');
 	}
 	
 	
@@ -196,7 +196,7 @@ final class gourlclass
 	*/
 	public static function coin_www()
 	{
-		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/');
+		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'swiscoin' => 'https://www.swiscoin.com/');
 	}
 	
 	
@@ -481,7 +481,7 @@ final class gourlclass
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content, custom <a href='%s'>actions</a>", GOURL), GOURL_ADMIN.GOURL.'paypermembership', plugins_url("/images/dir/membership_actions.txt", __FILE__))." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-membership-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc", GOURL), GOURL_ADMIN.GOURL.'products')." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-product-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.__("<a href='#addon'>Working with third-party plugins</a> - good support for third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)", GOURL).'</li>';
-		$tmp .= '<li> '.__("Support payments in Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit", GOURL).'</li>';
+		$tmp .= '<li> '.__("Support payments in Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin", GOURL).'</li>';
 		$tmp .= '<li> '.__("<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour)", GOURL).'</li>';
 		$tmp .= '<li> '.sprintf(__("Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> for You", GOURL), "https://gourl.io/view/contact/Contact_Us.html").'</li>';
 		$tmp .= "</ul>";
@@ -615,8 +615,9 @@ final class gourlclass
 		$ftc = "6otKdaB1aasmQ5kA9wKBXJM5mi9e19VxYQ";
 		$vtc = "VeRUojCEkZn9u8AswqiKvpfHW4BW8Uas7V";
 		$vrc = "VMr4YsLufTgx5ForMV7nP2sQJSSbec593f";
-		$mue = "7SA3Ht7CvoVueRvnKqqRR7fW6xg5hZk8TX";
 		$ppc = "PUxNprg24a8JjgG5pETKqesSiC5HprutvB";
+		$mue = "7SA3Ht7CvoVueRvnKqqRR7fW6xg5hZk8TX";
+		$scn = "SRWDHdAb7JPY79WnvhguUX7uKi3ttzfqqB";
 		
 		$tmp .= "<p>".sprintf(__('Please contact us with any questions - %s', GOURL), "<a href='https://gourl.io/view/contact/Contact_Us.html'>https://gourl.io/view/contact/Contact_Us.html</a>")."</p>";
 		
@@ -649,6 +650,7 @@ final class gourlclass
 		$tmp .= "<p>Vericoin: &#160; <a href='vericoin:".$vrc."?label=Donation'>".$vrc."</a></p>";
 		$tmp .= "<p>MonetaryUnit: &#160; <a href='monetaryunit:".$mue."?label=Donation'>".$mue."</a></p>";
 		$tmp .= "<p>Peercoin: &#160; <a href='peercoin:".$ppc."?label=Donation'>".$ppc."</a></p>";
+		$tmp .= "<p>Swiscoin: &#160; <a href='swiscoin:".$scn."?label=Donation'>".$scn."</a></p>";
 		$tmp .= "</div>";
 		$tmp .= "<br><br><br><br><br><br><br>";
 		
@@ -1529,7 +1531,7 @@ final class gourlclass
 			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'files&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			echo "<div class='".GOURL."intro postbox'>";
 			echo '<a style="float:right" target="_blank" href="https://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, MonetaryUnit, Peercoin", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
+			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
 			echo '<p>'.sprintf(__("Create <a href='%s'>New Paid File Downloads</a> and place new generated <a href='%s'>shortcode</a> on your public page/post. Done!", GOURL), GOURL_ADMIN.GOURL.'file', plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 			echo sprintf(__("<a href='%s'>Read more</a>", GOURL), GOURL_ADMIN.GOURL."#i3").'</p>';
 			echo '<p><b>-----------------<br>'.sprintf(__("Alternatively, you can use free <a href='%s'>Easy Digital Downloads</a> plugin (advanced digital selling plugin with Credit Cards/Paypal) with our <a href='%s'>EDD Bitcoin/Altcoin Gateway</a> addon", GOURL), admin_url('plugin-install.php?tab=search&type=term&s=Easy+Digital+Downloads+sell+complete+management+sales+charts+Email+Subscribers+csv'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+easy+digital+Downloads+edd')) . '</b></p>';

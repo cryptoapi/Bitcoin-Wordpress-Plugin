@@ -189,7 +189,7 @@ msgstr ""
 #: gourl.php:484
 msgid ""
 "Support payments in Bitcoin, Litecoin, Paycoin, Dogecoin, Dash, Speedcoin, "
-"Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit"
+"Reddcoin, Potcoin, Feathercoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin"
 msgstr ""
 
 #: gourl.php:485
