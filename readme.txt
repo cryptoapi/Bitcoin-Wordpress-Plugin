@@ -181,7 +181,7 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 == Changelog ==
 
 = 1.3.13 =
-* Added Swiscoin (coins voting https://gourl.io/coin-voting.html)
+* Added Swiscoin (coins voting https://gourl.io/coin-voting.html )
 
 = 1.3.12 =
 * Added Japanese Language (Thanks to Takiko)
@@ -269,5 +269,5 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 == Upgrade Notice ==
 
 = 1.3.13 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended      
+This update includes several new features, enhancements, and bugfixes. Updating is recommended     
         

@@ -196,7 +196,7 @@ final class gourlclass
 	*/
 	public static function coin_www()
 	{
-		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'swiscoin' => 'https://www.swiscoin.com/');
+		return array('bitcoin' => 'https://bitcoin.org/', 'litecoin' => 'https://litecoin.org/', 'paycoin' => 'https://paycoin.com/', 'dogecoin' => 'http://dogecoin.com/', 'dash' => 'https://www.dashpay.io/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'vericoin' => 'http://www.vericoin.info/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'swiscoin' => 'https://www.swisopensource.com/');
 	}
 	
 	
@@ -6400,6 +6400,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 	if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
 	if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
 	if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
+	if ($from_Currency == "RM")  $from_Currency = "MYR"; // fix for Malaysian Ringgit
 	
 	$key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
 	
@@ -7439,5 +7440,5 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		}
 	
 		return false;
-	}
+	} 
 }
