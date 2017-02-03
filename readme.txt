@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.8
-Stable Tag: 1.3.13
+Stable Tag: 1.3.14
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.14 =
+* Added Italian Language (Thanks to Lorenzo)
+
 = 1.3.13 =
 * Added Swiscoin (coins voting https://gourl.io/coin-voting.html )
 
@@ -265,9 +268,3 @@ This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Me
 
 
 
-
-== Upgrade Notice ==
-
-= 1.3.13 =
-This update includes several new features, enhancements, and bugfixes. Updating is recommended     
-        
