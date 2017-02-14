@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, af
 
 Requires at least: 3.5
 Tested up to: 4.8
-Stable Tag: 1.3.14
+Stable Tag: 1.3.15
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.15 =
+* Added Turkish Language (Thanks to Gezgin)
+
 = 1.3.14 =
 * Added Italian Language (Thanks to Lorenzo)
 
@@ -265,6 +268,5 @@ Add Pay-Per-Product, Pay-Per-Membership
 
 = 1.0.0 =
 This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin
-
 
 
