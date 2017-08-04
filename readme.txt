@@ -3,15 +3,15 @@ Contributors: gourl, GoUrl.io
 Plugin Name: GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
-Tags: bitcoin, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, paycoin, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vericoin, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, darkcoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, vericoin, potcoin, paycoin, monetaryunit, peercoin, swiscoin
+Tags: bitcoin, bitcoincash, bitcoin cash, bitcoin payments, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, file download, gateway, gourl, litecoin, membership, paid content, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, potcoin, monetaryunit, peercoin
 
 Requires at least: 3.5
-Tested up to: 4.8
-Stable Tag: 1.3.15
+Tested up to: 4.9
+Stable Tag: 1.3.16
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dogecoin, Paycoin, Dash, Reddcoin, etc. Payments Online
+GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Accept Bitcoin, Litecoin, Dash, Dogecoin, Reddcoin, etc. Payments Online
 
 
 
@@ -28,7 +28,7 @@ Our customers list - [https://gourl.io#customers](https://gourl.io#customers)
 * No Monthly Fee, Transaction Fee from 0%. Set your own prices in USD, [EUR, GBP, RUB, AUD (100 currencies)](https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/)
 * No ID Required, No Bank Account Needed. Global, Anonymous, Secure, No Chargebacks, Zero Risk
 * Get payments straight to your bitcoin/altcoin wallets and convert to [USD/EUR/etc](https://gourl.io/#usd) later. All in automatic mode
-* Accept Bitcoin, Litecoin, Dogecoin, Dash, Speedcoin, Reddcoin, Potcoin, Feathercoin, Paycoin, Vertcoin, Vericoin, Peercoin, MonetaryUnit, Swiscoin payments Online on your Wordpress website 
+* Accept Bitcoin, BitcoinCash, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit payments Online on your Wordpress website 
 * [Pay-Per-Product](http://gourl.io/lib/examples/pay-per-product-multi.php) - advanced solution for your registered users: sell any products on website, invoices with buyer confirmation email, etc 
 * [Pay-Per-Download](http://gourl.io/lib/examples/pay-per-download-multi.php) - simple solution for your unregistered visitors: make money on file downloads 
 * [Pay-Per-View/Page](http://gourl.io/lib/examples/pay-per-page-multi.php) - for your unregistered visitors: offer paid access to your premium content/videos 
@@ -180,14 +180,14 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.16 =
+* Added Bitcoin Cash (BCH / BCC)
+
 = 1.3.15 =
 * Added Turkish Language (Thanks to Gezgin)
 
 = 1.3.14 =
 * Added Italian Language (Thanks to Lorenzo)
-
-= 1.3.13 =
-* Added Swiscoin (coins voting https://gourl.io/coin-voting.html )
 
 = 1.3.12 =
 * Added Japanese Language (Thanks to Takiko)
@@ -242,7 +242,6 @@ Pay-Per-View and Pay-Per-Membership - allow to use video preview
 Supports Bitcoin/Altcoin Payment Gateway for WPMU DEV Marketpress
 
 = 1.2.7 =
-* Add Paycoin [XPY] cryptocurrency
 * Supports Bitcoin/Altcoin Payment Gateway for WP eCommerce
 
 = 1.2.6 =
@@ -269,4 +268,4 @@ Add Pay-Per-Product, Pay-Per-Membership
 = 1.0.0 =
 This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin
 
-
+     

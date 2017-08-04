@@ -15,41 +15,50 @@
  * @example     https://gourl.io/bitcoin-payment-gateway-api.html
  * @gitHub  	https://github.com/cryptoapi/Payment-Gateway
  * @license 	Free GPLv2
- * @version     1.7.11
+ * @version     1.8.1
  *
  *
  *  CLASS CRYPTOBOX - LIST OF METHODS:
  *  --------------------------------------
  *  1. function display_cryptobox(..)			// Show Cryptocoin Payment Box and automatically displays successful payment message. If $submit_btn = true, display user submit button 'Click Here if you have already sent coins' or not
- *  2. function is_paid(..)	 					// If payment received - return true, otherwise return false
- *  3. function is_confirmed()					// Returns true if transaction/payment have 6+ confirmations. Average transaction/payment confirmation time - 10-20min for 6 confirmations (altcoins)
- *  4. function amount_paid()					// Returns the amount of coins received from the user 
- *  5. function amount_paid_usd()				// Returns the approximate amount in USD received from the user using live cryptocurrency exchange rates on the datetime of payment
- *  6. function set_status_processed()			// Optional - if payment received, set payment status to 'processed' and save this status in database
- *  7. function is_processed()					// Optional - if payment status in database is 'processed' - return true, otherwise return false
- *  8. function cryptobox_type()				// Returns cryptobox type - paymentbox or captchabox
- *  9. function payment_id()					// Returns current record id in the table crypto_payments. Crypto_payments table stores all payments from your users
- *  10.function payment_date()					// Returns payment/transaction datetime in GMT format
- *  11.function payment_info()					// Returns object with current user payment details - amount, txID, datetime, usercointry, etc
- *  12.function cryptobox_reset()				// Optional, Delete cookies/sessions and new cryptobox with new payment amount will be displayed. Use this function only if you have not set userID manually.
- *  13.function coin_name()						// Returns coin name (bitcoin, dogecoin, etc)
- *  14.function coin_label()					// Returns coin label (DOGE, BTC, etc)
- *  15.function iframe_id()						// Returns payment box frame id
+ *  2. function cryptobox_json_url()            // It generates url with your paramenters to gourl.io payment gateway. Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax.
+ *  3. function get_json_values()               // Alternatively, you can receive JSON values though php curl on server side and use it in your php file without using Javascript and Jquery/Ajax. 
+ *  4. function cryptobox_hash(..)              // It generates security md5 hash for all values used in payment box 
+ *  5. function is_paid(..)	 					// If payment received - return true, otherwise return false
+ *  6. function is_confirmed()					// Returns true if transaction/payment have 6+ confirmations. Average transaction/payment confirmation time - 10-20min for 6 confirmations (altcoins)
+ *  7. function amount_paid()					// Returns the amount of coins received from the user 
+ *  8. function amount_paid_usd()				// Returns the approximate amount in USD received from the user using live cryptocurrency exchange rates on the datetime of payment
+ *  9. function set_status_processed()			// Optional - if payment received, set payment status to 'processed' and save this status in database
+ *  10. function is_processed()					// Optional - if payment status in database is 'processed' - return true, otherwise return false
+ *  11.function cryptobox_type()				// Returns cryptobox type - paymentbox or captchabox
+ *  12.function payment_id()					// Returns current record id in the table crypto_payments. Crypto_payments table stores all payments from your users
+ *  13.function payment_date()					// Returns payment/transaction datetime in GMT format
+ *  14.function payment_info()					// Returns object with current user payment details - amount, txID, datetime, usercointry, etc
+ *  15.function cryptobox_reset()				// Optional, Delete cookies/sessions and new cryptobox with new payment amount will be displayed. Use this function only if you have not set userID manually.
+ *  16.function coin_name()						// Returns coin name (bitcoin, dogecoin, etc)
+ *  17.function coin_label()					// Returns coin label (DOGE, BTC, etc)
+ *  18.function iframe_id()						// Returns payment box frame id
  *
  *
  *  LIST OF GENERAL FUNCTIONS:
  *  -------------------------------------
  *  A. function payment_history(..) 			// Returns array with history payment details of any of your users / orders / etc.
  *  B. function payment_unrecognised(..) 		// Returns array with unrecognised payments for custom period - $time (users paid wrong amount on your internal wallet address)
- *  C. function display_language_box(..)		// Language selection dropdown list for cryptocoin payment box 
- *  D. function display_currency_box(..)		// Multiple crypto currency selection list. You can accept payments in multiple crypto currencies (for example: bitcoin, litecoin, dogecoin)
- *  E. function cryptobox_selcoin(..)			// Current selected coin by user (bitcoin, dogecoin, etc. - for multiple coin payment boxes) 
- *  F. function get_country_name(..)			// Get country name by country code or reverse
- *  G. function convert_currency_live(..)		// Fiat currency converter using Google Finance live exchange rates
- *  H. function validate_gourlkey(..)			// Validate gourl private/public/affiliate keys 
- *  I. function run_sql(..)						// Run SQL queries and return result in array/object formats
+ *  C. function cryptobox_sellanguage(..)       // Get cryptobox current selected language by user (english, spanish, etc)
+ *  D. function cryptobox_selcoin(..)			// Get cryptobox current selected coin by user (bitcoin, dogecoin, etc. - for multiple coin payment boxes) 
+ *  E. function display_language_box(..)		// Language selection dropdown list for cryptocoin payment box 
+ *  F. function display_currency_box(..)		// Multiple crypto currency selection list. You can accept payments in multiple crypto currencies (for example: bitcoin, bitcoincash, litecoin, dogecoin)
+ *  G. function get_country_name(..)			// Get country name by country code or reverse
+ *  H. function convert_currency_live(..)		// Fiat currency converter using Google Finance live exchange rates
+ *  I. function validate_gourlkey(..)			// Validate gourl private/public/affiliate keys 
+ *  J. function run_sql(..)						// Run SQL queries and return result in array/object formats
  *
  *
+ *  CONSTANTS
+ *  -------------------------------------
+ *  CRYPTOBOX_LANGUAGE - cryptobox current selected language
+ *  CRYPTOBOX_LOCALISATION - all cryptobox localisations 
+ *  
  *  Note: Complete Description of the Functions, see on the page below or here - https://gourl.io/api-php.html
  *
  *
@@ -66,10 +75,10 @@ if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
 
-define("CRYPTOBOX_VERSION", "1.7.11");
+define("CRYPTOBOX_VERSION", "1.8");
 
 // GoUrl supported crypto currencies
-define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'litecoin', 'paycoin', 'dogecoin', 'dash', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'vericoin', 'peercoin', 'monetaryunit', 'swiscoin')));
+define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'bitcoincash', 'litecoin', 'dash', 'dogecoin', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit')));
 
 
 class Cryptobox {
@@ -164,14 +173,10 @@ class Cryptobox {
 		if ($this->period != "NOEXPIRY" && !in_array($this->period, $arr)) die("Invalid Cryptobox Period - $this->period");
 		$this->period = str_replace(array("MINUTE", "HOUR", "DAY", "WEEK", "MONTH"), array(" MINUTE", " HOUR", " DAY", " WEEK", " MONTH"), $this->period);
 		
-		$id = "gourlcryptolang";
-		$this->language = strtolower($this->language);
 		$this->localisation = json_decode(CRYPTOBOX_LOCALISATION, true);
-		if (isset($_GET[$id]) && in_array($_GET[$id], array_keys($this->localisation))) $this->language = $_GET[$id];
-		elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], array_keys($this->localisation))) $this->language = $_COOKIE[$id];
-		elseif (!in_array($this->language, array_keys($this->localisation))) $this->language = "en";
+		if (!in_array(strtolower($this->language), array_keys($this->localisation))) $this->language = "en";
+		$this->language = cryptobox_sellanguage($this->language);
 		$this->localisation = $this->localisation[$this->language];
-		unset($id);
 		
 		if ($this->iframeID && preg_replace('/[^A-Za-z0-9\_\-]/', '', $this->iframeID) != $this->iframeID || $this->iframeID == "cryptobox_live_") die("Invalid iframe ID - $this->iframeID. Allowed symbols: a..Z0..9_-");
 		
@@ -277,13 +282,13 @@ class Cryptobox {
 	
 
 			if ($this->paid) $cryptobox_html .= "<span style='color:#339e2e;white-space:nowrap;'>".str_replace(array("%coinName%", "%coinLabel%", "%amountPaid%"), array($this->coinName, $this->coinLabel, $this->amountPaid), $this->localisation[($this->boxType=="paymentbox"?"msg_received":"msg_received2")])."</span>";
-			else $cryptobox_html .= "<span style='color:#eb4847'>".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, ($this->coinLabel=='DASH'?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["msg_not_received"])."</span><script type='text/javascript'>cryptobox_msghide('$id')</script>";
+			else $cryptobox_html .= "<span style='color:#eb4847'>".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, (in_array($this->coinLabel, array('BCH', 'DASH'))?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["msg_not_received"])."</span><script type='text/javascript'>cryptobox_msghide('$id')</script>";
 			
 			$cryptobox_html .= "</div></div><br>";
 		}
 	
-		$hash_str = $this->boxID.$this->coinName.$this->public_key.$this->private_key.$this->webdev_key.$this->amount.$this->period.$this->amountUSD.$this->language.$this->amount.$this->iframeID.$this->amountUSD.$this->userID.$this->userFormat.$this->orderID.$width.$height;
-		$hash = md5($hash_str);
+		$hash = $this->cryptobox_hash(false, $width, $height);
+		
 		$cryptobox_html .= "<div align='center' style='min-width:".$width."px'><iframe id='$this->iframeID' ".($box_style?'style="'.htmlspecialchars($box_style, ENT_COMPAT).'"':'')." scrolling='no' marginheight='0' marginwidth='0' frameborder='0' width='$width' height='$height'></iframe></div>";
 		$cryptobox_html .= "<div><script type='text/javascript'>";
 		$cryptobox_html .= "cryptobox_show($this->boxID, '$this->coinName', '$this->public_key', $this->amount, $this->amountUSD, '$this->period', '$this->language', '$this->iframeID', '$this->userID', '$this->userFormat', '$this->orderID', '$this->cookieName', '$this->webdev_key', '$hash', $width, $height);";
@@ -294,7 +299,7 @@ class Cryptobox {
 			$cryptobox_html .= "<form action='".$_SERVER["REQUEST_URI"]."#".($anchor?$anchor:"c".$this->iframeID)."' method='post'>";
 			$cryptobox_html .= "<input type='hidden' id='cryptobox_live_' name='cryptobox_live_' value='$val'>";
 			$cryptobox_html .= "<div align='center'>";
-			$cryptobox_html .= "<button".(in_array($this->language, array("ar", "fa"))?' dir="rtl"':'')." style='color:#555;border-color:#ccc;background:#f7f7f7;-webkit-box-shadow:inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);box-shadow:inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);vertical-align:top;display:inline-block;text-decoration:none;font-size:13px;line-height:26px;min-height:28px;margin:20px 0 25px 0;padding:0 10px 1px;cursor:pointer;border-width:1px;border-style:solid;-webkit-appearance:none;-webkit-border-radius:3px;border-radius:3px;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:\"Open Sans\",sans-serif;font-size: 13px;font-weight: normal;text-transform: none;'>&#160; ".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, ($this->coinLabel=='DASH'?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["button"]).($this->language!="ar"?" &#187;":"")." &#160;</button>";
+			$cryptobox_html .= "<button".(in_array($this->language, array("ar", "fa"))?' dir="rtl"':'')." style='color:#555;border-color:#ccc;background:#f7f7f7;-webkit-box-shadow:inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);box-shadow:inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);vertical-align:top;display:inline-block;text-decoration:none;font-size:13px;line-height:26px;min-height:28px;margin:20px 0 25px 0;padding:0 10px 1px;cursor:pointer;border-width:1px;border-style:solid;-webkit-appearance:none;-webkit-border-radius:3px;border-radius:3px;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:\"Open Sans\",sans-serif;font-size: 13px;font-weight: normal;text-transform: none;'>&#160; ".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, (in_array($this->coinLabel, array('BCH', 'DASH'))?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["button"]).($this->language!="ar"?" &#187;":"")." &#160;</button>";
 			$cryptobox_html .= "</div>";
 			$cryptobox_html .= "</form>";
 		}
@@ -305,10 +310,133 @@ class Cryptobox {
 	}
 	
 	
+
+	
+	
+	/* 2. Function cryptobox_json_url()
+	 *
+	 * It generates url with your paramenters to gourl.io payment gateway.
+	 * Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax.
+	 * See instruction https://gourl.io/bitcoin-payment-gateway-api.html#p8
+	 *  
+	 * JSON Values Example -
+	 * Payment not received - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/2.21/pe/NOEXPIRY/l/en/o/invoice22/u/83412313__3bccb54769/us/COOKIE/j/1/d/ODIuMTEuOTQuMTIx/h/e889b9a07493ee96a479e471a892ae2e   
+	 * Payment received successfully - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/0.1/pe/NOEXPIRY/l/en/o/invoice1/u/demo/us/MANUAL/j/1/d/ODIuMTEuOTQuMTIx/h/ac7733d264421c8410a218548b2d2a2a
+	 * 
+	 * Alternatively, you can receive JSON values through php curl on server side - function get_json_values() and use it in your php/other files without using javascript and jquery/ajax.
+	 * 
+	 * By default the user sees bitcoin payment box as iframe in html format - function display_cryptobox().
+	 * JSON data will allow you to easily customise your bitcoin payment boxes. For example, you can display payment amount and  
+	 * bitcoin payment address with your own text, you can also accept payments in android/windows and other applications. 
+	 * You get an array of values - payment amount, bitcoin address, text; and can place them in any position on your webpage/application.   
+	 */
+	public function cryptobox_json_url()
+	{
+	    
+	    $ip		= $this->ip_address();
+	    $hash 	= $this->cryptobox_hash(true);
+	    
+	    $data = array
+	    (
+	        "b" 	=> $this->boxID,
+	        "c" 	=> $this->coinName,
+	        "p" 	=> $this->public_key,
+	        "a" 	=> $this->amount,
+	        "au" 	=> $this->amountUSD,
+	        "pe"	=> str_replace(" ", "_", $this->period),
+	        "l" 	=> $this->language,
+	        "o" 	=> $this->orderID,
+	        "u" 	=> $this->userID,
+	        "us"	=> $this->userFormat,
+	        "j"     => 1, // json   
+	        "d" 	=> base64_encode($ip),
+	        "h" 	=> $hash
+	    );
+	     
+	    if ($this->webdev_key) $data["w"]  = $this->webdev_key;
+	    $data["z"] = rand(0,10000000);
+	    
+	    $url = "https://coins.gourl.io";
+	    foreach($data as $k=>$v) $url .= "/".$k."/".rawurlencode($v);
+	    
+	    return $url;
+	}
+	
+	
+	
+	
+	
+	/* 3. Function get_json_values()
+	 *
+	 * Alternatively, you can receive JSON values through php curl on server side and use it in your php/other files without using javascript and jquery/ajax.
+	 * Return Array; Examples -
+	 * Payment not received - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/2.21/pe/NOEXPIRY/l/en/o/invoice22/u/83412313__3bccb54769/us/COOKIE/j/1/d/ODIuMTEuOTQuMTIx/h/e889b9a07493ee96a479e471a892ae2e   
+	 * Payment received successfully - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/0.1/pe/NOEXPIRY/l/en/o/invoice1/u/demo/us/MANUAL/j/1/d/ODIuMTEuOTQuMTIx/h/ac7733d264421c8410a218548b2d2a2a
+	 * 
+	 * By default the user sees bitcoin payment box as iframe in html format - function display_cryptobox().
+	 * JSON data will allow you to easily customise your bitcoin payment boxes. For example, you can display payment amount and  
+	 * bitcoin payment address with your own text, you can also accept payments in android/windows and other applications. 
+	 * You get an array of values - payment amount, bitcoin address, text; and can place them in any position on your webpage/application.   
+	 */
+	public function get_json_values()
+	{
+		$url = $this->cryptobox_json_url();
+	    
+		$ch = curl_init( $url );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt( $ch, CURLOPT_HEADER, 0);
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt( $ch, CURLOPT_USERAGENT, 'Get_Json_Values PHP Class '.CRYPTOBOX_VERSION);
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
+		curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$res = curl_exec( $ch );
+		curl_close($ch);
+
+		// security; validate data sent by gourl.io
+		$f = false;
+		if ($res)
+		{
+		  $arr = $arr2 = json_decode($res, true);
+		  if (isset($arr2["data_hash"]))
+		  {
+		      unset($arr2["data_hash"]);
+		      if ($arr["data_hash"] == strtolower(hash("sha512", $this->private_key.json_encode($arr2).$this->private_key))) $f = true;
+		  }
+		}
+		if (!$f) $arr = array();    
 		
+		return $arr;
+	}
 	
 	
-	/* 2. Function is_paid($remotedb = false) -
+	
+	
+	
+	/* 4. Function cryptobox_hash($json = false, $width = 0, $height = 0)
+	 *
+	 * It generates security md5 hash for all values used in payment boxes. 
+	 * This protects payment box parameters from changes by end user in web browser. 
+	 * $json = true - generate md5 hash for json payment data output
+	 * or generate hash for iframe html box with sizes $width x $height
+	 */
+	public function cryptobox_hash($json = false, $width = 0, $height = 0)
+	{
+	    
+	    if ($json) $hash_str = $this->boxID."|".$this->coinName."|".$this->public_key."|".$this->private_key."|".$this->webdev_key."|".$this->amount."|".$this->amountUSD."|".$this->period."|". $this->language."|".$this->orderID."|".$this->userID."|".$this->userFormat."|".$this->ip_address();
+	    else       $hash_str = $this->boxID."|".$this->coinName."|".$this->public_key."|".$this->private_key."|".$this->webdev_key."|".$this->amount."|".$this->amountUSD."|".$this->period."|". $this->language."|".$this->orderID."|".$this->userID."|".$this->userFormat."|".$this->iframeID."|".$width."|".$height;
+
+		
+	    $hash = md5($hash_str);
+
+		
+	    return $hash; 
+	}
+	
+	
+	    
+	    
+	
+	/* 5. Function is_paid($remotedb = false) -
 	 * 
 	 * This Checks your local database whether payment has been received and is stored on your local database. 
 	 * 
@@ -336,7 +464,7 @@ class Cryptobox {
 	
 
 
-	/* 3. Function is_confirmed() -
+	/* 6. Function is_confirmed() -
 	*
 	* Function return is true if transaction/payment has 6+ confirmations. 
 	* It connects with our payment server and gets the current transaction status (confirmed/unconfirmed). 
@@ -353,7 +481,7 @@ class Cryptobox {
 	
 	
 	
-	/* 4. Function amount_paid()
+	/* 7. Function amount_paid()
 	 * 
 	 * Returns the amount of coins received from the user
 	 */
@@ -367,7 +495,7 @@ class Cryptobox {
 	
 	
 	
-	/* 5. Function amount_paid_usd()
+	/* 8. Function amount_paid_usd()
 	 * 
 	 * Returns the approximate amount in USD received from the user
 	 * using live cryptocurrency exchange rates on the datetime of payment.
@@ -396,7 +524,7 @@ class Cryptobox {
 	
 	
 	
-	/* 6. Functions set_status_processed() and is_processed() 
+	/* 9. Functions set_status_processed() and is_processed() 
 	 * 
 	 * You can use this function when user payment has been received
 	 * (function is_paid() returns true) and want to make one time action,
@@ -425,7 +553,7 @@ class Cryptobox {
 	
 	
 	
-	/* 7. Function is_processed() 
+	/* 10. Function is_processed() 
 	 * 
 	 * If payment status in database is 'processed' - return true, 
 	 * otherwise return false. You need to use it with 
@@ -441,7 +569,7 @@ class Cryptobox {
 	
 	
 	
-	/* 8. Function cryptobox_type() 
+	/* 11. Function cryptobox_type() 
 	 * 
 	 * Returns 'paymentbox' or 'captchabox'
 	 * 
@@ -468,7 +596,7 @@ class Cryptobox {
 	
 	
 	
-	/* 9. Function payment_id() 
+	/* 12. Function payment_id() 
 	 * 
 	 * Returns current record id in the table crypto_payments.
 	 * Crypto_payments table stores all payments from your users
@@ -481,7 +609,7 @@ class Cryptobox {
 	
 	
 	
-	/* 10. Function payment_date() 
+	/* 13. Function payment_date() 
 	 * 
 	 * Returns payment/transaction datetime in GMT format
 	 * Example - 2014-09-26 17:31:58 (is 26 September 2014, 5:31pm GMT) 
@@ -493,7 +621,7 @@ class Cryptobox {
 	
 	
 	
-	/* 11. Function payment_info()
+	/* 14. Function payment_info()
 	 * 
 	 * Returns object with current user payment details -
 	 * coinLabel 	 	- cryptocurrency label
@@ -521,7 +649,7 @@ class Cryptobox {
 	
 	
 	
-	/* 12. Function cryptobox_reset()
+	/* 15. Function cryptobox_reset()
 	 *
 	 * Optional, It will delete cookies/sessions with userID and new cryptobox with new payment amount
 	 * will be displayed after page reload. Cryptobox will recognize user as a new one with new generated userID.
@@ -562,9 +690,9 @@ class Cryptobox {
 	
 	
 	
-	/* 13. Function coin_name()
+	/* 16. Function coin_name()
 	 *
-	 * Returns coin name (bitcoin, dogecoin, litecoin, etc)   
+	 * Returns coin name (bitcoin, bitcoincash, litecoin, etc)   
 	*/
 	public function coin_name()
 	{
@@ -574,9 +702,9 @@ class Cryptobox {
 	
 	
 	
-	/* 14. Function coin_label()
+	/* 17. Function coin_label()
 	 *
-	 * Returns coin label (DOGE, BTC, LTC, etc)   
+	 * Returns coin label (BTC, BCH, LTC, etc)   
 	*/
 	public function coin_label()
 	{
@@ -585,7 +713,7 @@ class Cryptobox {
 
 	
 	
-	/* 15. Function iframe_id()
+	/* 18. Function iframe_id()
 	 *
 	 * Returns payment box frame id   
 	*/
@@ -597,11 +725,20 @@ class Cryptobox {
 
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * Other Internal functions   
 	*/
 	private function check_payment($remotedb = false)
 	{
+		static $already_checked = false;
+	    
 		$this->paymentID = $diff = 0;
 		
 		$obj = run_sql("SELECT paymentID, amount, amountUSD, txConfirmed, txCheckDate, txDate, processed, boxType FROM crypto_payments WHERE boxID = $this->boxID && orderID = '$this->orderID' && userID = '$this->userID' ".($this->period=="NOEXPIRY"?"":"&& txDate >= DATE_SUB('".gmdate("Y-m-d H:i:s")."', INTERVAL ".$this->period.")")." ORDER BY txDate DESC LIMIT 1");
@@ -621,13 +758,15 @@ class Cryptobox {
 		
 		if (!$obj && isset($_POST["cryptobox_live_"]) && $_POST["cryptobox_live_"] == md5($this->iframeID.$this->private_key.$this->userID)) $remotedb = true;
 		
-		if ((!$obj && $remotedb) || ($obj && !$this->confirmed && ($diff > (($this->coinLabel=='BTC'?35:12)*60) || $diff < 0))) // if $diff < 0 - user have incorrect time on local computer
+		if (!$already_checked && ((!$obj && $remotedb) || ($obj && !$this->confirmed && ($diff > (10*60) || $diff < 0)))) // if $diff < 0 - user have incorrect time on local computer
 		{
 			$this->check_payment_live();
+			$already_checked = true;
 		}
 	
 		return true;
 	}
+	
 	private function check_payment_live()
 	{
 		$ip		= $this->ip_address();
@@ -653,8 +792,8 @@ class Cryptobox {
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
-			
 		$res = curl_exec( $ch );
+		curl_close($ch);
 	
 		if ($res) $res = json_decode($res, true);
 		
@@ -679,7 +818,7 @@ class Cryptobox {
 
 			
 			$dt  = gmdate('Y-m-d H:i:s');
-			$obj = run_sql("select paymentID, processed, txConfirmed from crypto_payments where boxID = ".$res["box"]." && orderID = '".$res["order"]."' && userID = '".$res["user"]."' && txID = '".$res["tx"]."' limit 1"); 
+			$obj = run_sql("select paymentID, processed, txConfirmed from crypto_payments where boxID = ".$res["box"]." && orderID = '".$res["order"]."' && userID = '".$res["user"]."' && txID = '".$res["tx"]."' && amount = ".$res["amount"]." && addr = '".$res["addr"]."' limit 1"); 
 
 			if ($obj)
 			{ 
@@ -849,6 +988,7 @@ class Cryptobox {
 
 	
 	
+	
 	/* B. Function payment_unrecognised()
 	*
 	* Returns array with unrecognised payments for custom period - $period.
@@ -899,37 +1039,120 @@ class Cryptobox {
 	
 	
 	
-	/* D. Function display_language_box()
-	 * 
-	 * Language selection dropdown list for cryptocoin payment box
+	
+	
+	/* C. Function cryptobox_sellanguage($default = "en")
+	 *
+	 *  Get cryptobox current selected language by user (english, spanish, etc)
 	 */
-	function display_language_box($default = "en", $anchor = "gourlcryptolang")
+	function cryptobox_sellanguage($default = "en")
 	{
+		$default 		= strtolower($default);
+	    $localisation 	= json_decode(CRYPTOBOX_LOCALISATION, true); // List of available languages
+	    $id 	 		= "gourlcryptolang";
+	     
+	    if(defined("CRYPTOBOX_LANGUAGE"))
+	    {
+	        if (!isset($localisation[CRYPTOBOX_LANGUAGE])) die("Invalid lanuage value '".CRYPTOBOX_LANGUAGE."' in CRYPTOBOX_LANGUAGE; function cryptobox_language()");
+	        else return CRYPTOBOX_LANGUAGE;
+	    }
+	    
+	    if (isset($_GET[$id]) && in_array($_GET[$id], array_keys($localisation))) { $lan = $_GET[$id]; setcookie($id, $lan, time()+7*24*3600, "/"); }
+	    elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], array_keys($localisation))) $lan = $_COOKIE[$id];
+	    elseif (in_array($default, array_keys($localisation))) $lan = $default;
+	    else 	$lan = "en";
+	    
+	    define("CRYPTOBOX_LANGUAGE", $lan);
+	    
+	    return $lan;
+	}
+	
+	
+	
+	
+	
+	/* D. Function cryptobox_selcoin()
+	 *
+	 * Get cryptobox current selected coin by user (bitcoin, dogecoin, etc. - for multiple coin payment boxes)
+	 */
+	function cryptobox_selcoin($coins = array(), $default = "")
+	{
+	    static $current = "";
+	    
+	    $default 			= strtolower($default);
+	    $available_payments = json_decode(CRYPTOBOX_COINS, true); // List of available crypto currencies
+	    $id 	 			= "gourlcryptocoin";
+	
+	    if ($default && !in_array($default, $coins)) $coins[] = $default;
+	    if (!$default && $coins) $default = array_values($coins)[0];
+	     
+	    
+	    if($current)
+	    {
+	        if (!in_array($current, $available_payments)) $current = $default;
+	        else return $current;
+	    }
+	     
+	    
+	    // Current Selected Coin
+	    if (isset($_GET[$id]) && in_array($_GET[$id], $available_payments) && in_array($_GET[$id], $coins)) { $coinName = $_GET[$id]; setcookie($id, $coinName, time()+7*24*3600, "/"); }
+	    elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], $available_payments) && in_array($_COOKIE[$id], $coins)) $coinName = $_COOKIE[$id];
+	    else $coinName = $default;
+	
+	    $current =  $coinName;
+	     
+	    return $coinName;
+	}
+	
+	
+	
+	
+	    
+	/* E. Function display_language_box()
+	 * 
+	 * Language selection dropdown list for cryptocoin payment box<br>
+	 * $select_list = true - use &lt;SELECT&gt; tag for dropdown list, &lt;UL&gt; tag for dropdown list (using in bootstrap)
+	 */
+	function display_language_box($default = "en", $anchor = "gourlcryptolang", $select_list = true)
+	{
+	    
 		$default 		= strtolower($default);
 		$localisation 	= json_decode(CRYPTOBOX_LOCALISATION, true);
 		$id 	 		= "gourlcryptolang";
 		$arr 	 		= $_GET;
+		if (isset($arr["gourlcryptolang"])) unset($arr["gourlcryptolang"]);
 		
-		if (isset($_GET[$id]) && in_array($_GET[$id], array_keys($localisation))) { $lan = $_GET[$id]; unset($arr[$id]); setcookie($id, $lan, time()+7*24*3600, "/"); }
-		elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], array_keys($localisation))) $lan = $_COOKIE[$id];
-		elseif (in_array($default, array_keys($localisation))) $lan = $default;
-		else 	$lan = "en";
+		$lan = cryptobox_sellanguage($default);
 		
 		$url = $_SERVER["REQUEST_URI"];
 		if (mb_strpos($url, "?")) $url = mb_substr($url, 0, mb_strpos($url, "?"));
-		$tmp  = "<select name='$id' id='$id' onchange='window.open(\"//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=\"+this.options[this.selectedIndex].value+\"#".$anchor."\",\"_self\")' style='width:130px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666;border-radius:5px;-moz-border-radius:5px;border: #ccc 1px solid;margin:0;padding:3px 0 3px 6px;white-space:nowrap;overflow:hidden;'>";
-		foreach ($localisation as $k => $v) $tmp .= "<option ".($k==$lan?"selected":"")." value='$k'>".$v["name"]."</option>";
-		$tmp .= "</select>";
+		
+		// <select> html tag list
+		if ($select_list)
+		{
+    		$tmp  = "<select name='$id' id='$id' onchange='window.open(\"//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=\"+this.options[this.selectedIndex].value+\"#".$anchor."\",\"_self\")' style='width:130px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666;border-radius:5px;-moz-border-radius:5px;border: #ccc 1px solid;margin:0;padding:3px 0 3px 6px;white-space:nowrap;overflow:hidden;'>";
+    		foreach ($localisation as $k => $v) $tmp .= "<option ".($k==$lan?"selected":"")." value='$k'>".$v["name"]."</option>";
+    		$tmp .= "</select>";
+		}
+		else
+		// <ul> html tag list
+		{
+		    $tmp  = "<ul class='dropdown-menu'>";
+		    foreach ($localisation as $k => $v) $tmp .= "<li".($lan==$k?" class='active'":"")."><a href='//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=".$k."#".$anchor."'>".$v["name"]."</a></li>";
+		    $tmp  .= "</ul>";
+		}
 				
 		return $tmp; 
 	}
 	
 	
 	
-	/* D. Function display_currency_box()
+
+	
+	/* F. Function display_currency_box()
 	 *
 	* Multiple crypto currency selection list. You can accept payments in multiple crypto currencies
-	* For example you can accept payments in bitcoin, litecoin, dogecoin and use the same price in USD
+	* For example you can accept payments in bitcoin, bitcoincash, litecoin, etc and use the same price in USD
 	*/
 	function display_currency_box($coins = array(), $defCoin = "", $defLang = "en", $iconWidth = 50, $style = "width:350px; margin: 10px 0 10px 320px", $directory = "images", $anchor = "gourlcryptocoins")
 	{
@@ -938,6 +1161,7 @@ class Cryptobox {
 		$defCoin 			= strtolower($defCoin);
 		$defLang 			= strtolower($defLang);
 		$available_payments = json_decode(CRYPTOBOX_COINS, true);
+		$localisation       = json_decode(CRYPTOBOX_LOCALISATION, true);
 		$arr 	 			= $_GET;
 		
 		if (!in_array($defCoin, $available_payments)) die("Invalid your default value '$defCoin' in display_currency_box()");
@@ -954,17 +1178,11 @@ class Cryptobox {
 		$coin_url = "//".$_SERVER["HTTP_HOST"].$coin_url."?".http_build_query($arr).($arr?"&amp;":"")."gourlcryptocoin=";
 		
 		// Current Language
-		$localisation = json_decode(CRYPTOBOX_LOCALISATION, true);
-		$id = "gourlcryptolang";
-		$keys = array_keys($localisation);
-		if (isset($_GET[$id]) && in_array($_GET[$id], $keys)) $lan = $_GET[$id];
-		elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], $keys)) $lan = $_COOKIE[$id];
-		elseif (in_array($defLang, $keys)) $lan = $defLang;
-		else 	$lan = "en";
+		$lan = cryptobox_sellanguage($defLang);
 		$localisation = $localisation[$lan];
-						
-		$id  = "gourlcryptocoins";
-		$tmp = '<div id="'.$id.'" align="center" style="'.htmlspecialchars($style, ENT_COMPAT).'"><div style="margin-bottom:15px"><b>'.$localisation["payment"].' -</b></div>';
+		
+		
+		$tmp = '<div id="gourlcryptocoins" align="center" style="'.htmlspecialchars($style, ENT_COMPAT).'"><div style="margin-bottom:15px"><b>'.$localisation["payment"].' -</b></div>';
 		foreach ($coins as $v)
 		{
 			$v = trim(strtolower($v));
@@ -976,35 +1194,12 @@ class Cryptobox {
 		
 		return $tmp;
 	}
-		
 	
-	
-	/* E. Function cryptobox_selcoin()
-	 *
-	 * Current selected coin by user
-	 */	
-	function cryptobox_selcoin($coins = array(), $defCoin = "")
-	{
-		if (!$coins) return "";
-	
-		$defCoin 			= strtolower($defCoin);
-		$available_payments = json_decode(CRYPTOBOX_COINS, true); // GoUrl supported crypto currencies
-		$id 	 			= "gourlcryptocoin";
-	
-		if (!in_array($defCoin, $coins)) $coins[] = $defCoin;
-	
-		// Current Selected Coin
-		if (isset($_GET[$id]) && in_array($_GET[$id], $available_payments) && in_array($_GET[$id], $coins)) { $coinName = $_GET[$id]; setcookie($id, $coinName, time()+7*24*3600, "/"); }
-		elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], $available_payments) && in_array($_COOKIE[$id], $coins)) $coinName = $_COOKIE[$id];
-		else $coinName = $defCoin;
-	
-		return $coinName;
-	}
 
 	
 	
 
-	/* F. Function get_country_name()
+	/* G. Function get_country_name()
 	 * 
 	 * Get country name by country code
 	 */
@@ -1020,8 +1215,11 @@ class Cryptobox {
 		return $result;
 	}
 	
-
-	/* G. Function convert_currency_live()
+	
+	
+	
+	
+	/* H. Function convert_currency_live()
 	 * 
 	 * Currency Converter using Google Finance live exchange rates
 	 * Example - convert_currency_live("EUR", "USD", 22.37) - convert 22.37euro to usd
@@ -1046,17 +1244,23 @@ class Cryptobox {
 		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)");
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		curl_setopt ($ch, CURLOPT_TIMEOUT, 20);
-		$rawdata = curl_exec($ch);
+		$res = curl_exec($ch);
 		curl_close($ch);
-		$data = explode('bld>', $rawdata);
-		$data = explode($to_Currency, $data[1]);
-	
-		return round($data[0], ($to_Currency=="BTC"?5:2));
+		
+		if ($res)
+		{
+    		$data = explode('bld>', $res);
+    		$data = explode($to_Currency, $data[1]);
+    		return round($data[0], ($to_Currency=="BTC"?5:2));
+		}
+		else return -1; 
 	}
 	
 	
 	
-	/* H. Function validate_gourlkey()
+	
+	
+	/* I. Function validate_gourlkey()
 	 *
 	* Validate gourl private/public/affiliate keys
 	* $key 	 	- gourl payment box key
@@ -1096,8 +1300,10 @@ class Cryptobox {
 	}
 	
 	
-
-	/* I. Function run_sql()
+	
+	
+	
+	/* J. Function run_sql()
 	 *
 	 * Run SQL queries and return result in array/object formats
 	 */
@@ -1311,14 +1517,14 @@ class Cryptobox {
 							);
 
 	if(!defined("CRYPTOBOX_LOCALISATION")) define("CRYPTOBOX_LOCALISATION", json_encode($cryptobox_localisation));
-	unset($cryptobox_localisation);
+	unset($cryptobox_localisation);   
 	
 	if (!CRYPTOBOX_WORDPRESS || defined("CRYPTOBOX_PRIVATE_KEYS"))
 	{
 		$cryptobox_private_keys = explode("^", CRYPTOBOX_PRIVATE_KEYS);
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
-		
-		unset($v); unset($cryptobox_private_keys); 
+
+		unset($v); unset($cryptobox_private_keys);  
 	}
 ?>
