@@ -75,7 +75,7 @@ if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
 
-define("CRYPTOBOX_VERSION", "1.8");
+define("CRYPTOBOX_VERSION", "1.8.1");
 
 // GoUrl supported crypto currencies
 define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'bitcoincash', 'litecoin', 'dash', 'dogecoin', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit')));
@@ -1130,7 +1130,7 @@ class Cryptobox {
 		// <select> html tag list
 		if ($select_list)
 		{
-    		$tmp  = "<select name='$id' id='$id' onchange='window.open(\"//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=\"+this.options[this.selectedIndex].value+\"#".$anchor."\",\"_self\")' style='width:130px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666;border-radius:5px;-moz-border-radius:5px;border: #ccc 1px solid;margin:0;padding:3px 0 3px 6px;white-space:nowrap;overflow:hidden;'>";
+    		$tmp  = "<select name='$id' id='$id' onchange='window.open(\"//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=\"+this.options[this.selectedIndex].value+\"#".$anchor."\",\"_self\")' style='width:130px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666;border-radius:5px;-moz-border-radius:5px;border: #ccc 1px solid;margin:0;padding:3px 0 3px 6px;white-space:nowrap;overflow:hidden;display:inline;'>";
     		foreach ($localisation as $k => $v) $tmp .= "<option ".($k==$lan?"selected":"")." value='$k'>".$v["name"]."</option>";
     		$tmp .= "</select>";
 		}
@@ -1188,7 +1188,8 @@ class Cryptobox {
 			$v = trim(strtolower($v));
 			if (!in_array($v, $available_payments)) die("Invalid your submitted value '$v' in display_currency_box()");
 			if (strpos(CRYPTOBOX_PRIVATE_KEYS, ucfirst($v)."77") === false) die("Please add your Private Key for '$v' in variable \$cryptobox_private_keys, file cryptobox.config.php");
-			$tmp .= "<a href='".$coin_url.$v."#".$anchor."'><img style='box-shadow:none;margin:".round($iconWidth/10)."px ".round($iconWidth/7)."px;border:0;' width='$iconWidth' title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' src='".$directory."/".$v.($iconWidth>70?"2":"").".png'></a>";
+			$url = $coin_url.$v."#".$anchor;
+			$tmp .= "<a href='".$url."' onclick=\"location.href='".$url."';\"><img style='box-shadow:none;margin:".round($iconWidth/10)."px ".round($iconWidth/7)."px;border:0;' width='$iconWidth' title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' src='".$directory."/".$v.($iconWidth>70?"2":"").".png'></a>";
 		}
 		$tmp .= "</div>";
 		
@@ -1525,6 +1526,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);  
+		unset($v); unset($cryptobox_private_keys);
 	}
 ?>

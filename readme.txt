@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoincash, bitcoin cash, bitcoin payments, bitcoins, affiliate 
 
 Requires at least: 3.5
 Tested up to: 4.9
-Stable Tag: 1.3.16
+Stable Tag: 1.3.17
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.3.17 =
+Several new enhancements
+
 = 1.3.16 =
 * Added Bitcoin Cash (BCH / BCC)
 
@@ -267,5 +270,3 @@ Add Pay-Per-Product, Pay-Per-Membership
 
 = 1.0.0 =
 This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin
-
-     
