@@ -6409,7 +6409,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 	if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 0.5*60*60) > strtotime("now")) return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
 	
 	
-	$url = "https://www.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
+	$url = "https://finance.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
 
 	$ch = curl_init();
 	$timeout = 20;
