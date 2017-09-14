@@ -1,7 +1,7 @@
 <?php
 
 
-if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit;
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; 
 
 
 final class gourlclass 
@@ -6416,7 +6416,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount)
 	curl_setopt ($ch, CURLOPT_URL, $url);
 	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)");
+	curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
 	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 	curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
 	$rawdata = curl_exec($ch);
