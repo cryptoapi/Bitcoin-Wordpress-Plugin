@@ -7,7 +7,7 @@ Tags: bitcoin, bitcoincash, bitcoin cash, bitcoin payments, bitcoins, affiliate 
 
 Requires at least: 3.5
 Tested up to: 4.9
-Stable Tag: 1.3.18
+Stable Tag: 1.4.0
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,7 +124,7 @@ GoUrl wordpress plugin stores the data in four MySQL tables -
 
 = 4. Testing environment =
 
-You can use 110 free Speedcoins or Dogecoins for testing.
+You can use 500 free Speedcoins or Dogecoins for testing.
 Url: [https://speedcoin.org/info/free_coins/Free_Speedcoins.html](https://speedcoin.org/info/free_coins/Free_Speedcoins.html)
 The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
 
@@ -179,6 +179,9 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 
 == Changelog ==
+
+= 1.4.0 =
+Several new enhancements
 
 = 1.3.18 =
 Updated Google Currency Converter Url

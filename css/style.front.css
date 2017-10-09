@@ -215,3 +215,5 @@
 .edd-order-tx-id span {
 word-break: break-all; 
 }
+
+.woocommerce > .woocommerce-order > ul.woocommerce-thankyou-order-details li { margin-bottom: 15px; }

@@ -1,7 +1,7 @@
 <?php
 
 
-if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit; 
+if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit;
 
 
 final class gourlclass 
@@ -159,9 +159,13 @@ final class gourlclass
 		
 		// Force Login - external plugins
 		add_filter('v_forcelogin_whitelist', array(&$this, "v_forcelogin_whitelist"), 10, 1); // https://wordpress.org/plugins/wp-force-login/
+	
 		
+		// Exclude gourl js file from aggregation
+		add_filter('autoptimize_filter_js_exclude', array(&$this, "exclude_js_file"), 10, 1);
 	}
 	
+
 
 	
 	/*
@@ -239,6 +243,38 @@ final class gourlclass
 			return GOURL_DIR2."box/".$this->options[$type.'url'];
 		else 
 			return plugins_url("/images/".$type.".png", __FILE__);  
+	}
+	
+	
+	/*
+	 * Return transaction url to block explorer  
+	*/
+	public function blockexplorer_tr_url($txID, $coinName)
+	{
+	    $coinName = strtolower($coinName);
+	    
+	    if (!isset($this->coin_chain[$coinName])) return "";
+
+	    $explorer = $this->coin_chain[$coinName];
+	    $url = $explorer . (stripos($explorer,'cryptoid.info') ? 'tx.dws?' : (stripos($explorer,'blockdozer.com') ? 'insight/tx/' : 'tx/')) . $txID;
+	    
+		return $url;
+	}
+	
+	
+	/*
+	 * Return address url to block explorer
+	 */
+	public function blockexplorer_addr_url($address, $coinName)
+	{
+	    $coinName = strtolower($coinName);
+	     
+	    if (!isset($this->coin_chain[$coinName])) return "";
+	
+	    $explorer = $this->coin_chain[$coinName];
+	    $url = $explorer . (stripos($explorer,'cryptoid.info') ? 'address.dws?' : (stripos($explorer,'bchain.info') ? 'addr/' : (stripos($explorer,'blockdozer.com') ? 'insight/address/' : 'address/'))) . $address;
+	     
+	    return $url;
 	}
 	
 	
@@ -535,7 +571,7 @@ final class gourlclass
 		
 		$tmp .= "<p>".__("THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!", GOURL)."</p>";
 		
-		$tmp .= "<br><p>".sprintf(__("<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing", GOURL), "https://speedcoin.org/info/free_coins/Free_Speedcoins.html", "https://poloniex.com/");
+		$tmp .= "<br><p>".sprintf(__("<b>Testing environment</b>: You can use <a target='_blank' href='%s'>500 free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing", GOURL), "https://speedcoin.org/info/free_coins/Free_Speedcoins.html", "https://poloniex.com/");
 		$tmp .= "<a name='i4'></a>";
 		$tmp .= "</p>";
 		
@@ -1098,8 +1134,8 @@ final class gourlclass
 		$this->record["priceCoin"] = str_replace(",", "", $this->record["priceCoin"]);
 		if ($this->record["priceUSD"] == 0 && $this->record["priceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->record["priceUSD"] != 0 && $this->record["priceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
-		if ($this->record["priceUSD"] != 0 && (!is_numeric($this->record["priceUSD"]) || round($this->record["priceUSD"], 2) != $this->record["priceUSD"] || $this->record["priceUSD"] < 0.01 || $this->record["priceUSD"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->record["priceUSD"]);
-		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
+		if ($this->record["priceUSD"] != 0 && (!is_numeric($this->record["priceUSD"]) || round($this->record["priceUSD"], 2) != $this->record["priceUSD"] || $this->record["priceUSD"] < 0.01 || $this->record["priceUSD"] > 1000000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->record["priceUSD"]);
+		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 500000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
 		
 		if ($this->record["priceLabel"] && !isset($this->coin_names[$this->record["priceLabel"]])) $this->record_errors[] = sprintf(__("Price label '%s' - invalid value", GOURL), $this->record["priceLabel"]);
 		
@@ -1897,7 +1933,7 @@ final class gourlclass
 		if ($this->options2["ppvPrice"] == 0 && $this->options2["ppvPriceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->options2["ppvPrice"] != 0 && $this->options2["ppvPriceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->options2["ppvPrice"] != 0 && (!is_numeric($this->options2["ppvPrice"]) || round($this->options2["ppvPrice"], 2) != $this->options2["ppvPrice"] || $this->options2["ppvPrice"] < 0.01 || $this->options2["ppvPrice"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->options2["ppvPrice"]);
-		if ($this->options2["ppvPriceCoin"] != 0 && (!is_numeric($this->options2["ppvPriceCoin"]) || round($this->options2["ppvPriceCoin"], 4) != $this->options2["ppvPriceCoin"] || $this->options2["ppvPriceCoin"] < 0.0001 || $this->options2["ppvPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options2["ppvPriceCoin"], $this->options2["ppvPriceLabel"], $this->options2["ppvPriceLabel"]);
+		if ($this->options2["ppvPriceCoin"] != 0 && (!is_numeric($this->options2["ppvPriceCoin"]) || round($this->options2["ppvPriceCoin"], 4) != $this->options2["ppvPriceCoin"] || $this->options2["ppvPriceCoin"] < 0.0001 || $this->options2["ppvPriceCoin"] > 500000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options2["ppvPriceCoin"], $this->options2["ppvPriceLabel"], $this->options2["ppvPriceLabel"]);
 		
 		if (!in_array($this->options2["ppvExpiry"], $this->expiry_view))	$this->record_errors[] = __("Field 'Expiry Period' - invalid value", GOURL);
 		if ($this->lock_level_view && !in_array($this->options2["ppvLevel"], array_keys($this->lock_level_view)))	$this->record_errors[] = __('Lock Page Level - invalid value', GOURL);
@@ -2683,7 +2719,7 @@ final class gourlclass
 		if ($this->options3["ppmPrice"] == 0 && $this->options3["ppmPriceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->options3["ppmPrice"] != 0 && $this->options3["ppmPriceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->options3["ppmPrice"] != 0 && (!is_numeric($this->options3["ppmPrice"]) || round($this->options3["ppmPrice"], 2) != $this->options3["ppmPrice"] || $this->options3["ppmPrice"] < 0.01 || $this->options3["ppmPrice"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->options3["ppmPrice"]);
-		if ($this->options3["ppmPriceCoin"] != 0 && (!is_numeric($this->options3["ppmPriceCoin"]) || round($this->options3["ppmPriceCoin"], 4) != $this->options3["ppmPriceCoin"] || $this->options3["ppmPriceCoin"] < 0.0001 || $this->options3["ppmPriceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options3["ppmPriceCoin"], $this->options3["ppmPriceLabel"], $this->options3["ppmPriceLabel"]);
+		if ($this->options3["ppmPriceCoin"] != 0 && (!is_numeric($this->options3["ppmPriceCoin"]) || round($this->options3["ppmPriceCoin"], 4) != $this->options3["ppmPriceCoin"] || $this->options3["ppmPriceCoin"] < 0.0001 || $this->options3["ppmPriceCoin"] > 500000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->options3["ppmPriceCoin"], $this->options3["ppmPriceLabel"], $this->options3["ppmPriceLabel"]);
 		
 		if (!in_array($this->options3["ppmExpiry"], $this->expiry_period))	$this->record_errors[] = __('Membership Period - invalid value', GOURL);
 		if ($this->lock_level_membership && !in_array($this->options3["ppmLevel"], array_keys($this->lock_level_membership)))	$this->record_errors[] = __('Lock Page Level - invalid value', GOURL);
@@ -3696,7 +3732,7 @@ final class gourlclass
 		if ($this->record["priceUSD"] == 0 && $this->record["priceCoin"] == 0) 	$this->record_errors[] = __('Price - cannot be empty', GOURL);
 		if ($this->record["priceUSD"] != 0 && $this->record["priceCoin"] != 0) 	$this->record_errors[] = __('Price - use price in USD or in Cryptocoins. You cannot place values in two boxes together', GOURL);
 		if ($this->record["priceUSD"] != 0 && (!is_numeric($this->record["priceUSD"]) || round($this->record["priceUSD"], 2) != $this->record["priceUSD"] || $this->record["priceUSD"] < 0.01 || $this->record["priceUSD"] > 100000)) $this->record_errors[] = sprintf(__('Price - %s USD - invalid value. Min value: 0.01 USD', GOURL), $this->record["priceUSD"]);
-		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 50000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
+		if ($this->record["priceCoin"] != 0 && (!is_numeric($this->record["priceCoin"]) || round($this->record["priceCoin"], 4) != $this->record["priceCoin"] || $this->record["priceCoin"] < 0.0001 || $this->record["priceCoin"] > 500000000)) $this->record_errors[] = sprintf(__('Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max after floating point', GOURL), $this->record["priceCoin"], $this->record["priceLabel"], $this->record["priceLabel"]);
 							
 		if ($this->record["priceLabel"] && !isset($this->coin_names[$this->record["priceLabel"]])) $this->record_errors[] = sprintf(__("Price label '%s' - invalid value", GOURL), $this->record["priceLabel"]);
 		
@@ -4527,18 +4563,22 @@ final class gourlclass
 		
 		echo "<div class='wrap ".GOURL."admin'>";
 		echo $this->page_title(__('All Received Payments', GOURL));
-		echo "<div class='".GOURL."intro postbox'>";
-		echo sprintf( __("Notes: Please wait bitcoin/altcoin transaction confirmations (column 'Confirmed Payment?' in table below) before sending any purchased products / services to users. A transaction confirmation is needed to prevent <a target='_blank' href='%s'>double spending of the same money</a> because somebody may from time to time try to do so.", GOURL), "https://en.bitcoin.it/wiki/Double-spending");
-		echo "</div>";
+		
+		if (!(isset($_GET["b"]) && is_numeric($_GET["b"])))
+		{
+		  echo "<div class='".GOURL."intro postbox'>";
+		  echo sprintf( __("Notes: Please wait bitcoin/altcoin transaction confirmations (column 'Confirmed Payment?' in table below) before sending any purchased products / services to users. A transaction confirmation is needed to prevent <a target='_blank' href='%s'>double spending of the same money</a> because somebody may from time to time try to do so.", GOURL), "https://en.bitcoin.it/wiki/Double-spending");
+		  echo "</div>";
+		}
 		
 		
 		if (isset($_GET["b"]) && is_numeric($_GET["b"])) 
 		{	
 			$c = $this->check_payment_confirmation($_GET["b"]);
 		
-			echo  "<div class='".($c?"updated":GOURL."intro")." postbox'>";
-			if ($c) echo  sprintf(__('Payment %s Confirmed', GOURL), '#'.intval($_GET["b"]));
-			else echo  sprintf(__('Payment %s - <b>NOT confirmed yet</b>', GOURL), '#'.intval($_GET["b"]));
+			echo  "<div class='".($c?"updated":"error")." postbox'>";
+			if ($c) echo  "<span style='color:green'>".sprintf(__('GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>CONFIRMED</b>', GOURL), '#'.intval($_GET["b"]))."</span>";
+			else echo  "<span style='color:red'>".sprintf(__('GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>NOT confirmed yet</b>', GOURL), '#'.intval($_GET["b"]))."</span>";
 			echo "</div>";
 		}
 		
@@ -5309,7 +5349,7 @@ final class gourlclass
 	/*
 	 *  61. Bitcoin Payments with Any Other Wordpress Plugins
 	*/
-	public function cryptopayments ($pluginName, $amount, $amountCurrency = "USD", $orderID, $period, $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60)
+	public function cryptopayments ($pluginName, $amount, $amountLabel = "USD", $orderID, $period, $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60, $emultiplier = 1)
 	{
 
 		// Security Test
@@ -5321,11 +5361,14 @@ final class gourlclass
 		if (stripos($pluginName, "gourl") !== false && $pluginName != "gourlwoocommerce" && $affiliate_key != "gourl") return array("error" => __("Error. Please change plugin name. Plugin name can not use in name '..gourl..'", GOURL));
 		$pluginName = strtolower(substr($pluginName, 0, 17));
 		
-		$amountCurrency = trim(strtoupper($amountCurrency));
-		if ($amountCurrency == "USD" && (!is_numeric($amount) ||  $amount < 0.01 || $amount > 1000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value for USD: 0.01", GOURL), $amount));
-		if ($amountCurrency != "USD" && (!is_numeric($amount) ||  $amount < 0.0001 || $amount > 50000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value: 0.0001", GOURL), $amount));
-		if ($amountCurrency != "USD" && !isset($this->coin_names[$amountCurrency])) return array("error" => sprintf(__("Error. Invalid amountCurrency - %s. Allowed: USD, %s", GOURL), $amountCurrency, implode(", ", array_keys($this->coin_names))));
+		$amountLabel = trim(strtoupper($amountLabel));
+		if ($amountLabel == "USD" && (!is_numeric($amount) ||  $amount > 1000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value for USD: 0.01", GOURL), $amount));
+		if ($amountLabel != "USD" && (!is_numeric($amount) ||  $amount > 500000000))	return array("error" => sprintf(__("Error. Invalid amount value - %s. Min value: 0.0001", GOURL), $amount));
+		if ($amountLabel != "USD" && !isset($this->coin_names[$amountLabel])) return array("error" => sprintf(__("Error. Invalid amountCurrency - %s. Allowed: USD, %s", GOURL), $amountLabel, implode(", ", array_keys($this->coin_names))));
 
+		if ($amountLabel == "USD" && $amount < 0.01)   $amount = 0.01; 
+		if ($amountLabel != "USD" && $amount < 0.0001) $amount = 0.0001;
+		
 		if (!$orderID || preg_replace('/[^A-Za-z0-9\_\-]/', '', $orderID) != $orderID || strlen($orderID) > 32) return array("error" => sprintf(__("Error. Invalid Order ID - %s. Max size: 32 symbols. Allowed symbols: a..Z0..9_-", GOURL), $orderID));
 		
 		$period = trim(strtoupper(str_replace(" ", "", $period)));
@@ -5352,32 +5395,103 @@ final class gourlclass
 		$icon_width = str_replace("px", "", $icon_width);
 		if (!is_numeric($icon_width) || $icon_width < 30 || $icon_width > 250) $icon_width = 60;
 		
-		
-
-
-		if ($amountCurrency == "USD") 	
-		{	
-			$amountUSD		= $amount;
-			$amountCoin 	= 0;
-			$default_show 	= false;
-		}
-		else
-		{
-			$amountUSD		= 0;
-			$amountCoin 	= $amount;
-			$default_coin 	= $this->coin_names[$amountCurrency];
-			$default_show 	= true;
-		}
+		if (!$emultiplier || !is_numeric($emultiplier) || $emultiplier < 0.01) $emultiplier = 1;
+		$emultiplier = floatval($emultiplier);
 		
 		
-		
-	
-		// GoUrl Payments
+		/// GoUrl Payment Class
 		// --------------------------
-	
+		
+		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
+		
+		$amountUSD              = 0;
+		$exchange_error         = false;
 		$all_keys 				= array(); 		// Your payment boxes public / private keys from GoUrl.io
 		$available_coins 		= array(); 		// List of coins that you accept for payments
 		$cryptobox_private_keys = array();		// List Of your private keys
+		
+		
+		
+		
+		// A. Initialize all available payments
+		// -----
+		foreach ($this->coin_names as $k => $v)
+		{
+		    $public_key 	= $this->options[$v.'public_key'];
+		    $private_key 	= $this->options[$v.'private_key'];
+		
+		    if ($public_key && !strpos($public_key, "PUB"))    return array("error" => sprintf(__('Invalid %s Public Key - %s', GOURL), $v, $public_key));
+		    if ($private_key && !strpos($private_key, "PRV"))  return array("error" => sprintf(__('Invalid %s Private Key', GOURL), $v));
+		
+		    if ($private_key) $cryptobox_private_keys[] = $private_key;
+		    if ($private_key && $public_key)
+		    {
+		        $all_keys[$v] = array("public_key" => $public_key,  "private_key" => $private_key);
+		        $available_coins[] = $v;
+		    }
+		}		
+		
+		if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
+		
+		if (!$available_coins) return array("error" => sprintf(__("Error. Please enter Payment Private/Public Keys on GoUrl Options page for %s.", GOURL), "<b>".strtoupper($default_coin)."</b>"));
+		
+		if (!in_array($default_coin, $available_coins)) { $vals = array_values($available_coins); $default_coin = array_shift($vals); }
+		
+		
+		
+		
+		// B. Current selected coin by user
+		// -----
+		$coinName = cryptobox_selcoin($available_coins, $default_coin);
+		$coinLabel = array_search($coinName, $this->coin_names);
+		
+		// Current coin public/private keys
+		$public_key  = $all_keys[$coinName]["public_key"];
+		$private_key = $all_keys[$coinName]["private_key"];
+
+		
+		
+		
+		// C. Total Amount for Pay
+		// ------------------------
+
+		// Products prices in USD; convert USD to crypto on remote gateway side (gourl.io)
+		if ($amountLabel == "USD") 	
+		{	
+			$amountUSD		= $amount * $emultiplier;
+			$amount 	    = 0;
+		}
+		
+		// product prices in cryptocurrency; convert crypto to other crypto (DASH to LTC directly, etc) on your server side (yourwebsite.com) 
+		// for example 112 LTC ($amount=112 $amountLabel=LTC) need to convert to $coinName (Current selected coin by user)
+		elseif ($amountLabel != $coinLabel)
+		{
+	        // for example, convert LTC to DASH
+	        $s  = $amountLabel == "BTC" ? $amount : $amount * gourl_altcoin_btc_price($amountLabel); // total order price in bitcoins (LTC->BTC)
+	        $e  = $coinLabel == "BTC" ? 1 : gourl_altcoin_btc_price($coinLabel); // coinName rate in bitcoins (DASH->BTC)
+	        $s = (!$e) ? 0 : $s / $e;
+	        
+	        // successfully
+	        if ($s > 0)
+	        {
+	            if ($emultiplier == 1) $emultiplier = 1.01;
+	            $amount = $s * $emultiplier;
+	        }
+	        // error, cannot get exchange rates
+	        else
+	        {
+	            $amount = 99999;
+	            $exchange_error = true;
+	        }
+		}
+
+ 		if ($amount && $amount < 0.0001)     $amount = 0.0001;
+		if ($amountUSD && $amountUSD < 0.01) $amountUSD = 0.01;
+        
+		
+		// D. PAYMENT BOX CONFIG
+		// --------------------------
+	
 		
 		$box_width		= $this->options["box_width"];
 		$box_height		= $this->options["box_height"];
@@ -5385,47 +5499,7 @@ final class gourlclass
 		$message_style	= $this->payment_message_style();
 				
 	
-		foreach ($this->coin_names as $k => $v)
-		{
-			$public_key 	= $this->options[$v.'public_key'];
-			$private_key 	= $this->options[$v.'private_key'];
-	
-			if ($public_key && !strpos($public_key, "PUB"))    return array("error" => sprintf(__('Invalid %s Public Key - %s', GOURL), $v, $public_key));
-			if ($private_key && !strpos($private_key, "PRV"))  return array("error" => sprintf(__('Invalid %s Private Key', GOURL), $v));
-	
-			if ($private_key) $cryptobox_private_keys[] = $private_key;
-			if ($private_key && $public_key && (!$default_show || $v == $default_coin))
-			{
-				$all_keys[$v] = array("public_key" => $public_key,  "private_key" => $private_key);
-				$available_coins[] = $v;
-			}
-		}
-	
-		if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
-	
-		if (!$available_coins) return array("error" => sprintf(__("Error. Please enter Payment Private/Public Keys on GoUrl Options page for %s", GOURL), $default_coin));
-	
-		if (!in_array($default_coin, $available_coins)) { $vals = array_values($available_coins); $default_coin = array_shift($vals); }
-	
-	
-	
-		/// GoUrl Payment Class
-		// --------------------------
-		include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
-	
-	
-	
-		// Current selected coin by user
-		$coinName = cryptobox_selcoin($available_coins, $default_coin);
-	
-	
-		// Current Coin public/private keys
-		$public_key  = $all_keys[$coinName]["public_key"];
-		$private_key = $all_keys[$coinName]["private_key"];
-	
 
-		
-		// PAYMENT BOX CONFIG
 		$options = array(
 				"public_key"  => $public_key, 								// your box public key
 				"private_key" => $private_key, 								// your box private key
@@ -5433,7 +5507,7 @@ final class gourlclass
 				"orderID"     => $pluginName.".".$orderID, 					// unique  order id
 				"userID"      => ($userID == "guest" ? $pluginName.".".$userID : "user".$userID), // unique identifier for each your user
 				"userFormat"  => "MANUAL", 									// save userID in
-				"amount"   	  => $amountCoin,								// price in coins
+				"amount"   	  => $amount,								    // price in coins
 				"amountUSD"   => $amountUSD,								// price in USD
 				"period"      => $period, 									// payment valid period
 				"language"	  => $default_language  						// text on EN - english, FR - french, etc
@@ -5469,22 +5543,30 @@ final class gourlclass
 		$box_html = $box->display_cryptobox(true, $box_width, $box_height, $box_style, $message_style, $anchor);
 	
 	
-		$html = "";
-		if (!$is_paid) $html .= "<a id='".$anchor."' name='".$anchor."'></a>";
+		$html = "<a id='".$anchor."' name='".$anchor."'></a>";
 	
 		if ($is_paid) 			$html .= "<br>";
 		else 					$html .= $coins_list;
 	
-
+		
 		// Cryptocoin Payment Box
-		if ($languages_list) 
+		if (!$exchange_error || $is_paid)
 		{
-			$html .= "<table cellspacing='0' cellpadding='0' border='0' width='100%' style='border:0;box-shadow:none;margin:0;padding:0;background-color:transparent'>";
-			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'><div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-115)."px;min-width:100%;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div></td></tr>";
-			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'>".$box_html."</td></tr>";
-			$html .= "</table>";
+    		if ($languages_list) 
+    		{
+    			$html .= "<table cellspacing='0' cellpadding='0' border='0' width='100%' style='border:0;box-shadow:none;margin:0;padding:0;background-color:transparent'>";
+    			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'><div style='margin:".($coins_list?25:50)."px 0 5px ".($this->options['box_width']/2-115)."px;min-width:100%;text-align:center;font-size:13px;color:#666;font-weight:normal;white-space:nowrap;'>".__('Language', GOURL).": ".$this->space(1).$languages_list."</div></td></tr>";
+    			$html .= "<tr style='background-color:transparent'><td style='border:0;margin:0;padding:0;background-color:transparent'>".$box_html."</td></tr>";
+    			$html .= "</table>";
+    		}
+    		else $html .= $box_html;
 		}
-		else $html .= $box_html;
+		elseif ($exchange_error)
+		{
+		    $html .= "<br><br><div class='woocommerce-error'><p style='color:red'>";
+		    $html .= sprintf(__("Error! Cannot get exchange rates for %s. Please try a different cryptocurrency.", GOURL), "<b>".strtoupper($coinName)."</b>");
+		    $html .= "</p></div><br><br><br>";
+		}
 		
 		
 		// Result
@@ -5776,7 +5858,17 @@ final class gourlclass
 	
 	
 	/*
-	 *  64. Supported Functions
+	 *  64. Exclude gourl js file from aggregation in Autoptimize
+	 */
+	public function exclude_js_file($exclude)
+	{
+	    return $exclude . ", cryptobox.min";
+	}
+	
+	
+	
+	/*
+	 *  65. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -6173,7 +6265,8 @@ function cryptobox_new_payment($paymentID, $arr, $box_status)
 						"is_paid"			=> 1,
 							
 						"paymentID"     	=> intval($paymentID),
-						"paymentDate"		=> $arr["datetime"], 				// GMT
+						"paymentDate"		=> $arr["datetime"], 				// GMT 2015-01-30 13:32:45
+						"paymentTimestamp"	=> $arr["timestamp"], 				// 1422624765
 						"paymentLink"		=> GOURL_ADMIN.GOURL."payments&s=payment_".$paymentID,
 						"addr"       		=> $arr["addr"], 					// website admin cryptocoin wallet address
 						"tx"            	=> $arr["tx"],						// transaction id, see also paymentDate
@@ -6294,7 +6387,7 @@ function gourl_disable_feed()
 
 function gourl_email_notifications($productID, $paymentID, $details, $type)
 {
-	global $wpdb;
+	global $wpdb, $gourl;
 	
 	$payment_id 		= $paymentID;
 	$transaction_id 	= $details["tx"];
@@ -6312,9 +6405,7 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 	
 	if (!$productID || !$paymentID || !$transaction_id || !$type) return false;
 
-	
-	$coin_chain     	= gourlclass::coin_chain();
-	if ($transaction_id && isset($coin_chain[$details["coinname"]])) $transaction_id = "<a href='".$coin_chain[$details["coinname"]].(stripos($coin_chain[$details["coinname"]],'cryptoid.info')?'tx.dws?':'tx/').$transaction_id."' target='_blank'>".$transaction_id."</a>"; 
+	if ($transaction_id) $transaction_id = "<a href='".$gourl->blockexplorer_tr_url($transaction_id, $details["coinname"])."' target='_blank'>".$transaction_id."</a>"; 
 	
 	$txt_to 			= array($user_fullname, $user_username, $user_id, $user_email, $user_url, $paid_amount, $paid_amount_usd, $payment_id, $payment_url, $transaction_id, $transaction_time);
 	$txt_from 			= array("{user_fullname}", "{user_username}", "{user_id}", "{user_email}", "{user_url}", "{paid_amount}", "{paid_amount_usd}", "{payment_id}", "{payment_url}", "{transaction_id}", "{transaction_time}");
@@ -6388,58 +6479,7 @@ function gourl_email_notifications($productID, $paymentID, $details, $type)
 
 
 
-/*
- * XVI.
-*/
-function gourl_convert_currency($from_Currency, $to_Currency, $amount)
-{
-	$amount = urlencode($amount);
-	$from_Currency = trim(strtoupper(urlencode($from_Currency)));
-	$to_Currency = trim(strtoupper(urlencode($to_Currency)));
 
-	if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
-	if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
-	if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
-	if ($from_Currency == "RM")  $from_Currency = "MYR"; // fix for Malaysian Ringgit
-	
-	$key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
-	
-	// update exchange rate one time per 30 min
-	$arr = get_option($key);
-	if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 0.5*60*60) > strtotime("now")) return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
-	
-	
-	$url = "https://finance.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
-
-	$ch = curl_init();
-	$timeout = 20;
-	curl_setopt ($ch, CURLOPT_URL, $url);
-	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
-	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
-	$rawdata = curl_exec($ch);
-	curl_close($ch);
-	$data = explode('bld>', $rawdata);
-	$data = explode($to_Currency, $data[1]);
-
-	
-	// save exchange rate on next 30min
-	if ($data[0] > 0)
-	{
-	    $arr = array("price" => $data[0], "time" => strtotime("now"));
-	    update_option($key, $arr);
-	    
-	    return round($data[0]*$amount, ($to_Currency=="BTC"?5:2));
-	}
-	elseif ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 4*60*60) > strtotime("now")) 
-	{
-	   return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
-	}
-	
-	return 0;
-}
 
 
 
@@ -6933,7 +6973,6 @@ class gourl_table_products extends WP_List_Table
 class gourl_table_payments extends WP_List_Table
 {
 	private $coin_names = array();
-	private $coin_chain = array();
 	
 	private $search 		= '';
 	private $rec_per_page	= 20;
@@ -6943,7 +6982,6 @@ class gourl_table_payments extends WP_List_Table
 	{
 
 		$this->coin_names 	= gourlclass::coin_names();
-		$this->coin_chain	= gourlclass::coin_chain();
 		
 		$this->search = $search;
 		$this->file_columns = $file_columns;
@@ -7056,12 +7094,12 @@ class gourl_table_payments extends WP_List_Table
 			
 			
 			case 'txID':
-				if ($item->$column_name) $tmp = "<a title='".__('Transaction Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].(stripos($this->coin_chain[$this->coin_names[$item->coinLabel]],'cryptoid.info')?'tx.dws?':'tx/').$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
+				if ($item->$column_name) $tmp = "<a title='".__('Transaction Details', GOURL)." - ".$item->$column_name."' href='".$gourl->blockexplorer_tr_url($item->$column_name, $this->coin_names[$item->coinLabel])."' target='_blank'>".$item->$column_name."</a>";
 				break;
 
 			
 			case 'addr':
-				if ($item->$column_name) $tmp = "<a title='".__('Wallet Details', GOURL)." - ".$item->$column_name."' href='".$this->coin_chain[$this->coin_names[$item->coinLabel]].(stripos($this->coin_chain[$this->coin_names[$item->coinLabel]],'cryptoid.info')?'address.dws?':'address/').$item->$column_name."' target='_blank'>".$item->$column_name."</a>";
+				if ($item->$column_name) $tmp = "<a title='".__('Wallet Details', GOURL)." - ".$item->$column_name."' href='".$gourl->blockexplorer_addr_url($item->$column_name, $this->coin_names[$item->coinLabel])."' target='_blank'>".$item->$column_name."</a>";
 				break;
 				
 			
@@ -7071,7 +7109,7 @@ class gourl_table_payments extends WP_List_Table
 			case 'processedDate':
 				if (!($column_name == "processedDate" && strpos($item->orderID, "file_") !== 0))
 				{
-					$tmp = ($item->$column_name && date("Y", strtotime($item->$column_name)) > 2010) ? date("d M Y, H:i A", strtotime($item->$column_name)) : '-';
+					$tmp = ($item->$column_name && date("Y", strtotime($item->$column_name)) > 2010) ? (date("d M Y", strtotime($item->$column_name)).", <span class='gourlnowrap'>".date("H:i A", strtotime($item->$column_name))."</span>") : '-';
 				}
 				break;
 
@@ -7097,9 +7135,9 @@ class gourl_table_payments extends WP_List_Table
 					'amountUSD'			=> __('Approximate in USD', GOURL),
 					'unrecognised'		=> __('Unrecogn. Payment?', GOURL),
 					'userID'			=> __('User ID', GOURL),
-					'countryID'			=> __('User Country', GOURL),
-					'txConfirmed'		=> __('Confirmed Payment?', GOURL),
 					'txDate'			=> __('Transaction Time, GMT', GOURL),
+					'countryID'			=> __('User Location', GOURL),
+					'txConfirmed'		=> __('Confirmed Payment?', GOURL),
 					'processed'			=> __('User Downl. File?', GOURL),
 					'processedDate'		=> __('File Downloaded Time, GMT', GOURL),
 					'txID'				=> __('Transaction ID', GOURL),
@@ -7442,3 +7480,203 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 		return false; 
 	} 
 }
+
+
+
+/*
+ *	XXIII. Get URL Data
+ */
+function gourl_get_url( $url, $timeout = 15 )
+{
+    $ch = curl_init();
+    curl_setopt ($ch, CURLOPT_URL, $url);
+    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+    curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
+    curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
+    $data 		= curl_exec($ch);
+    $httpcode 	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return ($httpcode>=200 && $httpcode<300) ? $data : false;
+}
+
+
+
+/*
+ *	XXV. Convert USD to AUD, EUR to GBP, etc using Google Finance 
+ *  Update interval in hours; default 1 hour
+ */
+function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval = 1)
+{
+    $amount = urlencode($amount);
+    $from_Currency = trim(strtoupper(urlencode($from_Currency)));
+    $to_Currency = trim(strtoupper(urlencode($to_Currency)));
+
+    if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
+    if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
+    if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
+    if ($from_Currency == "RM")  $from_Currency = "MYR"; // fix for Malaysian Ringgit
+
+    $key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
+
+    // update exchange rate one time per 1 hour
+    $arr = get_option($key);
+    if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + $interval*60*60) > strtotime("now")) return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
+
+
+    $url = "https://finance.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
+
+    $rawdata = gourl_get_url( $url, 20 );
+
+    $data = explode('bld>', $rawdata);
+    $data = explode($to_Currency, $data[1]);
+
+
+    // save exchange rate on next 1hour
+    if ($data[0] > 0)
+    {
+        $arr = array("price" => $data[0], "time" => strtotime("now"));
+        update_option($key, $arr);
+         
+        return round($data[0]*$amount, ($to_Currency=="BTC"?5:2));
+    }
+    elseif ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 5*60*60) > strtotime("now"))
+    {
+        return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
+    }
+
+    return 0;
+}
+
+
+
+/*
+ *	XXV. Get Live Rates for BTC-USD, BTC-EUR, BTC-AUD, etc.
+ *  Update interval in hours; default 1 hour
+ */
+function gourl_bitcoin_live_price ($currency, $interval = 1)
+{
+     
+    $price 	= 0;
+    $min 	= 200;
+    $key 	= GOURL.'_exchange_BTC_'.$currency;
+
+    if (!in_array($currency, array_keys(json_decode(GOURL_RATES, true)))) return 0;
+
+
+    // return exchange rate if data less then 1hour; update exchange rate one time per 1 hour
+    $arr2 = get_option($key);
+    if ($arr2 && isset($arr2["price"]) && $arr2["price"] > 0 && isset($arr2["time"]) && ($arr2["time"] + $interval*60*60) > strtotime("now")) return $arr2["price"];
+
+
+
+    // a. bitstamp.net
+    if ($currency == "USD")
+    {
+        $data = gourl_get_url("https://www.bitstamp.net/api/ticker/");
+        $arr = json_decode($data, true);
+        if (isset($arr["last"]) && isset($arr["volume"]) && $arr["last"] > $min) $price = round($arr["last"]);
+    }
+
+    // b. blockchain.info
+    if (!$price)
+    {
+        $data = gourl_get_url("https://blockchain.info/ticker");
+        $arr = json_decode($data, true);
+        if (isset($arr[$currency]["15m"]) && $arr[$currency]["15m"] > $min) $price = round($arr[$currency]["15m"]);
+        if (!$price && isset($arr[$currency]["last"]) && $arr[$currency]["last"] > $min) $price = round($arr[$currency]["last"]);
+    }
+
+
+
+    // save exchange rate on next 1hour
+    if ($price > 0)
+    {
+        $arr2 = array("price" => $price, "time" => strtotime("now"));
+        update_option($key, $arr2);
+         
+        return $price;
+    }
+    // temporary connection problems with bitstamp, blockchain,info
+    elseif ($arr2 && isset($arr2["price"]) && $arr2["price"] > 0 && isset($arr2["time"]) && ($arr2["time"] + 5*60*60) > strtotime("now"))
+    {
+        return $arr2["price"];
+    }
+
+
+    return 0;
+}
+	
+
+
+/*
+ *	XXVI. Get Altcoins Live Rates to BTC - DASH/BTC, LTC/BTC, BCH/BTC
+ *  Update interval in hours; default 1 hour
+ */
+function gourl_altcoin_btc_price ($altcoin, $interval = 1)
+{
+    global $gourl;
+    
+    $price 	= 0;
+    $key 	= GOURL.'_exchange_'.$altcoin.'_BTC';
+     
+     
+    // return exchange rate if data less then 1hour; update exchange rate one time per 1 hour
+    $arr2 = get_option($key);
+    if ($arr2 && isset($arr2["price"]) && $arr2["price"] > 0 && isset($arr2["time"]) && ($arr2["time"] + $interval*60*60) > strtotime("now")) return $arr2["price"];
+
+    if ($altcoin == "SPD") return 0.00000010; // use speedcoin for tests; get free SPD - https://speedcoin.org/info/free_coins
+    
+     
+    // A. Poloniex
+    // --------------
+    $data = gourl_get_url('https://poloniex.com/public?command=returnTicker');
+    $arr = json_decode($data, true);
+
+    if (isset($arr["BTC_LTC"]) && $arr["BTC_LTC"]["last"] > 0)
+    {
+        foreach ($arr as $k => $v)
+            if ($v["last"] > 0 && $gourl->left($k, "_") == "BTC" && $gourl->right($k, "_") == $altcoin) $price = sprintf('%.8f', $v["last"]);
+    }
+
+     
+    // B. Bittrex
+    // --------------
+    if (!$price)
+    {
+        $data = gourl_get_url('https://bittrex.com/api/v1.1/public/getmarketsummaries');
+        $arr = json_decode($data, true);
+        	
+        if (isset($arr["success"]) && $arr["success"] == "1" && is_array($arr["result"]))
+        {
+            foreach ($arr["result"] as $k => $v)
+                if ($v["Last"] > 0 && $gourl->left($v["MarketName"], "-") == "BTC" && ($gourl->right($v["MarketName"], "-")=="BCC"?"BCH":$gourl->right($v["MarketName"], "-")) == $altcoin) $price = sprintf('%.8f', $v["Last"]);
+        }
+    }
+
+     
+     
+    // save exchange rate on next 1hour
+    if ($price > 0)
+    {
+        $arr2 = array("price" => $price, "time" => strtotime("now"));
+        update_option($key, $arr2);
+
+        return $price;
+    }
+    // temporary connection problems with poloniex/birrex
+    elseif ($arr2 && isset($arr2["price"]) && $arr2["price"] > 0 && isset($arr2["time"]) && ($arr2["time"] + 5*60*60) > strtotime("now"))
+    {
+        return $arr2["price"];
+    }
+     
+     
+    return 0;
+}
+
+
+
+

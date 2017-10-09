@@ -164,8 +164,8 @@ class Cryptobox {
 		
 		if (($this->amount <= 0 && $this->amountUSD <= 0) || ($this->amount > 0 && $this->amountUSD > 0)) die("You can use in cryptobox options one of variable only: amount or amountUSD. You cannot place values in that two variables together (submitted amount = '".$this->amount."' and amountUSD = '".$this->amountUSD."' )");
 		 
-		if ($this->amount && (!is_numeric($this->amount) || $this->amount < 0.0001 || $this->amount > 50000000)) die("Invalid Amount - $this->amount $this->coinLabel. Allowed range: 0.0001 .. 50,000,000");
-		if ($this->amountUSD && (!is_numeric($this->amountUSD) || $this->amountUSD < 0.01 || $this->amountUSD > 1000000)) die("Invalid amountUSD - $this->amountUSD USD. Allowed range: 0.01 .. 1,000,000");
+		if ($this->amount && (!is_numeric($this->amount) || $this->amount < 0.0001 || $this->amount > 500000000)) die("Invalid Amount - ".sprintf('%.8f', $this->amount)." $this->coinLabel. Allowed range: 0.0001 .. 500,000,000");
+		if ($this->amountUSD && (!is_numeric($this->amountUSD) || $this->amountUSD < 0.01 || $this->amountUSD > 1000000)) die("Invalid amountUSD - ".sprintf('%.8f', $this->amountUSD)." USD. Allowed range: 0.01 .. 1,000,000");
 		
 		$this->period = trim(strtoupper(str_replace(" ", "", $this->period)));
 		if (substr($this->period, -1) == "S") $this->period = substr($this->period, 0, -1);
@@ -1235,6 +1235,7 @@ class Cryptobox {
 		if ($from_Currency == "TRL")  $from_Currency = "TRY"; // fix for Turkish Lyra
 		if ($from_Currency == "ZWD")  $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
 		if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
+		if ($from_Currency == "RM")   $from_Currency = "MYR"; // fix for Malaysian Ringgit
 		
 		$url = "https://finance.google.com/finance/converter?a=".$amount."&from=".$from_Currency."&to=".$to_Currency;
 	
@@ -1242,7 +1243,8 @@ class Cryptobox {
 		curl_setopt ($ch, CURLOPT_URL, $url);
 		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
+		curl_setopt ($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		curl_setopt ($ch, CURLOPT_TIMEOUT, 20);
 		$res = curl_exec($ch);
@@ -1518,7 +1520,7 @@ class Cryptobox {
 							);
 
 	if(!defined("CRYPTOBOX_LOCALISATION")) define("CRYPTOBOX_LOCALISATION", json_encode($cryptobox_localisation));
-	unset($cryptobox_localisation);   
+	unset($cryptobox_localisation);  
 	
 	if (!CRYPTOBOX_WORDPRESS || defined("CRYPTOBOX_PRIVATE_KEYS"))
 	{
@@ -1526,6 +1528,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);      
+		unset($v); unset($cryptobox_private_keys);
 	}
 ?>

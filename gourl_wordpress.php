@@ -3,7 +3,7 @@
 Plugin Name: 		GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 Plugin URI: 		https://gourl.io/bitcoin-wordpress-plugin.html
 Description: 		Official <a href="https://gourl.io">GoUrl.io</a> Bitcoin Payment Gateway Plugin for Wordpress. Provides <a href="https://gourl.io/lib/examples/pay-per-product-multi.php">Pay-Per-Product</a>, <a href="https://gourl.io/lib/examples/pay-per-download-multi.php">Pay-Per-Download</a>, <a href="https://gourl.io/lib/examples/pay-per-membership-multi.php">Pay-Per-Membership</a>, <a href="https://gourl.io/lib/examples/pay-per-page-multi.php">Pay-Per-View</a> and bitcoin/altcoin payment gateways for - <a href='https://gourl.io/bitcoin-payments-woocommerce.html'>WooCommerce</a>, <a href='https://gourl.io/bitcoin-payments-wp-ecommerce.html'>WP eCommerce</a>, <a href='https://gourl.io/bitcoin-payments-jigoshop.html'>Jigoshop</a>, <a href='https://gourl.io/bitcoin-payments-wpmudev-marketpress.html'>MarketPress</a>, <a href='https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html'>AppThemes</a>, <a href='https://gourl.io/bitcoin-payments-paid-memberships-pro.html'>Paid Memberships Pro</a>, <a href='https://gourl.io/bbpress-premium-membership.html'>bbPress</a>, <a href='https://gourl.io/bitcoin-donations-wordpress-plugin.html'>Give Donations</a>, etc. Accept Bitcoin, BitcoinCash, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit payments online. No Chargebacks, Global, Secure.  All in automatic mode.   
-Version: 			1.3.18
+Version: 			1.4.0
 Author: 			GoUrl.io
 Author URI: 		https://gourl.io
 License: 			GPLv2
@@ -31,10 +31,11 @@ $dir_arr = wp_upload_dir();
 
 DEFINE('GOURL', 				"gourl");
 DEFINE('GOURL_PREVIEW', 		"gourladmin");
-DEFINE('GOURL_VERSION', 		"1.3.18");
+DEFINE('GOURL_VERSION', 		"1.4.0");
 DEFINE('GOURL_ADMIN', 			admin_url("admin.php?page="));
 DEFINE('GOURL_DIR',  			$dir_arr["basedir"]."/".GOURL.'/');
 DEFINE('GOURL_DIR2', 			$dir_arr["baseurl"]."/".GOURL.'/');
+DEFINE('GOURL_IMG', 			plugins_url('/images/', __FILE__));
 DEFINE('GOURL_BASENAME', 		plugin_basename(__FILE__));
 DEFINE("GOURL_PERMISSION", 		"add_users");
 
@@ -46,6 +47,8 @@ DEFINE('GOURL_TAG_MEMCHECKOUT',	"gourl-membership-checkout"); 	// [gourl-members
 
 DEFINE('GOURL_LOCK_START',		"<!-- start_gourlpayment_box -->"); 
 DEFINE('GOURL_LOCK_END',		"<!-- end_gourlpayment_box -->");
+
+DEFINE('GOURL_RATES', json_encode(array("USD" => "US Dollar", "EUR" => "Euro", "GBP" => "British Pound", "AUD" => "Australian Dollar", "BRL" => "Brazilian Real", "CAD" => "Canadian Dollar", "CHF" => "Swiss Franc", "CLP" => "Chilean Peso", "CNY" => "Chinese Yuan Renminbi", "DKK" => "Danish Krone", "HKD"=> "Hong Kong Dollar", "INR" => "Indian Rupee", "ISK" => "Icelandic Krona", "JPY" => "Japanese Yen", "KRW" => "South Korean Won", "NZD" => "New Zealand Dollar", "PLN" => "Polish Zloty", "RUB" => "Russian Ruble", "SEK" => "Swedish Krona", "SGD" => "Singapore Dollar", "THB" => "Thai Baht", "TWD" => "Taiwan New Dollar")));
 
 DEFINE('CRYPTOBOX_WORDPRESS',	true);
 
@@ -64,4 +67,4 @@ add_filter('plugin_action_links', 	'gourl_action_links', 10, 2);
 add_action('plugins_loaded', 		'gourl_load_textdomain');
 
 if (function_exists( 'mb_stripos' ) && function_exists( 'mb_strripos' ) && function_exists( 'curl_init' ) && function_exists( 'mysqli_connect' ) && version_compare(phpversion(), '5.4.0', '>=')) $gourl = new gourlclass();
-   
+          

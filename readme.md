@@ -2,7 +2,7 @@
 GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership
 -----------------------------------------------------------
 
-Version 1.3.18
+Version 1.4.0
 
 
 **GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress 3.5 or higher version**
@@ -16,9 +16,9 @@ Accept Bitcoin, BitcoinCash, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potc
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
 * Requires at least: 3.5
 * Tested up to: 4.8
-* Stable Tag: 1.3.18
+* Stable Tag: 1.4.0
 * License: GNU Version 2 or Any Later Version
-
+  
 
 # ![Payment-Gateway](https://gourl.io/images/wordpress/screenshot1.png)
 
@@ -132,7 +132,7 @@ GoUrl wordpress plugin stores the data in four MySQL tables -
 
 **4. Testing environment**
 
-You can use 110 free Speedcoins or Dogecoins for testing.
+You can use 500 free Speedcoins or Dogecoins for testing.
 Url: [https://speedcoin.org/info/free_coins/Free_Speedcoins.html](https://speedcoin.org/info/free_coins/Free_Speedcoins.html)
 The minimum account balance on GoUrl.io which our system will automatically transfer from your GoUrl internal wallet address to your external wallet address is 2 x mining fee. For Bitcoin this is 0.0005 BTC, and for Speedcoin and Dogecoin it is 5 coins, etc
 

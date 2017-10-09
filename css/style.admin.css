@@ -1,4 +1,5 @@
 
+.gourlnowrap { white-space: nowrap; }
 
 .gourladmin h2 {
 	font-family: 'Tenor Sans', sans-serif;
@@ -317,10 +318,9 @@
 .gourladmin .gourlwidetable .column-addr { overflow: hidden; white-space:nowrap; text-align: right; }
 
 .gourladmin .gourlwidetable .gourlnofilecolumn .column-orderID { width: 11%; text-align: left; }
-.gourladmin .gourlwidetable .gourlnofilecolumn .column-userID { width: 11%; }
+.gourladmin .gourlwidetable .gourlnofilecolumn .column-amount { width: 8.5%; }
 .gourladmin .gourlwidetable .gourlnofilecolumn .column-amountUSD { width: 8%; }
 .gourladmin .gourlwidetable .gourlnofilecolumn .column-txDate { width: 7.5%; }
-.gourladmin .gourlwidetable .gourlnofilecolumn .column-unrecognised { width: 4.7%; }
 .gourladmin .gourlwidetable .gourlnofilecolumn .column-txConfirmed { width: 4.7%; }
 
 
