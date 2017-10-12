@@ -7,6 +7,7 @@ if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit;
 final class gourlclass 
 {
 	private $options 		= array(); 		// global setting values
+	private $hash_url		= "";			// security; save your gourl public/private keys sha1 hash in file (db and file)
 	private $errors			= array(); 		// global setting errors
 	private $payments		= array(); 		// global activated payments (bitcoin, litecoin, etc)
 	
@@ -52,7 +53,8 @@ final class gourlclass
 	 */
 	public function __construct() 
 	{
-
+		$this->hash_url = GOURL_DIR."files/gourl.hash"; // you can change path
+	    
 		$this->coin_names 	= self::coin_names();
 		$this->coin_chain 	= self::coin_chain();
 		$this->coin_www 	= self::coin_www();
@@ -755,6 +757,35 @@ final class gourlclass
 			if (!$this->options[$k."url"]) $this->options[$k] = 0;
 		}
 		
+		
+
+		// Additional Security - compare gourl public/private keys sha1 hash with hash stored in file $this->hash_url
+		// ------------------
+		$txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
+		$arr = json_decode($txt, true);
+
+		if (isset($arr["nonce"]) && $arr["nonce"] != sha1(md5(NONCE_KEY))) 
+		{
+		    $this->save_cryptokeys_hash(); // admin changed NONCE_KEY
+		    $txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
+		    $arr = json_decode($txt, true);
+		}
+		
+		foreach($this->coin_names as $k => $v)
+		{
+		    $pub  = $v."public_key";
+		    $prv  = $v."private_key";
+		    if (($this->options[$pub] || $this->options[$prv]) && 
+		        (!isset($arr[$pub]) || !isset($arr[$prv]) ||  
+		         $arr[$pub] != sha1($this->options[$pub].NONCE_KEY.$this->options[$pub]) || 
+		         $arr[$prv] != sha1($this->options[$prv].NONCE_KEY.$this->options[$prv])))
+		         {
+		              $this->options[$pub] = $this->options[$prv] = "";
+		              update_option(GOURL.$pub, "");
+		              update_option(GOURL.$prv, "");
+		         }
+		}
+				
 		return true;
 	}
 	
@@ -838,6 +869,9 @@ final class gourlclass
 		if (!function_exists( 'mysqli_connect' )) 			$this->errors[] = sprintf(__("Error. Please enable <a target='_blank' href='%s'>MySQLi extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.mysqli.php", "http://crybit.com/how-to-enable-mysqli-extension-on-web-server/");
 		if (version_compare(phpversion(), '5.4.0', '<')) 	$this->errors[] = sprintf(__("Error. You need PHP 5.4.0 (or greater). Current php version: %s", GOURL), phpversion());
 		
+		// writable directory
+		if (!file_exists($this->hash_url) && !is_writable(dirname($this->hash_url))) $this->errors[] = sprintf(__("Error. Cannot write file %s - please make directory %s writable.", GOURL), $this->hash_url, dirname($this->hash_url));
+		
 		return true;
 	}
 	
@@ -849,16 +883,56 @@ final class gourlclass
 	*/
 	private function save_settings()
 	{
+		$arr = array();
 		foreach ($this->options as $key => $value)
 		{
- 			update_option(GOURL.$key, $value);
+		    $boxkey = (strpos($key, "public_key") || strpos($key, "private_key")) ? true : false;
+		    if (!(file_exists($this->hash_url) && !is_writable($this->hash_url) && $boxkey))
+		    {
+		    	if ($boxkey && get_option(GOURL.$key) != $value) $arr[$key] = array("old_key" => get_option(GOURL.$key), "new_key" => $value);
+		    	update_option(GOURL.$key, $value);
+		    }
 		}
-	
+		
+		if ($arr) 
+		{    
+		    wp_mail(get_bloginfo('admin_email'), 'Notification - GoUrl Bitcoin Payment Gateway Plugin - Cryptobox Keys Changed', 
+		    date("r")."\n\nGoUrl Bitcoin Payment Gateway for Wordpress plugin\n\nFollowing crypto payment box/es keys was changed on your website -\n\n".print_r($arr, true));
+		}    
+
+		$this->save_cryptokeys_hash();
+
 		return true;
 	}
 	
 	
 	
+	/*
+	 *  12b. Additional Security
+	 *  Save gourl public/private keys sha1 hash in file $this->hash_url
+	*/	
+	private function save_cryptokeys_hash()
+	{	
+	    if (!file_exists($this->hash_url) || is_writable($this->hash_url))
+	    {    
+        	$arr = array("nonce" => sha1(md5(NONCE_KEY)));
+        	foreach($this->coin_names as $k => $v)
+        	{
+        	    $pub  = $v."public_key";
+        	    $prv  = $v."private_key";
+        	    if ($this->options[$pub] && $this->options[$prv]) 
+        	    {    
+        	        $arr[$pub] = sha1($this->options[$pub].NONCE_KEY.$this->options[$pub]);
+        	        $arr[$prv] = sha1($this->options[$prv].NONCE_KEY.$this->options[$prv]);
+        	    }    
+        	}
+        	
+        	file_put_contents($this->hash_url, json_encode($arr));
+	    }
+
+	    return true;
+	}
+		
 	
 	
 	/*
@@ -866,7 +940,8 @@ final class gourlclass
 	*/
 	public function page_settings()
 	{
-	
+		$readonly = (file_exists($this->hash_url) && !is_writable($this->hash_url)) ? 'readonly' : '';
+	    
 		if ($this->errors) $message = "<div class='error'>".__('Please fix errors below:', GOURL)."<ul><li>- ".implode("</li><li>- ", $this->errors)."</li></ul></div>";
 		elseif ($this->updated)  $message = '<div class="updated"><p>'.__('Settings have been updated <strong>successfully</strong>', GOURL).'</p></div>';
 		else $message = "";
@@ -895,8 +970,9 @@ final class gourlclass
 		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_settings" />';
 	
 		$tmp .= '<p>'.sprintf(__( "If you use multiple websites online, please create separate <a target='_blank' href='%s'>GoUrl Payment Box</a> records (with unique payment box public/private keys) for each of your websites. Do not use the same GoUrl Payment Box with the same public/private keys on your different websites.", GOURL ), "https://gourl.io/editrecord/coin_boxes/0") . '</p>';
-		$tmp .= '<p>'.sprintf(__( "If you want to use plugin in a language other than English, see the page <a href='%s'>Languages and Translations</a>. &#160;  This enables you to easily customize the texts of all the labels visible to your users.", GOURL ), "https://gourl.io/languages.html", "https://gourl.io/languages.html") . '</p><br><br>';
-		
+		$tmp .= '<p>'.sprintf(__( "If you want to use plugin in a language other than English, see the page <a href='%s'>Languages and Translations</a>. &#160;  This enables you to easily customize the texts of all the labels visible to your users.", GOURL ), "https://gourl.io/languages.html", "https://gourl.io/languages.html") . '</p>';
+		if (!$readonly) $tmp .= '<p>'.sprintf(__( "Additional Security - You can make file <a href='%s'>%s</a> - <a target='_blank' href='%s'>readonly</a>. GoUrl Public/Private keys on page below will be not editable anymore (readonly mode).", GOURL ), $this->hash_url, "<b>".basename($this->hash_url)."</b>", "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/") . '</p>';
+		$tmp .= '<br><br>';
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
 		$tmp .= '<input type="submit" onclick="this.value=\''.__('Please wait...', GOURL).'\';document.getElementById(\'gourlsubmitloading\').style.display=\'inline\';return true;" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
@@ -918,10 +994,11 @@ final class gourlclass
 	
 			$tmp .= '<tr><th>'.$v2.' '.__('Payments', GOURL).':<br><a target="_blank" href="'.$this->coin_www[$v].'"><img title="'.$v2.' Payment API" src="'.plugins_url('/images/'.$v.'.png', __FILE__).'" border="0"></a></th>';
 			$tmp .= '<td>';
-			$tmp .= '<div>GoUrl '.$v2.' '.sprintf(__('Box (%s) Public Key', GOURL), $k).' -</div><input type="text" id="'.GOURL.$v.'public_key" name="'.GOURL.$v.'public_key" value="'.htmlspecialchars($this->options[$v.'public_key'], ENT_QUOTES).'" class="widefat">';
-			$tmp .= '<div>GoUrl '.$v2.' '.sprintf(__('Box (%s) Private Key', GOURL), $k).' -</div><input type="text" id="'.GOURL.$v.'private_key" name="'.GOURL.$v.'private_key" value="'.htmlspecialchars($this->options[$v.'private_key'], ENT_QUOTES).'" class="widefat">';
-			if ($this->options[$v.'public_key'] && $this->options[$v.'private_key'] && !$this->errors) $tmp .= '<em><span class="gourlpayments">'.sprintf(__("%s (%s) payments are active!", GOURL), $v2, $k).'</span></em>';
-			else $tmp .= '<em>'.sprintf(__("<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/Public Keys are used for communicating between your website and GoUrl.io Payment Gateway server (similar like paypal id/keys).<br>If you want to start accepting payments in <a target='_blank' href='%s'>%s (%s)</a>, please create a <a target='_blank' href='%s'>%s Payment Box</a> on GoUrl.io and then enter the received free GoUrl %s Box Public/Private Keys. Leave field blank if you do not accept payments in %s", GOURL), $v2, $v2, $this->coin_www[$v], $v2, $k, "https://gourl.io/editrecord/coin_boxes/0/", $v2, $v2, $v2).'</em>';
+			$tmp .= '<div>GoUrl '.$v2.' '.sprintf(__('Box (%s) Public Key', GOURL), $k).' -</div><input type="text" '.$readonly.' id="'.GOURL.$v.'public_key" name="'.GOURL.$v.'public_key" value="'.htmlspecialchars($this->options[$v.'public_key'], ENT_QUOTES).'" class="widefat">';
+			$tmp .= '<div>GoUrl '.$v2.' '.sprintf(__('Box (%s) Private Key', GOURL), $k).' -</div><input type="text" '.$readonly.' id="'.GOURL.$v.'private_key" name="'.GOURL.$v.'private_key" value="'.htmlspecialchars($this->options[$v.'private_key'], ENT_QUOTES).'" class="widefat">';
+			if ($this->options[$v.'public_key'] && $this->options[$v.'private_key'] && !$this->errors) $tmp .= '<em><span class="gourlpayments"><b>'.sprintf(__("%s (%s) payments are active!", GOURL), $v2, $k).'</b></span></em>';
+			elseif (!$readonly) $tmp .= '<em>'.sprintf(__("<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/Public Keys are used for communicating between your website and GoUrl.io Payment Gateway server (similar like paypal id/keys).<br>If you want to start accepting payments in <a target='_blank' href='%s'>%s (%s)</a>, please create a <a target='_blank' href='%s'>%s Payment Box</a> on GoUrl.io and then enter the received free GoUrl %s Box Public/Private Keys. Leave field blank if you do not accept payments in %s", GOURL), $v2, $v2, $this->coin_www[$v], $v2, $k, "https://gourl.io/editrecord/coin_boxes/0/", $v2, $v2, $v2).'</em>';
+			if ($readonly) $tmp .= '<em><span class="gourlpayments">'.sprintf(__("You cannot modify this values because security hash file <a href='%s'>%s</a> is readonly!", GOURL), $this->hash_url, basename($this->hash_url)).'</span></em>';
 			$tmp .= '</td></tr>';
 		}
 	
@@ -5824,13 +5901,14 @@ final class gourlclass
 			$wpdb->query("ALTER TABLE `crypto_products` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
 		} 
 		
-	
-		// current version
-		update_option(GOURL.'version', GOURL_VERSION);
-	
 		// upload dir
 		gourl_retest_dir();
 	
+		if (!file_exists($this->hash_url)) file_put_contents($this->hash_url, '{"nonce":"1"}');
+
+		// current version
+		update_option(GOURL.'version', GOURL_VERSION);
+				
 		ob_flush();
 	
 		return true;
@@ -7676,7 +7754,3 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
      
     return 0;
 }
-
-
-
-
