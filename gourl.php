@@ -889,7 +889,8 @@ final class gourlclass
 		    $boxkey = (strpos($key, "public_key") || strpos($key, "private_key")) ? true : false;
 		    if (!(file_exists($this->hash_url) && !is_writable($this->hash_url) && $boxkey))
 		    {
-		    	if ($boxkey && get_option(GOURL.$key) != $value) $arr[$key] = array("old_key" => get_option(GOURL.$key), "new_key" => $value);
+		        $oldval = get_option(GOURL.$key);
+		    	if ($boxkey && $oldval != $value) $arr[$key] = array("old_key" => ($oldval ? substr($oldval, 0, -20)."....." : "-empty-"), "new_key" => ($value ? substr($value, 0, -20)."....." : "-empty-"));
 		    	update_option(GOURL.$key, $value);
 		    }
 		}
@@ -7752,5 +7753,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;
+    return 0;      
 }
