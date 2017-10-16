@@ -7596,9 +7596,11 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
 
     if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
     if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
-    if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
     if ($from_Currency == "RM")  $from_Currency = "MYR"; // fix for Malaysian Ringgit
 
+    if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
+    if ($from_Currency == "IRT") { $from_Currency = "IRR"; $amount = $amount * 10; } // fix for Iranian Toman; 1IRT = 10IRR 
+    
     $key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
 
     // update exchange rate one time per 1 hour
@@ -7613,6 +7615,21 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     $data = explode('bld>', $rawdata);
     $data = explode($to_Currency, $data[1]);
 
+    // alternative
+    // not working - https://finance.google.com/finance/converter?a=1&from=IRR&to=USD
+    // working - https://finance.google.com/finance/converter?a=1&from=USD&to=IRR
+    if (!$data[0] || $data[0] <= 0)
+    {
+        $url = "https://finance.google.com/finance/converter?a=1&from=".$to_Currency."&to=".$from_Currency;
+        $rawdata = gourl_get_url( $url, 20 );
+        $data = explode('bld>', $rawdata);
+        $data = explode($to_Currency, $data[1]);
+    
+        if ($data[0] > 0) $data[0] = 1 / $data[0];
+    }
+    
+    
+    
 
     // save exchange rate on next 1hour
     if ($data[0] > 0)
@@ -7753,5 +7770,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;      
+    return 0;    
 }
