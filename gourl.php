@@ -7565,7 +7565,7 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 /*
  *	XXIII. Get URL Data
  */
-function gourl_get_url( $url, $timeout = 15 )
+function gourl_get_url( $url, $timeout = 20 )
 {
     $ch = curl_init();
     curl_setopt ($ch, CURLOPT_URL, $url);
@@ -7590,7 +7590,6 @@ function gourl_get_url( $url, $timeout = 15 )
  */
 function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval = 1)
 {
-    $amount = urlencode($amount);
     $from_Currency = trim(strtoupper(urlencode($from_Currency)));
     $to_Currency = trim(strtoupper(urlencode($to_Currency)));
 
@@ -7605,7 +7604,12 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
 
     // update exchange rate one time per 1 hour
     $arr = get_option($key);
-    if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + $interval*60*60) > strtotime("now")) return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
+    if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + $interval*60*60) > strtotime("now")) 
+    {
+        $total = $arr["price"]*$amount;
+        if ($to_Currency=="BTC" || $total<0.01) return sprintf('%.5f', round($total, 5));
+        else return round($total, 2);
+    }
 
 
     $url = "https://finance.google.com/finance/converter?a=1&from=".$from_Currency."&to=".$to_Currency;
@@ -7613,18 +7617,21 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     $rawdata = gourl_get_url( $url, 20 );
 
     $data = explode('bld>', $rawdata);
-    $data = explode($to_Currency, $data[1]);
-
+    $data = (isset($data[1])) ? explode($to_Currency, $data[1]) : array();
+    $data[0] = (isset($data[0])) ? floatval($data[0]) : 0;    
+    
     // alternative
     // not working - https://finance.google.com/finance/converter?a=1&from=IRR&to=USD
     // working - https://finance.google.com/finance/converter?a=1&from=USD&to=IRR
-    if (!$data[0] || $data[0] <= 0)
+    if ($data[0] <= 0)
     {
         $url = "https://finance.google.com/finance/converter?a=1&from=".$to_Currency."&to=".$from_Currency;
         $rawdata = gourl_get_url( $url, 20 );
+
         $data = explode('bld>', $rawdata);
-        $data = explode($to_Currency, $data[1]);
-    
+        $data = (isset($data[1])) ? explode($to_Currency, $data[1]) : array();
+        $data[0] = (isset($data[0])) ? floatval($data[0]) : 0;
+        
         if ($data[0] > 0) $data[0] = 1 / $data[0];
     }
     
@@ -7637,11 +7644,16 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
         $arr = array("price" => $data[0], "time" => strtotime("now"));
         update_option($key, $arr);
          
-        return round($data[0]*$amount, ($to_Currency=="BTC"?5:2));
+        $total = $arr["price"]*$amount;
+        if ($to_Currency=="BTC" || $total<0.01) return sprintf('%.5f', round($total, 5));
+        else return round($total, 2);  
     }
+    
     elseif ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 5*60*60) > strtotime("now"))
     {
-        return round($arr["price"]*$amount, ($to_Currency=="BTC"?5:2));
+        $total = $arr["price"]*$amount;
+        if ($to_Currency=="BTC" || $total<0.01) return sprintf('%.5f', round($total, 5));
+        else return round($total, 2);
     }
 
     return 0;
@@ -7770,5 +7782,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;    
+    return 0;     
 }
