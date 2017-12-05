@@ -165,6 +165,11 @@ final class gourlclass
 		
 		// Exclude gourl js file from aggregation
 		add_filter('autoptimize_filter_js_exclude', array(&$this, "exclude_js_file"), 10, 1);
+		
+		// Disable BJ Lazy Load  iframes
+		$bj_lazy_load_options = get_option('bj_lazy_load_options');
+		if ($bj_lazy_load_options && is_array($bj_lazy_load_options)) update_option('bj_lazy_load_options', array_merge( $bj_lazy_load_options, array("lazy_load_iframes" => "no") ));
+		
 	}
 	
 
