@@ -3,7 +3,7 @@
 	* @copyright   2014-2018 Delta Consultants
 	* @category    Javascript
 	* @website     https://gourl.io   
-	* @api         https://gourl.io/api.html      
+	* @api         https://gourl.io/api.html     
 	* @version     2.1
 	*/
 	
@@ -93,7 +93,7 @@
 		$('.'+ext+'button_refresh').html('<i class="fas fa-sync-alt"></i>&#160; ' + data.texts.refresh);
 		
 		
-		$('.mncrpt a.dropdown-item, .'+ext+'button_confirm, .'+ext+'button_wait, .'+ext+'refresh').click(function() { $('.'+ext+'refresh, .'+ext+'msg').hide(); document.location.href = "#h"+ext; $('.'+ext+'loading_icon').show(); });
+		$('.mncrpt a.dropdown-item, .'+ext+'button_confirm, .'+ext+'button_wait, .'+ext+'refresh').click(function() { $('.'+ext+'refresh, .'+ext+'msg').hide(); document.location.href = "#h"+ext.replace(/_\s*$/, ""); $('.'+ext+'loading_icon').show(); });
 		
 		
 	

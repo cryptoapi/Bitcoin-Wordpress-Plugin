@@ -236,9 +236,11 @@ word-break: break-all;
 	max-width: 1000px; 
 }
 
+/*
 .mncrpt .box-shadow { 
-	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); 
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05) !important; 
 }
+*/
 		
 .mncrpt .card { 
 	margin: 0; 
@@ -341,4 +343,4 @@ word-break: break-all;
 .mncrpt_debug { 
 	text-align: left; 
 	font-weight: bold; 
-}  
+}   
