@@ -1,5 +1,3 @@
-
-
 #gourllogin {
 	margin: 70px 0 90px 0;
 	max-width: 430px;
@@ -217,3 +215,130 @@ word-break: break-all;
 }
 
 .woocommerce > .woocommerce-order > ul.woocommerce-thankyou-order-details li { margin-bottom: 15px; }
+
+.mncrpt img.radioimage-select { padding: 7px; border: solid 2px #ffffff; margin: 7px 1px; cursor: pointer; box-shadow: none; }
+.mncrpt img.radioimage-select:hover { border: solid 2px #a5c1e5; }
+.mncrpt img.radioimage-select.radioimage-checked { border: solid 2px #7db8d9; background-color: #f4f8fb; }
+
+
+.entry-content1 { width: auto !important; }
+
+@media (min-width: 768px) { .tooltip-inner { max-width: 350px !important; } }
+		
+.mncrpt {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.mncrpt .container { 
+	max-width: 1000px; 
+}
+
+.mncrpt .box-shadow { 
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); 
+}
+		
+.mncrpt .card { 
+	margin: 0; 
+	padding: 0; 
+	min-width: 0; 
+	max-width: 1000px; 
+	box-shadow: none; 
+	line-height: 1.5; 
+}
+
+.mncrpt .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.mncrpt .badge { 
+	text-align: left !important; 
+}
+
+.mncrpt h1, .mncrpt h3, .mncrpt h4 { 
+	font-family: inherit; 
+	font-weight: 500 !important; 
+	color: inherit; 
+	padding: 0 !important; 
+	margin: 0.5rem 0 !important; 
+}
+
+.mncrpt h1 { 
+	font-size: 2.5rem; 
+}
+
+.mncrpt h4 
+{ 
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	font-size: 1.45rem;  
+	text-transform: none !important; 
+}
+
+
+.mncrpt .pb-1, .mncrpt .py-1 {
+    padding-bottom: .25rem!important;
+}
+.mncrpt .mb-4, .mncrpt .my-4 {
+    margin-bottom: 1.2rem!important;
+}
+
+.mncrpt .mt-3, .mncrpt .my-3 {
+    margin-top: 1rem!important;
+}
+
+
+.mncrpt .card-title a  
+{ 
+	text-decoration:none !important; 
+	box-shadow:none !important; 
+	border-bottom:none !important
+}
+
+.mncrpt .card-body a { 
+	-webkit-box-shadow: none !important; 
+	box-shadow: none !important; 
+}
+
+.mncrpt .card-body h1 {
+	line-height: 1; 
+}
+
+
+.mncrpt p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+
+.mncrpt .card-body, .mncrpt .card-header, .mncrpt .text-center {
+	text-align: center;
+}
+
+.mncrpt img {
+    display: inline;
+}
+
+.mncrpt button { 
+	text-transform: none !important; 
+}
+
+.mncrpt .dropdown-toggle { 
+	display: block !important; 
+	border: 1px solid #eeeeee; 
+	padding: .375rem .75rem;
+	border-radius: .25rem;
+	width: auto;
+}
+
+.mncrpt .btn-outline-secondary:hover { 
+	background-color: #6c757d; 
+	color: white; 
+}
+
+.mncrpt_debug { 
+	text-align: left; 
+	font-weight: bold; 
+}  

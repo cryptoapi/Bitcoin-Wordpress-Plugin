@@ -1,28 +1,31 @@
 <?php
 /**
- * ##########################################
+ * ##########################################  
  * ###  PLEASE DO NOT MODIFY THIS FILE !  ###
  * ##########################################
  *
  *
- * PHP Cryptocurrency Payment Class       
+ * PHP Cryptocurrency Payment Class      
  *
  * @package     GoUrl PHP Bitcoin/Altcoin Payments and Crypto Captcha
  * @copyright   2014-2018 Delta Consultants
  * @category    Libraries
- * @website     https://gourl.io
- * @api         https://gourl.io/api-php.html
- * @example     https://gourl.io/bitcoin-payment-gateway-api.html
+ * @website     https://gourl.io      
+ * @api         https://gourl.io/bitcoin-payment-gateway-api.html
+ * @example     https://gourl.io/lib/examples/example_customize_box.php    <----
  * @gitHub  	https://github.com/cryptoapi/Payment-Gateway
  * @license 	Free GPLv2
- * @version     1.8.3
+ * @version     2.1
  *
  *
  *  CLASS CRYPTOBOX - LIST OF METHODS:
  *  --------------------------------------
- *  1. function display_cryptobox(..)			// Show Cryptocoin Payment Box and automatically displays successful payment message. If $submit_btn = true, display user submit button 'Click Here if you have already sent coins' or not
- *  2. function cryptobox_json_url()            // It generates url with your paramenters to gourl.io payment gateway. Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax.
- *  3. function get_json_values()               // Alternatively, you can receive JSON values though php curl on server side and use it in your php file without using Javascript and Jquery/Ajax. 
+ *  1a. function display_cryptobox(..)			// Show Cryptocoin Payment Box and automatically displays successful payment message. If $submit_btn = true, display user submit button 'Click Here if you have already sent coins' or not
+ *  1b. function display_cryptobox_bootstrap(..) // Show Customize Mobile Friendly Payment Box and automatically displays successful payment message if use ajax.
+ *                                               // optional - FREE WHITE-LABEL PRODUCT - BITCOIN/ALTCOIN PAYMENT BOX WITH YOUT LOGO THROUGH YOUR SERVER.  
+ *                                               // This function use bootstrap4 template; you can use your own template without this function
+ *  2. function cryptobox_json_url()            // It generates url with your parameters to gourl.io payment gateway. Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax.
+ *  3. function get_json_values()               // Alternatively, you can receive JSON values though php curl on server side and use it in your php file without using Javascript and Jquery/Ajax.
  *  4. function cryptobox_hash(..)              // It generates security md5 hash for all values used in payment box 
  *  5. function is_paid(..)	 					// If payment received - return true, otherwise return false
  *  6. function is_confirmed()					// Returns true if transaction/payment have 6+ confirmations. Average transaction/payment confirmation time - 10-20min for 6 confirmations (altcoins)
@@ -34,10 +37,11 @@
  *  12.function payment_id()					// Returns current record id in the table crypto_payments. Crypto_payments table stores all payments from your users
  *  13.function payment_date()					// Returns payment/transaction datetime in GMT format
  *  14.function payment_info()					// Returns object with current user payment details - amount, txID, datetime, usercointry, etc
- *  15.function cryptobox_reset()				// Optional, Delete cookies/sessions and new cryptobox with new payment amount will be displayed. Use this function only if you have not set userID manually.
- *  16.function coin_name()						// Returns coin name (bitcoin, dogecoin, etc)
- *  17.function coin_label()					// Returns coin label (DOGE, BTC, etc)
- *  18.function iframe_id()						// Returns payment box frame id
+ *  15.function payment_status_text()           // Return text message payment received or not; "msg_not_received", "msg_received" or "msg_received2"
+ *  16.function cryptobox_reset()				// Optional, Delete cookies/sessions and new cryptobox with new payment amount will be displayed. Use this function only if you have not set userID manually.
+ *  17.function coin_name()						// Returns coin name (bitcoin, dogecoin, etc)
+ *  18.function coin_label()					// Returns coin label (DOGE, BTC, etc)
+ *  19.function iframe_id()						// Returns payment box frame id
  *
  *
  *  LIST OF GENERAL FUNCTIONS:
@@ -46,10 +50,10 @@
  *  B. function payment_unrecognised(..) 		// Returns array with unrecognised payments for custom period - $time (users paid wrong amount on your internal wallet address)
  *  C. function cryptobox_sellanguage(..)       // Get cryptobox current selected language by user (english, spanish, etc)
  *  D. function cryptobox_selcoin(..)			// Get cryptobox current selected coin by user (bitcoin, dogecoin, etc. - for multiple coin payment boxes) 
- *  E. function display_language_box(..)		// Language selection dropdown list for cryptocoin payment box 
+ *  E. function display_language_box(..)		// Language selection dropdown list for cryptocoin payment box
  *  F. function display_currency_box(..)		// Multiple crypto currency selection list. You can accept payments in multiple crypto currencies (for example: bitcoin, bitcoincash, litecoin, dogecoin)
  *  G. function get_country_name(..)			// Get country name by country code or reverse
- *  H. function convert_currency_live(..)		// Fiat currency converter using Google Finance live exchange rates
+ *  H. function convert_currency_live(..)		// Fiat currency converter using XE.COM live exchange rates
  *  I. function validate_gourlkey(..)			// Validate gourl private/public/affiliate keys 
  *  J. function run_sql(..)						// Run SQL queries and return result in array/object formats
  *
@@ -58,7 +62,7 @@
  *  -------------------------------------
  *  CRYPTOBOX_LANGUAGE - cryptobox current selected language
  *  CRYPTOBOX_LOCALISATION - all cryptobox localisations 
- *  
+ *
  *  Note: Complete Description of the Functions, see on the page below or here - https://gourl.io/api-php.html
  *
  *
@@ -66,7 +70,7 @@
 
 
 
-if(!defined("CRYPTOBOX_WORDPRESS")) define("CRYPTOBOX_WORDPRESS", true); 
+if(!defined("CRYPTOBOX_WORDPRESS")) define("CRYPTOBOX_WORDPRESS", true);
 
 if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
     require_once( "cryptobox.config.php" ); 
@@ -75,7 +79,7 @@ if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
 
-define("CRYPTOBOX_VERSION", "1.8.3");
+define("CRYPTOBOX_VERSION", "2.1");
 
 // GoUrl supported crypto currencies
 define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'bitcoincash', 'litecoin', 'dash', 'dogecoin', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit', 'universalcurrency')));
@@ -108,7 +112,7 @@ class Cryptobox {
 	 * If you use multiple stores/sites online, please create separate GoUrl Payment Box (with unique payment box public/private keys) for each of your stores/websites. 
 	 * Do not use the same GoUrl Payment Box with the same public/private keys on your different websites/stores.
 	 * if you use the same $public_key, $orderID and $userID in your multiple cryptocoin payment boxes on different website pages and a user has made payment; a successful result for that user will be returned on all those pages (if $period time valid). 
-	 * if you change - $public_key or $orderID or $userID - new cryptocoin payment box will be shown for exisiting paid user. (function $this->is_paid() starts to return 'false'). 
+	 * if you change - $public_key or $orderID or $userID - new cryptocoin payment box will be shown for exisiting paid user. (function $this->is_paid() starts to return 'false').
 	 * */
 
 	
@@ -281,8 +285,8 @@ class Cryptobox {
 			$cryptobox_html .= '<div'.(in_array($this->language, array("ar", "fa"))?' dir="rtl"':'').' style="'.htmlspecialchars($message_style, ENT_COMPAT).'">';
 	
 
-			if ($this->paid) $cryptobox_html .= "<span style='color:#339e2e;white-space:nowrap;'>".str_replace(array("%coinName%", "%coinLabel%", "%amountPaid%"), array($this->coinName, $this->coinLabel, $this->amountPaid), $this->localisation[($this->boxType=="paymentbox"?"msg_received":"msg_received2")])."</span>";
-			else $cryptobox_html .= "<span style='color:#eb4847'>".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, (in_array($this->coinLabel, array('BCH', 'DASH'))?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["msg_not_received"])."</span><script type='text/javascript'>cryptobox_msghide('$id')</script>";
+			if ($this->paid) $cryptobox_html .= "<span style='color:#339e2e;white-space:nowrap;'>".$this->payment_status_text()."</span>";
+			else $cryptobox_html .= "<span style='color:#eb4847'>".$this->payment_status_text()."</span><script type='text/javascript'>cryptobox_msghide('$id')</script>";
 			
 			$cryptobox_html .= "</div></div><br>";
 		}
@@ -315,7 +319,7 @@ class Cryptobox {
 	
 	/* 2. Function cryptobox_json_url()
 	 *
-	 * It generates url with your paramenters to gourl.io payment gateway.
+	 * It generates url with your parameters to gourl.io payment gateway.
 	 * Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax.
 	 * See instruction https://gourl.io/bitcoin-payment-gateway-api.html#p8
 	 *  
@@ -350,6 +354,7 @@ class Cryptobox {
 	        "us"	=> $this->userFormat,
 	        "j"     => 1, // json   
 	        "d" 	=> base64_encode($ip),
+	        "f"     => base64_encode($this->ua(false)),
 	        "h" 	=> $hash
 	    );
 	     
@@ -358,7 +363,7 @@ class Cryptobox {
 	    
 	    $url = "https://coins.gourl.io";
 	    foreach($data as $k=>$v) $url .= "/".$k."/".rawurlencode($v);
-	    
+ 
 	    return $url;
 	}
 	
@@ -386,7 +391,7 @@ class Cryptobox {
 		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt( $ch, CURLOPT_HEADER, 0);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt( $ch, CURLOPT_USERAGENT, 'Get_Json_Values PHP Class '.CRYPTOBOX_VERSION);
+		curl_setopt( $ch, CURLOPT_USERAGENT, $this->ua());
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
 		$res = curl_exec( $ch );
@@ -400,10 +405,12 @@ class Cryptobox {
 		  if (isset($arr2["data_hash"]))
 		  {
 		      unset($arr2["data_hash"]);
-		      if ($arr["data_hash"] == strtolower(hash("sha512", $this->private_key.json_encode($arr2).$this->private_key))) $f = true;
+		      if (strtolower($arr["data_hash"]) == strtolower(hash("sha512", $this->private_key.json_encode($arr2).$this->private_key))) $f = true;
 		  }
 		}
-		if (!$f) $arr = array();    
+		if (!$f) $arr = array();
+
+		if ($arr && $arr["status"] == "payment_received" && !$this->paid) $this->check_payment(true);
 		
 		return $arr;
 	}
@@ -725,7 +732,520 @@ class Cryptobox {
 
 	
 	
+	/* 19. Function payment_status_text()
+	 *
+	 * Return message from $cryptobox_localisation on current user language
+	 * message payment received or not; "msg_not_received", "msg_received" or "msg_received2"
+	 */
+	public function payment_status_text()
+	{
+        if ($this->paid) $txt = str_replace(array("%coinName%", "%coinLabel%", "%amountPaid%"), array($this->coinName, $this->coinLabel, $this->amountPaid), $this->localisation[($this->boxType=="paymentbox"?"msg_received":"msg_received2")]);
+        else $txt = str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, (in_array($this->coinLabel, array('BCH', 'DASH'))?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["msg_not_received"]);
+	             
+	    return $txt;        
+	}
 	
+	
+	
+	/* 20. Function display_cryptobox_bootstrap()
+	 *
+	 *  Show Customize Mobile Friendly Payment Box and automatically displays successful payment message.
+	 *  This function use bootstrap4 template; you can use your own template without this function
+	 *  
+	 *  FREE WHITE-LABEL BITCOIN/ALTCOIN PAYMENT BOX WITH THIS FUNCTION 
+	 *  Simple use this function with 'curl' option and your own logo
+	 *
+	 *  Live Demo  (awaiting payment)  -     https://gourl.io/lib/examples/example_customize_box.php?boxtype=1
+	 *  Live Demo2 (payment received)  -     https://gourl.io/lib/examples/example_customize_box.php?boxtype=2
+	 *
+	 *  Your html5 file header should have -
+	 *  
+	 *  <!DOCTYPE html>
+	 *  <html lang="en">
+	 *  <head>
+	 *  <title>...</title>
+	 *  <meta charset="utf-8">
+	 *  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 *  <meta name="viewport" content="width=device-width, initial-scale=1">
+	 *  <!-- Bootstrap CSS - Original Theme -->
+	 *  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+	 *  <!-- or you can use other Themes, for example from https://bootswatch.com/; replace line with bootstrap.min.css above to line below -->
+	 *  <!-- <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css"> -->
+	 *  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+	 *  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+	 *  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	 *  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	 *  script src="<?php echo CRYPTOBOX_JS_FILES_PATH; ?>support.min.js" crossorigin="anonymous"></script>
+	 *  <style>
+            html { font-size: 14px; }
+            @media (min-width: 768px) { html { font-size: 16px; } .tooltip-inner { max-width: 350px; } }
+            .mncrpt .container { max-width: 980px; }
+            .mncrpt .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+            img.radioimage-select { padding: 7px; border: solid 2px #ffffff; margin: 7px 1px; cursor: pointer; box-shadow: none; }
+            img.radioimage-select:hover { border: solid 2px #a5c1e5; }
+            img.radioimage-select.radioimage-checked { border: solid 2px #7db8d9; background-color: #f4f8fb; }
+	 *  </style>
+	 *  </head>
+	 *  <body>
+	 *  ....
+	 *
+	
+	* This function has the following parameters -
+	* $coins - list of cryptocoins which you accept for payment (bitcoin/litecoin/dash/..)
+	* $def_coin - default coin in payment box 
+	* $def_language - default language in payment box
+	* $custom_text - your own text above payment box 
+	* $coinImageSize - coin selection list - image sizes; default 70px 
+	* $qrcodeSize - QRCode size; default 200px
+	* $show_languages - show or hide language selection menu above payment box
+	* $logoimg_path - show or hide (when empty value) logo above payment box. You can use default logo or place path to your own logo
+	* $resultimg_path - after payment is received, you can customize successful image in payment box (image with your company text for example)
+	* $resultimgSize - result image size; default 250px
+	* redirect - redirect to another page after payment is received (3 seconds delay)
+	*    
+	* method - "ajax" or "curl". 
+	*    AJAX - Prefer Method (users don't need click any submit buttons)
+	*    CURL + Your Own Logo (White Label Product - https://www.google.com/search?q=white+label+product), user need to click on button below payment form when payment is sent
+	*    with ajax - user browser receive payment data directly from our server and automatically show successful payment notification message on page (without page reload, any clicks on buttons). 
+	*    with curl - User browser receive payment data in json format from your server only; and your server receive json data from our server
+	* 
+	* debug - show raw payment data from gourl.io on the page also, for debug purposes.  
+	*
+	* JSON Raw Payment Values Example -
+	* Payment not received - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/2.21/pe/NOEXPIRY/l/en/o/invoice22/u/83412313__3bccb54769/us/COOKIE/j/1/d/ODIuMTEuOTQuMTIx/h/e889b9a07493ee96a479e471a892ae2e
+	* Payment received successfully - https://coins.gourl.io/b/20/c/Bitcoin/p/20AAvZCcgBitcoin77BTCPUB0xyyeKkxMUmeTJRWj7IZrbJ0oL/a/0/au/0.1/pe/NOEXPIRY/l/en/o/invoice1/u/demo/us/MANUAL/j/1/d/ODIuMTEuOTQuMTIx/h/ac7733d264421c8410a218548b2d2a2a
+	 *  
+	 */
+
+	public function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $custom_text = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "ajax", $debug = false)
+	{
+
+
+	    $logoimg_path = preg_replace('/[^A-Za-z0-9\-\_\=\?\&\.\;\:\/]/', '', $logoimg_path);
+	    $resultimg_path = preg_replace('/[^A-Za-z0-9\-\_\=\?\&\.\;\:\/]/', '', $resultimg_path);
+	    $redirect = preg_replace('/[^A-Za-z0-9\-\_\=\?\&\.\;\:\/]/', '', $redirect);
+
+	    $custom_text = strip_tags($custom_text, '<p><a><br>');
+	    
+	    $coinImageSize    = intval($coinImageSize);
+	    if ($coinImageSize > 200) $coinImageSize = 70;
+	    
+	    $qrcodeSize    = intval($qrcodeSize);
+	    if ($qrcodeSize > 500) $qrcodeSize = 200;
+
+	    $resultimgSize    = intval($resultimgSize);
+	    if ($resultimgSize > 500) $resultimgSize = 250;
+	    
+	    if (!in_array($method, array("ajax", "curl"))) $method = "ajax";
+	     
+	    
+	    $ext           = (defined("CRYPTOBOX_PREFIX_HTMLID")) ? CRYPTOBOX_PREFIX_HTMLID : "acrypto_";      // any prefix for all html elements; default 'acrypto_'
+	    $ext2          = "h".trim($ext, " _");
+	    
+	    $page_url      = "//".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."#".$ext2; // Current page url
+	    $hide       =  "style='display:none'";
+	    
+	    $phpdir_path   = (defined("CRYPTOBOX_PHP_FILES_PATH")) ? CRYPTOBOX_PHP_FILES_PATH : "";            // path to directory with files cryptobox.class.php/cryptobox.callback.php/cryptobox.newpayment.php; cryptobox.newpayment.php will be automatically call through ajax or php two times - when payment received and when confirmed (6 confirmations) 
+	    $imgdir_path   = (defined("CRYPTOBOX_IMG_FILES_PATH")) ? CRYPTOBOX_IMG_FILES_PATH : "images/";     // path to directory with coin image files (directory 'images' by default)
+	    $jsdir_path    = (defined("CRYPTOBOX_JS_FILES_PATH"))  ? CRYPTOBOX_JS_FILES_PATH : "";             // path to directory with files ajax.min.js/support.min.js
+	     
+	    
+	    
+	    if (!in_array($method, array("ajax", "curl"))) $method = "ajax";
+	     
+
+	    // Language selection list for payment box (html code)
+	    if ($show_languages) $languages_list = display_language_box($def_language, $ext2, false);
+
+
+
+	
+	     
+	    // ---------------------------
+	    // Bootstrap4 Template Start
+	    // ----------------------------
+	     
+	    // All Payment Box Elements Area Start ...
+	    $tmp = "<div id='".$ext2."' class='".$ext."cryptobox_area mncrpt'>";
+	     
+	    //JQuery Payment Box Script, see https://github.com/cryptoapi/Payment-Gateway/blob/master/js/source/ajax.js 
+	    if ($method == "ajax")
+	    {
+	        $tmp .= "<script>jQuery.getScript('".$jsdir_path."ajax.min.js',  function() { cryptobox_ajax('" . base64_encode($this->cryptobox_json_url()) . "', " . intval($this->is_paid()) . ", " . intval($this->is_confirmed()) . ", '" . base64_encode($phpdir_path) . "', '" . base64_encode($imgdir_path) . "', '" . base64_encode($logoimg_path) . "', '" . base64_encode($ext) . "', '" . base64_encode($redirect) . "'); })</script>";
+	    }
+	    else
+	    {
+	        $data = $this->get_json_values();
+	        unset($data["public_key"]); unset($data["box"]); unset($data["texts"]["website"]);
+	        if (isset($data["private_key"])) unset($data["private_key"]);
+	        if (isset($data["private_key_hash"])) unset($data["private_key_hash"]);
+	        unset($data["data_hash"]);
+	        if (!$debug) unset($data["err"]);
+	        $data = json_encode($data, JSON_FORCE_OBJECT | JSON_HEX_APOS);
+	        $tmp .= '<script>jQuery(document).ready(function(){ cryptobox_update_page("'.base64_encode($data).'", "' . base64_encode($imgdir_path) . '", "' . base64_encode($logoimg_path) . '", "' . base64_encode($ext) . '") })</script>';
+	        if ($this->is_paid() && $redirect) $tmp .= '<script>setTimeout(function() { window.location = "'.$redirect.'"; }, 3000);</script>';
+	    } 
+	     
+	     
+	    
+	    // ----------------------------------
+	    // Text - Pay now + Custom User text 
+	    // ----------------------------------
+	    
+	    $tmp .= "<div class='".$ext."header px-3 py-3 pt-md-5 pb-md-4 mx-auto my-4 text-center' style='max-width:700px'>";
+	    $tmp .= "<h1 class='display-4 ".$ext."texts_pay_now'><span class='".$ext."texts_pay_now'>&#160;</span></h1>";
+	    $custom_text = trim($custom_text);
+	    if ($custom_text)
+	    {
+    	    $tmp .= "<br>";
+    	    if (stripos($custom_text, "<p") === false) $tmp .= "<p class='lead'>" . $custom_text . "</p>"; else $tmp .= $custom_text;
+	    }
+	    $tmp .= "</div>";
+	     
+	    
+	    
+	    // ------------------------------
+	    // Payment Box Ajax Loading ...
+	    // ------------------------------
+	    $tmp .= "<div class='".$ext."loader' style='height:700px'>";
+	    
+	    $tmp .= "<form action='" . $page_url. "' method='post'>";
+	    $tmp .= "<div class='container text-center ".$ext."loader_button pt-5 mt-5'><br><br><br><br><br>";
+	    $tmp .= "<button type='submit' title='Click to Reload Page' class='btn btn-outline-secondary btn-lg'><i class='fas fa-spinner fa-spin'></i> &#160; " . $this->coin_name() . " " . $this->localisation["loading"] . "</button>";
+	    $tmp .= "</div>";
+	        
+	    $tmp .= "<div class='container'>";
+	    $tmp .= "<div class='row'>";
+	    $tmp .= "<div class='col-12 text-center col-sm-10 offset-sm-1 col-md-8 offset-md-2'>";
+	    $tmp .= "<div class='card box-shadow ".$ext."cryptobox_error' " . $hide . ">";
+	    $tmp .= "<div class='card-header'>";
+	    $tmp .= "<h4 class='my-0 font-weight-normal'>Error Message</h4>";
+	    $tmp .= "</div>";
+	    $tmp .= "<div class='card-body'>";
+	    $tmp .= "<h1 class='card-title'>" . $this->coin_name() . " " . $this->localisation["loading"] . "</h1>";
+	    $tmp .= "<br>";
+	    $tmp .= "<div class='lead ".$ext."error_message'></div>";
+	    $tmp .= "<br><br>";
+	    $tmp .= "<button type='submit' class='btn btn-outline-primary btn-block btn-lg'><i class='fas fa-sync'></i> &#160; Reload Page</button>";
+	    $tmp .= "<br>";
+	    $tmp .= "</div>";
+	    $tmp .= "</div>";
+	    $tmp .= "</div>";
+	    $tmp .= "</div>";
+	    $tmp .= "</div>";
+	    $tmp .= "</form>";
+	    
+	    $tmp .= "</div>";
+	    
+	    // End - Payment Box Ajax Loading ...
+	    	    
+	    
+	    
+
+	    // ----------------------------
+	    // Area above Payment Box
+	    // ----------------------------
+	    $tmp .= "<div class='".$ext."cryptobox_top' " . $hide . ">";
+	     
+	    
+        // A1. Notification payment received or not; when user click 'Refresh' button below payment form
+        // --------------------
+        if (isset($_POST["".$ext."refresh_"]) || isset($_POST["".$ext."refresh2_"]))
+        {    
+	            $tmp .= "<div class='row ".$ext."msg mx-2'>";
+	            $tmp .= "<div class='container'>";
+	            $tmp .= "<div class='row'>";	
+	            $tmp .= "<div class='col-12 col-sm-10 offset-sm-1 mb-5 mt-2 text-left'>";
+	                        
+                if ($this->is_paid(true)) 
+                    $tmp .= "<span class='badge badge-success ".$ext."paymentcaptcha_statustext'>Successfully Received</span>"; 
+                else 
+                    $tmp .= "<span class='badge badge-danger ".$ext."paymentcaptcha_statustext'>Not Received</span>";
+                
+	            $tmp .= "<div class='jumbotron jumbotron-fluid text-center'>";
+	            $tmp .= "<div class='container'>";
+                $t = $this->payment_status_text();
+	            if (mb_strpos($t, '<br>')) 
+	            { 
+	                $tmp .= "<h3 class='display-5'>" . $this->left($t, "<br>") . "</h3><br>"; 
+	                $t = $this->right($t, '<br>'); 
+	            } 
+	            $tmp .= "<p class='lead'>" . $t . "</p>";
+	            $tmp .= "</div>";
+	            $tmp .= "</div>";
+	                        
+	            $tmp .= "</div>";
+	            $tmp .= "</div>";
+	            $tmp .= "</div>";
+	            $tmp .= "</div>";
+	                
+	     }  
+	    
+	    
+	     
+	     // A2. Coin selection list (bitcoin/litecoin/etc)
+	     // --------------------
+	     if (!$this->is_paid())
+	     {
+	        // Coin selection list (html code)
+	        $coins_list = display_currency_box($coins, $def_coin, $def_language, $coinImageSize, "margin: 20px 0 80px 0", $imgdir_path, $ext2, true);
+
+	         if (!$custom_text) $tmp .= "<br>";
+	         $tmp .= "<div class='container ".$ext."coins_list'><div class='row'><div class='col-12 text-center col-sm-10 offset-sm-1 col-md-8 offset-md-2 text-center'>" . $coins_list . "</div></div></div>";
+	     }
+	     
+	     
+	     
+	     
+	     // Language / logo Row
+	     if ($show_languages || $logoimg_path)
+	     {
+    	     $tmp .= "<div class='container'>";
+    	     $tmp .= "<div class='row'>";
+	     }	     
+
+	     
+	     // A3. Box Language
+	     // --------------------
+	     
+	     if ($show_languages)
+	     {
+    	     $offset = ($logoimg_path) ? "text-center mb-2" : "mb-3";
+    	     $tmp .= "<div class='".$ext."box_language col-12 ".(CRYPTOBOX_WORDPRESS?"text-left col-sm-2 col-md-3 offset-md-1":"col-sm-4 offset-sm-1 text-sm-left col-md-4 offset-md-2 text-md-left")." mt-sm-4 $offset'>";
+    	     $tmp .= "<div class='btn-group'>";
+    	     $tmp .= "<button type='button' class='btn btn-outline-secondary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+    	     $tmp .= "Language" . " - " . $this->localisation['name'];
+    	     $tmp .= "</button>";
+    	     $tmp .= $languages_list;
+    	     $tmp .= "</div>";
+    	     $tmp .= "</div>";
+	     }
+	     // End - A3. Box Language
+	     
+
+	     // A4. Logo
+	     // --------------------
+	     if ($logoimg_path)
+	     {
+	         $offset = ($show_languages) ? "" : "offset-sm-5 offset-md-6";
+    	     $tmp .= "<div class='".$ext."box_logo col-12 col-sm-6 col-md-4 mt-4 $offset'>";
+    	     $tmp .= "<div class='text-right'><img class='".$ext."logo_image' alt='logo' src='#'></div>";
+    	     $tmp .= "<br>";
+    	     $tmp .= "</div>";
+	     }
+    	 // End - A4. Logo
+
+	     
+	     if ($show_languages || $logoimg_path)
+	     {
+    	     $tmp .= "</div>";
+    	     $tmp .= "</div>";
+	     }
+	     else $tmp .= "<br><br>";
+	     	     
+	     
+	     $tmp .= "</div>";   
+	     // --------------------
+         // End - Area above Payment Box
+	     
+	     
+	     
+	     
+	     
+	     
+
+	     // -----------------------------------------------------------------------------------------------
+	     // Two visual types of payment box - payment not received (type1) and payment received (type2)
+	     // -----------------------------------------------------------------------------------------------
+	     
+	     
+	     // Type1 - Crypto Payment Box - Payment Not Received
+	     
+	     
+	     $tmp .= "<div class='container ".$ext."cryptobox_unpaid' " . $hide . ">";
+	     $tmp .= "<div class='row'>";	
+	           
+	     $tmp .= "<div class='col-12 ".(CRYPTOBOX_WORDPRESS?"col-md-10 offset-md-1":"text-center col-sm-10 offset-sm-1 col-md-8 offset-md-2")."'>";
+	           
+	     $tmp .= "<form action='" . $page_url . "' method='post'>";
+	     $tmp .= "<div class='card box-shadow'>";
+	     $tmp .= "<div class='card-header'>";
+	                 
+	     $tmp .= "<h4 class='my-0 font-weight-normal ".$ext."addr_title'><span class='".$ext."texts_coin_address'>&#160;</span>";
+	     $tmp .= "<button type='submit' class='".$ext."refresh btn btn-sm btn-outline-secondary float-right'><i class='fas fa-sync-alt'></i></button>";
+	     $tmp .= "<span class='".$ext."loading_icon mr-3 float-left' " . $hide . "> <i class='fas fa-laptop'></i></span>";
+	     $tmp .= "<span class='".$ext."loading_icon mr-3 float-left' " . $hide . "> <i class='fas fa-sync-alt fa-spin'></i></span>";
+	     $tmp .= "</h4>";
+	                 
+	     $tmp .= "</div>";
+	                 
+	     $tmp .= "<div class='card-body'>";
+
+	     if ($qrcodeSize) $tmp .= "<div class='".$ext."copy_address'><a href='#a'><img class='".$ext."qrcode_image' style='max-width:100%; height:auto; width:auto\9;' alt='qrcode' data-size='".intval($qrcodeSize)."' src='#'></a></div>";
+	                     
+	     $tmp .= "<h1 class='mt-3 mb-4 pb-1 card-title ".$ext."copy_amount'><span class='".$ext."amount'>&#160;</span> <small class='text-muted'><span class='".$ext."coinlabel'></span></small></h1>";
+	     $tmp .= "<div class='lead ".$ext."copy_amount ".$ext."texts_send'></div>";
+	     $tmp .= "<div class='lead ".$ext."texts_no_include_fee'></div>";
+	     $tmp .= "<br>";
+	     $tmp .= "<h4 class='card-title'>";
+	     $tmp .= "<a class='".$ext."wallet_address' style='line-height:1.5;' href='#a'></a> &#160;&#160;"; 
+	     $tmp .= "<a class='".$ext."copy_address' href='#a'><i class='fas fa-copy'></i></a> &#160;&#160;";  
+	     $tmp .= "<a class='".$ext."wallet_open' href='#a'><i class='fas fa-external-link-alt'></i></a>";
+	     $tmp .= "</h4>";
+	     $tmp .= "<br>";
+	     $tmp .= "<button type='submit' class='".$ext."button_wait btn btn-lg btn-block btn-outline-primary' style='white-space:normal'></button>";
+	     $tmp .= "<br>";
+	     $tmp .= "<p class='lead ".$ext."texts_intro3'></p>";
+	                     
+	     $tmp .= "</div>";
+	                 
+	     $tmp .= "</div>";
+	               
+	     $tmp .= "<input type='hidden' id='".$ext."refresh_' name='".$ext."refresh_' value='1'>";
+	             
+	     $tmp .= "<button type='submit' class='".$ext."button_refresh btn btn-lg btn-block btn-primary mt-3' " . $hide . "></button>";
+	               
+	     // $tmp .= "<div class='lead ".$ext."texts_btn_wait_hint mt-5'></div>"; // additional hint
+	     
+	     $tmp .= "</form>";
+	     
+	     $tmp .= "</div>";
+	     
+	     if ($method != "ajax" && !$this->is_paid())
+	     {
+	         $tmp .= "<div class='col-12 text-center ".(CRYPTOBOX_WORDPRESS?"col-md-10 offset-md-1":"col-sm-10 offset-sm-1 col-md-8 offset-md-2")."'>";
+	         $tmp .= "<form action='" . $page_url . "' method='post'>";
+	         $tmp .= "<input type='hidden' id='".$ext."refresh2_' name='".$ext."refresh2_' value='1'>";
+	         $tmp .= "<br><button type='submit' class='".$ext."button_confirm btn btn-lg btn-block btn-primary my-2' style='white-space:normal'><i class='fas fa-angle-double-right'></i> &#160; ".str_replace(array("%coinName%", "%coinNames%", "%coinLabel%"), array($this->coinName, (in_array($this->coinLabel, array('BCH', 'DASH'))?$this->coinName:$this->coinName.'s'), $this->coinLabel), $this->localisation["button"])." &#160; <i class='fas fa-angle-double-right'></i></button>";
+	         $tmp .= "</form>";
+	         $tmp .= "</div>";
+	     }
+	     
+	     
+	     $tmp .= "</div>";
+	     $tmp .= "</div>";
+	     
+	     // -----------------------------------------------
+	     // End Type1 - Payment Box - Payment Not Received
+	     // -----------------------------------------------
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     // -------------------------------------------------------------------------
+	     // Type2 - Crypto Payment Box - Payment Received/Successful Result 
+	     // -------------------------------------------------------------------------
+	     
+	     
+	     $tmp .= "<div class='container ".$ext."cryptobox_paid' " . $hide . ">";
+	     $tmp .= "<div class='row'>";
+	     $tmp .= "<div class='col-12 ".(CRYPTOBOX_WORDPRESS?"col-md-10 offset-md-1":"col-sm-10 offset-sm-1 col-md-8 offset-md-2 text-center")."'>";
+	           
+	     $tmp .= "<div class='card box-shadow'>";
+	     $tmp .= "<div class='card-header'>";
+	                 
+	     $tmp .= "<h4 class='my-0 font-weight-normal ".$ext."addr_title'><span class='".$ext."texts_title'>&#160;</span>";
+	     $tmp .= "<span class='".$ext."loading_icon mr-3 float-left' " . $hide . "> <i class='fas fa-laptop'></i></span>";
+	     $tmp .= "<span class='".$ext."loading_icon mr-3 float-left' " . $hide . "> <i class='fas fa-sync-alt fa-spin'></i></span>";
+	     $tmp .= "</h4>";
+	     
+	     $tmp .= "</div>";
+	                 
+	     $tmp .= "<div class='card-body'>";
+	                 
+	     $tmp .= "<div class='".$ext."paid_total'>";
+	     $tmp .= "<h1 style='margin-top:10px' class='card-title ".$ext."copy_amount'><span class='".$ext."amount'>&#160;</span> <small class='text-muted'><span class='".$ext."coinlabel'></span></small></h1>";
+	     $tmp .= "</div>";
+	     $tmp .= "<br>";
+	     if (!$resultimg_path || $resultimg_path == "default") $resultimg_path = $imgdir_path."paid.png";
+	     if ($resultimgSize) $tmp .= "<div class='".$ext."copy_transaction'><img class='".$ext."paidimg' style='max-width: 100%; width: ".$resultimgSize."px; height: auto;' src='".$resultimg_path."' alt='Paid'></div><br><br>";
+	     $tmp .= "<h1 class='display-4 ".$ext."paymentcaptcha_successful' style='line-height:1.5;'>.</h1>";
+	     $tmp .= "<br>";
+	     $tmp .= "<div class='lead ".$ext."paymentcaptcha_date'></div>";
+	     $tmp .= "<br>";
+	     $tmp .= "<br>";
+	     $tmp .= "<a href='#a' class='".$ext."button_details btn btn-lg btn-block btn-outline-primary' style='white-space:normal'></a>";
+	     $tmp .= "</div>";
+	                 
+	     $tmp .= "</div>";
+	             
+	     $tmp .= "</div>";
+	     $tmp .= "</div>";
+	     $tmp .= "</div>";
+	     $tmp .= "<br><br><br>";
+	     
+	     // -----------------------------------------------
+	     // End Type2 - Payment Received/Successful Result 
+	     // -----------------------------------------------
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+
+	    // -------------------------------------------------------------------------------------------
+	    // Debug Raw JSON Payment Data from gourl.io
+	    // -------------------------------------------------------------------------------------------
+	    
+	     if ($debug)
+	     {    
+	     
+	     $tmp .= "<div class='mncrpt_debug container ".$ext."cryptobox_rawdata px-4 py-3' style='overflow-wrap: break-word; display:none;'>";
+	     $tmp .= "<div class='row'>";
+	     $tmp .= "<div class='col-12'>";
+	     $tmp .= "<br><br><br><br><br>";
+	     
+	     $tmp .= "<h1 class='display-4'>Raw JSON Data (from GoUrl.io payment gateway) -</h1>";
+	     $tmp .= "<br>";
+	     $tmp .= "<p class='lead'><b>PHP Language</b> - Please use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L747'>\$box->display_cryptobox_bootstrap (...)</a>; it generate customize mobile friendly bitcoin/altcoin payment box and automatically displays successful payment message (bootstrap4, json, your own logo, white label product, etc)</p>";
+	     $tmp .= "<p class='lead'><b>ASP/Other Languages</b> - You can use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L320'>\$box->cryptobox_json_url()</a>; It generates url with your parameters to gourl.io payment gateway. ";
+	     $tmp .= "Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax (on the user side). ";
+	     $tmp .= "Or your server can receive JSON values through curl - function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L373'>\$box->get_json_values()</a>; and use it in your files/scripts directly without javascript when generating the webpage (on the server side).</p>";
+	     $tmp .= "<p class='lead'><a target='_blank' href='" . $this->cryptobox_json_url() . "'>JSON data source &#187;</a></p>";
+	     
+	     $tmp .= "<div class='card card-body bg-light'>";
+	     $tmp .= "<div class='".$ext."jsondata'></div>";
+	     $tmp .= "</div>";
+	     
+	     $tmp .= "</div>";
+	     $tmp .= "</div>";
+	     $tmp .= "</div>";
+	     $tmp .= "<br><br><br>";
+	     
+	     }
+	     // ------------------
+	     // End Debug
+	     // ------------------
+	     
+	     
+	     
+	     
+	     $tmp .= "</div>"; 
+	     // End - <div id='".$ext2."' class='".$ext."cryptobox_area'>
+
+	     
+	     
+	     // ---------------------------
+	     // Bootstrap4 Template End
+	     // ----------------------------
+	     
+	     
+	     return $tmp;
+	     
+	}
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	
@@ -770,11 +1290,12 @@ class Cryptobox {
 	private function check_payment_live()
 	{
 		$ip		= $this->ip_address();
-		$hash 	= md5($this->boxID.$this->private_key.$this->userID.$this->orderID.$this->language.$this->period.$ip);
+		$private_key_hash = strtolower(hash("sha512", $this->private_key));
+		$hash 	= md5($this->boxID.$private_key_hash.$this->userID.$this->orderID.$this->language.$this->period.$ip);
 		$box_status = "";
 		
 		$data = array(
-				"r" 	=> $this->private_key,
+				"g" 	=> $private_key_hash,
 				"b" 	=> $this->boxID,
 				"o"		=> $this->orderID,
 				"u"		=> $this->userID,
@@ -790,6 +1311,7 @@ class Cryptobox {
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query($data));
 		curl_setopt( $ch, CURLOPT_HEADER, 0);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt( $ch, CURLOPT_USERAGENT, $this->ua());
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
 		$res = curl_exec( $ch );
@@ -799,9 +1321,10 @@ class Cryptobox {
 		
 		if ($res) foreach ($res as $k => $v) if (is_string($v)) $res[$k] = trim($v);
 
+		
 		if (isset($res["status"]) && in_array($res["status"], array("payment_received")) &&
 				$res["box"] && is_numeric($res["box"]) && $res["box"] > 0 && $res["amount"] && is_numeric($res["amount"]) && $res["amount"] > 0 &&
-				$res["private_key"] && preg_replace('/[^A-Za-z0-9]/', '', $res["private_key"]) == $res["private_key"] && $res["private_key"] == $this->private_key)
+				isset($res["private_key_hash"]) && strlen($res["private_key_hash"]) == 128 && preg_replace('/[^A-Za-z0-9]/', '', $res["private_key_hash"]) == $res["private_key_hash"] && strtolower($res["private_key_hash"]) == $private_key_hash)
 		{
 			
 			foreach ($res as $k => $v)
@@ -902,8 +1425,10 @@ class Cryptobox {
 		 
 		return $out;
 	}
-	
-	
+	private function ua($agent = true)
+	{
+	   return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER["SERVER_NAME"] . (isset($_SERVER["PHP_SELF"])?$_SERVER["PHP_SELF"]:"") . ' | GU ' . (CRYPTOBOX_WORDPRESS?'WORDPRESS':'PHP') . ' ' . CRYPTOBOX_VERSION . ($agent && isset($_SERVER["HTTP_USER_AGENT"])?' | '.$_SERVER["HTTP_USER_AGENT"]:'');
+	}
 	public function ip_address()
 	{
 		static $ip_address;
@@ -1029,14 +1554,14 @@ class Cryptobox {
 		if ($boxID && (!is_numeric($boxID) || $boxID < 1 || round($boxID) != $boxID))	return false;
 		if ($period && preg_replace('/[^A-Za-z0-9\ ]/', '', $period) != $period) return false;
 			
-		$res = run_sql("SELECT paymentID, boxID, boxType, coinLabel, amount, amountUSD, addr, txID, txDate, recordCreated       
+		$res = run_sql("SELECT paymentID, boxID, boxType, coinLabel, amount, amountUSD, addr, txID, txDate, recordCreated
 						FROM crypto_payments WHERE unrecognised = 1 ".($boxID?" && boxID = $boxID":"").($period?" && recordCreated > DATE_SUB('".gmdate("Y-m-d H:i:s")."', INTERVAL $period)":"")." ORDER BY txDate DESC LIMIT 10000");
 	
 		if ($res && !is_array($res)) $res = array($res);
 		
 		return $res;
 	}
-	
+
 	
 	
 	
@@ -1049,16 +1574,16 @@ class Cryptobox {
 	{
 		$default 		= strtolower($default);
 	    $localisation 	= json_decode(CRYPTOBOX_LOCALISATION, true); // List of available languages
-	    $id 	 		= "gourlcryptolang";
+	    $id 	 		= (defined("CRYPTOBOX_LANGUAGE_HTMLID")) ? CRYPTOBOX_LANGUAGE_HTMLID : "gourlcryptolang";
 	     
 	    if(defined("CRYPTOBOX_LANGUAGE"))
 	    {
 	        if (!isset($localisation[CRYPTOBOX_LANGUAGE])) die("Invalid lanuage value '".CRYPTOBOX_LANGUAGE."' in CRYPTOBOX_LANGUAGE; function cryptobox_language()");
 	        else return CRYPTOBOX_LANGUAGE;
 	    }
-	    
-	    if (isset($_GET[$id]) && in_array($_GET[$id], array_keys($localisation))) { $lan = $_GET[$id]; setcookie($id, $lan, time()+7*24*3600, "/"); }
-	    elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], array_keys($localisation))) $lan = $_COOKIE[$id];
+
+	    if (isset($_GET[$id]) && in_array($_GET[$id], array_keys($localisation)) && !defined("CRYPTOBOX_LANGUAGE_HTMLID_IGNORE")) { $lan = $_GET[$id]; setcookie($id, $lan, time()+7*24*3600, "/"); }
+	    elseif (isset($_COOKIE[$id]) && in_array($_COOKIE[$id], array_keys($localisation)) && !defined("CRYPTOBOX_LANGUAGE_HTMLID_IGNORE")) $lan = $_COOKIE[$id];
 	    elseif (in_array($default, array_keys($localisation))) $lan = $default;
 	    else 	$lan = "en";
 	    
@@ -1078,11 +1603,11 @@ class Cryptobox {
 	function cryptobox_selcoin($coins = array(), $default = "")
 	{
 	    static $current = "";
-	    
+
 	    $default 			= strtolower($default);
 	    $available_payments = json_decode(CRYPTOBOX_COINS, true); // List of available crypto currencies
-	    $id 	 			= "gourlcryptocoin";
-	
+	    $id 	 			= (defined("CRYPTOBOX_COINS_HTMLID")) ? CRYPTOBOX_COINS_HTMLID : "gourlcryptocoin";
+
 	    if ($default && !in_array($default, $coins)) $coins[] = $default;
 	    if (!$default && $coins) $default = array_values($coins)[0];
 	     
@@ -1111,16 +1636,16 @@ class Cryptobox {
 	/* E. Function display_language_box()
 	 * 
 	 * Language selection dropdown list for cryptocoin payment box<br>
-	 * $select_list = true - use &lt;SELECT&gt; tag for dropdown list, &lt;UL&gt; tag for dropdown list (using in bootstrap)
+	 * $no_bootstrap = false - use dropdown list in bootstrap
 	 */
-	function display_language_box($default = "en", $anchor = "gourlcryptolang", $select_list = true)
+	function display_language_box($default = "en", $anchor = "gourlcryptolang", $no_bootstrap = true)
 	{
 	    
 		$default 		= strtolower($default);
 		$localisation 	= json_decode(CRYPTOBOX_LOCALISATION, true);
-		$id 	 		= "gourlcryptolang";
+		$id 	 		= (defined("CRYPTOBOX_LANGUAGE_HTMLID")) ? CRYPTOBOX_LANGUAGE_HTMLID : "gourlcryptolang";
 		$arr 	 		= $_GET;
-		if (isset($arr["gourlcryptolang"])) unset($arr["gourlcryptolang"]);
+		if (isset($arr[$id])) unset($arr[$id]);
 		
 		$lan = cryptobox_sellanguage($default);
 		
@@ -1128,18 +1653,18 @@ class Cryptobox {
 		if (mb_strpos($url, "?")) $url = mb_substr($url, 0, mb_strpos($url, "?"));
 		
 		// <select> html tag list
-		if ($select_list)
+		if ($no_bootstrap)
 		{
     		$tmp  = "<select name='$id' id='$id' onchange='window.open(\"//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=\"+this.options[this.selectedIndex].value+\"#".$anchor."\",\"_self\")' style='width:130px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666;border-radius:5px;-moz-border-radius:5px;border: #ccc 1px solid;margin:0;padding:3px 0 3px 6px;white-space:nowrap;overflow:hidden;display:inline;'>";
     		foreach ($localisation as $k => $v) $tmp .= "<option ".($k==$lan?"selected":"")." value='$k'>".$v["name"]."</option>";
     		$tmp .= "</select>";
 		}
 		else
-		// <ul> html tag list
+		// bootstrap4
 		{
-		    $tmp  = "<ul class='dropdown-menu'>";
-		    foreach ($localisation as $k => $v) $tmp .= "<li".($lan==$k?" class='active'":"")."><a href='//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=".$k."#".$anchor."'>".$v["name"]."</a></li>";
-		    $tmp  .= "</ul>";
+		    $tmp  = "<div class='dropdown-menu'>";
+		    foreach ($localisation as $k => $v) $tmp .= "<a href='//".$_SERVER["HTTP_HOST"].$url."?".http_build_query($arr).($arr?"&amp;":"").$id."=".$k."#".$anchor."' class='dropdown-item".($lan==$k?"  active":"")."'>".$v["name"]."</a>";
+		    $tmp  .= "</div>";
 		}
 				
 		return $tmp; 
@@ -1154,42 +1679,51 @@ class Cryptobox {
 	* Multiple crypto currency selection list. You can accept payments in multiple crypto currencies
 	* For example you can accept payments in bitcoin, bitcoincash, litecoin, etc and use the same price in USD
 	*/
-	function display_currency_box($coins = array(), $defCoin = "", $defLang = "en", $iconWidth = 50, $style = "width:350px; margin: 10px 0 10px 320px", $directory = "images", $anchor = "gourlcryptocoins")
+	function display_currency_box($coins = array(), $def_coin = "", $def_language = "en", $iconWidth = 50, $style = "width:350px; margin: 10px 0 10px 320px", $directory = "images", $anchor = "gourlcryptocoins", $jquery = false)
 	{
 		if (!$coins) return "";
-		
-		$defCoin 			= strtolower($defCoin);
-		$defLang 			= strtolower($defLang);
+
+		$directory          = rtrim($directory, "/");
+		$def_coin 			= strtolower($def_coin);
+		$def_language 			= strtolower($def_language);
 		$available_payments = json_decode(CRYPTOBOX_COINS, true);
 		$localisation       = json_decode(CRYPTOBOX_LOCALISATION, true);
 		$arr 	 			= $_GET;
+		$id 	 			= (defined("CRYPTOBOX_COINS_HTMLID")) ? CRYPTOBOX_COINS_HTMLID : "gourlcryptocoin";
 		
-		if (!in_array($defCoin, $available_payments)) die("Invalid your default value '$defCoin' in display_currency_box()");
-		if (!in_array($defCoin, $coins)) $coins[] = $defCoin; 
+		if (!in_array($def_coin, $available_payments)) die("Invalid your default value '$def_coin' in display_currency_box()");
+		if (!in_array($def_coin, $coins)) $coins[] = $def_coin; 
+		
+		$coins = array_map('strtolower', $coins);
+		$coins = array_unique($coins);
+		if (count($coins) <= 1) return "";
 		
 		
 		// Current Coin
-		$coinName = cryptobox_selcoin($coins, $defCoin);
+		$coinName = cryptobox_selcoin($coins, $def_coin);
+		
 		
 		// Url for Change Coin
 		$coin_url = $_SERVER["REQUEST_URI"];
 		if (mb_strpos($coin_url, "?")) $coin_url = mb_substr($coin_url, 0, mb_strpos($coin_url, "?"));
-		if (isset($arr["gourlcryptocoin"])) unset($arr["gourlcryptocoin"]);
-		$coin_url = "//".$_SERVER["HTTP_HOST"].$coin_url."?".http_build_query($arr).($arr?"&amp;":"")."gourlcryptocoin=";
+		if (isset($arr[$id])) unset($arr[$id]);
+		$coin_url = "//".$_SERVER["HTTP_HOST"].$coin_url."?".http_build_query($arr).($arr?"&amp;":"").$id."=";
 		
 		// Current Language
-		$lan = cryptobox_sellanguage($defLang);
+		$lan = cryptobox_sellanguage($def_language);
 		$localisation = $localisation[$lan];
 		
 		
-		$tmp = '<div id="gourlcryptocoins" align="center" style="'.htmlspecialchars($style, ENT_COMPAT).'"><div style="margin-bottom:15px"><b>'.$localisation["payment"].' -</b></div>';
+		$tmp = '<div'.($anchor=="gourlcryptocoins"?" id='$anchor'":"").' style="'.trim(trim(htmlspecialchars($style, ENT_COMPAT), "; ")."; text-align:center", "; ").'"><div style="margin-bottom:15px"><b>'.$localisation["payment"].' -</b></div>';
 		foreach ($coins as $v)
 		{
 			$v = trim(strtolower($v));
 			if (!in_array($v, $available_payments)) die("Invalid your submitted value '$v' in display_currency_box()");
 			if (strpos(CRYPTOBOX_PRIVATE_KEYS, ucfirst($v)."77") === false) die("Please add your Private Key for '$v' in variable \$cryptobox_private_keys, file cryptobox.config.php");
 			$url = $coin_url.$v."#".$anchor;
-			$tmp .= "<a href='".$url."' onclick=\"location.href='".$url."';\"><img style='box-shadow:none;margin:".round($iconWidth/10)."px ".round($iconWidth/7)."px;border:0;' width='$iconWidth' title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' src='".$directory."/".$v.($iconWidth>70?"2":"").".png'></a>";
+			
+			if ($jquery) $tmp .= "<input type='radio' class='aradioimage' data-title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' ".($coinName==$v?"checked":"")." data-url='$url' data-width='$iconWidth' data-alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' data-image='".$directory."/".$v.($iconWidth>70?"2":"").".png' name='aradioname' value='$v'>&#160; ".($iconWidth>70 || count($coins)<4?"&#160; ":"");
+			else $tmp .= "<a href='".$url."' onclick=\"location.href='".$url."';\"><img style='box-shadow:none;margin:".round($iconWidth/10)."px ".round($iconWidth/6)."px;border:0;display:inline;' width='$iconWidth' title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' src='".$directory."/".$v.($iconWidth>70?"2":"").".png'></a>";
 		}
 		$tmp .= "</div>";
 		
@@ -1222,7 +1756,7 @@ class Cryptobox {
 	
 	/* H. Function convert_currency_live()
 	 * 
-	 * Currency Converter using Google Finance live exchange rates
+	 * Currency Converter using XE.COM live exchange rates
 	 * Example - convert_currency_live("EUR", "USD", 22.37) - convert 22.37euro to usd
 				 convert_currency_live("EUR", "BTC", 22.37) - convert 22.37euro to bitcoin
 	 */
@@ -1267,7 +1801,7 @@ class Cryptobox {
 		// get data from xe.com
 		// ----------------
 		$val = 0;
-		$url = "http://www.xe.com/currencyconverter/convert/?Amount=1&From=".$from_Currency."&To=".$to_Currency;
+		$url = "https://www.xe.com/currencyconverter/convert/?Amount=1&From=".$from_Currency."&To=".$to_Currency;
 		
 		$rawdata = get_url_contents( $url );
 		
@@ -1447,7 +1981,8 @@ class Cryptobox {
 							/*38*/	"msg_received" 	 	=> "%coinName% Payment System received %amountPaid% %coinLabel% successfully !",
 							/*39*/	"msg_received2" 	=> "%coinName% Captcha received %amountPaid% %coinLabel% successfully !",
 							/*40*/	"payment"			=> "Select Payment Method",
-							/*42*/	"pay_in"			=> "Payment in %coinName%"),
+							/*42*/	"pay_in"			=> "Payment in %coinName%",
+							/*55*/	"loading"			=> "Loading ..."),
 
 							"es" => array("name"		=> "Spanish", 
 									"button"			=> "Click aqui si ya has mandado %coinNames%",
@@ -1455,31 +1990,37 @@ class Cryptobox {
 									"msg_received" 	 	=> "%coinName% Sistema de pago recibido %amountPaid% %coinLabel% satisfactoriamente !",
 									"msg_received2" 	=> "%coinName% Captcha recibido %amountPaid% %coinLabel% satisfactoriamente !",
 									"payment"			=> "Seleccionar m&eacute;todo de pago",
-									"pay_in"			=> "Pago en %coinName%"),
-							
+									"pay_in"			=> "Pago en %coinName%",
+									"loading"			=> "Cargando ..."),
+							    	
 							"fr" => array("name"		=> "French",
 									"button"			=> "Cliquez ici si vous avez d&eacute;j&agrave; envoy&eacute; vos %coinNames%",
 									"msg_not_received" 	=> "<b>Les %coinNames% n'ont pas encore &eacute;t&eacute; re&ccedil;us.</b><br>Si vous avez d&eacute;j&agrave; envoy&eacute; les %coinNames% (la somme exacte en un seul paiement, comme indiqu&eacute; dans le cadre ci-dessous), Veuillez s'il vous pla&icirc;t attendre quelques minutes le temps que le syst&egrave;me re&ccedil;oive votre paiement en %coinName%. Si vous envoyez toute autre somme, le syst&egrave;me de paiement n'identifiera pas la transaction et vous devrez &agrave; nouveau envoyer la somme correcte, ou contacter le propri&eacute;taire du site via l'assistance.",
 									"msg_received" 	 	=> "Le syst&egrave;me de paiement %coinName% a re&ccedil;u %amountPaid% %coinLabel% avec succ&egrave;s !",
 									"msg_received2" 	=> "Le %coinName% Captcha a re&ccedil;u %amountPaid% %coinLabel% avec succ&egrave;s !",
 									"payment"			=> "S&eacute;lectionnez la m&eacute;thode de paiement",
-									"pay_in"			=> "Paiement en %coinName%"),
-
+									"pay_in"			=> "Paiement en %coinName%",
+									"loading"			=> "Chargement ..."),
+	     
 							"de" => array("name"		=> "German", 
 									"button"			=> "Klicke hier wenn du schon %coinNames% gesendet hast",
 									"msg_not_received" 	=> "<b>%coinNames% wurden bis jetzt noch nicht empfangen.</b><br>Wenn du bereits %coinNames% gesendet hast (der exakte %coinName% Betrag f&uuml;r die Zahlung steht in der Box unten) warte bitte ein paar Minuten bis das %coinName% System die Zahlung erhalten hat. Wenn du einen anderen Betrag sendest ignoriert das System die Transaktion und du musst den korrekten Betrag erneut senden, oder den Besitzer der Website kontaktieren um Hilfe zu erhalten.",
 									"msg_received" 	 	=> "%coinName% Bezahlsystem hat %amountPaid% %coinLabel% erfolgreich erhalten !",
 									"msg_received2" 	=> "%coinName% Captcha hat %amountPaid% %coinLabel% erfolgreich erhalten !",
 									"payment"			=> "Zahlungmethode ausw&auml;hlen",
-									"pay_in"			=> "Zahlung in %coinName%"),
-
+									"pay_in"			=> "Zahlung in %coinName%",
+									"loading"			=> "Wird geladen ..."),
+	     
+	    
 							"nl" => array("name"		=> "Dutch",
 									"button"			=> "Klik hier als je al %coinNames% hebt verstuurd",
 									"msg_not_received" 	=> "<b>%coinNames% zijn nog niet ontvangen.</b><br>Als je al %coinNames% verstuurd hebt, (het exacte bedrag in %coinName% staat in het vak hieronder), wacht dan a.u.b. een paar minuten tot ze ontvangen zijn door het %coinName% Betaal Systeem. Als u een ander bedrag verstuurd, zal de transactie worden genegeerd, u zult dan alsnog het correcte bedrag moeten overmaken of contact opnemen met de site beheerder voor verdere assistentie.",
 									"msg_received"      => "%coinName% Betaal Systeem heeft %amountPaid% %coinLabel% succesvol ontvangen !",
 									"msg_received2"     => "%coinName% Captcha Systeem heeft %amountPaid% %coinLabel% succesvol ontvangen !",
 									"payment"           => "Kies uw betaalmethode",
-									"pay_in"            => "Betaling in %coinName%"),
+									"pay_in"            => "Betaling in %coinName%",
+									"loading"			=> "Bezig met laden ..."),
+							    	
 	         
 							"it" => array("name"		=> "Italian",
 									"button"			=> "Clicca qui se hai gi&#224; inviato i %coinNames%",
@@ -1487,103 +2028,117 @@ class Cryptobox {
 									"msg_received"      => "Il sistema di pagamento %coinName% ha ricevuto %amountPaid% %coinLabel% con successo !",
 									"msg_received2"     => "Il %coinName% Captcha ha ricevuto %amountPaid% %coinLabel% con successo !",
 									"payment"           => "Seleziona metodo di pagamento",
-									"pay_in"            => "Pagamento in %coinName%"),
-	         
+									"pay_in"            => "Pagamento in %coinName%",
+									"loading"			=> "Caricamento in corso ..."),
+	     
 							"ru" => array("name"		=> "Russian",
 									"button"			=> "&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; &#1079;&#1076;&#1077;&#1089;&#1100; &#1077;&#1089;&#1083;&#1080; &#1074;&#1099; &#1091;&#1078;&#1077; &#1087;&#1086;&#1089;&#1083;&#1072;&#1083;&#1080; %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% &#1085;&#1077; &#1087;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1099; &#1077;&#1097;&#1105;.</b><br>&#1045;&#1089;&#1083;&#1080; &#1074;&#1099; &#1091;&#1078;&#1077; &#1087;&#1086;&#1089;&#1083;&#1072;&#1083;&#1080; %coinNames% (&#1090;&#1086;&#1095;&#1085;&#1091;&#1102; &#1089;&#1091;&#1084;&#1084;&#1091; %coinName% &#1086;&#1076;&#1085;&#1080;&#1084; &#1087;&#1083;&#1072;&#1090;&#1077;&#1078;&#1105;&#1084; &#1082;&#1072;&#1082; &#1087;&#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1086; &#1085;&#1080;&#1078;&#1077;), &#1087;&#1086;&#1078;&#1072;&#1083;&#1091;&#1081;&#1089;&#1090;&#1072; &#1087;&#1086;&#1076;&#1086;&#1078;&#1076;&#1080;&#1090;&#1077; &#1085;&#1077;&#1089;&#1082;&#1086;&#1083;&#1100;&#1082;&#1086; &#1084;&#1080;&#1085;&#1091;&#1090; &#1076;&#1083;&#1103; &#1087;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1080;&#1103; &#1080;&#1093; %coinName% &#1087;&#1083;&#1072;&#1090;&#1105;&#1078;&#1085;&#1086;&#1081; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1086;&#1081;. &#1045;&#1089;&#1083;&#1080; &#1074;&#1099; &#1087;&#1086;&#1089;&#1083;&#1072;&#1083;&#1080; &#1083;&#1102;&#1073;&#1091;&#1102; &#1076;&#1088;&#1091;&#1075;&#1091;&#1102; &#1089;&#1091;&#1084;&#1084;&#1091;, &#1087;&#1083;&#1072;&#1090;&#1105;&#1078;&#1085;&#1072;&#1103; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1072; &#1073;&#1091;&#1076;&#1077;&#1090; &#1080;&#1075;&#1085;&#1086;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1101;&#1090;&#1086; &#1080; &#1074;&#1072;&#1084; &#1085;&#1091;&#1078;&#1085;&#1086; &#1073;&#1091;&#1076;&#1077;&#1090; &#1087;&#1086;&#1089;&#1083;&#1072;&#1090;&#1100; &#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1100;&#1085;&#1091;&#1102; &#1089;&#1091;&#1084;&#1084;&#1091; &#1086;&#1087;&#1103;&#1090;&#1100;, &#1080;&#1083;&#1080; &#1089;&#1074;&#1103;&#1078;&#1080;&#1090;&#1077;&#1089;&#1100; &#1089; &#1074;&#1083;&#1072;&#1076;&#1077;&#1083;&#1100;&#1094;&#1077;&#1084; &#1089;&#1072;&#1081;&#1090;&#1072; &#1076;&#1083;&#1103; &#1087;&#1086;&#1084;&#1086;&#1097;&#1080;",
 									"msg_received" 	 	=> "%coinName% &#1087;&#1083;&#1072;&#1090;&#1105;&#1078;&#1085;&#1072;&#1103; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1072; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1083;&#1072; %amountPaid% %coinLabel% &#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086; !",
 									"msg_received2" 	=> "%coinName% &#1082;&#1072;&#1087;&#1095;&#1072; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1083;&#1072; %amountPaid% %coinLabel% &#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086; !",
 									"payment"			=> "&#1042;&#1099;&#1073;&#1077;&#1088;&#1080;&#1090;&#1077; &#1089;&#1087;&#1086;&#1089;&#1086;&#1073; &#1086;&#1087;&#1083;&#1072;&#1090;&#1099;",
-									"pay_in"			=> "&#1054;&#1087;&#1083;&#1072;&#1090;&#1072; &#1074; %coinName%"),
-									
+									"pay_in"			=> "&#1054;&#1087;&#1083;&#1072;&#1090;&#1072; &#1074; %coinName%",
+									"loading"			=> "&#1047;&#1072;&#1075;&#1088;&#1091;&#1078;&#1072;&#1077;&#1090;&#1089;&#1103; ..."),
+	     
 							"pl" => array("name"		=> "Polish", 
 									"button"			=> "Kliknij tutaj, je&#347;li ju&#380; wys&#322;ane %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% nie zosta&#322;y jeszcze otrzymane.</b><br>Je&#347;li ju&#380; wys&#322;a&#322;e&#347; %coinNames% (dok&#322;adn&#261; sum&#281; %coinName% w jednej p&#322;atno&#347;ci, jak pokazano w poni&#380;szym polu), prosz&#281; poczeka&#263; kilka minut, aby system p&#322;atno&#347;ci %coinName% m&#243;g&#322; j&#261; otrzyma&#263;. Je&#347;li wy&#347;lesz jak&#261;kolwiek inn&#261; sum&#281;, system p&#322;atno&#347;ci zignoruje transakcje i trzeba b&#281;dzie wys&#322;a&#263; poprawn&#261; sum&#281; ponownie lub skontaktowa&#263; si&#281; z w&#322;a&#347;cicielem witryny w celu uzyskania pomocy.",
 									"msg_received" 	 	=> "System p&#322;atno&#347;ci %coinName% otrzyma&#322; %amountPaid% %coinLabel% pomy&#347;lnie !",
 									"msg_received2" 	=> "%coinName% Captcha otrzyma&#322; %amountPaid% %coinLabel% pomy&#347;lnie !",
 									"payment"			=> "Wybierz metod&#281; p&#322;atno&#347;&#263;i",
-									"pay_in"			=> "P&#322;atno&#347;&#263; w %coinName%"),
-
+									"pay_in"			=> "P&#322;atno&#347;&#263; w %coinName%",
+									"loading"			=> "&#321;aduj&#281; ..."),
+	     
 							"pt" => array("name"		=> "Portuguese",
 									"button"			=> "Se ja enviou %coinNames% clique aqui",
 									"msg_not_received" 	=> "<b>Os %coinNames% ainda n&#227;o foram recebidos.</b><br>Se j&#225; enviou %coinNames% (a soma exata de %coinName% num s&#243; pagamento, como mostrado na caixa abaixo), por favor, espere alguns minutos para o sistema de pagamentos %coinName% os receber. Se enviar qualquer outro montante, o sistema de pagamentos ir&#225; ignorar a transa&#231;&#227;o e ter&#225; que enviar a soma correta novamente; ou entre em contato com o propriet&#225;rio do site para assist&#234;ncia.",
 									"msg_received" 	 	=> "O sistema de pagamentos %coinName% recebeu %amountPaid% %coinLabel% com sucesso !",
 									"msg_received2" 	=> "%coinName% Captcha recebeu %amountPaid% %coinLabel% com sucesso !",
 									"payment"			=> "Selecione o metodo de pagamento",
-									"pay_in"			=> "Pagamento em %coinName%"),
-                	         
+									"pay_in"			=> "Pagamento em %coinName%",
+									"loading"			=> "Carregando ..."),
+	     
 							"fa" => array("name"		=> "Persian",
 									"button"			=> "&#1575;&#1711;&#1585; &#1588;&#1605;&#1575; &#1575;&#1586; &#1602;&#1576;&#1604; &#1575;&#1585;&#1587;&#1575;&#1604; %coinName% &#1575;&#1610;&#1606;&#1580;&#1575; &#1585;&#1575; &#1705;&#1604;&#1610;&#1705; &#1705;&#1606;&#1610;&#1583;",
 									"msg_not_received" 	=> "<b>%coinNames% &#1607;&#1606;&#1608;&#1586; &#1583;&#1585;&#1610;&#1575;&#1601;&#1578; &#1606;&#1588;&#1583;&#1607; &#1575;&#1587;&#1578; </b><br> &#1575;&#1711;&#1585; &#1588;&#1605;&#1575; &#1602;&#1576;&#1604;&#1575; &#1575;&#1585;&#1587;&#1575;&#1604; &#1705;&#1585;&#1583;&#1610;&#1583; %coinNames% ,&#1576;&#1607; &#1589;&#1608;&#1585;&#1578; &#1583;&#1602;&#1610;&#1602; %coinName% &#1605;&#1580;&#1605;&#1608;&#1593; &#1583;&#1585; &#1610;&#1705; &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1607;&#1605;&#1575;&#1606;&#1711;&#1608;&#1606;&#1607; &#1705;&#1607; &#1583;&#1585; &#1705;&#1575;&#1583;&#1585; &#1586;&#1610;&#1585; &#1606;&#1588;&#1575;&#1606; &#1583;&#1575;&#1583;&#1607; &#1588;&#1583;&#1607; &#1575;&#1587;&#1578; , &#1604;&#1591;&#1601;&#1575; &#1670;&#1606;&#1583; &#1583;&#1602;&#1610;&#1602;&#1607; &#1576;&#1585;&#1575;&#1610; &#1583;&#1585;&#1610;&#1575;&#1601;&#1578; &#1575;&#1586; &#1591;&#1585;&#1601; %coinName% &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1587;&#1610;&#1587;&#1578;&#1605; &#1589;&#1576;&#1585; &#1705;&#1606;&#1610;&#1583;. &#1575;&#1711;&#1585; &#1588;&#1605;&#1575; &#1607;&#1585; &#1711;&#1608;&#1606;&#1607; &#1605;&#1580;&#1605;&#1608;&#1593; &#1583;&#1610;&#1711;&#1585;&#1610; &#1575;&#1586; &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1585;&#1575; &#1601;&#1585;&#1587;&#1578;&#1575;&#1583;&#1607; &#1575;&#1610;&#1583;, &#1587;&#1610;&#1587;&#1578;&#1605; &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1605;&#1593;&#1575;&#1605;&#1604;&#1607; &#1585;&#1575; &#1606;&#1575;&#1583;&#1610;&#1583;&#1607; &#1605;&#1610; &#1711;&#1610;&#1585;&#1583; &#1608; &#1588;&#1605;&#1575; &#1606;&#1610;&#1575;&#1586; &#1576;&#1607; &#1575;&#1585;&#1587;&#1575;&#1604; &#1605;&#1580;&#1605;&#1608;&#1593; &#1583;&#1585;&#1587;&#1578;&#1610; &#1705;&#1607; &#1584;&#1705;&#1585; &#1588;&#1583; &#1583;&#1575;&#1585;&#1610;&#1583;, &#1610;&#1575; &#1576;&#1575; &#1583;&#1575;&#1585;&#1606;&#1583;&#1607; &#1587;&#1575;&#1610;&#1578; &#1576;&#1585;&#1575;&#1610; &#1705;&#1605;&#1705; &#1608; &#1578;&#1608;&#1590;&#1610;&#1581;&#1575;&#1578; &#1576;&#1610;&#1588;&#1578;&#1585; &#1578;&#1605;&#1575;&#1587; &#1576;&#1711;&#1610;&#1585;&#1610;&#1583;.",
 									"msg_received" 	 	=> "%coinName% &#1587;&#1610;&#1587;&#1578;&#1605; &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; %amountPaid% %coinLabel% &#1585;&#1575; &#1576;&#1575; &#1605;&#1608;&#1601;&#1602;&#1610;&#1578; &#1583;&#1585;&#1610;&#1575;&#1601;&#1578; &#1705;&#1585;&#1583; !",
 									"msg_received2" 	=> "%coinName% &#1705;&#1662;&#1670;&#1575; %amountPaid% %coinLabel% &#1585;&#1575; &#1576;&#1575; &#1605;&#1608;&#1601;&#1602;&#1610;&#1578; &#1583;&#1585;&#1610;&#1575;&#1601;&#1578; &#1705;&#1585;&#1583; !",
 									"payment"			=> "&#1585;&#1608;&#1588; &#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1585;&#1575; &#1575;&#1606;&#1578;&#1582;&#1575;&#1576; &#1705;&#1606;&#1610;&#1583;",
-									"pay_in"			=> "&#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1583;&#1585; %coinName%"),
-	    
+									"pay_in"			=> "&#1662;&#1585;&#1583;&#1575;&#1582;&#1578; &#1583;&#1585; %coinName%",
+									"loading"			=> "&#1576;&#1575;&#1585;&#1711;&#1584;&#1575;&#1585;&#1740; ..."),
+	     
 							"ko" => array("name"		=> "Korean",
 									"button"			=> "&#47564;&#50557; %coinName% &#51060;&#48120; &#48372;&#45256;&#45796;&#47732; &#50668;&#44592;&#47484; &#53364;&#47533;&#54616;&#49464;&#50836;",
 									"msg_not_received" 	=> "<b>%coinNames% &#50500;&#51649; &#48155;&#51648; &#47803;&#54664;&#49845;&#45768;&#45796;.</b><br>&#47564;&#50557; &#45817;&#49888;&#51060; &#51060;&#48120; %coinNames% &#51012; &#48372;&#45256;&#45796;&#47732; (&#50500;&#47000; &#48149;&#49828;&#50504;&#50640; &#48372;&#50668;&#51648;&#45716; &#54616;&#45208;&#51032; &#44208;&#51228; &#45236;&#50640; &#50668;&#48516;&#51032; %coinName% &#51032; &#54633;&#44228;), &#44208;&#51228; &#49884;&#49828;&#53596;&#51060; &#51652;&#54665;&#46104;&#45716; &#46041;&#50504; &#51104;&#49884;&#47564; &#44592;&#45796;&#47140;&#51452;&#49464;&#50836;. &#47564;&#50557; &#45817;&#49888;&#51060; &#54633;&#44228;&#50640; &#48372;&#50668;&#51648;&#45716; &#44163;&#44284; &#45796;&#47480; &#49688;&#47049;&#51032; &#48708;&#53944;&#53076;&#51064;&#51012; &#48372;&#45256;&#45796;&#47732;, &#44208;&#51228; &#49884;&#49828;&#53596;&#51008; &#54644;&#45817; &#44144;&#47000;&#47484; &#47924;&#49884;&#54616;&#47728;, &#45817;&#49888;&#51008; &#45796;&#49884; &#50732;&#48148;&#47480; &#54633;&#44228;&#47564;&#53372;&#51032; &#48708;&#53944;&#53076;&#51064;&#51012; &#48372;&#45236;&#44144;&#45208; &#46020;&#50880;&#51012; &#51460; &#49688; &#51080;&#45716; &#49324;&#51060;&#53944; &#44288;&#47532;&#51088;&#50640;&#44172; &#50672;&#46973;&#54644;&#50556; &#54633;&#45768;&#45796;.",
 									"msg_received" 	 	=> "%coinName% &#44208;&#51228; &#49884;&#49828;&#53596;&#51060; %amountPaid% %coinLabel% &#47484; &#49457;&#44277;&#51201;&#51004;&#47196; &#48155;&#50520;&#49845;&#45768;&#45796; !",
 									"msg_received2" 	=> "%coinName% &#52897;&#52320;&#44032; %amountPaid% %coinLabel% &#47484; &#49457;&#44277;&#51201;&#51004;&#47196; &#48155;&#50520;&#49845;&#45768;&#45796; !",
 									"payment"			=> "&#44208;&#51228; &#48169;&#48277; &#49440;&#53469;",
-									"pay_in"			=> "%coinName% &#51648;&#44553;"),
-
+									"pay_in"			=> "%coinName% &#51648;&#44553;",
+									"loading"			=> "&#47196;&#46300; &#51473; ..."),
+	     
 							"ja" => array("name"		=> "Japanese", 
 									"button"			=> "%coinNames%&#12434;&#36865;&#20449;&#28168;&#12398;&#22580;&#21512;&#12399;&#12289;&#12371;&#12385;&#12425;&#12434;&#12463;&#12522;&#12483;&#12463;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;",
 									"msg_not_received" 	=> "<b>%coinNames%&#12398;&#21463;&#21462;&#12399;&#23436;&#20102;&#12375;&#12390;&#12356;&#12414;&#12379;&#12435;&#12290;</b><br>%coinNames%&#65288;&#19979;&#35352;&#12395;&#34920;&#31034;&#12373;&#12428;&#12390;&#12356;&#12427;&#12385;&#12423;&#12358;&#12393;&#12398;%coinNames%&#12434;1&#22238;&#12398;&#12488;&#12521;&#12531;&#12470;&#12463;&#12471;&#12519;&#12531;&#12392;&#12375;&#12390;&#65289;&#12434;&#12377;&#12391;&#12395;&#36865;&#12387;&#12383;&#22580;&#21512;&#12399;&#12289;%coinName%&#27770;&#28168;&#12471;&#12473;&#12486;&#12512;&#12363;&#12425;&#25968;&#20998;&#20197;&#20869;&#12395;&#30906;&#35469;&#12364;&#12354;&#12426;&#12414;&#12377;&#12290;&#25351;&#23450;&#20197;&#19978;&#12398;%coinNames%&#12434;&#36865;&#12387;&#12383;&#22580;&#21512;&#12399;&#12289;&#12471;&#12473;&#12486;&#12512;&#12395;&#21453;&#26144;&#12373;&#12428;&#12414;&#12379;&#12435;&#12398;&#12391;&#12289;&#12418;&#12358;&#19968;&#24230;&#12420;&#12426;&#30452;&#12377;&#12363;&#12289;&#12454;&#12455;&#12502;&#12469;&#12452;&#12488;&#31649;&#29702;&#32773;&#12408;&#12362;&#21839;&#21512;&#12379;&#12367;&#12384;&#12373;&#12356;&#12290;&#19975;&#12364;&#19968;&#12289;&#36865;&#20449;&#28168;&#12415;&#12398;&#22580;&#21512;&#12399;&#12289;%coinName%&#27770;&#28168;&#12471;&#12473;&#12486;&#12512;&#12363;&#12425;&#12398;&#30906;&#35469;&#12434;&#24453;&#12387;&#12390;&#12367;&#12384;&#12373;&#12356;&#12290;",
 									"msg_received" 	 	=> "%coinName%&#27770;&#28168;&#12471;&#12473;&#12486;&#12512;&#12391; %amountPaid% %coinLabel% &#12398;&#27770;&#28168;&#12364;&#23436;&#20102;&#12375;&#12414;&#12375;&#12383; !",
 									"msg_received2" 	=> "%coinName%&#12461;&#12515;&#12502;&#12481;&#12515;&#12391; %amountPaid% %coinLabel% &#12398;&#27770;&#28168;&#12364;&#23436;&#20102;&#12375;&#12414;&#12375;&#12383; !",
 									"payment"			=> "&#27770;&#28168;&#26041;&#27861;&#12434;&#36984;&#25246;",
-									"pay_in"			=> "%coinName%&#12391;&#12398;&#27770;&#28168;"),
-									
+									"pay_in"			=> "%coinName%&#12391;&#12398;&#27770;&#28168;",
+									"loading"			=> "&#35501;&#12415;&#36796;&#12435;&#12391;&#12356;&#12414;&#12377;..."),
+	     
 							"id" => array("name"		=> "Indonesian", 
 									"button"			=> "Klik disini jika anda telah mengirim %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% belum diterima.</b><br>Jika kamu sudah mengirim %coinNames% (sejumlah %coinNames% dengan jumlah yang tepat seperti pada kotak dibawah),  silahkan tunggu beberapa menit untuk menerima %coinName% lewat sistem pembayaran. Jika anda mengirim sejumlah lain, sistem pembayaran akan mengabaikan transaksinya dan anda perlu mengirim dengan jumlah yang tepat lagi, atau kontak pemilik web untuk membantu.",
 									"msg_received" 	 	=> "%coinName% Sistem Pembayaran menerima %amountPaid% %coinLabel% dengan sukses !",
 									"msg_received2" 	=> "%coinName% Captcha menerima %amountPaid% %coinLabel% dengan sukses !",
 									"payment"			=> "Pilih Metode Pembayaran",
-									"pay_in"			=> "Pembayaran dalam bentuk %coinName%"),
-
+									"pay_in"			=> "Pembayaran dalam bentuk %coinName%",
+									"loading"			=> "Pemuatan ..."),
+	     
 							"tr" => array("name"		=> "Turkish",
 									"button"			=> "%coinName% g&#246;nderdiyseniz, buraya t&#305;klay&#305;n",
 									"msg_not_received" 	=> "<b>%coinNames% hen&#252;z al&#305;namad&#305;.</b><br> De&#287;i&#351;ik yada yanl&#305;&#351; bir mebl&#226; verdiyseniz, sistem kabul etmemi&#351; olabilir. Bu durumda g&#246;derme i&#351;leminizi birka&#231; dakika bekleyerek tekrarlay&#305;n. Veya site sahibinden yard&#305;m isteyin.",
 									"msg_received" 	 	=> "%coinName% &#246;deme sistemine %amountPaid% %coinLabel% ba&#351;ar&#305;yla gelmi&#351;tir !",
 									"msg_received2" 	=> "%coinName% Capcha`ya %amountPaid% %coinLabel% ba&#351;ar&#305;yla gelmi&#351;tir !",
 									"payment"			=> "&#214;deme metodunu se&#231;iniz",
-									"pay_in"			=> "%coinName% ile &#246;deme"),
-	         
+									"pay_in"			=> "%coinName% ile &#246;deme",
+									"loading"			=> "Y&#252;kleniyor ..."),
+	     
 							"ar" => array("name"		=> "Arabic",
 									"button"			=> "&#1575;&#1590;&#1594;&#1591; &#1607;&#1606;&#1575; &#1601;&#1610; &#1581;&#1575;&#1604;&#1577; &#1602;&#1605;&#1578; &#1601;&#1593;&#1604;&#1575;&#1611; &#1576;&#1575;&#1604;&#1575;&#1585;&#1587;&#1575;&#1604; %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% &#1604;&#1605; &#1610;&#1578;&#1605; &#1575;&#1587;&#1578;&#1604;&#1575;&#1605;&#1607;&#1575; &#1576;&#1593;&#1583;.</b><br> &#1573;&#1584;&#1575; &#1602;&#1605;&#1578; &#1576;&#1573;&#1585;&#1587;&#1575;&#1604;&#1607;&#1575; %coinNames% (&#1576;&#1575;&#1604;&#1592;&#1576;&#1591; %coinName% &#1605;&#1576;&#1604;&#1594; &#1601;&#1610; &#1583;&#1601;&#1593; &#1608;&#1575;&#1581;&#1583;), &#1610;&#1585;&#1580;&#1609; &#1575;&#1604;&#1573;&#1606;&#1578;&#1592;&#1575;&#1585; &#1576;&#1590;&#1593; &#1583;&#1602;&#1575;&#1574;&#1602; &#1604;&#1573;&#1587;&#1578;&#1604;&#1575;&#1605;&#1607;&#1605; &#1605;&#1606; &#1582;&#1604;&#1575;&#1604; %coinName% &#1606;&#1592;&#1575;&#1605; &#1575;&#1604;&#1583;&#1601;&#1593;. &#1573;&#1584;&#1575; &#1602;&#1605;&#1578; &#1576;&#1573;&#1585;&#1587;&#1575;&#1604; &#1605;&#1576;&#1575;&#1604;&#1594; &#1571;&#1582;&#1585;&#1609;, &#1606;&#1592;&#1575;&#1605; &#1575;&#1604;&#1583;&#1601;&#1593; &#1587;&#1608;&#1601; &#1610;&#1580;&#1575;&#1607;&#1604; &#1575;&#1604;&#1589;&#1601;&#1602;&#1577;&#1548; &#1608;&#1587;&#1608;&#1601; &#1578;&#1581;&#1578;&#1575;&#1580; &#1604;&#1573;&#1585;&#1587;&#1575;&#1604; &#1575;&#1604;&#1605;&#1576;&#1604;&#1594; &#1575;&#1604;&#1589;&#1581;&#1610;&#1581; &#1605;&#1585;&#1577; &#1571;&#1582;&#1585;&#1609;",
 									"msg_received" 	 	=> "%coinName% &#1578;&#1605; &#1575;&#1587;&#1578;&#1604;&#1575;&#1605; &#1575;&#1604;&#1605;&#1576;&#1604;&#1594; %amountPaid% %coinLabel% &#1576;&#1606;&#1580;&#1575;&#1581; !",
 									"msg_received2" 	=> "%coinName% &#1578;&#1605; &#1575;&#1587;&#1578;&#1604;&#1575;&#1605; &#1575;&#1604;&#1603;&#1575;&#1576;&#1578;&#1588;&#1575; %amountPaid% %coinLabel% &#1576;&#1606;&#1580;&#1575;&#1581; !",
 									"payment"			=> "&#1575;&#1582;&#1578;&#1585; &#1591;&#1585;&#1610;&#1602;&#1577; &#1575;&#1604;&#1583;&#1601;&#1593;",
-									"pay_in"			=> "&#1583;&#1601;&#1593; &#1601;&#1610; %coinName%"),
-												
+									"pay_in"			=> "&#1583;&#1601;&#1593; &#1601;&#1610; %coinName%",
+									"loading"			=> "&#1580;&#1575;&#1585; &#1575;&#1604;&#1578;&#1581;&#1605;&#1610;&#1604; ..."),
+	     
 							"cn" => array("name"		=> "Chinese Simplified",
 									"button"			=> "&#28857;&#20987;&#27492;,&#22914;&#26524;&#20320;&#24050;&#32463;&#21457;&#36865;&#20102; %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% &#36824;&#27809;&#26377;&#25910;&#21040;&#12290;</b><br>&#22914;&#26524;&#20320;&#24050;&#32463;&#21457;&#36865; %coinNames% (&#20351;&#29992;&#20102;&#31934;&#30830;&#25968;&#37327;,&#22914;&#19979;&#26694;&#20013;&#26174;&#31034;&#30340;&#37027;&#26679;)&#65292;&#35831;&#31561;&#24453; &#20960;&#20998;&#38047;, &#31995;&#32479;&#22312;&#23436;&#25104; %coinName% &#30340;&#25509;&#25910;&#22788;&#29702;&#12290;&#22914;&#26524;&#20320;&#21457;&#36865;&#20854;&#23427;&#25968;&#37327;&#65292;&#25903;&#20184;&#31995;&#32479;&#23558;&#24573;&#30053;&#20320;&#30340;&#20132;&#26131;&#12290;&#20320;&#24517;&#39035;&#20351;&#29992;&#31934;&#30830;&#25968;&#37327;&#12290;",
 									"msg_received" 	 	=> "%coinName% &#25903;&#20184;&#31995;&#32479;&#25104;&#21151;&#25509;&#25910;&#20102; %amountPaid% %coinLabel% !",
 									"msg_received2" 	=> "%coinName% &#39564;&#35777;&#30721;&#24050;&#25509;&#25910;&#65292; %amountPaid% %coinLabel% &#25104;&#21151; !",
 									"payment"			=> "&#36873;&#25321;&#20184;&#27454;&#26041;&#24335;",
-									"pay_in"			=> "&#25903;&#20184; %coinName%"),
-									
+									"pay_in"			=> "&#25903;&#20184; %coinName%",
+									"loading"			=> "&#21152;&#36733;&#20013;..."),
+	     
 							"zh" => array("name"		=> "Chinese Traditional",
 									"button"			=> "&#40670;&#25802;&#27492;,&#22914;&#26524;&#20320;&#24050;&#32147;&#30332;&#36865;&#20102; %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% &#36996;&#27794;&#26377;&#25910;&#21040;&#12290;</b><br>&#22914;&#26524;&#20320;&#24050;&#32147;&#30332;&#36865; %coinNames% (&#20351;&#29992;&#20102;&#31934;&#30906;&#25976;&#37327;,&#22914;&#19979;&#26694;&#20013;&#39023;&#31034;&#30340;&#37027;&#27171;)&#65292;&#35531;&#31561;&#24453;&#24190;&#20998;&#37758;,&#31995;&#32113;&#22312;&#23436;&#25104; %coinName% &#30340;&#25509;&#25910;&#34389;&#29702;&#12290;&#22914;&#26524;&#20320;&#30332;&#36865;&#20854;&#23427;&#25976;&#37327;&#65292;&#25903;&#20184;&#31995;&#32113;&#23559;&#24573;&#30053;&#20320;&#30340;&#20132;&#26131;&#12290;&#20320;&#24517;&#38920;&#20351;&#29992;&#31934;&#30906;&#25976;&#37327;&#12290;",
 									"msg_received" 	 	=> "%coinName% &#25903;&#20184;&#31995;&#32113;&#25104;&#21151;&#25509;&#25910;&#20102; %amountPaid% %coinLabel% !",
 									"msg_received2" 	=> "%coinName% &#39511;&#35657;&#30908;&#24050;&#25509;&#25910;&#65292;%amountPaid% %coinLabel% &#25104;&#21151; !",
 									"payment"			=> "&#36984;&#25799;&#20184;&#27454;&#26041;&#24335;",
-									"pay_in"			=> "&#25903;&#20184; %coinName%"),
-
+									"pay_in"			=> "&#25903;&#20184; %coinName%",
+									"loading"			=> "&#21152;&#36617;&#20013;..."),
+	     
 							"hi" => array("name"		=> "Hindi",
 									"button"			=> "&#2310;&#2346; &#2346;&#2361;&#2354;&#2375; &#2360;&#2375; &#2361;&#2368; &#2349;&#2375;&#2332;&#2375; &#2361;&#2376;&#2306; &#2340;&#2379; &#2351;&#2361;&#2366;&#2306; &#2325;&#2381;&#2354;&#2367;&#2325; &#2325;&#2352;&#2375;&#2306; %coinNames%",
 									"msg_not_received" 	=> "<b>%coinNames% &#2325;&#2368; &#2309;&#2349;&#2368; &#2340;&#2325; &#2346;&#2381;&#2352;&#2366;&#2346;&#2381;&#2340; &#2344;&#2361;&#2368;&#2306; &#2325;&#2367;&#2351;&#2366; &#2327;&#2351;&#2366; &#2361;&#2376;.</b><br>&#2344;&#2368;&#2330;&#2375; &#2342;&#2367;&#2319; &#2327;&#2319; &#2348;&#2377;&#2325;&#2381;&#2360; &#2350;&#2375;&#2306; &#2342;&#2367;&#2326;&#2366;&#2351;&#2366; &#2327;&#2351;&#2366; &#2361;&#2376; &#2319;&#2325; &#2349;&#2369;&#2327;&#2340;&#2366;&#2344; &#2350;&#2375;&#2306; &#2360;&#2335;&#2368;&#2325; %coinNames% &#2352;&#2366;&#2358;&#2367; &#2351;&#2342;&#2367; &#2310;&#2346; &#2344;&#2375; &#2346;&#2361;&#2354;&#2375; &#2360;&#2375; &#2361;&#2368; %coinName% &#2349;&#2375;&#2332;&#2366; &#2361;&#2376;, &#2340;&#2379; %coinName% &#2349;&#2369;&#2327;&#2340;&#2366;&#2344; &#2346;&#2381;&#2352;&#2339;&#2366;&#2354;&#2368; &#2360;&#2375; &#2313;&#2344;&#2381;&#2361;&#2375;&#2306; &#2346;&#2381;&#2352;&#2366;&#2346;&#2381;&#2340; &#2325;&#2352;&#2344;&#2375; &#2325;&#2375; &#2354;&#2367;&#2319; &#2325;&#2369;&#2331; &#2361;&#2368; &#2350;&#2367;&#2344;&#2335;&#2379;&#2306; &#2325;&#2371;&#2346;&#2351;&#2366; &#2346;&#2381;&#2352;&#2340;&#2368;&#2325;&#2381;&#2359;&#2366; &#2325;&#2352;&#2375;&#2306;. &#2310;&#2346; &#2346;&#2361;&#2354;&#2375; &#2360;&#2375; &#2361;&#2368; &#2325;&#2367;&#2360;&#2368; &#2309;&#2344;&#2381;&#2351; &#2352;&#2366;&#2358;&#2367; &#2349;&#2375;&#2332;&#2344;&#2375; &#2325;&#2368; &#2361;&#2376;, &#2340;&#2379; &#2349;&#2369;&#2327;&#2340;&#2366;&#2344; &#2346;&#2381;&#2352;&#2339;&#2366;&#2354;&#2368; &#2354;&#2375;&#2344;-&#2342;&#2375;&#2344; &#2346;&#2352; &#2343;&#2381;&#2351;&#2366;&#2344; &#2344;&#2361;&#2368;&#2306; &#2342;&#2375;&#2327;&#2366; &#2324;&#2352; &#2310;&#2346; &#2347;&#2367;&#2352; &#2360;&#2375; &#2360;&#2361;&#2368; &#2352;&#2366;&#2358;&#2367; &#2349;&#2375;&#2332;&#2344;&#2375; &#2325;&#2368; &#2332;&#2352;&#2370;&#2352;&#2340; &#2361;&#2379;&#2327;&#2368;.",
 									"msg_received" 	 	=> "%coinName% &#2349;&#2369;&#2327;&#2340;&#2366;&#2344; &#2346;&#2381;&#2352;&#2339;&#2366;&#2354;&#2368; &#2346;&#2381;&#2352;&#2366;&#2346;&#2381;&#2340; %amountPaid% %coinLabel% &#2360;&#2347;&#2354;&#2340;&#2366;&#2346;&#2370;&#2352;&#2381;&#2357;&#2325; !",
 									"msg_received2" 	=> "%coinName% &#2325;&#2376;&#2346;&#2381;&#2330;&#2366; &#2346;&#2381;&#2352;&#2366;&#2346;&#2381;&#2340; %amountPaid% %coinLabel% &#2360;&#2347;&#2354;&#2340;&#2366;&#2346;&#2370;&#2352;&#2381;&#2357;&#2325; !",
 									"payment"			=> "&#2330;&#2369;&#2344;&#2375;&#2306; &#2349;&#2369;&#2327;&#2340;&#2366;&#2344; &#2325;&#2366; &#2340;&#2352;&#2368;&#2325;&#2366;",
-									"pay_in"			=> "%coinName% &#2350;&#2375;&#2306; &#2349;&#2369;&#2327;&#2340;&#2366;&#2344;")
+									"pay_in"			=> "%coinName% &#2350;&#2375;&#2306; &#2349;&#2369;&#2327;&#2340;&#2366;&#2344;",
+									"loading"			=> "&#2354;&#2379;&#2337; &#2361;&#2379; &#2352;&#2361;&#2366; &#2361;&#2376; ...")
+	    
 							);
 
 	if(!defined("CRYPTOBOX_LOCALISATION")) define("CRYPTOBOX_LOCALISATION", json_encode($cryptobox_localisation));
@@ -1595,6 +2150,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);     
+		unset($v); unset($cryptobox_private_keys);    
 	}
 ?>

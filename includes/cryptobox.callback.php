@@ -1,6 +1,6 @@
 <?php
 /**
- * ##########################################
+ * ##########################################  
  * ###  PLEASE DO NOT MODIFY THIS FILE !  ###
  * ##########################################
  *
@@ -11,7 +11,7 @@
  * @copyright   2014-2018 Delta Consultants
  * @category    Libraries
  * @website     https://gourl.io
- * @version     1.8.3
+ * @version     2.1
  * 
  * 
  * This file processes call-backs from Cryptocoin Payment Box server when new payment  
@@ -34,7 +34,7 @@
 
 if(!defined("CRYPTOBOX_WORDPRESS")) define("CRYPTOBOX_WORDPRESS", true); 
 
-if (!CRYPTOBOX_WORDPRESS) include_once("cryptobox.class.php");
+if (!CRYPTOBOX_WORDPRESS) require_once( "cryptobox.class.php" ); 
 elseif (!defined('ABSPATH')) exit; // Exit if accessed directly in wordpress
 
 
@@ -53,7 +53,7 @@ if (isset($_POST["private_key_hash"]) && strlen($_POST["private_key_hash"]) == 1
 if (!$valid_key && isset($_POST["json"]) && $_POST["json"] == "1")
 {
     $data_hash = $boxID = "";
-    if (isset($_POST["data_hash"]) && strlen($_POST["data_hash"]) == 128 && preg_replace('/[^A-Za-z0-9]/', '', $_POST["data_hash"]) == $_POST["data_hash"]) { $data_hash = $_POST["data_hash"]; unset($_POST["data_hash"]); }
+    if (isset($_POST["data_hash"]) && strlen($_POST["data_hash"]) == 128 && preg_replace('/[^A-Za-z0-9]/', '', $_POST["data_hash"]) == $_POST["data_hash"]) { $data_hash = strtolower($_POST["data_hash"]); unset($_POST["data_hash"]); }
     if (isset($_POST["box"]) && is_numeric($_POST["box"]) && $_POST["box"] > 0) $boxID = intval($_POST["box"]);
     
     if ($data_hash && $boxID)
@@ -150,6 +150,6 @@ else
 	$box_status = "Only POST Data Allowed";
 
 
-	echo $box_status; // don't delete it 
+	echo $box_status; // don't delete it      
  
 ?>

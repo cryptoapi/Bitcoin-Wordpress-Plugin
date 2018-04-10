@@ -10,6 +10,16 @@
 	background-image: none !important;
 }
 
+.gourladmin .previewactive .inside, .gourladmin .gourlbox > h1, .gourladmin .gourlbox > h3, .gourladmin .gourlbox > .gourlprice, .gourladmin .acrypto_header, .gourladmin .acrypto_texts_pay_now, .gourladmin .acrypto_coins_list {
+	color: #212529 !important;
+}
+
+.gourladmin .previewactive .inside a {
+	color: #007bff;
+}
+
+
+
 .gourladmin h2 {
 	margin: 15px 0;
 }
@@ -452,3 +462,4 @@
 	font-family: 'Open Sans', sans-serif;
 	line-height: 35px;  
 } 
+      
