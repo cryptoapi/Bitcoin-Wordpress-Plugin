@@ -242,39 +242,39 @@ final class gourlclass
 	public function bootstrap_scripts()
 	{
 	    $theme = $this->options['box_theme'];
-	    
-	    if ($theme == "black")          $css =  'https://bootswatch.com/4/darkly/bootstrap.css';
-	    elseif ($theme == "greyred")    $css =  'https://bootswatch.com/4/superhero/bootstrap.css';
-	    elseif ($theme == "greygreen")  $css =  'https://bootswatch.com/4/solar/bootstrap.css';
-	    elseif ($theme == "whiteblue")  $css =  'https://bootswatch.com/4/cerulean/bootstrap.css';
-	    elseif ($theme == "whitered")   $css =  'https://bootswatch.com/4/united/bootstrap.css';
-	    elseif ($theme == "whitegreen") $css =  'https://bootswatch.com/4/flatly/bootstrap.css';
-	    elseif ($theme == "whiteblack") $css =  'https://bootswatch.com/4/lux/bootstrap.css';
-	    elseif ($theme == "whitepurple")$css =  'https://bootswatch.com/4/pulse/bootstrap.css';
-	    elseif ($theme == "litera")     $css =  'https://bootswatch.com/4/litera/bootstrap.css';
-	    elseif ($theme == "minty")      $css =  'https://bootswatch.com/4/minty/bootstrap.css';
-	    elseif ($theme == "sandstone")  $css =  'https://bootswatch.com/4/sandstone/bootstrap.css';
-	    elseif ($theme == "sketchy")    $css =  'https://bootswatch.com/4/sketchy/bootstrap.css';
-	    else                            $css =  'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
-	     
-	    
+
+	    if ($theme == "black")          $css =  plugins_url("/css/darkly.min.css", __FILE__); // original https://bootswatch.com/4/darkly/bootstrap.css
+	    elseif ($theme == "greyred")    $css =  plugins_url("/css/superhero.min.css", __FILE__);
+	    elseif ($theme == "greygreen")  $css =  plugins_url("/css/solar.min.css", __FILE__);
+	    elseif ($theme == "whiteblue")  $css =  plugins_url("/css/cerulean.min.css", __FILE__); // original https://bootswatch.com/4/cerulean/bootstrap.css
+	    elseif ($theme == "whitered")   $css =  plugins_url("/css/united.min.css", __FILE__);
+	    elseif ($theme == "whitegreen") $css =  plugins_url("/css/flatly.min.css", __FILE__);
+	    elseif ($theme == "whiteblack") $css =  plugins_url("/css/lux.min.css", __FILE__);
+	    elseif ($theme == "whitepurple")$css =  plugins_url("/css/pulse.min.css", __FILE__);
+	    elseif ($theme == "litera")     $css =  plugins_url("/css/litera.min.css", __FILE__);
+	    elseif ($theme == "minty")      $css =  plugins_url("/css/minty.min.css", __FILE__);
+	    elseif ($theme == "sandstone")  $css =  plugins_url("/css/sandstone.min.css", __FILE__);
+	    elseif ($theme == "sketchy")    $css =  plugins_url("/css/sketchy.min.css", __FILE__);
+	    else                            $css =  plugins_url("/css/bootstrapcustom.min.css", __FILE__);
+
+
 	    $tmp  = "<link rel='stylesheet' id='cr-bootstrapcss-css'  href='".$css."' type='text/css' media='all' />";
 	    $tmp .= "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' crossorigin='anonymous'></script>";
 	    $tmp .= "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' crossorigin='anonymous'></script>";
 	    $tmp .= "<script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' crossorigin='anonymous'></script>";
 	    $tmp .= "<script type='text/javascript' src='https://use.fontawesome.com/releases/v5.0.9/js/all.js' crossorigin='anonymous'></script>";
-	    $tmp .= "<script type='text/javascript' src='".plugins_url("/js/support.min.js?ver=".GOURL_VERSION, __FILE__)."' crossorigin='anonymous'></script>";	    
-	     
+	    $tmp .= "<script type='text/javascript' src='".plugins_url("/js/support.min.js?ver=".GOURL_VERSION, __FILE__)."' crossorigin='anonymous'></script>";
+
 	    return $tmp;
 	}
-	
-	
+
+
 	/*
 	 *  8.
 	 */
 	public function payments()
 	{
-		return $this->payments; 
+		return $this->payments;
 	}
 
 	
@@ -530,7 +530,7 @@ final class gourlclass
 		$tmp .= '<div style="min-width:1200px;width:100%;">';
 		
 		$tmp .= "<table border='0'>";
-		
+
 		if ($tr_products || $tr_files || $tr_membership || $tr_payperview || !$all_payments)
 		{	
 			// 1
@@ -866,7 +866,7 @@ final class gourlclass
 		$txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
 		$arr = json_decode($txt, true);
 
-		if (isset($arr["nonce"]) && $arr["nonce"] != sha1(md5(NONCE_KEY))) 
+		if (isset($arr["nonce"]) && $arr["nonce"] != sha1(md5(NONCE_KEY)))
 		{
 		    $this->save_cryptokeys_hash(); // admin changed NONCE_KEY
 		    $txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
@@ -1107,8 +1107,8 @@ final class gourlclass
 		$tmp .= '<p>';
 		$tmp .= '<select name="'.GOURL.'box_theme" >';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], '').' value="">Default</option>';
-		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greygreen').' value="greygreen">Grey/Green</option>';
-		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greyred').' value="greyred">Grey/Red</option>';
+		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greyred').' value="greyred">LightGrey/Red</option>';
+		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greygreen').' value="greygreen">DarkGrey/Green</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'black').' value="black">Black</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'whiteblue').' value="whiteblue">White/Blue</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'whitered').' value="whitered">White/Red</option>';
@@ -1120,7 +1120,8 @@ final class gourlclass
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'minty').' value="minty">Light Green (Rounded)</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'sketchy').' value="sketchy">Sketchy - comics :)</option>';
 		$tmp .= '</select>';
-		$tmp .= '<em>'.sprintf(__("Payment Box color theme (<a href='%s'>white</a> / <a href='%s'>black</a> / <a href='%s'>sketchy</a> / blue / red / etc).", GOURL), "https://gourl.io/images/woocommerce/screenshot-3.png", "https://gourl.io/images/woocommerce/screenshot-9.png", "https://gourl.io/images/woocommerce/screenshot-10.png").' &#160; <a target="_blank" href="'.GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto">'.__('Live Payment Box Preview &#187;', GOURL).'</a>'. '</em>';
+		$tmp .= ' &#160; &#160; <a href="'.GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto">'.__('Preview &#187;', GOURL).'</a>';
+		$tmp .= '<em>'.sprintf(__("Payment Box color theme (<a href='%s'>white</a> / <a href='%s'>black</a> / <a href='%s'>sketchy</a> / blue / red / etc)", GOURL), "https://gourl.io/images/woocommerce/screenshot-3.png", "https://gourl.io/images/woocommerce/screenshot-9.png", "https://gourl.io/images/woocommerce/screenshot-10.png"). '</em>';
 		$tmp .= '</p>';
 		
 		
@@ -1969,7 +1970,7 @@ final class gourlclass
 				
 			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 	
-				
+
 				
 
 			/// GoUrl Payment Class
@@ -2710,7 +2711,7 @@ final class gourlclass
 		if ($priceUSD == 0 && $priceCoin == 0) $priceUSD = 1;
 		if ($priceUSD > 0 && $priceCoin > 0) $priceCoin = 0;
 		if ($priceCoin > 0) { $this->options2["ppvCoin"] = $priceLabel; $this->options2["ppvOneCoin"] = 1; }
-		
+
 		$expiryPeriod	= $this->options2["ppvExpiry"];
 		$lang 			= $this->options2["ppvLang"];
 		$defCoin		= $this->coin_names[$this->options2["ppvCoin"]];
@@ -5905,7 +5906,8 @@ final class gourlclass
 
             $box_html  = $this->bootstrap_scripts();
             $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $default_coin, $default_language, $customtext, $icon_width, $qrcodesize, $showlanguages, "", "default", 250, $redirect, "curl") . "<br>";
-            // function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $customtext = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "ajax", $debug = false)
+            
+            // info function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $customtext = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "ajax", $debug = false)
 
             // Re-test after receive json data from live server
             $is_paid = $box->is_paid();
@@ -8099,5 +8101,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;                
+    return 0;                            
 }

@@ -233,7 +233,7 @@ word-break: break-all;
 }
 
 .mncrpt .container { 
-	max-width: 1000px; 
+	max-width: 900px !important; 
 }
 
 /*
@@ -246,7 +246,7 @@ word-break: break-all;
 	margin: 0; 
 	padding: 0; 
 	min-width: 0; 
-	max-width: 1000px; 
+	max-width: 900px !important;  
 	box-shadow: none; 
 	line-height: 1.5; 
 }
@@ -320,7 +320,7 @@ word-break: break-all;
 }
 
 .mncrpt img {
-    display: inline;
+    display: inline !important;
 }
 
 .mncrpt button { 
@@ -343,4 +343,4 @@ word-break: break-all;
 .mncrpt_debug { 
 	text-align: left; 
 	font-weight: bold; 
-}   
+} 
