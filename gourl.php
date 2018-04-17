@@ -1055,7 +1055,7 @@ final class gourlclass
         {
             $error_connect = $this->test_gourl_connection();
             if ($error_connect) $message .= "<div class='error'>".__('Error to connect to gourl.io server!', GOURL)."<br>".$error_connect."</div>";
-            elseif (!$this->updated) $message .= '<div class="updated"><p><b>'.__('Connection to GoUrl.io Server is OK!', GOURL).'</b></p></div>';
+            elseif (!$this->updated) $message .= '<div class="updated"><p><b>'.sprintf(__('Connection to GoUrl.io Server is OK! &#160; &#160; Payment Box <a href="%s">Preview &#187;</a>', GOURL), GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto').'</b></p></div>';
         }
 
 
@@ -1075,7 +1075,7 @@ final class gourlclass
 		$tmp .= $message;
 	
 		$tmp .= "<form enctype='multipart/form-data' method='post' accept-charset='utf-8' action='".GOURL_ADMIN.GOURL."settings'>";
-	
+
 		$tmp .= "<div class='postbox'>";
 		$tmp .= "<h3 class='hndle'>".__('General Settings', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
