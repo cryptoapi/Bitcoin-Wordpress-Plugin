@@ -1053,9 +1053,15 @@ final class gourlclass
 
         if (!$this->errors && ((isset($_GET['testconnect']) && $_GET["testconnect"] == "true") || $this->updated))
         {
-            $error_connect = $this->test_gourl_connection();
-            if ($error_connect) $message .= "<div class='error'>".__('Error to connect to gourl.io server!', GOURL)."<br>".$error_connect."</div>";
-            elseif (!$this->updated) $message .= '<div class="updated"><p><b>'.sprintf(__('Connection to GoUrl.io Server is OK! &#160; &#160; Payment Box <a href="%s">Preview &#187;</a>', GOURL), GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto').'</b></p></div>';
+            $messages = $this->test_gourl_connection( $this->updated );
+            if (isset($messages["error"])) 
+            {
+                unset($messages["error"]);
+                $message .= "<div class='error'><p>".__('Connection to GoUrl.io Payment Server - Errors found -', GOURL)."</p><ol><li>".implode("</li><li>", $messages)."</li></ol>";
+                $message .= "<br><br><div style='color:#23282d'>".sprintf( __("Note: As alternative, you can use old <a href='%s'>iFrame Payment Box Type</a>", GOURL), plugins_url('/images/compare_box.png', __FILE__)) . " (option below)";
+                $message .= "</div><br></div>";
+            }
+            elseif (!$this->updated) $message .= "<div class='updated'><p><b>ALL CONNECTIONS ARE OK!</b></p><ol><li>".implode("</li><li>", $messages)."</li></ol></div>";
         }
 
 
@@ -1295,45 +1301,54 @@ final class gourlclass
 	/*
 	 *
 	*/
-    private function test_gourl_connection()
+    private function test_gourl_connection($one_key = true)
     {
-        $error_message = "";
-        $public_key = $private_key = "";
+        $messages = array();
+        $arr = $arr2 = array();
 
         foreach ($this->coin_names as $k => $v)
-        if (!$public_key && !$private_key)
+        if (!$one_key || !$arr)
         {
             $public_key 	= $this->options[$v.'public_key'];
             $private_key 	= $this->options[$v.'private_key'];
+            
+            if ($public_key || $private_key) $arr[$v] = array("public_key" => $public_key, "private_key" => $private_key);
+            if ($private_key) $arr2[] = $private_key; 
         }
 
-        if (!$public_key || !$private_key) return 'Please add your GoUrl Cryptobox Public/Private Keys on this settings page';
-		elseif(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", $private_key);
+        if (!$arr) return array("error" => true, "desc" => 'Please add your GoUrl Cryptobox Public/Private Keys on this settings page');
+		elseif(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $arr2));
 
 
         include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
 
-        $options = array(
-            "public_key"  => $public_key,
-            "private_key" => $private_key,
-            "orderID"     => "test",
-            "userID"      => "testuser",
-            "amountUSD"   => 1,
-            "period"      => "1 DAY",
-            );
-
-        $box = new Cryptobox ($options);
-
-        $data = $box->get_json_values();
-
-        if (!isset($data["status"]) || !isset($data["texts"]) || !in_array($data["status"], array("payment_received", "payment_not_received")))
+        foreach($arr as $k => $v)
         {
-            if (isset($data["data_hash"])) unset($data["data_hash"]);
-            if (isset($data["err"]) && $data["err"]) $error_message = sprintf( __("GoUrl.io server (<a target='_blank' href='%s'>payment data URL</a>) return error: %s", GOURL), $box->cryptobox_json_url(), "<pre>" . print_r($data, true) . "</pre>");
-            else $error_message = sprintf( __("Unable to connect to Gourl.io server through CURL - <a target='_blank' href='%s'>payment data URL</a><br>Check your network connection / add GoUrl.io IPs in <a target='_blank' href='%s'>whitelist</a><br>Your website received data: %s", GOURL), $box->cryptobox_json_url(), "https://gourl.io/api-php.html#cdn", "<pre>" . ($data?print_r($data, true):"- empty -<br><a target='_blank' href='".$box->cryptobox_json_url()."'>Raw Data &#187;</a>") . "</pre>");
+        
+            $options = array(
+                "public_key"  => $v["public_key"],
+                "private_key" => $v["private_key"],
+                "orderID"     => "test_order",
+                "userID"      => "test_user",
+                "amountUSD"   => 10,
+                "period"      => "1 DAY",
+                );
+    
+            $box = new Cryptobox ($options);
+    
+            $data = $box->get_json_values();
+    
+            if (!isset($data["status"]) || !isset($data["texts"]) || !in_array($data["status"], array("payment_received", "payment_not_received")))
+            {
+                if (isset($data["data_hash"])) unset($data["data_hash"]);
+                if (isset($data["err"]) && $data["err"])    $messages[$k] = ucwords($k) . " - " . sprintf( __("GoUrl.io server (<a target='_blank' href='%s'>Raw Data Url</a>) return error: %s", GOURL), $box->cryptobox_json_url(), "<pre>" . print_r($data, true) . "</pre>");
+                else                                        $messages[$k] = ucwords($k) . " - " . sprintf( __("Unable to connect to Gourl.io server through CURL - <a target='_blank' href='%s'>Raw Data Url</a><br>Check your network connection / add GoUrl.io IPs in <a target='_blank' href='%s'>whitelist</a><br>Your website received data: %s", GOURL), $box->cryptobox_json_url(), "https://gourl.io/api-php.html#cdn", "<pre>" . ($data?print_r($data, true):"- empty - &#160; <a target='_blank' href='".$box->cryptobox_json_url()."'>See Raw Data &#187;</a>") . "</pre>");
+                $messages["error"] = true;
+            }
+            else $messages[$k] = "<div style='color:green !important'>" . ucwords($k) . " - " . sprintf(__('Connection to GoUrl.io Server is OK! &#160; <a target="_blank" href="%s">Raw Data Url &#187;</a> &#160; &#160; Payment Box <a href="%s">Preview &#187;</a>', GOURL), $box->cryptobox_json_url(), GOURL_ADMIN.GOURL.'payperview&example=2&gourlcryptocoin='.$k.'&preview=true#previewcrypto') . "</div>";
         }
 
-        return $error_message;
+        return $messages;
     }
 
 
@@ -8159,5 +8174,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;     
+    return 0;    
 }
