@@ -34,7 +34,7 @@ final class gourlclass
 	private $expiry_period 		= array('NO EXPIRY', '10 MINUTES', '20 MINUTES', '30 MINUTES', '1 HOUR', '2 HOURS', '3 HOURS', '6 HOURS', '12 HOURS', '1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS',  '1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS', '1 MONTH', '2 MONTHS', '3 MONTHS', '6 MONTHS', '12 MONTHS'); // payment expiry period
 	private $store_visitorid 	= array('COOKIE','SESSION','IPADDRESS','MANUAL'); // Save auto-generated unique visitor ID in cookies, sessions or use the IP address to decide unique visitors (without use cookies)
 	private $addon 				= array("gourlwoocommerce", "gourlwpecommerce", "gourljigoshop", "gourlappthemes", "gourlmarketpress", "gourlpmpro", "gourlgive", "gourledd");
-			
+
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileUrl"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	
@@ -672,7 +672,7 @@ final class gourlclass
 		$tmp .= "</ul>";
 
 		$tmp .= "<p>".__("THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!", GOURL)."</p>";
-		
+
 		$tmp .= "<br><p>".sprintf(__("<b>Testing environment</b>: You can use <a target='_blank' href='%s'>500 free Speedcoins</a> or <a target='_blank' href='%s'>Dogecoins</a> for testing", GOURL), "https://speedcoin.org/info/free_coins/Free_Speedcoins.html", "https://poloniex.com/");
 		$tmp .= "<a name='i4'></a>";
 		$tmp .= "</p>";
@@ -701,16 +701,16 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__("<b>Both solutions</b> - Pay-Per-Membership and Pay-Per-View hide content on premium pages from unpaid users/visitors and allow to use custom actions on free website pages; Pay-Per-Membership provides premium membership mode in <a href='%s'>bbPress</a> also.", GOURL), "https://wordpress.org/plugins/bbpress/")."</li>";
 		$tmp .= "<li> ".__("If a visitor goes to a premium page and have not logged in -<br>Pay-Per-View will show a payment box and accept payments from the unregistered visitor.<br>Pay-Per-Membership will show a message that the user needs to login/register on your website first and after show a payment box for logged in users only.", GOURL)."</li>";
 		$tmp .= "</ul>";
-		
+
 		$tmp .= "<br><p>";
 		$tmp .= sprintf(__("For example, you might offer paid unlimited access to your 50 website premium pages/posts for the price of 1 USD for 2 DAYS to all your website visitors (<span class='gourlnowrap'>non-registered</span> visitors or registered users). Simple <a href='%s'>add</a> shortcode <a href='%s'>[%s]</a> or <a href='%s'>[%s]</a> for all those fifty your premium pages/posts. When visitors go on any of those pages, they will see automatic cryptocoin payment box (the original page content will be hidden). After visitor makes their payment, they will get access to original pages content/videos and after 2 days will see a new payment box. Visitor can make payment on any your premium page and they will get access to all other premium pages also.<br>Optional - You can <a href='%s'>show ads</a> for unpaid users on other your free webpages, etc.", GOURL), plugins_url('/images/tagexample_membership_full.png', __FILE__), GOURL_ADMIN.GOURL."payperview", GOURL_TAG_VIEW, GOURL_ADMIN.GOURL."paypermembership", GOURL_TAG_MEMBERSHIP, plugins_url('/images/paypermembership_code.png', __FILE__));
 		$tmp .= "<br><br>";
 		$tmp .= sprintf(__("<b>Notes:</b><br>- Do not use [%s] and [%s] together on the same page.<br>- Website Editors / Admins will have all the time full access to premium pages and see original page content", GOURL), GOURL_TAG_VIEW, GOURL_TAG_MEMBERSHIP);
 		$tmp .= "<a name='i5'></a>";
 		$tmp .= "</p>";
-		
-		
-		
+
+
+
 		$tmp .= "<br><br><br><br><br><br><br>";
 		$tmp .= "<div class='gourltitle'>5. ".__('Adding Custom Actions after Payment has been received', GOURL)."</div>";
 		$tmp .= "<p><b>".__('Using for Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-Membership only', GOURL)."</b></p>";
@@ -816,11 +816,11 @@ final class gourlclass
 	// function save
 	// function adminpage
 	// function shortcode
-	
-	
+
+
 	/**************** A. GENERAL OPTIONS ************************************/
-	
-	
+
+
 	/*
 	 *  19. Get values from the options table
 	*/
@@ -872,14 +872,14 @@ final class gourlclass
 		    $txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
 		    $arr = json_decode($txt, true);
 		}
-		
+
 		foreach($this->coin_names as $k => $v)
 		{
 		    $pub  = $v."public_key";
 		    $prv  = $v."private_key";
-		    if (($this->options[$pub] || $this->options[$prv]) && 
-		        (!isset($arr[$pub]) || !isset($arr[$prv]) ||  
-		         $arr[$pub] != sha1($this->options[$pub].NONCE_KEY.$this->options[$pub]) || 
+		    if (($this->options[$pub] || $this->options[$prv]) &&
+		        (!isset($arr[$pub]) || !isset($arr[$prv]) ||
+		         $arr[$pub] != sha1($this->options[$pub].NONCE_KEY.$this->options[$pub]) ||
 		         $arr[$prv] != sha1($this->options[$prv].NONCE_KEY.$this->options[$prv])))
 		         {
 		              $this->options[$pub] = $this->options[$prv] = "";
@@ -1007,15 +1007,15 @@ final class gourlclass
 
 		return true;
 	}
-	
+
 	
 	
 	/*
 	 *  23. Additional Security
 	 *  Save gourl public/private keys sha1 hash in file $this->hash_url
-	*/	
+	*/
 	private function save_cryptokeys_hash()
-	{	
+	{
 	    if (!file_exists($this->hash_url) || is_writable($this->hash_url))
 	    {
         	$arr = array("nonce" => sha1(md5(NONCE_KEY)));
@@ -1023,21 +1023,23 @@ final class gourlclass
         	{
         	    $pub  = $v."public_key";
         	    $prv  = $v."private_key";
-        	    if ($this->options[$pub] && $this->options[$prv]) 
-        	    {    
+        	    if ($this->options[$pub] && $this->options[$prv])
+        	    {
         	        $arr[$pub] = sha1($this->options[$pub].NONCE_KEY.$this->options[$pub]);
         	        $arr[$prv] = sha1($this->options[$prv].NONCE_KEY.$this->options[$prv]);
-        	    }    
+        	    }
         	}
-        	
+
         	file_put_contents($this->hash_url, json_encode($arr));
 	    }
 
 	    return true;
 	}
-		
-	
-	
+
+
+
+
+
 	/*
 	 *  24.
 	*/
@@ -1049,19 +1051,27 @@ final class gourlclass
 		elseif ($this->updated)  $message = '<div class="updated"><p>'.__('Settings have been updated <strong>successfully</strong>', GOURL).'</p></div>';
 		else $message = "";
 
+        if (!$this->errors && ((isset($_GET['testconnect']) && $_GET["testconnect"] == "true") || $this->updated))
+        {
+            $error_connect = $this->test_gourl_connection();
+            if ($error_connect) $message .= "<div class='error'>".__('Error to connect to gourl.io server!', GOURL)."<br>".$error_connect."</div>";
+            elseif (!$this->updated) $message .= '<div class="updated"><p><b>'.__('Connection to GoUrl.io Server is OK!', GOURL).'</b></p></div>';
+        }
+
+
 		if ($this->record_info) $message .= '<div class="updated"><ul><li>- '.implode("</li><li>- ", $this->record_info).'</li></ul></div>';
 
 		$tmp  = "<div class='wrap ".GOURL."admin'>";
 		$tmp .= $this->page_title(__('Settings', GOURL));
-		
-			
+
+
 		if (!$this->payments)
 		{
 			$tmp .= "<div class='".GOURL."intro postbox'>";
 			$tmp .= sprintf( __("Simple register on <a target='_blank' href='%s'>GoUrl.io</a> and get your Free Public/Private Payment Box keys. &#160; <a href='%s'>Read more &#187;</a>", GOURL), "https://gourl.io/info/memberarea/My_Account.html", GOURL_ADMIN.GOURL."#i3");
 			$tmp .= "</div>";
 		}
-		
+
 		$tmp .= $message;
 	
 		$tmp .= "<form enctype='multipart/form-data' method='post' accept-charset='utf-8' action='".GOURL_ADMIN.GOURL."settings'>";
@@ -1069,7 +1079,7 @@ final class gourlclass
 		$tmp .= "<div class='postbox'>";
 		$tmp .= "<h3 class='hndle'>".__('General Settings', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
-	
+
 		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_settings" />';
 	
 		$tmp .= '<p>'.sprintf(__( "If you use multiple websites online, please create separate <a target='_blank' href='%s'>GoUrl Payment Box</a> records (with unique payment box public/private keys) for each of your websites. Do not use the same GoUrl Payment Box with the same public/private keys on your different websites.", GOURL ), "https://gourl.io/editrecord/coin_boxes/0") . '</p>';
@@ -1091,9 +1101,11 @@ final class gourlclass
 		
 
 
-		$tmp .= '<tr><th colspan="2"><br><br><br><h3>'.__('Payment Box Settings', GOURL).'</h3></th>';
+		$tmp .= '<tr><th colspan="2"><br><br><br><h3>'.__('Payment Box Settings', GOURL).'</h3>';
+		if (!$this->errors) $tmp .= '<p><a href="'.GOURL_ADMIN.GOURL.'settings&testconnect=true" style="font-weight:normal" class="'.GOURL.'button button-secondary">'.__('Click to Test Connection to GoUrl.io Server', GOURL).'</a></p><br>';
+		$tmp .= '</th>';
 		$tmp .= '</tr>';
-		
+
 		$tmp .= '<tr><th>'.__('PaymentBox Type', GOURL).': <img width="70" hspace="20" alt="new" src="'.plugins_url('/images/new.png', __FILE__).'" border="0"></th><td>';
 		$tmp .= '<p>';
 		$tmp .= '<b><input type="radio" name="'.GOURL.'box_type" value="" '.$this->chk($this->options['box_type'], "").'> '.__('White Label, Mobile Friendly', GOURL).$this->space(4);
@@ -1102,7 +1114,7 @@ final class gourlclass
 		$tmp .= '<em>'.__('iFrame - display gourl.io payment box in iFrame on your webpage. Not mobile friendly.', GOURL).' &#160; <a target="_blank" href="https://gourl.io/bitcoin-payment-gateway-api.html?gourlcryptolang=en#gourlcryptolang">'.__('iFrame Example', GOURL).'</a>'. '</em>';
 		$tmp .= '</p>';
 		$tmp .= '</tr>';
-		
+
 		$tmp .= '<tr><th>'.__('Payment Box Theme', GOURL).':</th><td>';
 		$tmp .= '<p>';
 		$tmp .= '<select name="'.GOURL.'box_theme" >';
@@ -1120,10 +1132,10 @@ final class gourlclass
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'minty').' value="minty">Light Green (Rounded)</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'sketchy').' value="sketchy">Sketchy - comics :)</option>';
 		$tmp .= '</select>';
-		$tmp .= ' &#160; &#160; <a href="'.GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto">'.__('Preview &#187;', GOURL).'</a>';
+		$tmp .= ' &#160; &#160; <a href="'.GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto">'.__('Live Preview &#187;', GOURL).'</a>';
 		$tmp .= '<em>'.sprintf(__("Payment Box color theme (<a href='%s'>white</a> / <a href='%s'>black</a> / <a href='%s'>sketchy</a> / blue / red / etc)", GOURL), "https://gourl.io/images/woocommerce/screenshot-3.png", "https://gourl.io/images/woocommerce/screenshot-9.png", "https://gourl.io/images/woocommerce/screenshot-10.png"). '</em>';
 		$tmp .= '</p>';
-		
+
 		
 				
 		
@@ -1279,8 +1291,54 @@ final class gourlclass
 	
 	
 	
-	
-	
+
+	/*
+	 *
+	*/
+    private function test_gourl_connection()
+    {
+        $error_message = "";
+        $public_key = $private_key = "";
+
+        foreach ($this->coin_names as $k => $v)
+        if (!$public_key && !$private_key)
+        {
+            $public_key 	= $this->options[$v.'public_key'];
+            $private_key 	= $this->options[$v.'private_key'];
+        }
+
+        if (!$public_key || !$private_key) return 'Please add your GoUrl Cryptobox Public/Private Keys on this settings page';
+		elseif(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", $private_key);
+
+
+        include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
+
+        $options = array(
+            "public_key"  => $public_key,
+            "private_key" => $private_key,
+            "orderID"     => "test",
+            "userID"      => "testuser",
+            "amountUSD"   => 1,
+            "period"      => "1 DAY",
+            );
+
+        $box = new Cryptobox ($options);
+
+        $data = $box->get_json_values();
+
+        if (!isset($data["status"]) || !isset($data["texts"]) || !in_array($data["status"], array("payment_received", "payment_not_received")))
+        {
+            if (isset($data["data_hash"])) unset($data["data_hash"]);
+            if (isset($data["err"]) && $data["err"]) $error_message = sprintf( __("GoUrl.io server (<a target='_blank' href='%s'>payment data URL</a>) return error: %s", GOURL), $box->cryptobox_json_url(), "<pre>" . print_r($data, true) . "</pre>");
+            else $error_message = sprintf( __("Unable to connect to Gourl.io server through CURL - <a target='_blank' href='%s'>payment data URL</a><br>Check your network connection / add GoUrl.io IPs in <a target='_blank' href='%s'>whitelist</a><br>Your website received data: %s", GOURL), $box->cryptobox_json_url(), "https://gourl.io/api-php.html#cdn", "<pre>" . ($data?print_r($data, true):"- empty -<br><a target='_blank' href='".$box->cryptobox_json_url()."'>Raw Data &#187;</a>") . "</pre>");
+        }
+
+        return $error_message;
+    }
+
+
+
+
 	/**************** COMMON FUNCTIONS **************************/
 	
 	/*
@@ -1947,7 +2005,7 @@ final class gourlclass
 			$all_keys 				= array(); 		// Your payment boxes public / private keys from GoUrl.io
 			$available_coins 		= array(); 		// List of coins that you accept for payments
 			$cryptobox_private_keys = array();		// List Of your private keys
-				
+
 			foreach ($this->coin_names as $k => $v)
 			{
 				$public_key 	= $this->options[$v.'public_key'];
@@ -1963,30 +2021,30 @@ final class gourlclass
 					$available_coins[] = $v;
 				}
 			}
-				
-			if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
-				
-			if (!$available_coins) return '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>';
-				
-			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
-	
 
-				
+			if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
+
+			if (!$available_coins) return '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>';
+
+			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
+
+
+
 
 			/// GoUrl Payment Class
 			// --------------------------
 			include_once(plugin_dir_path( __FILE__ )."includes/cryptobox.class.php");
-				
+
 				
 				
 			// Current selected coin by user
 			$coinName = cryptobox_selcoin($available_coins, $defCoin);
 				
-				
+
 			// Current Coin public/private keys
 			$public_key  = $all_keys[$coinName]["public_key"];
 			$private_key = $all_keys[$coinName]["private_key"];
-				
+
 				
 			// PAYMENT BOX CONFIG
 			$options = array(
@@ -2766,7 +2824,7 @@ final class gourlclass
 		if (!$available_coins) { $html = '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>'; return $html; } 
 			
 		if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
-			
+
 			
 			
 		/// GoUrl Payment Class
@@ -8101,5 +8159,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;                            
+    return 0;     
 }
