@@ -815,9 +815,9 @@ class Cryptobox {
 	* redirect - redirect to another page after payment is received (3 seconds delay)
 	*    
 	* method - "ajax" or "curl". 
-	*    AJAX - user don't need click any submit buttons
+	*    AJAX - user don't need click payment submit button on form. Payment box show successful paid message automatically
 	*    CURL + White Label Payment Box with Your Own Logo (White Label Product - https://www.google.com/search?q=white+label+product), user need to click on button below payment form when payment is sent
-	*    with ajax - user browser receive payment data directly from our server and automatically show successful payment notification message on page (without page reload, any clicks on buttons). 
+	*    with ajax - user browser receive payment data directly from our server and automatically show successful payment notification message on the page (without page reload, any clicks on buttons). 
 	*    with curl - User browser receive payment data in json format from your server only; and your server receive json data from our server
 	* 
 	* debug - show raw payment data from gourl.io on the page also, for debug purposes.  
@@ -828,7 +828,7 @@ class Cryptobox {
 	 *  
 	 */
 
-	public function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $custom_text = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "ajax", $debug = false)
+	public function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $custom_text = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "curl", $debug = false)
 	{
 
 
@@ -847,7 +847,7 @@ class Cryptobox {
 	    $resultimgSize    = intval($resultimgSize);
 	    if ($resultimgSize > 500) $resultimgSize = 250;
 	    
-	    if (!in_array($method, array("ajax", "curl"))) $method = "ajax";
+	    if (!in_array($method, array("ajax", "curl"))) $method = "curl";
 	     
 	    
 	    $ext           = (defined("CRYPTOBOX_PREFIX_HTMLID")) ? CRYPTOBOX_PREFIX_HTMLID : "acrypto_";      // any prefix for all html elements; default 'acrypto_'
@@ -862,9 +862,6 @@ class Cryptobox {
 	     
 	    
 	    
-	    if (!in_array($method, array("ajax", "curl"))) $method = "ajax";
-	     
-
 	    // Language selection list for payment box (html code)
 	    if ($show_languages) $languages_list = display_language_box($def_language, $ext2, false);
 
@@ -1454,7 +1451,7 @@ class Cryptobox {
 	}
 	private function ua($agent = true)
 	{
-	   return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER["SERVER_NAME"] . (isset($_SERVER["REDIRECT_URL"])?$_SERVER["REDIRECT_URL"]:$_SERVER["PHP_SELF"]) . ' | GU ' . (CRYPTOBOX_WORDPRESS?'WORDPRESS':'PHP') . ' ' . CRYPTOBOX_VERSION . ($agent && isset($_SERVER["HTTP_USER_AGENT"])?' | '.$_SERVER["HTTP_USER_AGENT"]:'');
+	    return (isset($_SERVER['REQUEST_SCHEME'])?$_SERVER['REQUEST_SCHEME']:'http') . '://' . $_SERVER["SERVER_NAME"] . (isset($_SERVER["REDIRECT_URL"])?$_SERVER["REDIRECT_URL"]:$_SERVER["PHP_SELF"]) . ' | GU ' . (CRYPTOBOX_WORDPRESS?'WORDPRESS':'PHP') . ' ' . CRYPTOBOX_VERSION . ($agent && isset($_SERVER["HTTP_USER_AGENT"])?' | '.$_SERVER["HTTP_USER_AGENT"]:'');
 	}
 	public function ip_address()
 	{
@@ -2228,6 +2225,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);      
+		unset($v); unset($cryptobox_private_keys);            
 	}
 ?>
