@@ -292,7 +292,7 @@ final class gourlclass
 	*/
 	public static function coin_chain()
 	{
-		return array('bitcoin' => 'https://blockchain.info/', 'bitcoincash' => 'http://blockdozer.com/', 'litecoin' => 'https://bchain.info/LTC/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'http://www.potchain.net/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'universalcurrency' => 'https://explorer.u-currency.com/');
+		return array('bitcoin' => 'https://blockchain.info/', 'bitcoincash' => 'http://blockdozer.com/', 'litecoin' => 'https://bchain.info/LTC/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'https://chainz.cryptoid.info/pot/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'universalcurrency' => 'https://explorer.u-currency.com/');
 	}
 
 
@@ -8174,5 +8174,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;       
+    return 0;        
 }
