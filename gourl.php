@@ -7951,7 +7951,7 @@ function gourl_get_url( $url, $timeout = 20 )
 
 
 /*
- *	XXV. Convert USD to AUD, EUR to GBP, etc using XE.COM
+ *	XXV. Convert USD to AUD, EUR to GBP, etc using live exchange rates websites
  *  Update interval in hours; default 1 hour
  */
 function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval = 1)
@@ -7960,10 +7960,10 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     $to_Currency   = trim(strtoupper(urlencode($to_Currency)));
     
     if ($from_Currency == "TRL") $from_Currency = "TRY"; // fix for Turkish Lyra
-    if ($from_Currency == "ZWL") $from_Currency = "ZWD"; // fix for Zimbabwe Dollar
+    if ($from_Currency == "ZWD") $from_Currency = "ZWL"; // fix for Zimbabwe Dollar
     if ($from_Currency == "RM")  $from_Currency = "MYR"; // fix for Malaysian Ringgit
-    if ($from_Currency == "BTC") $from_Currency = "XBT"; // fix for Bitcoin
-    if ($to_Currency == "BTC")   $to_Currency = "XBT";   // fix for Bitcoin
+    if ($from_Currency == "XBT") $from_Currency = "BTC"; // fix for Bitcoin
+    if ($to_Currency   == "XBT") $to_Currency   = "BTC"; // fix for Bitcoin
     
     if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
     if ($from_Currency == "IRT") { $from_Currency = "IRR"; $amount = $amount * 10; } // fix for Iranian Toman; 1IRT = 10IRR
@@ -7972,13 +7972,13 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
 
     
     
-    // data from buffer; update exchange rate one time per 1 hour
+    // a. data from buffer; update exchange rate one time per 1 hour
     // ----------------------------
     $arr = get_option($key);
     if ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + $interval*60*60) > strtotime("now")) 
     {
         $total = $arr["price"]*$amount;
-        if ($to_Currency=="XBT" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
+        if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
         return $total;
@@ -7986,25 +7986,73 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
 
 
     
-    // get data from xe.com
-    // ----------------
     $val = 0;
-    $url = "https://www.xe.com/currencyconverter/convert/?Amount=1&From=".$from_Currency."&To=".$to_Currency;
+    if ($from_Currency == $to_Currency)  $val = 1;
     
-    $rawdata = gourl_get_url( $url, 20 );
     
-    if (strpos($rawdata, "1 ".$from_Currency." = "))
+    
+    // b. get BTC rates
+    // ----------------
+    $bitcoinUSD = 0;
+    if (!$val && ($from_Currency == "BTC" || $to_Currency == "BTC"))
     {
-        $data = explode("uccResultAmount'>", $rawdata);
-        if (isset($data[1]))
+        $aval = array ('BTC', 'USD', 'AUD', 'BRL', 'CAD', 'CHF', 'CLP', 'CNY', 'DKK', 'EUR', 'GBP', 'HKD', 'INR', 'ISK', 'JPY', 'KRW', 'NZD', 'PLN', 'RUB', 'SEK', 'SGD', 'THB', 'TWD');
+        if (in_array($from_Currency, $aval) && in_array($to_Currency, $aval))
         {
-            $pos = stripos($data[1], "</span>");
-            if ($pos)
-            {
-                $data = substr($data[1], 0, $pos);
-                if (is_numeric($data) && $data > 0) $val = floatval($data);
-            }
+            $data = json_decode(gourl_get_url("https://blockchain.info/ticker"), true);
+            
+            // rates BTC->...
+            $rates = array("BTC" => 1);
+            if ($data) foreach($data as $k => $v) $rates[$k] = ($v["15m"] > 1000) ? round($v["15m"]) : ($v["last"] > 1000 ? round($v["last"]) : 0);
+            // convert BTC/USD, EUR/BTC, etc.
+            if (isset($rates[$to_Currency]) && $rates[$to_Currency] > 0 && isset($rates[$from_Currency]) && $rates[$from_Currency] > 0) $val = $rates[$to_Currency] / $rates[$from_Currency];
+            if (isset($rates["USD"]) && $rates["USD"] > 0) $bitcoinUSD = $rates["USD"];
         }
+        
+        if (!$val && $bitcoinUSD < 1000)
+        {
+            $data = json_decode(gourl_get_url("https://www.bitstamp.net/api/ticker/"), true);
+            if (isset($data["last"]) && isset($data["volume"]) && $data["last"] > 1000) $bitcoinUSD = round($data["last"]);
+        }
+        
+        if ($from_Currency == "BTC" && $to_Currency == "USD" && $bitcoinUSD > 0) $val  =  $bitcoinUSD;
+        if ($from_Currency == "USD" && $to_Currency == "BTC" && $bitcoinUSD > 0) $val  =  1 / $bitcoinUSD;
+    }
+    
+    
+    
+    // c. get rates from European Central Bank https://www.ecb.europa.eu
+    // ----------------
+    $aval = array ('EUR', 'USD', 'JPY', 'BGN', 'CZK', 'DKK', 'GBP', 'HUF', 'PLN', 'RON', 'SEK', 'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD', 'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'PHP', 'SGD', 'THB', 'ZAR');
+    if ($bitcoinUSD > 0) $aval[] = "BTC";
+    if (!$val && in_array($from_Currency, $aval) && in_array($to_Currency, $aval))
+    {
+        $xml = simplexml_load_string(gourl_get_url("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"));
+        $json = json_encode($xml);
+        $data = json_decode($json,TRUE);
+        
+        if (isset($data["Cube"]["Cube"]))
+        {
+            $data = $data["Cube"]["Cube"];
+            $time = $data["@attributes"]["time"];
+            
+            // rates EUR->...
+            $rates = array("EUR" => 1);
+            foreach($data["Cube"] as $v) $rates[$v["@attributes"]["currency"]] = floatval($v["@attributes"]["rate"]);
+            if ($bitcoinUSD > 0 && $rates["USD"] > 0) $rates["BTC"] = $rates["USD"] / $bitcoinUSD;
+            
+            // convert USD/JPY, EUR/GBP, etc.
+            if ($rates[$to_Currency] > 0 && $rates[$from_Currency] > 0) $val = $rates[$to_Currency] / $rates[$from_Currency];
+        }
+    }
+    
+    
+    // d. get rates from https://free.currencyconverterapi.com/api/v6/convert?q=BTC_EUR&compact=y
+    // ----------------
+    if (!$val)
+    {
+        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key."&compact=y"), TRUE);
+        if (isset($data[$key]["val"]) && $data[$key]["val"] > 0) $val = $data[$key]["val"];
     }
     
     
@@ -8017,7 +8065,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
         update_option($key, $arr);
         
         $total = $val*$amount;
-        if ($to_Currency=="XBT" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
+        if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
         return $total;
@@ -8026,7 +8074,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     elseif ($arr && isset($arr["price"]) && $arr["price"] > 0 && isset($arr["time"]) && ($arr["time"] + 5*60*60) > strtotime("now"))
     {
         $total = $arr["price"]*$amount;
-        if ($to_Currency=="XBT" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
+        if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
         return $total;
@@ -8174,5 +8222,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
      
-    return 0;        
+    return 0;     
 }
