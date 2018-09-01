@@ -7968,8 +7968,9 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     if ($from_Currency == "RIAL") $from_Currency = "IRR"; // fix for Iranian Rial
     if ($from_Currency == "IRT") { $from_Currency = "IRR"; $amount = $amount * 10; } // fix for Iranian Toman; 1IRT = 10IRR
     
+    
     $key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
-
+    
     
     
     // a. data from buffer; update exchange rate one time per 1 hour
@@ -8051,8 +8052,9 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     // ----------------
     if (!$val)
     {
-        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key."&compact=y"), TRUE);
-        if (isset($data[$key]["val"]) && $data[$key]["val"] > 0) $val = $data[$key]["val"];
+        $key2 	= $from_Currency.'_'.$to_Currency;
+        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=y"), TRUE);
+        if (isset($data[$key2]["val"]) && $data[$key2]["val"] > 0) $val = $data[$key2]["val"];
     }
     
     
