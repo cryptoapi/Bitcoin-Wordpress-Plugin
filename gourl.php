@@ -108,7 +108,7 @@ final class gourlclass
 		
 
 		// B. Pay-Per-Download - New File
-		if ($this->page == GOURL.'file')
+		if ($this->page == GOURL.'file' && is_admin())
 		{
 			$this->record_fields = $this->fields_download;
 			$this->get_record('file');
@@ -119,7 +119,7 @@ final class gourlclass
 
 
 		// C. Pay-Per-View
-		if ($this->page == GOURL.'payperview')
+		if ($this->page == GOURL.'payperview' && is_admin())
 		{
 			$this->get_view();
 			if (!$_POST) $this->check_view();
@@ -127,7 +127,7 @@ final class gourlclass
 
 
 		// D. Pay-Per-Membership
-		if ($this->page == GOURL.'paypermembership')
+		if ($this->page == GOURL.'paypermembership' && is_admin())
 		{
 			$this->get_membership();
 			if (!$_POST) $this->check_membership();
@@ -135,7 +135,7 @@ final class gourlclass
 
 
 		// E. Pay-Per-Membership - New User
-		if ($this->page == GOURL.'paypermembership_user')
+		if ($this->page == GOURL.'paypermembership_user' && is_admin())
 		{
 			$this->record_fields = $this->fields_membership_newuser;
 			if (!$this->id) // default for new record
@@ -148,7 +148,7 @@ final class gourlclass
 
 
 		// F. Pay-Per-Product - New Product
-		if ($this->page == GOURL.'product')
+		if ($this->page == GOURL.'product' && is_admin())
 		{
 			$this->record_fields = $this->fields_product;
 			$this->get_record('product');
@@ -950,7 +950,7 @@ final class gourlclass
 		
 
 		// upload files
-		if ($_FILES && $_POST && $this->page == GOURL.'settings')
+		if ($_FILES && $_POST && is_admin() && $this->page == GOURL.'settings')
 		{
 			foreach($this->custom_images as $k => $v)
 			{
@@ -1053,15 +1053,19 @@ final class gourlclass
 
         if (!$this->errors && ((isset($_GET['testconnect']) && $_GET["testconnect"] == "true") || $this->updated))
         {
-            $messages = $this->test_gourl_connection( $this->updated );
-            if (isset($messages["error"])) 
+            if (!is_admin()) $message .= "<div class='error'><p>".__('Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!', GOURL)."</p></div>";
+            else 
             {
-                unset($messages["error"]);
-                $message .= "<div class='error'><p>".__('Connection to GoUrl.io Payment Server - Errors found -', GOURL)."</p><ol><li>".implode("</li><li>", $messages)."</li></ol>";
-                $message .= "<br><br><div style='color:#23282d'>".sprintf( __("Note: As alternative, you can use old <a href='%s'>iFrame Payment Box Type</a>", GOURL), plugins_url('/images/compare_box.png', __FILE__)) . " (option below)";
-                $message .= "</div><br></div>";
+                $messages = $this->test_gourl_connection( $this->updated );
+                if (isset($messages["error"])) 
+                {
+                    unset($messages["error"]);
+                    $message .= "<div class='error'><p>".__('Connection to GoUrl.io Payment Server - Errors found -', GOURL)."</p><ol><li>".implode("</li><li>", $messages)."</li></ol>";
+                    $message .= "<br><br><div style='color:#23282d'>".sprintf( __("Note: As alternative, you can use old <a href='%s'>iFrame Payment Box Type</a>", GOURL), plugins_url('/images/compare_box.png', __FILE__)) . " (option below)";
+                    $message .= "</div><br></div>";
+                }
+                elseif (!$this->updated) $message .= "<div class='updated'><p><b>ALL CONNECTIONS ARE OK!</b></p><ol><li>".implode("</li><li>", $messages)."</li></ol></div>";
             }
-            elseif (!$this->updated) $message .= "<div class='updated'><p><b>ALL CONNECTIONS ARE OK!</b></p><ol><li>".implode("</li><li>", $messages)."</li></ol></div>";
         }
 
 
@@ -1661,8 +1665,8 @@ final class gourlclass
 		{
 			$all_files = scandir(GOURL_DIR."files");
 			for ($i=0; $i<sizeof($all_files); $i++)
-				if (!in_array($all_files[$i], array(".", "..", "index.htm", "index.html", "index.php", ".htaccess", "gourl_ipn.php", "gourl.hash")) && is_file(GOURL_DIR.'/files/'.$all_files[$i]))
-				{
+			if (!in_array($all_files[$i], array(".", "..", "index.htm", "index.html", "index.php", ".htaccess", "gourl_ipn.php", "gourl.hash")) && is_file(GOURL_DIR.'/files/'.$all_files[$i]))
+			{
 				$files[] = $all_files[$i];
 			}
 	}
@@ -1673,7 +1677,7 @@ final class gourlclass
 	$tmp .= "</select>";
 	$tmp .= '<label> &#160; <small><a '.($this->record['fileName']?'':'style="display:none"').' id="'.GOURL.'preview" title="'.$this->record['fileName'].'" href="'.GOURL_ADMIN.GOURL.'&'.GOURL_PREVIEW.'='.$this->record['fileName'].'">'.__('Download', GOURL).'</a> <span id="'.GOURL.'fileSize_info">'.($this->record['fileSize']?$this->space(2).__('size', GOURL).': '.gourl_byte_format($this->record['fileSize']):'').'</span></small></label>';
 	$tmp .= '<br><em>'.sprintf(__('If the file has already been uploaded to the server, you can select that file from this drop-down list (files folder %s)<br><strong>OR</strong><br> upload new file below -', GOURL), GOURL_DIR2."files").'</em>';
-	$tmp .= '<input type="file" name="'.GOURL.'fileName2" id="'.GOURL.'fileName2" class="widefat"><br><em>'.__('Please use simple file names on <b>English</b>. Click on the Choose File button. Locate the file that you want to use, left click on it and click on the Open button. The path of the file that you have selected will appear in the File field', GOURL).'</em>';
+	$tmp .= '<input type="file" accept=".jpg,.jpeg,.png,.gif,.mp3,.aac,.ogg,.avi,.mov,.mp4,.mkv,.txt,.doc,.pdf,.iso,.7z,.rar,.zip" name="'.GOURL.'fileName2" id="'.GOURL.'fileName2" class="widefat"><br><em>'.__("Allowed: .jpg .png .gif .mp3 .aac .ogg .avi .mov .mp4 .mkv .txt .doc .pdf .iso .7z .rar .zip", GOURL)."<br>".__('Please use simple file names on <b>English</b>. Click on the Choose File button. Locate the file that you want to use, left click on it and click on the Open button. The path of the file that you have selected will appear in the File field', GOURL).'</em>';
 	$tmp .= '<br><strong>OR</strong><p>b) '.__('Alternatively enter Remote File URL', GOURL).' -</p>';
 	$tmp .= '<input type="text" class="widefat" name="'.GOURL.'fileUrl" id="'.GOURL.'fileUrl" value="'.htmlspecialchars($this->record['fileUrl'], ENT_QUOTES).'">';
 	if ($this->record['fileUrl']) $tmp .= '<br><em>'.sprintf(__('<a target="_blank" href="%s">Test Your Url Now &#187;</a>', GOURL), $this->record['fileUrl']).'</em>';
@@ -5638,43 +5642,56 @@ final class gourlclass
 	{
 		$fileName 	= mb_strtolower($file["name"]);
 		$ext 		= $this->right($fileName, ".", false);
+		$fileName 	= $this->left($fileName, ".", false);
 
 		if ($fileName == $ext) $ext = "";
 		$ext = trim($ext);
-		if (mb_strpos($ext, " ")) $ext = str_replace(" ", "_", $ext);
+		if (mb_strpos($ext, " ")!==false)         $ext = str_replace(" ", "_", $ext);
+		if (mb_strpos($fileName, ".")!==false)    $fileName = str_replace(".", "_", $fileName);
 
-		if (!is_uploaded_file($file["tmp_name"])) $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. Alternatively, you can upload your file to '%s' using the FTP File Manager", GOURL), $file["name"], GOURL_DIR2.$dir);
-		elseif (in_array($dir, array("images", "box")) && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__("Invalid image file '%s', supported *.gif, *.jpg, *.png files only", GOURL), $file["name"]);
+		if (!is_admin())
+		{
+		    $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. You should be ADMIN user!", GOURL), $file["name"]);
+		}
 		else
 		{
-			if ($english) $fileName = preg_replace('/[^A-Za-z0-9\.\_\&]/', ' ', $fileName); // allowed english symbols only
-			else $fileName = preg_replace('/[\(\)\?\!\;\,\>\<\'\"\%\&]/', ' ', $fileName);
-
-			$fileName = trim(mb_strtolower(str_replace(" ", "_", preg_replace("{[ \t]+}", " ", trim($fileName)))), ".,!;_-");
-			$fileName = str_replace("_.", ".", $fileName);
-			$fileName = mb_substr($fileName, 0, 95);
-			if (mb_strlen($fileName) < (mb_strlen($ext) + 3)) $fileName = date("Ymd")."_".strtotime("now").".".$ext;
-			if (in_array($dir, array("images", "box")) && is_numeric($fileName[0])) $fileName = "i".$fileName;
-
-			$i = 1;
-			$fileName1 = $this->left($fileName, ".", false);
-			$fileName2 = (mb_strpos($fileName, ".")) ? "." . $this->right($fileName, ".", false) : "";
-			while (file_exists(GOURL_DIR.$dir."/".$fileName)) { $i++; $fileName = $fileName1 . "-" . $i . $fileName2; }
-
-			if (!move_uploaded_file($file["tmp_name"], GOURL_DIR.$dir."/".$fileName)) $this->record_errors[] = sprintf(__("Cannot move file '%s' to directory '%s' on server. Please check directory permissions", GOURL), $file["name"], GOURL_DIR2.$dir);
-			elseif ($dir == "images")
-			{
-				$this->record_info[] = sprintf(__('Your Featured Image %s has been uploaded <strong>successfully</strong>', GOURL), ($file["name"] == $fileName ? '"'.$fileName.'"' : ''));
-
-				return $fileName;
-
-			}
-			else
-			{
-				$this->record_info[] = sprintf(__('Your File %s has been uploaded <strong>successfully</strong>', GOURL), ($file["name"] == $fileName ? '"'.$fileName.'"' : '')) . ($file["name"] != $fileName ? '. '.sprintf(__('New File Name is <strong>%s</strong>', GOURL), $fileName):'');
-
-				return $fileName;
-			}
+    		if (!is_uploaded_file($file["tmp_name"])) $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. Alternatively, you can upload your file to '%s' using the FTP File Manager", GOURL), $file["name"], GOURL_DIR2.$dir);
+    		elseif (in_array($dir, array("images", "box")) && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__("Invalid image file '%s', supported *.gif, *.jpg, *.png files only", GOURL), $file["name"]);
+    		elseif (in_array($dir, array("files")) && !in_array($ext, array("jpg","jpeg","png","gif","mp3","aac","ogg","avi","mov","mp4","mkv","txt","doc","pdf","iso","7z","rar","zip"))) $this->record_errors[] = sprintf(__("Invalid file '%s', supported *.jpg, *.png, *.gif, *.mp3, *.aac, *.ogg, *.avi, *.mov, *.mp4, *.mkv, *.txt, *.doc, *.pdf, *.iso, *.7z, *.rar, *.zip files only", GOURL), $file["name"]);
+    		else
+    		{
+    			if ($english) $fileName = preg_replace('/[^A-Za-z0-9\.\_\&]/', ' ', $fileName); // allowed english symbols only
+    			else $fileName = preg_replace('/[\(\)\?\!\;\,\>\<\'\"\%\&]/', ' ', $fileName);
+    
+    			$fileName = mb_strtolower(str_replace(" ", "_", preg_replace("{[ \t]+}", " ", trim($fileName))));
+    			$fileName = mb_substr($fileName, 0, 90);
+    			$fileName = trim($fileName, ".,!;_-");
+    			if (mb_strlen($fileName) < 4) $fileName = date("Ymd")."_".strtotime("now");
+    			if (in_array($dir, array("images", "box")) && is_numeric($fileName[0])) $fileName = "i".$fileName;
+    
+    			if (file_exists(GOURL_DIR.$dir."/".$fileName.".".$ext)) 
+    			{
+    			    $i = 1;
+    			    while (file_exists(GOURL_DIR.$dir."/".$fileName."-".$i.".".$ext)) $i++;
+    			    $fileName = $fileName."-".$i;
+    			}
+    			$fileName = $fileName.".".$ext;
+    
+    			if (!move_uploaded_file($file["tmp_name"], GOURL_DIR.$dir."/".$fileName)) $this->record_errors[] = sprintf(__("Cannot move file '%s' to directory '%s' on server. Please check directory permissions", GOURL), $file["name"], GOURL_DIR2.$dir);
+    			elseif ($dir == "images")
+    			{
+    				$this->record_info[] = sprintf(__('Your Featured Image %s has been uploaded <strong>successfully</strong>', GOURL), ($file["name"] == $fileName ? '"'.$fileName.'"' : ''));
+    
+    				return $fileName;
+    
+    			}
+    			else
+    			{
+    				$this->record_info[] = sprintf(__('Your File %s has been uploaded <strong>successfully</strong>', GOURL), ($file["name"] == $fileName ? '"'.$fileName.'"' : '')) . ($file["name"] != $fileName ? '. '.sprintf(__('New File Name is <strong>%s</strong>', GOURL), $fileName):'');
+    
+    				return $fileName;
+    			}
+    		}
 		}
 
 		return "";
@@ -8223,6 +8240,6 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
         return $arr2["price"];
     }
      
-     
-    return 0;     
+   
+    return 0;
 }

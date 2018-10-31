@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GoUrl Bitcoin Payment Gateway & Paid Downloads & "
 "Membership\n"
-"POT-Creation-Date: 2017-10-12 12:36+0300\n"
-"PO-Revision-Date: 2017-10-12 12:36+0300\n"
+"POT-Creation-Date: 2018-10-31 10:00+0000\n"
+"PO-Revision-Date: 2018-10-31 10:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -21,109 +21,109 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: gourl.php:293 gourl.php:429 gourl.php:7516
+#: gourl.php:392 gourl.php:528 gourl.php:7900
 msgid "Summary"
 msgstr "Краткий обзор"
 
-#: gourl.php:293
+#: gourl.php:392
 msgid "version"
 msgstr "версия"
 
-#: gourl.php:311
+#: gourl.php:410
 msgid "Latest Payment to Pay-Per-Product"
 msgstr "Последние платежи Pay-Per-Product"
 
-#: gourl.php:313 gourl.php:374 gourl.php:418 gourl.php:4677
+#: gourl.php:412 gourl.php:473 gourl.php:517 gourl.php:5025
 msgid "Latest Payment"
 msgstr "Последний платеж"
 
-#: gourl.php:327
+#: gourl.php:426
 msgid "Latest Payment to Pay-Per-Download"
 msgstr "Последние платежи Pay-Per-Download"
 
-#: gourl.php:344
+#: gourl.php:443
 msgid "Latest Payment to Pay-Per-Membership"
 msgstr "Последние платежи Pay-Per-Membership"
 
-#: gourl.php:358
+#: gourl.php:457
 msgid "Latest Payment to Pay-Per-View"
 msgstr "Последние платежи Pay-Per-View"
 
-#: gourl.php:390
+#: gourl.php:489
 msgid "Latest Payment to Other Plugins"
 msgstr "Последний платеж другому плагину"
 
-#: gourl.php:404
+#: gourl.php:503
 msgid "Unrecognised Latest Payment"
 msgstr "Нераспознанный последний платёж"
 
-#: gourl.php:415 gourl.php:418 gourl.php:1434 gourl.php:1914 gourl.php:2165
-#: gourl.php:2975 gourl.php:4067 gourl.php:4676 gourl.php:6627 gourl.php:6875
-#: gourl.php:7147
+#: gourl.php:514 gourl.php:517 gourl.php:1689 gourl.php:2207 gourl.php:2458
+#: gourl.php:3287 gourl.php:4396 gourl.php:5024 gourl.php:7021 gourl.php:7259
+#: gourl.php:7531
 msgid "USD"
 msgstr "USD"
 
-#: gourl.php:438
+#: gourl.php:537
 #, php-format
 msgid "%s  paid products"
 msgstr "%s платных продукта"
 
-#: gourl.php:439 gourl.php:442 gourl.php:445 gourl.php:448 gourl.php:466
-#: gourl.php:471 gourl.php:474 gourl.php:4673 gourl.php:4674 gourl.php:4675
+#: gourl.php:538 gourl.php:541 gourl.php:544 gourl.php:547 gourl.php:565
+#: gourl.php:570 gourl.php:573 gourl.php:5021 gourl.php:5022 gourl.php:5023
 msgid "payments"
 msgstr "платежей"
 
-#: gourl.php:441
+#: gourl.php:540
 #, php-format
 msgid "%s  paid files"
 msgstr "%s платных файлов"
 
-#: gourl.php:444
+#: gourl.php:543
 #, php-format
 msgid "%s  premium users"
 msgstr "%s премиум пользователей"
 
-#: gourl.php:470
+#: gourl.php:569
 msgid "Other Plugins with GoUrl"
 msgstr "Другие плагины с GoUrl"
 
-#: gourl.php:473
+#: gourl.php:572
 msgid "Unrecognised Payments"
 msgstr "Нераспознанные платежи"
 
-#: gourl.php:476 gourl.php:4673
+#: gourl.php:575 gourl.php:5021
 msgid "Total Received"
 msgstr "Всего получено"
 
-#: gourl.php:476
+#: gourl.php:575
 #, php-format
 msgid "%s payments"
 msgstr "%s платежей"
 
-#: gourl.php:477
+#: gourl.php:576
 msgid "Recent Payment"
 msgstr "Последний платёж"
 
-#: gourl.php:495
+#: gourl.php:594
 msgid "GoUrl Live Currency Rates"
 msgstr "GoUrl Курсы Валют"
 
-#: gourl.php:506
+#: gourl.php:605
 msgid "What Makes Us Unique"
 msgstr "Что делает нас уникальными"
 
-#: gourl.php:510
+#: gourl.php:609
 msgid "Example"
 msgstr "Пример"
 
-#: gourl.php:512
+#: gourl.php:611
 #, php-format
 msgid "100%% Free Open Source on <a target='_blank' href='%s'>Github.com</a>"
 msgstr ""
 "100%% бесплатный плагин с открытым исходным кодом на <a target='_blank' "
 "href='%s'>Github.com</a>"
 
-#: gourl.php:513
+#: gourl.php:612
 #, php-format
 msgid ""
 "No Monthly Fee, Transaction Fee from 0%%. Set your own prices in USD, <a "
@@ -132,7 +132,7 @@ msgstr ""
 "Нет ежемесячной абонентской платы, Транзакции комиссия от 0%%. Используйте "
 "цены в долларах, <a href='%s'>рублях, евро ... (100 валют)</a>"
 
-#: gourl.php:514
+#: gourl.php:613
 msgid ""
 "No ID Required, No Bank Account Needed. Global, Anonymous, Secure, No "
 "Chargebacks, Zero Risk"
@@ -140,7 +140,7 @@ msgstr ""
 "Не требуется ID, не нужен банковский счёт. Глобально, анонимно, безопасно, "
 "нет возвратов, нет риска"
 
-#: gourl.php:515
+#: gourl.php:614
 #, php-format
 msgid ""
 "Get payments straight to your bitcoin/altcoin wallets and convert to <a "
@@ -150,7 +150,7 @@ msgstr ""
 "<a target='_blank' href='%s'>USD/EUR/RUB</a> позже. Всё в автоматическом "
 "режиме"
 
-#: gourl.php:516
+#: gourl.php:615
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-Download</a> - simple solution for your "
@@ -160,7 +160,7 @@ msgstr ""
 "для ваших <b>незарегистрированных</b> посетителей: зарабатывайте на "
 "скачивании файлов"
 
-#: gourl.php:517
+#: gourl.php:616
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-View/Page</a> - for your <b>unregistered</b> visitors: "
@@ -170,7 +170,7 @@ msgstr ""
 "<b>незарегистрированных</b> посетителей: предложите платный доступ к вашему "
 "премиум контенту/видео"
 
-#: gourl.php:518
+#: gourl.php:617
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: "
@@ -180,7 +180,7 @@ msgstr ""
 "<b>зарегистрированных пользователей</b>: предложите платный доступ к вашему "
 "премиум-контенту, настраиваемые <a href='%s'>действия</a>"
 
-#: gourl.php:519
+#: gourl.php:618
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-Product</a> - advanced solution for your <b>registered "
@@ -191,7 +191,7 @@ msgstr ""
 "ваших <b>зарегистрированных пользователей</b>: продавайте любые товары на "
 "сайте, отправка подтверждений покупателю по электронной почте, и т.д."
 
-#: gourl.php:520
+#: gourl.php:619
 msgid ""
 "<a href='#addon'>Working with third-party plugins</a> - good support for "
 "third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)"
@@ -199,15 +199,21 @@ msgstr ""
 "<a href='#addon'>Поддержка других плагинов</a> - хорошая поддержка сторонних "
 "плагинов (WoCommerce, Jigoshop, bbPress, AppThemes, и т.д.)"
 
-#: gourl.php:521
+#: gourl.php:620
+#, fuzzy
+#| msgid ""
+#| "Support payments in Bitcoin, Bitcoin Cash, Litecoin, Dash, Dogecoin, "
+#| "Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, "
+#| "MonetaryUnit"
 msgid ""
 "Support payments in Bitcoin, Bitcoin Cash, Litecoin, Dash, Dogecoin, "
-"Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit"
+"Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, "
+"UniversalCurrency, MonetaryUnit"
 msgstr ""
 "Поддержка платежей в Биткоинах, Bitcoin Cash, Litecoin, Dash, Dogecoin, "
 "Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit"
 
-#: gourl.php:522
+#: gourl.php:621
 msgid ""
 "<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io "
 "account and your Website. If GoUrl attempts to deliver a payment "
@@ -221,7 +227,7 @@ msgstr ""
 "сохраняется в очереди и доставляется на ваш веб-сайт, когда он станет "
 "доступен (повторно связь проверяется с вашим веб-сайтом каждый час)"
 
-#: gourl.php:523
+#: gourl.php:622
 #, php-format
 msgid ""
 "Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> "
@@ -230,43 +236,43 @@ msgstr ""
 "Бесплатная <a href='%s'>поддержка плагина</a> и <a href='#addon'>бесплатные "
 "дополнения</a> для вас"
 
-#: gourl.php:531
+#: gourl.php:630
 msgid "Free Bitcoin Gateway Add-ons"
 msgstr "Бесплатные дополнения для биткоин шлюза"
 
-#: gourl.php:532
+#: gourl.php:631
 msgid "The following Add-ons extend the functionality of GoUrl -"
 msgstr "Следующие дополнения расширяют функциональные возможности GoUrl -"
 
-#: gourl.php:533
+#: gourl.php:632
 msgid "All Add-ons on Wordpress.prg"
 msgstr "Все дополнения на Wordpress.prg"
 
-#: gourl.php:534
+#: gourl.php:633
 msgid "View on 'Add Plugins' Page"
 msgstr "Просмотр на 'Плагин' странице"
 
-#: gourl.php:538
+#: gourl.php:637
 msgid "Bitcoin/Altcoin Gateway"
 msgstr "Bitcoin/Altcoin шлюз"
 
-#: gourl.php:538
+#: gourl.php:637
 msgid "Description"
 msgstr "Описание"
 
-#: gourl.php:538
+#: gourl.php:637
 msgid "Homepage"
 msgstr "Страница"
 
-#: gourl.php:538
+#: gourl.php:637
 msgid "Wordpress.org"
 msgstr "WordPress.org"
 
-#: gourl.php:538
+#: gourl.php:637
 msgid "Installation pages"
 msgstr "Установка"
 
-#: gourl.php:539
+#: gourl.php:638
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for wordpress E-Commerce - "
@@ -275,36 +281,60 @@ msgstr ""
 "Предоставляет GoUrl Биткоин/Альткоин платежный шлюз для wordpress "
 "электронной коммерции - <a target='_blank' href='%s'>WooCommerce 2.1 +</a>"
 
-#: gourl.php:539 gourl.php:540 gourl.php:541 gourl.php:542 gourl.php:543
-#: gourl.php:544 gourl.php:545 gourl.php:546 gourl.php:547 gourl.php:553
+#: gourl.php:638 gourl.php:639 gourl.php:640 gourl.php:641 gourl.php:642
+#: gourl.php:643 gourl.php:644 gourl.php:645 gourl.php:646 gourl.php:647
+#: gourl.php:653
 msgid "Plugin Homepage"
 msgstr "Домашняя страница"
 
-#: gourl.php:539 gourl.php:540 gourl.php:541 gourl.php:542 gourl.php:543
-#: gourl.php:544 gourl.php:545 gourl.php:546 gourl.php:547
+#: gourl.php:638 gourl.php:639 gourl.php:640 gourl.php:641 gourl.php:642
+#: gourl.php:643 gourl.php:644 gourl.php:645 gourl.php:646 gourl.php:647
 msgid "Screenshots"
 msgstr "Скриншоты"
 
-#: gourl.php:539 gourl.php:540 gourl.php:541 gourl.php:542 gourl.php:543
-#: gourl.php:544 gourl.php:545 gourl.php:546 gourl.php:547 gourl.php:554
+#: gourl.php:638 gourl.php:639 gourl.php:640 gourl.php:641 gourl.php:642
+#: gourl.php:643 gourl.php:644 gourl.php:645 gourl.php:646 gourl.php:647
+#: gourl.php:654
 msgid "Wordpress Page"
 msgstr "WordPress страница"
 
-#: gourl.php:539 gourl.php:540 gourl.php:541 gourl.php:542 gourl.php:543
-#: gourl.php:544 gourl.php:545 gourl.php:546 gourl.php:547 gourl.php:555
+#: gourl.php:638 gourl.php:639 gourl.php:640 gourl.php:641 gourl.php:642
+#: gourl.php:643 gourl.php:644 gourl.php:645 gourl.php:646 gourl.php:647
+#: gourl.php:655
 msgid "Open Source"
 msgstr "Открытый источник"
 
-#: gourl.php:539 gourl.php:540 gourl.php:541 gourl.php:542 gourl.php:543
-#: gourl.php:544 gourl.php:545 gourl.php:546 gourl.php:547 gourl.php:556
+#: gourl.php:638 gourl.php:640 gourl.php:641 gourl.php:642 gourl.php:643
+#: gourl.php:644 gourl.php:645 gourl.php:646 gourl.php:647 gourl.php:656
 msgid "Install Now"
 msgstr "Установить"
 
-#: gourl.php:539
+#: gourl.php:638
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: gourl.php:540
+#: gourl.php:639
+#, php-format
+msgid ""
+"Provides a GoUrl Bitcoin/Altcoin Payment Gateway for- <a target='_blank' "
+"href='%s'>WooCommerce Subscriptions</a><br><br>NOTE: WOOCOMMERCE "
+"SUBSCRIPTIONS PLUGIN IS FREE OPEN SOURCE, DO NOT PAY $199!<br>Free plugin "
+"download from <a target='_blank' href='%s'>Github Plugin Repository</a>"
+msgstr ""
+
+#: gourl.php:639
+#, fuzzy
+#| msgid "Install Now"
+msgid "GoUrl Install Now"
+msgstr "Установить"
+
+#: gourl.php:639
+#, fuzzy
+#| msgid "Description"
+msgid "Woo Subscriptions"
+msgstr "Описание"
+
+#: gourl.php:640
 #, php-format
 msgid ""
 "Bitcoin/Altcoin & Paypal Donations in Wordpress. Provides a GoUrl Bitcoin/"
@@ -317,11 +347,11 @@ msgstr ""
 "простой в использовании плагин  для принятия пожертвований в биткоинах, "
 "альткоинах, paypal, authorize.net, stripe, paymill прямо на вашем сайте."
 
-#: gourl.php:540
+#: gourl.php:640
 msgid "Give"
 msgstr "Give"
 
-#: gourl.php:541
+#: gourl.php:641
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' "
@@ -332,11 +362,11 @@ msgstr ""
 "href='%s'>Easy Digital Downloads 2.4+</a> - продажа цифровых файлов / "
 "загрузок через WordPress."
 
-#: gourl.php:541
+#: gourl.php:641
 msgid "EDD"
 msgstr "EDD"
 
-#: gourl.php:542
+#: gourl.php:642
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for advanced wordpress "
@@ -347,11 +377,11 @@ msgstr ""
 "плтаное членство - <a target='_blank' href='%s'>Paid Memberships Pro 1.8.4+</"
 "a>"
 
-#: gourl.php:542
+#: gourl.php:642
 msgid "PaidMembPro"
 msgstr "PaidMembPro"
 
-#: gourl.php:543
+#: gourl.php:643
 #, php-format
 msgid ""
 "This addon will add Premium Membership and Bitcoin payment gateway to <a "
@@ -374,11 +404,11 @@ msgstr ""
 "вопросы (создать новую премиум тему в bbPress), и только платные премиум "
 "пользователи будут видеть ваши ответы и т.д."
 
-#: gourl.php:543
+#: gourl.php:643
 msgid "bbPress"
 msgstr "bbPress"
 
-#: gourl.php:544
+#: gourl.php:644
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway and Escrow for all <a "
@@ -390,11 +420,11 @@ msgstr ""
 "объявлений, Vantage, JobRoller, Clipper, Taskerr, HireBee, Ideas, Quality "
 "Control и т.д."
 
-#: gourl.php:544
+#: gourl.php:644
 msgid "AppThemes"
 msgstr "AppThemes"
 
-#: gourl.php:545
+#: gourl.php:645
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' "
@@ -403,11 +433,11 @@ msgstr ""
 "Предоставляет GoUrl Биткоин/Альткоин платежный шлюз для <a target='_blank' "
 "href='%s'>Jigoshop 1.12 +</a>"
 
-#: gourl.php:545
+#: gourl.php:645
 msgid "Jigoshop"
 msgstr "Jigoshop"
 
-#: gourl.php:546
+#: gourl.php:646
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' "
@@ -416,11 +446,11 @@ msgstr ""
 "Предоставляет GoUrl Биткоин/Альткоин платежный шлюз для <a target='_blank' "
 "href='%s'>WP eCommerce 3.8.10+</a>"
 
-#: gourl.php:546
+#: gourl.php:646
 msgid "WP eCommerce"
 msgstr "WP eCommerce"
 
-#: gourl.php:547
+#: gourl.php:647
 #, php-format
 msgid ""
 "Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' "
@@ -429,19 +459,19 @@ msgstr ""
 "Предоставляет GoUrl Биткоин/Альткоин платежный шлюз для <a target='_blank' "
 "href='%s'>MarketPress 2.9+</a>"
 
-#: gourl.php:547
+#: gourl.php:647
 msgid "MarketPress"
 msgstr "MarketPress"
 
-#: gourl.php:547
+#: gourl.php:647
 msgid "Important Notes"
 msgstr "Важные замечания"
 
-#: gourl.php:548
+#: gourl.php:648
 msgid "Supports Bitcoin/Altcoin Payments in Any Other Wordpress Plugins"
 msgstr "Поддержка биткоин/альткоин платежей в любых других плагинах wordpress"
 
-#: gourl.php:549
+#: gourl.php:649
 #, php-format
 msgid ""
 "Other wordpress plugin developers can easily integrate Bitcoin payments to "
@@ -463,11 +493,11 @@ msgstr ""
 "биткоин / лайткоин / dogecoin / и т.д. платежи будут автоматически "
 "использоваться в их плагинах. Это просто!"
 
-#: gourl.php:551
+#: gourl.php:651
 msgid "Webmaster Spelling Notifications Plugin"
 msgstr "Уведомление об ошибках на сайте для веб-мастеров (плагин)"
 
-#: gourl.php:551
+#: gourl.php:651
 #, php-format
 msgid ""
 "Plugin allows site visitors to send reports to the webmaster/owner about any "
@@ -478,11 +508,11 @@ msgstr ""
 "любых орфографических или грамматических ошибках. Проверка орфографии на веб-"
 "сайте. <a href='%s'>Live Демо</a>"
 
-#: gourl.php:565
+#: gourl.php:665
 msgid "GoUrl Instruction"
 msgstr "GoUrl Инструкция"
 
-#: gourl.php:568
+#: gourl.php:668
 #, php-format
 msgid ""
 "Free <a target='_blank' href='%s'>Register</a> or <a target='_blank' "
@@ -492,7 +522,7 @@ msgstr ""
 "target='_blank' href='%s'>войдите</a> на GoUrl.io - глобальный биткоин "
 "платежный шлюз"
 
-#: gourl.php:569
+#: gourl.php:669
 #, php-format
 msgid ""
 "Create <a target='_blank' href='%s'>Payment Box</a> Records for all coin "
@@ -501,7 +531,7 @@ msgstr ""
 "Создайте <a target='_blank' href='%s'>Payment Box</a> записи для всех типов "
 "монет, которые вы будете принимать на вашем сайте"
 
-#: gourl.php:570
+#: gourl.php:670
 #, php-format
 msgid ""
 "You will need to place <a href='%s'>Callback URL</a> on Gourl.io, please "
@@ -510,7 +540,7 @@ msgstr ""
 "Вам нужно будет добавить <a href='%s'>Callback URL</a> на Gourl.io, "
 "пожалуйста используйте: <b>%s</b>"
 
-#: gourl.php:571
+#: gourl.php:671
 #, php-format
 msgid ""
 "You will get Free GoUrl <a href='%s'>Public/Private keys</a> from new "
@@ -521,11 +551,11 @@ msgstr ""
 "созданного <a target='_blank' href='%s'>payment box</a>, сохраните их на <a "
 "href='%s'>cтранице с настройками</a>"
 
-#: gourl.php:574
+#: gourl.php:674
 msgid "THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!"
 msgstr "ЭТО ВСЁ! ВАШ САЙТ ГОТОВ К ПРИЕМУ БИТКОИНОВ ОНЛАЙН!"
 
-#: gourl.php:576
+#: gourl.php:676
 #, php-format
 msgid ""
 "<b>Testing environment</b>: You can use <a target='_blank' href='%s'>500 "
@@ -535,19 +565,19 @@ msgstr ""
 "бесплатных Speedcoins</a> или <a target='_blank' href='%s'>Dogecoins</a> для "
 "тестирования"
 
-#: gourl.php:584
+#: gourl.php:684
 msgid "Differences between Pay-Per-View and Pay-Per-Membership"
 msgstr "Различия между Pay-Per-View и Pay-Per-Membership"
 
-#: gourl.php:587
+#: gourl.php:687
 msgid "Click to see full size image"
 msgstr "Нажмите, чтобы увидеть полный размер изображения"
 
-#: gourl.php:587
+#: gourl.php:687
 msgid "Add GoUrl Shortcodes to pages. Example"
 msgstr "Добавьте GoUrl Shortcodes на страницы. Пример"
 
-#: gourl.php:592
+#: gourl.php:692
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-View</a> - shortcode <b>[%s]</b> - you can use it for "
@@ -566,7 +596,7 @@ msgstr ""
 "пользователь удаляет файлы cookie браузера, он потеряет свое членство и "
 "новое поле оплаты будет отображаться."
 
-#: gourl.php:593
+#: gourl.php:693
 #, php-format
 msgid ""
 "<a href='%s'>Pay-Per-Membership</a> - shortcode <b>[%s]</b> - similar to pay-"
@@ -582,7 +612,7 @@ msgstr ""
 "выбирать от 1 часа до 1 года по вашему выбору. Вам нужно иметь на веб-сайте "
 "опцию регистрации <a href='%s'>включенной</a>."
 
-#: gourl.php:594
+#: gourl.php:694
 msgid ""
 "You can use <b>custom actions with Pay-Per-Membership</b> on your website "
 "(premium and free webpages).<br>For example, hide ads for premium users, php "
@@ -592,14 +622,14 @@ msgstr ""
 "вашем сайте (для премиум и бесплатных веб-страниц).<br>Например скрыть "
 "рекламные объявления для премиум пользователей, php код ниже -"
 
-#: gourl.php:597
+#: gourl.php:697
 msgid ""
 "You can use <b>custom actions with Pay-Per-View</b> on your website too -"
 msgstr ""
 "Вы можете использовать <b>настраиваемые действия с Pay-Per-View</b> на вашем "
 "сайте также -"
 
-#: gourl.php:600
+#: gourl.php:700
 #, php-format
 msgid ""
 "<b>Pay-Per-Membership</b> integrated with <a href='%s'>bbPress Forum/"
@@ -612,7 +642,7 @@ msgstr ""
 "a> ). Вы можете пометить некоторые темы на вашем bbPress как премиум и может "
 "легко монетизировать их с биткоинами/альткоинами."
 
-#: gourl.php:601
+#: gourl.php:701
 #, php-format
 msgid ""
 "<b>Both solutions</b> - Pay-Per-Membership and Pay-Per-View hide content on "
@@ -626,7 +656,7 @@ msgstr ""
 "Membership также предоставляет режим премиум членства в <a "
 "href='%s'>bbPress</a>."
 
-#: gourl.php:602
+#: gourl.php:702
 msgid ""
 "If a visitor goes to a premium page and have not logged in -<br>Pay-Per-View "
 "will show a payment box and accept payments from the unregistered visitor."
@@ -640,7 +670,7 @@ msgstr ""
 "пользователь должен войти/зарегистрироваться на вашем сайте сначала и после "
 "платежное окно будет ему (зарегистрированному пользователю)."
 
-#: gourl.php:606
+#: gourl.php:706
 #, php-format
 msgid ""
 "For example, you might offer paid unlimited access to your 50 website "
@@ -672,7 +702,7 @@ msgstr ""
 "объявления</a> для бесплатных пользователей на других бесплатных страницах "
 "вашего сайта и т.д."
 
-#: gourl.php:608
+#: gourl.php:708
 #, php-format
 msgid ""
 "<b>Notes:</b><br>- Do not use [%s] and [%s] together on the same page.<br>- "
@@ -683,11 +713,11 @@ msgstr ""
 "странице.<br> - Редакторы сайта / Администраторы будут иметь все время "
 "полный доступ к премиум страницам и видеть оригинальное содержимое страниц"
 
-#: gourl.php:615
+#: gourl.php:715
 msgid "Adding Custom Actions after Payment has been received"
 msgstr "Добавление пользовательских действий после получения оплаты"
 
-#: gourl.php:616
+#: gourl.php:716
 msgid ""
 "Using for Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-"
 "Membership only"
@@ -695,7 +725,7 @@ msgstr ""
 "Используется в Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-"
 "Membership только"
 
-#: gourl.php:617
+#: gourl.php:717
 #, php-format
 msgid ""
 "Optional - You can use additional actions after a payment has been received "
@@ -710,7 +740,7 @@ msgstr ""
 "редактируйте php файл <a href='%s'>gourl_ipn.php</a> в каталоге %s и "
 "добавьте секцию с вашим order_ID в функцию <b>%s</b>."
 
-#: gourl.php:618
+#: gourl.php:718
 msgid ""
 "This function will appear every time when a new payment from any user is "
 "received successfully. Function gets user_ID - user who made payment, "
@@ -723,11 +753,11 @@ msgstr ""
 "страницы редактирования записи Pay-Per-Product, Pay-Per-Download и т.д.) и "
 "платежные детали в виде массива."
 
-#: gourl.php:620 gourl.php:633
+#: gourl.php:720 gourl.php:733
 msgid "Example of PHP code"
 msgstr "Пример PHP кода"
 
-#: gourl.php:621
+#: gourl.php:721
 #, php-format
 msgid ""
 "P.S. If you use <a href='#addon'>additional plugins/add-ons</a> with gourl "
@@ -742,11 +772,11 @@ msgstr ""
 "получаемые этой функцией, такие же, как значения получаемые функцией "
 "gourl_successful_payment(), см <a href='%s'>скриншот</a> выше."
 
-#: gourl.php:628
+#: gourl.php:728
 msgid "Bitcoin Payments with Any Other Wordpress Plugins"
 msgstr "Биткоин платежи с любыми другими wordpress плагинами"
 
-#: gourl.php:629
+#: gourl.php:729
 #, php-format
 msgid ""
 "<b>Other wordpress plugin developers can easily integrate Bitcoin payments "
@@ -781,7 +811,7 @@ msgstr ""
 "платежа, пользователь увидит подтверждение на веб-странице с любым wordpress "
 "плагином, что оплата получена (т.е. очень быстро)."
 
-#: gourl.php:630
+#: gourl.php:730
 #, php-format
 msgid ""
 "<b>Beneficial for You and other users.</b> Simply use this GoUrl Bitcoin/"
@@ -805,7 +835,7 @@ msgstr ""
 "альткоин платежи, которые связаны с ними, используя данные из этой общей "
 "таблицы 'Все платежи'."
 
-#: gourl.php:632
+#: gourl.php:732
 msgid ""
 "Example of php code with GoUrl Bitcoin Payment Gateway for other wordpress "
 "plugins -"
@@ -813,7 +843,7 @@ msgstr ""
 "Пример php кода с GoUrl биткоин платежным шлюзом для других wordpress "
 "плагинов -"
 
-#: gourl.php:635
+#: gourl.php:735
 #, php-format
 msgid ""
 "And add custom actions after payment has been received. <a "
@@ -822,16 +852,16 @@ msgstr ""
 "И добавить пользовательские действия после того, как оплата получена. <a "
 "href='%s'>Инструкция по интеграции »</a>"
 
-#: gourl.php:642
+#: gourl.php:742
 msgid "GoUrl Contacts"
 msgstr "GoUrl Контакты"
 
-#: gourl.php:657
+#: gourl.php:758
 #, php-format
 msgid "Please contact us with any questions - %s"
 msgstr "Вы можете задавать нам любые вопросы - %s"
 
-#: gourl.php:659
+#: gourl.php:760
 #, php-format
 msgid ""
 "A great way to get involved in open source is to contribute to the existing "
@@ -849,35 +879,42 @@ msgstr ""
 "кодом для этого бесплатного плагина с открытым кодом <a target='_blank' "
 "href='%s'>здесь</a>"
 
-#: gourl.php:663
+#: gourl.php:764
 msgid "Buttons For Your Website -"
 msgstr "Кнопки для вашего сайта -"
 
-#: gourl.php:674
+#: gourl.php:775
 msgid "Our Project Donation Addresses -"
 msgstr "Нашего проекта адреса для пожертвований -"
 
-#: gourl.php:728
+#: gourl.php:830
 msgid "It is a Paid Download ! Please pay below"
 msgstr "Это платная загрузка ! Пожалуйста оплатите ниже"
 
-#: gourl.php:824
+#: gourl.php:889
+#, php-format
+msgid ""
+"Invalid %s keys md5 hash in file %s. Please delete this file and re-enter "
+"your GoUrl Public/Private Keys"
+msgstr ""
+
+#: gourl.php:926
 msgid "Box Invalid Public Key"
 msgstr "Box неверный Public Key"
 
-#: gourl.php:827
+#: gourl.php:929
 msgid "Box Invalid Private Key"
 msgstr "Box неверный Private Key"
 
-#: gourl.php:829
+#: gourl.php:931
 msgid "Box Private Key  - cannot be empty"
 msgstr "Box Private Key  - не может быть пустым"
 
-#: gourl.php:830
+#: gourl.php:932
 msgid "Box Public Key  - cannot be empty"
 msgstr "Box Public Key  - не может быть пустым"
 
-#: gourl.php:837
+#: gourl.php:939
 #, php-format
 msgid ""
 "You must choose at least one payment method. Please enter your GoUrl Public/"
@@ -886,34 +923,34 @@ msgstr ""
 "Вы должны выбрать, хотя бы один способ оплаты. Пожалуйста, введите ваши "
 "GoUrl Public/Private ключи. <a href='%s'>Инструкция здесь »</a>"
 
-#: gourl.php:839
+#: gourl.php:941
 msgid "Invalid Payment Box Width. Allowed 480..700px"
 msgstr "Неверная ширина Payment Box. Допускается 480..700px"
 
-#: gourl.php:840
+#: gourl.php:942
 msgid "Invalid Payment Box Height. Allowed 200..400px"
 msgstr "Неверная высота Payment Box. Допускается 200..400px"
 
-#: gourl.php:842
+#: gourl.php:944
 msgid "Invalid Records Per Page value. Allowed 5..200"
 msgstr "Неверное значение Records Per Page. Допускается 5..200"
 
-#: gourl.php:844
+#: gourl.php:946
 msgid ""
 "Invalid Popup Message text size. Allowed 15 - 400 characters text length"
 msgstr ""
 "Недопустимый размер текста для всплывающего сообщения. Допускается текст в "
 "15 - 400 символов"
 
-#: gourl.php:846
+#: gourl.php:948
 msgid "Invalid Payment Box Style"
 msgstr "Неверный стиль платежного окна (Payment Box)"
 
-#: gourl.php:847
+#: gourl.php:949
 msgid "Invalid Payment Messages Style"
 msgstr "Неверный стиль сообщений (Payment Messages)"
 
-#: gourl.php:868 gourl.php:6009
+#: gourl.php:970 gourl.php:6397
 #, php-format
 msgid ""
 "Error. Please enable <a target='_blank' href='%s'>CURL extension</a> in PHP. "
@@ -922,7 +959,7 @@ msgstr ""
 "Ошибка. Пожалуйста, включите <a target='_blank' href='%s'>CURL расширение</"
 "a> в PHP. <a target='_blank' href='%s'>Читайте здесь »</a>"
 
-#: gourl.php:869 gourl.php:6010
+#: gourl.php:971 gourl.php:6398
 #, php-format
 msgid ""
 "Error. Please enable <a target='_blank' href='%s'>MySQLi extension</a> in "
@@ -931,32 +968,48 @@ msgstr ""
 "Ошибка. Пожалуйста, включите <a target='_blank' href='%s'>MySQLi расширение</"
 "a> в PHP. <a target='_blank' href='%s'>Читайте здесь »</a>"
 
-#: gourl.php:870 gourl.php:6011
+#: gourl.php:972 gourl.php:6399
 #, php-format
 msgid "Error. You need PHP 5.4.0 (or greater). Current php version: %s"
 msgstr "Ошибка. Вам нужен PHP 5.4.0 (или выше). Текущая версия php: %s"
 
-#: gourl.php:873
+#: gourl.php:975
 #, php-format
 msgid "Error. Cannot write file %s - please make directory %s writable."
 msgstr ""
 "Ошибка. Нельзя создать файл %s - пожалуйста сделайте директорию %s "
 "записываемой."
 
-#: gourl.php:945 gourl.php:1331 gourl.php:2064 gourl.php:2856 gourl.php:3646
-#: gourl.php:3952
+#: gourl.php:1050 gourl.php:1583 gourl.php:2357 gourl.php:3168 gourl.php:3975
+#: gourl.php:4281
 msgid "Please fix errors below:"
 msgstr "Пожалуйста, исправьте ошибки ниже:"
 
-#: gourl.php:946
+#: gourl.php:1051
 msgid "Settings have been updated <strong>successfully</strong>"
 msgstr "Настройки были обновлены <strong>успешно</strong>"
 
-#: gourl.php:952 gourl.php:2072 gourl.php:2864 gourl.php:5249 gourl.php:5250
+#: gourl.php:1056
+msgid ""
+"Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!"
+msgstr ""
+
+#: gourl.php:1063
+msgid "Connection to GoUrl.io Payment Server - Errors found -"
+msgstr ""
+
+#: gourl.php:1064
+#, php-format
+msgid ""
+"Note: As alternative, you can use old <a href='%s'>iFrame Payment Box Type</"
+"a>"
+msgstr ""
+
+#: gourl.php:1075 gourl.php:2365 gourl.php:3176 gourl.php:5580 gourl.php:5581
 msgid "Settings"
 msgstr "Настройки"
 
-#: gourl.php:958
+#: gourl.php:1081
 #, php-format
 msgid ""
 "Simple register on <a target='_blank' href='%s'>GoUrl.io</a> and get your "
@@ -967,11 +1020,11 @@ msgstr ""
 "получите бесплатные Public/Private Payment Box ключи. <a href='%s'>Читать "
 "дальше »</a>"
 
-#: gourl.php:967
+#: gourl.php:1090
 msgid "General Settings"
 msgstr "Основные настройки"
 
-#: gourl.php:972
+#: gourl.php:1095
 #, php-format
 msgid ""
 "If you use multiple websites online, please create separate <a "
@@ -986,7 +1039,7 @@ msgstr ""
 "используйте одни и те же GoUrl Payment Box Public/Private Keys на различных "
 "веб-сайтах."
 
-#: gourl.php:973
+#: gourl.php:1096
 #, php-format
 msgid ""
 "If you want to use plugin in a language other than English, see the page <a "
@@ -997,39 +1050,46 @@ msgstr ""
 "к странице <a href='%s'>Языки и переводы</a>.  Это позволит легко настроить "
 "тексты всех сообщений, видимых вашими пользователями."
 
-#: gourl.php:974
-#, php-format
+#: gourl.php:1097
+#, fuzzy, php-format
+#| msgid ""
+#| "Additional Security - You can make file <a href='%s'>%s</a> - <a "
+#| "target='_blank' href='%s'>readonly</a>. GoUrl Public/Private keys on page "
+#| "below will be not editable anymore (readonly mode)."
 msgid ""
-"Additional Security - You can make file <a href='%s'>%s</a> - <a "
-"target='_blank' href='%s'>readonly</a>. GoUrl Public/Private keys on page "
-"below will be not editable anymore (readonly mode)."
+"<b style='color:red'>ADDITIONAL PAYMENTS SECURITY</b>  - You can make file "
+"<a href='%s'>%s</a> - <a target='_blank' href='%s'>readonly</a>. GoUrl "
+"Public/Private keys on page below will be not editable anymore (readonly "
+"mode). Optional - for full security make <a target='_blank' "
+"href='%s'>readonly</a> gourl main plugin file <a href='%s'>gourl.php</a> "
+"also."
 msgstr ""
 "Дополнительная безопасность - вы можете сделать файл <a href='%s'>%s</a> - "
 "<a target='_blank' href='%s'>только для чтения</a>. GoUrl Public/Private "
 "ключи на странице ниже нельзя будет редактировать (режим readonly)."
 
-#: gourl.php:978 gourl.php:1375 gourl.php:3673 gourl.php:4033
+#: gourl.php:1101 gourl.php:1627 gourl.php:4002 gourl.php:4362
 msgid "Please wait..."
 msgstr "Подождите..."
 
-#: gourl.php:978 gourl.php:2154 gourl.php:2963
+#: gourl.php:1101 gourl.php:2447 gourl.php:3275
 msgid "Save Settings"
 msgstr "Сохранить настройки"
 
-#: gourl.php:979 gourl.php:1377 gourl.php:2158 gourl.php:2968 gourl.php:4037
+#: gourl.php:1102 gourl.php:1629 gourl.php:2451 gourl.php:3280 gourl.php:4366
 msgid "Instruction"
 msgstr "Инструкция"
 
-#: gourl.php:980 gourl.php:1364 gourl.php:2145 gourl.php:2953 gourl.php:3662
-#: gourl.php:4022
+#: gourl.php:1103 gourl.php:1616 gourl.php:2438 gourl.php:3265 gourl.php:3991
+#: gourl.php:4351
 msgid "Reload Page"
 msgstr "Обновить"
 
-#: gourl.php:985
+#: gourl.php:1108
 msgid "Your Callback Url"
 msgstr "Ваш Callback Url"
 
-#: gourl.php:986
+#: gourl.php:1109
 #, php-format
 msgid ""
 "IMPORTANT - Please place this url in field <a href='%s'>Callback URL</a> for "
@@ -1039,26 +1099,99 @@ msgstr ""
 "URL</a> для всех ваших Payment Box на gourl.io. <a href='%s'>Смотрите "
 "скриншот</a>"
 
-#: gourl.php:995
+#: gourl.php:1114
+#, fuzzy
+#| msgid "Payment Box Height"
+msgid "Payment Box Settings"
+msgstr "Payment Box высота"
+
+#: gourl.php:1115
+msgid "Click to Test Connection to GoUrl.io Server"
+msgstr ""
+
+#: gourl.php:1119
+#, fuzzy
+#| msgid "PaymentBox Style:"
+msgid "PaymentBox Type"
+msgstr "PaymentBox стиль:"
+
+#: gourl.php:1121
+msgid "White Label, Mobile Friendly"
+msgstr ""
+
+#: gourl.php:1122
+msgid "iFrame (Legacy)"
+msgstr ""
+
+#: gourl.php:1122
+#, fuzzy
+#| msgid "Screenshots"
+msgid "screenshots"
+msgstr "Скриншоты"
+
+#: gourl.php:1123
+msgid ""
+"White Label Payment Box - user browser receive payment data from your "
+"website only (does not even know about gourl.io); your website receive data "
+"from gourl.io (curl method). It use Bootstrap4. You can use your own payment "
+"logo"
+msgstr ""
+
+#: gourl.php:1123
+msgid "White Label Example"
+msgstr ""
+
+#: gourl.php:1124
+msgid ""
+"iFrame - display gourl.io payment box in iFrame on your webpage. Not mobile "
+"friendly."
+msgstr ""
+
+#: gourl.php:1124
+#, fuzzy
+#| msgid "Example"
+msgid "iFrame Example"
+msgstr "Пример"
+
+#: gourl.php:1128
+#, fuzzy
+#| msgid "Payment Box"
+msgid "Payment Box Theme"
+msgstr "Payment Box"
+
+#: gourl.php:1145
+#, fuzzy
+#| msgid "Video Preview 3"
+msgid "Live Preview &#187;"
+msgstr "Предпросмотр видео 3"
+
+#: gourl.php:1146
+#, php-format
+msgid ""
+"Payment Box color theme (<a href='%s'>white</a> / <a href='%s'>black</a> / "
+"<a href='%s'>sketchy</a> / blue / red / etc)"
+msgstr ""
+
+#: gourl.php:1158
 msgid "Payments"
 msgstr "Платежи"
 
-#: gourl.php:997
+#: gourl.php:1160
 #, php-format
 msgid "Box (%s) Public Key"
 msgstr "Box (%s) Публичный ключ"
 
-#: gourl.php:998
+#: gourl.php:1161
 #, php-format
 msgid "Box (%s) Private Key"
 msgstr "Box (%s) Приватный ключ"
 
-#: gourl.php:999
+#: gourl.php:1162
 #, php-format
 msgid "%s (%s) payments are active!"
 msgstr "%s (%s) активированы платежи!"
 
-#: gourl.php:1000
+#: gourl.php:1163
 #, php-format
 msgid ""
 "<b>That is not a %s wallet private key!</b> &#160; GoUrl %s Box Private/"
@@ -1077,7 +1210,7 @@ msgstr ""
 "здесь полученные бесплатные GoUrl %s  Box Public/Private Keys. Оставьте поле "
 "пустым, если вы не принимаете платежи в %s"
 
-#: gourl.php:1001
+#: gourl.php:1164
 #, php-format
 msgid ""
 "You cannot modify this values because security hash file <a href='%s'>%s</a> "
@@ -1086,19 +1219,21 @@ msgstr ""
 "Эти значения нельзя изменить, поскольку безопасности хэш файл <a href='%s'>"
 "%s</a> доступен только для чтения!"
 
-#: gourl.php:1005
-msgid "Payment Box"
-msgstr "Payment Box"
+#: gourl.php:1178
+#, fuzzy
+#| msgid "Payment Box Style"
+msgid "Payment Box (iFrame type only)"
+msgstr "Payment Box Стиль"
 
-#: gourl.php:1008
+#: gourl.php:1181
 msgid "Payment Box Width"
 msgstr "Payment Box ширина"
 
-#: gourl.php:1009 gourl.php:1013 gourl.php:1533 gourl.php:6665
+#: gourl.php:1182 gourl.php:1186 gourl.php:1788 gourl.php:7059
 msgid "px"
 msgstr "px"
 
-#: gourl.php:1009
+#: gourl.php:1182
 #, php-format
 msgid ""
 "Cryptocoin Payment Box Width, default 540px. <a href='%s'>See screenshot "
@@ -1107,35 +1242,35 @@ msgstr ""
 "Cryptocoin Payment Box ширина, по умолчанию 540px. <a href='%s'>Смотрите "
 "скриншот »</a>"
 
-#: gourl.php:1012
+#: gourl.php:1185
 msgid "Payment Box Height"
 msgstr "Payment Box высота"
 
-#: gourl.php:1013
+#: gourl.php:1186
 msgid "Cryptocoin Payment Box Height, default 230px"
 msgstr "Cryptocoin Payment Box высота, по умолчанию 230px"
 
-#: gourl.php:1016
+#: gourl.php:1189
 msgid "Payment Box Style"
 msgstr "Payment Box Стиль"
 
-#: gourl.php:1018
+#: gourl.php:1191
 msgid "Box with Default Shadow"
 msgstr "Box с тенью по умолчанию"
 
-#: gourl.php:1019
+#: gourl.php:1192
 msgid "Box with light Border"
 msgstr "Box with light Border"
 
-#: gourl.php:1020
+#: gourl.php:1193
 msgid "Box without Border"
 msgstr "Box without Border"
 
-#: gourl.php:1022 gourl.php:1032
+#: gourl.php:1195 gourl.php:1205
 msgid "Custom Style"
 msgstr "Произвольный стиль"
 
-#: gourl.php:1023
+#: gourl.php:1196
 #, php-format
 msgid ""
 "Payment Box Visual CSS Style. <a href='%s'>See screenshot &#187;</"
@@ -1146,23 +1281,23 @@ msgstr ""
 "a><br>Пример: border-radius:15px;border:1px solid #eee;padding:3px 6px;"
 "margin:10px"
 
-#: gourl.php:1026
+#: gourl.php:1199
 msgid "Payment Messages Style"
 msgstr "Payment Messages стиль"
 
-#: gourl.php:1028
+#: gourl.php:1201
 msgid "Messages with Default Shadow"
 msgstr "Сообщения с тенью по умолчанию"
 
-#: gourl.php:1029
+#: gourl.php:1202
 msgid "Messages with light Border"
 msgstr "Messages with light Border"
 
-#: gourl.php:1030
+#: gourl.php:1203
 msgid "Messages without Border"
 msgstr "Messages without Border"
 
-#: gourl.php:1033
+#: gourl.php:1206
 #, php-format
 msgid ""
 "Payment Notifications CSS Style (when user click on payment button which is "
@@ -1175,23 +1310,23 @@ msgstr ""
 "»</a><br>Пример: display:inline-block;max-width:580px;padding:15px 20px;box-"
 "shadow:0 0 3px #aaa;margin:7px;line-height:25px;"
 
-#: gourl.php:1036
+#: gourl.php:1209
 msgid "Images for Payment Box"
 msgstr "Изображения для Payment Box"
 
-#: gourl.php:1039
+#: gourl.php:1212
 msgid "1. Pay-Per-Product"
 msgstr "1. Pay-Per-Product"
 
-#: gourl.php:1041
+#: gourl.php:1214
 msgid "Display Website Login Form"
 msgstr "Показывать Форму входа на сайт"
 
-#: gourl.php:1042
+#: gourl.php:1215
 msgid "Display Payment Login Image"
 msgstr "Показывать изображение Payment Login"
 
-#: gourl.php:1043
+#: gourl.php:1216
 #, php-format
 msgid ""
 "Unregistered visitors will see that on your webpages with <a href='%s'>Pay-"
@@ -1200,15 +1335,15 @@ msgstr ""
 "Незарегистрированные посетители будут видеть это, на ваших веб-страниц с <a "
 "href='%s'>Pay-Per-Product</a> продуктами"
 
-#: gourl.php:1051
+#: gourl.php:1224
 msgid "Default "
 msgstr "По умолчанию"
 
-#: gourl.php:1053
+#: gourl.php:1226
 msgid "Custom Image"
 msgstr "Произвольное изображение"
 
-#: gourl.php:1056
+#: gourl.php:1229
 msgid ""
 "This image will be displayed if your site requires registration for "
 "unregistered buyer before paying for a product/service."
@@ -1216,7 +1351,7 @@ msgstr ""
 "Это изображение будет отображаться, если ваш сайт требует регистрации для "
 "незарегистрированных покупателей перед оплатой продукта/услуги."
 
-#: gourl.php:1057
+#: gourl.php:1230
 msgid ""
 "This image will be displayed if only registered users can buy/download your "
 "paid files."
@@ -1224,32 +1359,32 @@ msgstr ""
 "Это изображение будет отображаться, если только зарегистрированные "
 "пользователи могут купить/скачать платные файлы."
 
-#: gourl.php:1059
+#: gourl.php:1232
 msgid "Allowed images: JPG, GIF, PNG."
 msgstr "Допускаются изображения: JPG, GIF, PNG."
 
-#: gourl.php:1064
+#: gourl.php:1237
 msgid "Other"
 msgstr "Прочее"
 
-#: gourl.php:1067
+#: gourl.php:1240
 msgid "Records Per Page"
 msgstr "Кол-во записей на странице"
 
-#: gourl.php:1068 gourl.php:3610
+#: gourl.php:1241 gourl.php:3939
 msgid "records"
 msgstr "записей"
 
-#: gourl.php:1068
+#: gourl.php:1241
 msgid "Set number of records per page in tables 'All Payments' and 'All Files'"
 msgstr ""
 "Задать количество записей на странице в таблицах «Все платежи» и «Все файлы»"
 
-#: gourl.php:1071
+#: gourl.php:1244
 msgid "Popup Message"
 msgstr "Всплывающее Сообщение"
 
-#: gourl.php:1072
+#: gourl.php:1245
 msgid ""
 "Pay-Per-Download: A pop-up message that a visitor will see when trying to "
 "download a paid file without payment<br>Default text: It is a Paid "
@@ -1259,11 +1394,11 @@ msgstr ""
 "посетитель будет видеть при попытке скачать платный файл без произведения "
 "оплаты<br>Текст по умолчанию: Это платная загрузка! Пожалуйста оплатите ниже"
 
-#: gourl.php:1075
+#: gourl.php:1248
 msgid "Additional Fields"
 msgstr "Дополнительные поля"
 
-#: gourl.php:1076
+#: gourl.php:1249
 msgid ""
 "Pay-Per-Download: If box is checked, display on 'All Payments' statistics "
 "page two additional columns 'File Downloaded By User?' and 'File Downloaded "
@@ -1274,40 +1409,76 @@ msgstr ""
 "файла» в таблице «Все платежи». Используйте это, если вы продаете файлы "
 "онлайн"
 
-#: gourl.php:1079
+#: gourl.php:1252
 msgid "Reverse Bitcoin Chart"
 msgstr "Обратный Bitcoin график"
 
-#: gourl.php:1080
+#: gourl.php:1253
 #, php-format
 msgid "<a href='%s'>Bitcoin Chart</a>: Reverse the X axis of time"
 msgstr "<a href='%s'>Bitcoin график</a>: обратное направление оси X (времени)"
 
-#: gourl.php:1193
+#: gourl.php:1348
+#, php-format
+msgid ""
+"GoUrl.io server (<a target='_blank' href='%s'>Raw Data Url</a>) return "
+"error: %s"
+msgstr ""
+
+#: gourl.php:1349
+#, php-format
+msgid ""
+"Unable to connect to Gourl.io server through CURL - <a target='_blank' "
+"href='%s'>Raw Data Url</a><br>Check your network connection / add GoUrl.io "
+"IPs in <a target='_blank' href='%s'>whitelist</a><br>Your website received "
+"data: %s"
+msgstr ""
+
+#: gourl.php:1352
+#, php-format
+msgid ""
+"Connection to GoUrl.io Server is OK! &#160; <a target=\"_blank\" href=\"%s"
+"\">Raw Data Url &#187;</a> &#160; &#160; Payment Box <a href=\"%s\">Preview "
+"&#187;</a>"
+msgstr ""
+
+#: gourl.php:1421
 msgid "Invalid File ID, Please reload page"
 msgstr "Недопустимый File ID, пожалуйста перезагрузите страницу"
 
-#: gourl.php:1198
-msgid "Your File - cannot be empty"
-msgstr "Ваш файл - не может быть пустым"
+#: gourl.php:1444
+#, fuzzy, php-format
+#| msgid "File does not exist on the server"
+msgid "File not exists on URL - %s"
+msgstr "Файл не существует на сервере"
 
-#: gourl.php:1204
+#: gourl.php:1447
+msgid ""
+"Your Local File &nbsp;/&nbsp; Remote File URL - please use one of them only "
+"(not both)"
+msgstr ""
+
+#: gourl.php:1448
+msgid "Your Local File &nbsp;OR&nbsp; Remote File URL - cannot be empty"
+msgstr ""
+
+#: gourl.php:1454
 msgid "Featured Image - select image"
 msgstr "Изображение - выберите фото"
 
-#: gourl.php:1207
+#: gourl.php:1457
 msgid "Title - cannot be empty"
 msgstr "Название - поле не может быть пустым"
 
-#: gourl.php:1208
+#: gourl.php:1458
 msgid "Title - Max size 100 symbols"
 msgstr "Название - Макс. размер 100 символов"
 
-#: gourl.php:1212 gourl.php:2010 gourl.php:2796 gourl.php:3809
+#: gourl.php:1462 gourl.php:2303 gourl.php:3108 gourl.php:4138
 msgid "Price - cannot be empty"
 msgstr "Цена - поле не может быть пустым"
 
-#: gourl.php:1213 gourl.php:2011 gourl.php:2797 gourl.php:3810
+#: gourl.php:1463 gourl.php:2304 gourl.php:3109 gourl.php:4139
 msgid ""
 "Price - use price in USD or in Cryptocoins. You cannot place values in two "
 "boxes together"
@@ -1315,12 +1486,12 @@ msgstr ""
 "Цена - используйте цену в USD или в криптовалюте. Вы не можете использовать "
 "две цены вместе"
 
-#: gourl.php:1214 gourl.php:2012 gourl.php:2798 gourl.php:3811
+#: gourl.php:1464 gourl.php:2305 gourl.php:3110 gourl.php:4140
 #, php-format
 msgid "Price - %s USD - invalid value. Min value: 0.01 USD"
 msgstr "Цена - %s USD - недопустимое значение. Минимальное значение: 0.01 USD"
 
-#: gourl.php:1215 gourl.php:2013 gourl.php:2799 gourl.php:3812
+#: gourl.php:1465 gourl.php:2306 gourl.php:3111 gourl.php:4141
 #, php-format
 msgid ""
 "Price - %s %s - invalid value. Min value: 0.0001 %s. Allow 4 digits max "
@@ -1329,40 +1500,40 @@ msgstr ""
 "Цена - %s %s - недопустимое значение. Мин. значение: 0.0001 %s. Разрешены 4 "
 "цифры после плавающей точки"
 
-#: gourl.php:1217 gourl.php:3814
+#: gourl.php:1467 gourl.php:4143
 #, php-format
 msgid "Price label '%s' - invalid value"
 msgstr "Метка цена '%s' - недопустимое значение"
 
-#: gourl.php:1219 gourl.php:3816
+#: gourl.php:1469 gourl.php:4145
 msgid "Purchase Limit - invalid value"
 msgstr "Предел покупок - недопустимое значение"
 
-#: gourl.php:1221 gourl.php:3818
+#: gourl.php:1471 gourl.php:4147
 msgid "Field 'Expiry Period' - cannot be empty"
 msgstr "Поле «Срок действия» - не может быть пустым"
 
-#: gourl.php:1222 gourl.php:2015 gourl.php:3819
+#: gourl.php:1472 gourl.php:2308 gourl.php:4148
 msgid "Field 'Expiry Period' - invalid value"
 msgstr "Поле «Срок действия» - недопустимое значение"
 
-#: gourl.php:1224
+#: gourl.php:1474
 msgid "Store Visitor IDs - invalid value"
 msgstr "Хранить Посетителя ID - недопустимое значение"
 
-#: gourl.php:1226 gourl.php:2017 gourl.php:2803 gourl.php:3821
+#: gourl.php:1476 gourl.php:2310 gourl.php:3115 gourl.php:4150
 msgid "PaymentBox Language - invalid value"
 msgstr "PaymentBox язык - недопустимое значение"
 
-#: gourl.php:1228 gourl.php:2019 gourl.php:2805 gourl.php:3823
+#: gourl.php:1478 gourl.php:2312 gourl.php:3117 gourl.php:4152
 msgid "Field 'PaymentBox Coin' - cannot be empty"
 msgstr "Поле «PaymentBox монета» - не может быть пустым"
 
-#: gourl.php:1229 gourl.php:2020 gourl.php:2806 gourl.php:3824
+#: gourl.php:1479 gourl.php:2313 gourl.php:3118 gourl.php:4153
 msgid "Field 'PaymentBox Coin' - invalid value"
 msgstr "Поле «PaymentBox монета» - недопустимое значение"
 
-#: gourl.php:1230 gourl.php:3825
+#: gourl.php:1480 gourl.php:4154
 #, php-format
 msgid ""
 "Field 'PaymentBox Coin' - payments in %s not available. Please re-save record"
@@ -1370,7 +1541,7 @@ msgstr ""
 "Поле «PaymentBox монета» - платежи в %s не доступны. Пожалуйста, повторно "
 "сохраните запись"
 
-#: gourl.php:1234 gourl.php:2022 gourl.php:2808 gourl.php:3826
+#: gourl.php:1484 gourl.php:2315 gourl.php:3120 gourl.php:4155
 #, php-format
 msgid ""
 "Field 'PaymentBox Coin' - please select '%s' because you have entered price "
@@ -1379,58 +1550,58 @@ msgstr ""
 "Поле «PaymentBox монета» - Пожалуйста выберите «%s», потому что вы ввели "
 "цену в %s"
 
-#: gourl.php:1239
+#: gourl.php:1489
 msgid "Invalid Image Width. Allowed 1..2,000px"
 msgstr "Недопустимая ширина изображения. Допускается 1..2, 000px"
 
-#: gourl.php:1332 gourl.php:3953
+#: gourl.php:1584 gourl.php:4282
 msgid "Record has been saved <strong>successfully</strong>"
 msgstr "Запись <strong>успешно</strong> сохранена"
 
-#: gourl.php:1339
+#: gourl.php:1591
 msgid "Edit File"
 msgstr "Редактировать файл"
 
-#: gourl.php:1339 gourl.php:1363
+#: gourl.php:1591 gourl.php:1615
 msgid "New File"
 msgstr "Новый файл"
 
-#: gourl.php:1347 gourl.php:2082 gourl.php:2889 gourl.php:3968
+#: gourl.php:1599 gourl.php:2375 gourl.php:3201 gourl.php:4297
 #, php-format
 msgid "Preview Shortcode &#160; &#160; %s"
 msgstr "Предпросмотр шорткод &#160; &#160; %s"
 
-#: gourl.php:1348 gourl.php:2083 gourl.php:2873 gourl.php:2890 gourl.php:3969
+#: gourl.php:1600 gourl.php:2376 gourl.php:3185 gourl.php:3202 gourl.php:4298
 msgid "Close Preview"
 msgstr "Закрыть предпросмотр"
 
-#: gourl.php:1353 gourl.php:1388 gourl.php:2091 gourl.php:2898 gourl.php:4011
-#: gourl.php:4048
+#: gourl.php:1605 gourl.php:1640 gourl.php:2384 gourl.php:3210 gourl.php:4340
+#: gourl.php:4377
 msgid "Shortcode"
 msgstr "Шорткод"
 
-#: gourl.php:1362 gourl.php:4020
+#: gourl.php:1614 gourl.php:4349
 #, php-format
 msgid "Sold %d copies"
 msgstr "Продано %d копий"
 
-#: gourl.php:1365 gourl.php:1637
+#: gourl.php:1617 gourl.php:1892
 msgid "All Paid Files"
 msgstr "Все платные файлы"
 
-#: gourl.php:1375 gourl.php:3673 gourl.php:4033
+#: gourl.php:1627 gourl.php:4002 gourl.php:4362
 msgid "Save Record"
 msgstr "Сохранить запись"
 
-#: gourl.php:1376 gourl.php:4034
+#: gourl.php:1628 gourl.php:4363
 msgid "Show Preview"
 msgstr "Предпросмотр"
 
-#: gourl.php:1385
+#: gourl.php:1637
 msgid "File ID"
 msgstr "ID файла"
 
-#: gourl.php:1389 gourl.php:4049
+#: gourl.php:1641 gourl.php:4378
 #, php-format
 msgid ""
 "Just <a target='_blank' href='%s'>add this shortcode</a> to any your page or "
@@ -1440,41 +1611,41 @@ msgstr ""
 "страницу или пост (в html режиме) и окно крипто оплаты (payment box) будет "
 "отображаться"
 
-#: gourl.php:1393 gourl.php:6695 gourl.php:6929
+#: gourl.php:1645 gourl.php:7089 gourl.php:7313
 msgid "Title"
 msgstr "Заголовок"
 
-#: gourl.php:1396
+#: gourl.php:1648
 msgid "Title / Friendly name for the file. Visitors will see this title"
 msgstr ""
 "Название / дружественное имя файла. Посетители будут видеть это название"
 
-#: gourl.php:1401 gourl.php:4061
+#: gourl.php:1653 gourl.php:4390
 msgid "Active ?"
 msgstr "Активен ?"
 
-#: gourl.php:1402
+#: gourl.php:1654
 msgid "If box is not checked, visitors cannot pay you for this file"
 msgstr ""
 "Если флажок не установлен, посетители не могут платить вам за этот файл"
 
-#: gourl.php:1406
+#: gourl.php:1658
 msgid "Your File"
 msgstr "Ваш файл"
 
-#: gourl.php:1408
+#: gourl.php:1660
 msgid "Select pre-uploaded file"
 msgstr "Выберите заранее загруженный файл"
 
-#: gourl.php:1426
+#: gourl.php:1678
 msgid "Download"
 msgstr "Скачать"
 
-#: gourl.php:1426 gourl.php:1913
+#: gourl.php:1678 gourl.php:2206
 msgid "size"
 msgstr "размер"
 
-#: gourl.php:1427
+#: gourl.php:1679
 #, php-format
 msgid ""
 "If the file has already been uploaded to the server, you can select that "
@@ -1485,7 +1656,13 @@ msgstr ""
 "списка (папка с файлами %s)<br><strong>ИЛИ</strong><br>загрузите новый файл "
 "ниже -"
 
-#: gourl.php:1428
+#: gourl.php:1680
+msgid ""
+"Allowed: .jpg .png .gif .mp3 .aac .ogg .avi .mov .mp4 .mkv .txt .doc .pdf ."
+"iso .7z .rar .zip"
+msgstr ""
+
+#: gourl.php:1680
 msgid ""
 "Please use simple file names on <b>English</b>. Click on the Choose File "
 "button. Locate the file that you want to use, left click on it and click on "
@@ -1496,15 +1673,24 @@ msgstr ""
 "на кнопку Выбрать файл. Найдите файл, который вы хотите загрузить, щелкните "
 "левой кнопкой мыши на нем и нажмите на кнопку Открыть. Файл появится в поле"
 
-#: gourl.php:1433 gourl.php:1914 gourl.php:2164 gourl.php:4066
+#: gourl.php:1681
+msgid "Alternatively enter Remote File URL"
+msgstr ""
+
+#: gourl.php:1683
+#, php-format
+msgid "<a target=\"_blank\" href=\"%s\">Test Your Url Now &#187;</a>"
+msgstr ""
+
+#: gourl.php:1688 gourl.php:2207 gourl.php:2457 gourl.php:4395
 msgid "Price"
 msgstr "Цена"
 
-#: gourl.php:1435 gourl.php:2166 gourl.php:2976 gourl.php:4068
+#: gourl.php:1690 gourl.php:2459 gourl.php:3288 gourl.php:4397
 msgid "or"
 msgstr "или"
 
-#: gourl.php:1440 gourl.php:2171 gourl.php:2981 gourl.php:4073
+#: gourl.php:1695 gourl.php:2464 gourl.php:3293 gourl.php:4402
 #, php-format
 msgid ""
 "Please specify price in USD or in Cryptocoins. You cannot place prices in "
@@ -1528,11 +1714,11 @@ msgstr ""
 "использовать <a target='_blank' href='%s'> Poloniex 'autosell' опцию</a> "
 "(авто конвертация вашей криптовалюты в USD)."
 
-#: gourl.php:1443
+#: gourl.php:1698
 msgid "Show File Name/Price"
 msgstr "Отображать имя файла/цену"
 
-#: gourl.php:1444
+#: gourl.php:1699
 msgid ""
 "If box is checked, visitors will see approximate file price in USD and "
 "uploaded file name/size"
@@ -1540,16 +1726,16 @@ msgstr ""
 "Если флажок установлен, посетители увидят приблизительную цену файла в usd и "
 "загруженное имя файла/размер"
 
-#: gourl.php:1447 gourl.php:4077 gourl.php:6710 gourl.php:6940
+#: gourl.php:1702 gourl.php:4406 gourl.php:7104 gourl.php:7324
 msgid "Purchase Limit"
 msgstr "Покупок лимит"
 
-#: gourl.php:1448 gourl.php:1540 gourl.php:4078 gourl.php:4180 gourl.php:6661
-#: gourl.php:6904
+#: gourl.php:1703 gourl.php:1795 gourl.php:4407 gourl.php:4509 gourl.php:7055
+#: gourl.php:7288
 msgid "copies"
 msgstr "копий"
 
-#: gourl.php:1448
+#: gourl.php:1703
 msgid ""
 "The maximum number of times a file may be purchased/downloaded. Leave blank "
 "or set to 0 for unlimited number of purchases/downloads"
@@ -1557,11 +1743,11 @@ msgstr ""
 "Сколько максимум раз данный файл может быть куплен/загружен. Оставьте поле "
 "пустым или установите 0 для неограниченного количества покупок/загрузок"
 
-#: gourl.php:1451 gourl.php:2174 gourl.php:4081
+#: gourl.php:1706 gourl.php:2467 gourl.php:4410
 msgid "Expiry Period"
 msgstr "Срок действия"
 
-#: gourl.php:1458
+#: gourl.php:1713
 msgid ""
 "Period after which the payment becomes obsolete and new Cryptocoin Payment "
 "Box will be shown for this file (you can use it to take new payments from "
@@ -1576,11 +1762,11 @@ msgstr ""
 "Хранить Посетителя ID: «Registered Users»; т.к. «Cookie/Session» не "
 "безопасно для длительного срока"
 
-#: gourl.php:1462 gourl.php:6711
+#: gourl.php:1717 gourl.php:7105
 msgid "Store Visitor IDs"
 msgstr "Хранить Посетителя ID"
 
-#: gourl.php:1469
+#: gourl.php:1724
 msgid ""
 "For Unregistered Your Website Visitors - Save auto-generated unique visitor "
 "ID in cookies, sessions or use the IP address to decide unique visitors "
@@ -1604,35 +1790,35 @@ msgstr ""
 "идентификации пользователя). Гораздо лучше использовать 'Registered users' "
 "чем 'Cookie/Session/Ipaddress'"
 
-#: gourl.php:1474 gourl.php:2197 gourl.php:3009 gourl.php:4092
+#: gourl.php:1729 gourl.php:2490 gourl.php:3321 gourl.php:4421
 msgid "PaymentBox Language"
 msgstr "PaymentBox язык"
 
-#: gourl.php:1481 gourl.php:2204 gourl.php:3016 gourl.php:4099
+#: gourl.php:1736 gourl.php:2497 gourl.php:3328 gourl.php:4428
 msgid "Default Payment Box Localisation"
 msgstr "По умолчанию Payment Box локализация"
 
-#: gourl.php:1486 gourl.php:2208 gourl.php:3020 gourl.php:4104
+#: gourl.php:1741 gourl.php:2501 gourl.php:3332 gourl.php:4433
 msgid "PaymentBox Coin"
 msgstr "PaymentBox монета"
 
-#: gourl.php:1493 gourl.php:2215 gourl.php:3027 gourl.php:4111
+#: gourl.php:1748 gourl.php:2508 gourl.php:3339 gourl.php:4440
 msgid "Activated Payments :"
 msgstr "Активированные платежи :"
 
-#: gourl.php:1493 gourl.php:2215 gourl.php:3027 gourl.php:4111
+#: gourl.php:1748 gourl.php:2508 gourl.php:3339 gourl.php:4440
 msgid "- Please Setup -"
 msgstr "- Пожалуйста настройте -"
 
-#: gourl.php:1494 gourl.php:2216 gourl.php:3028 gourl.php:4112
+#: gourl.php:1749 gourl.php:2509 gourl.php:3340 gourl.php:4441
 msgid "Default Coin in Payment Box"
 msgstr "По умолчанию монета в Payment Box"
 
-#: gourl.php:1499 gourl.php:2220 gourl.php:3031 gourl.php:4117
+#: gourl.php:1754 gourl.php:2513 gourl.php:3343 gourl.php:4446
 msgid "Use Default Coin only:"
 msgstr "Использ. по умолчанию монету только:"
 
-#: gourl.php:1500
+#: gourl.php:1755
 msgid ""
 "If box is checked, payment box will accept payments in one default coin "
 "'PaymentBox Coin' for this file (no multiple coins). Please use price in USD "
@@ -1643,27 +1829,27 @@ msgstr ""
 "несколько криптовалют). Пожалуйста, используйте Цену в USD, если вы хотите "
 "принимать несколько криптовалют"
 
-#: gourl.php:1504
+#: gourl.php:1759
 msgid "Description (Optional)"
 msgstr "Описание (необязательно)"
 
-#: gourl.php:1507
+#: gourl.php:1762
 msgid "Short File Description"
 msgstr "Краткое описание файла"
 
-#: gourl.php:1512 gourl.php:6704
+#: gourl.php:1767 gourl.php:7098
 msgid "Featured Image"
 msgstr "Изображение"
 
-#: gourl.php:1526
+#: gourl.php:1781
 msgid "OR"
 msgstr "ИЛИ"
 
-#: gourl.php:1528
+#: gourl.php:1783
 msgid "Custom Featured Image"
 msgstr "Произвольное изображение"
 
-#: gourl.php:1529
+#: gourl.php:1784
 msgid ""
 "This featured image represent your uploaded file above. Max sizes: 800px x "
 "600px, allowed images: JPG, GIF, PNG."
@@ -1671,36 +1857,36 @@ msgstr ""
 "Это изображение представляет ваш загруженный файл выше. Макс размеры: 800px "
 "x 600px, Допускаются изображения: JPG, GIF, PNG."
 
-#: gourl.php:1532 gourl.php:6705
+#: gourl.php:1787 gourl.php:7099
 msgid "Image Width"
 msgstr "Ширина изображения"
 
-#: gourl.php:1533
+#: gourl.php:1788
 msgid "Your featured image width"
 msgstr "Ширина вашего изображения"
 
-#: gourl.php:1539 gourl.php:1663 gourl.php:4179 gourl.php:4295 gourl.php:6700
-#: gourl.php:6932
+#: gourl.php:1794 gourl.php:1918 gourl.php:4508 gourl.php:4624 gourl.php:7094
+#: gourl.php:7316
 msgid "Total Sold"
 msgstr "Всего продано"
 
-#: gourl.php:1545 gourl.php:4185
+#: gourl.php:1800 gourl.php:4514
 msgid "Latest Received Payment"
 msgstr "Последний полученный платеж"
 
-#: gourl.php:1552 gourl.php:4192
+#: gourl.php:1807 gourl.php:4521
 msgid "Record Updated"
 msgstr "Запись обновлена"
 
-#: gourl.php:1557 gourl.php:4197
+#: gourl.php:1812 gourl.php:4526
 msgid "Record Created"
 msgstr "Запись создана"
 
-#: gourl.php:1561 gourl.php:2261 gourl.php:3101 gourl.php:4201
+#: gourl.php:1816 gourl.php:2554 gourl.php:3413 gourl.php:4530
 msgid "Custom Actions"
 msgstr "Пользовательские действия"
 
-#: gourl.php:1562 gourl.php:2262 gourl.php:3102 gourl.php:4202
+#: gourl.php:1817 gourl.php:2555 gourl.php:3414 gourl.php:4531
 #, php-format
 msgid ""
 "Optional - add in file gourl_ipn.php code below. <a href='%s'>Read more "
@@ -1709,15 +1895,15 @@ msgstr ""
 "Необязательно - добавить в файл gourl_ipn.php код ниже. <a href='%s'>Читать "
 "дальше »</a>"
 
-#: gourl.php:1637 gourl.php:5201 gourl.php:5202
+#: gourl.php:1892 gourl.php:5532 gourl.php:5533
 msgid "Add New File"
 msgstr "Добавить файл"
 
-#: gourl.php:1641 gourl.php:2100 gourl.php:2908 gourl.php:4273
+#: gourl.php:1896 gourl.php:2393 gourl.php:3220 gourl.php:4602
 msgid "Hide Introduction"
 msgstr "Скрыть введение"
 
-#: gourl.php:1644
+#: gourl.php:1899
 #, php-format
 msgid ""
 "Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on "
@@ -1737,7 +1923,7 @@ msgstr ""
 "<a href='%s'>Любой может зарегистрироваться</a>) и настройте  изображение <a "
 "href='%s'>входа на сайт</a>."
 
-#: gourl.php:1645
+#: gourl.php:1900
 #, php-format
 msgid ""
 "Create <a href='%s'>New Paid File Downloads</a> and place new generated <a "
@@ -1746,12 +1932,12 @@ msgstr ""
 "Создайте <a href='%s'>Новую платную загрузку файла</a> и поместите новый "
 "сгенерированный <a href='%s'>шорткод</a> на вашу страницу/пост. Всё!"
 
-#: gourl.php:1646
+#: gourl.php:1901
 #, php-format
 msgid "<a href='%s'>Read more</a>"
 msgstr "<a href='%s'>Читать полностью</a>"
 
-#: gourl.php:1647
+#: gourl.php:1902
 #, php-format
 msgid ""
 "Alternatively, you can use free <a href='%s'>Easy Digital Downloads</a> "
@@ -1762,95 +1948,95 @@ msgstr ""
 "Digital Downloads</a> (цифровые продажи с кредитными картами/paypal) с нашим "
 "дополнением - <a href='%s'>EDD Биткоин/Альткоин шлюз</a>"
 
-#: gourl.php:1653 gourl.php:2096 gourl.php:2904 gourl.php:4285
+#: gourl.php:1908 gourl.php:2389 gourl.php:3216 gourl.php:4614
 msgid "Show Introduction"
 msgstr "Показать введение"
 
-#: gourl.php:1660 gourl.php:3610 gourl.php:4292 gourl.php:4673
+#: gourl.php:1915 gourl.php:3939 gourl.php:4621 gourl.php:5021
 msgid "Found"
 msgstr "Найдено"
 
-#: gourl.php:1660
+#: gourl.php:1915
 msgid "Total Files"
 msgstr "Всего файлов"
 
-#: gourl.php:1660 gourl.php:1661 gourl.php:1662 gourl.php:1663
+#: gourl.php:1915 gourl.php:1916 gourl.php:1917 gourl.php:1918
 msgid "files"
 msgstr "файлов"
 
-#: gourl.php:1661 gourl.php:4293
+#: gourl.php:1916 gourl.php:4622
 msgid "Active"
 msgstr "Активно"
 
-#: gourl.php:1662 gourl.php:4294
+#: gourl.php:1917 gourl.php:4623
 msgid "Inactive"
 msgstr "Неактивно"
 
-#: gourl.php:1664 gourl.php:3614 gourl.php:4296 gourl.php:4678
+#: gourl.php:1919 gourl.php:3943 gourl.php:4625 gourl.php:5026
 msgid "Reset Search Filters"
 msgstr "Сбросить фильтры поиска"
 
-#: gourl.php:1693 gourl.php:4326
+#: gourl.php:1948 gourl.php:4655
 #, php-format
 msgid "Invalid format. Use %s"
 msgstr "Недопустимый формат. Используйте %s"
 
-#: gourl.php:1708
+#: gourl.php:1963
 #, php-format
 msgid "Invalid file id '%s' -"
 msgstr "Недопустимый файл id '%s' -"
 
-#: gourl.php:1754 gourl.php:1755
+#: gourl.php:2010 gourl.php:2011
 msgid "Please register or login to download this file"
 msgstr "Пожалуйста, зарегистрируйтесь или войдите, чтобы скачать этот файл"
 
-#: gourl.php:1759
+#: gourl.php:2015
 msgid "File does not exist on the server"
 msgstr "Файл не существует на сервере"
 
-#: gourl.php:1760
+#: gourl.php:2016
 msgid "Error! File does not exist on the server !"
 msgstr "Ошибка! Файл не существует на сервере!"
 
-#: gourl.php:1777 gourl.php:2347 gourl.php:2537 gourl.php:3327 gourl.php:4403
+#: gourl.php:2033 gourl.php:2640 gourl.php:2830 gourl.php:3639 gourl.php:4732
 #, php-format
 msgid "Invalid %s Public Key %s -"
 msgstr "Неверный %s Public Key %s -"
 
-#: gourl.php:1778 gourl.php:2348 gourl.php:2538 gourl.php:3328 gourl.php:4404
+#: gourl.php:2034 gourl.php:2641 gourl.php:2831 gourl.php:3640 gourl.php:4733
 #, php-format
 msgid "Invalid %s Private Key -"
 msgstr "Неверный %s Private Key -"
 
-#: gourl.php:1790 gourl.php:2360 gourl.php:2550 gourl.php:3340 gourl.php:4416
+#: gourl.php:2046 gourl.php:2653 gourl.php:2843 gourl.php:3652 gourl.php:4745
 msgid "No Available Payments -"
 msgstr "Нет доступных платежей -"
 
-#: gourl.php:1860 gourl.php:4471
+#: gourl.php:2102 gourl.php:4800
 msgid "Sold Out"
 msgstr "Продано"
 
-#: gourl.php:1866
+#: gourl.php:2108
 msgid "Cryptcoin Payments Disabled for this File"
 msgstr "Крипто платежи отключены для этого файла"
 
-#: gourl.php:1913
+#: gourl.php:2206
 msgid "File"
 msgstr "Файл"
 
-#: gourl.php:1921 gourl.php:6750
+#: gourl.php:2214
 msgid "Download File"
 msgstr "Скачать файл"
 
-#: gourl.php:1928 gourl.php:2646 gourl.php:3457 gourl.php:4554 gourl.php:5635
+#: gourl.php:2221 gourl.php:2954 gourl.php:3786 gourl.php:4902 gourl.php:6015
 msgid "Language"
 msgstr "Язык"
 
-#: gourl.php:2016 gourl.php:2802
+#: gourl.php:2309 gourl.php:3114
 msgid "Lock Page Level - invalid value"
 msgstr "Уровень блокировки страниц - недопустимое значение"
 
-#: gourl.php:2021 gourl.php:2807
+#: gourl.php:2314 gourl.php:3119
 #, php-format
 msgid ""
 "Field 'PaymentBox Coin' - payments in %s not available. Please click on "
@@ -1859,7 +2045,7 @@ msgstr ""
 "Поле «PaymentBox монета» - платежи в %s не доступны. Пожалуйста, нажмите на "
 "кнопку «Сохранить настройки»"
 
-#: gourl.php:2024 gourl.php:2810
+#: gourl.php:2317 gourl.php:3122
 #, php-format
 msgid ""
 "Field 'Use Default Coin Only' - check it because you have entered price in "
@@ -1869,16 +2055,16 @@ msgstr ""
 "в %s. Пожалуйста, используйте цену в USD, если вы хотите принимать несколько "
 "криптовалют"
 
-#: gourl.php:2065
+#: gourl.php:2358
 msgid "Pay-Per-View Settings have been updated <strong>successfully</strong>"
 msgstr "Pay-Per-View настройки были обновлены <strong>успешно</strong>"
 
-#: gourl.php:2107
+#: gourl.php:2400
 #, php-format
 msgid "<b>Pay-Per-View Summary</b> - <a target='_blank' href='%s'>Example</a>"
 msgstr "<b>Pay-Per-View введение</b> - <a target='_blank' href='%s'>Пример</a>"
 
-#: gourl.php:2109
+#: gourl.php:2402
 msgid ""
 "Your unregistered anonymous website visitors  will need to send you a set "
 "amount of cryptocoins for access to your website's specific pages & videos "
@@ -1893,7 +2079,7 @@ msgstr ""
 "странице вашим посетителям, когда срок платежа истечет, новое окно оплаты "
 "появится, уведомления о получении оплаты на ваш email, и т.д."
 
-#: gourl.php:2111
+#: gourl.php:2404
 #, php-format
 msgid ""
 "Pay-Per-View supports <a href='%s'>custom actions</a> (for example, show ads "
@@ -1903,7 +2089,7 @@ msgstr ""
 "(например, показ объявлений для бесплатных пользователей на всех страницах "
 "сайта, <a href='%s'>см. код</a>)"
 
-#: gourl.php:2112
+#: gourl.php:2405
 #, php-format
 msgid ""
 "<a href='%s'>Read how it works</a> and differences between Pay-Per-View and "
@@ -1912,11 +2098,11 @@ msgstr ""
 "Читайте <a href='%s'>как это работает</a> и различия между Pay-Per-View и "
 "Pay-Per-Membership."
 
-#: gourl.php:2114
+#: gourl.php:2407
 msgid "Pay-Per-View Pages -"
 msgstr "Pay-Per-View страницы -"
 
-#: gourl.php:2116 gourl.php:2923
+#: gourl.php:2409 gourl.php:3235
 #, php-format
 msgid ""
 "You can customize lock-image / preview video for each page or not use "
@@ -1926,13 +2112,13 @@ msgstr ""
 "страницы или не использовать их вообще.<br>Каталог изображений по умолчанию: "
 "%s или используйте путь к изображению  %s"
 
-#: gourl.php:2118 gourl.php:2925
+#: gourl.php:2411 gourl.php:3237
 msgid "Shortcodes with preview images/videos for premium locked pages:"
 msgstr ""
 "Шорткоды с  предпросмотром изображений/видео для премиум заблокированных "
 "страниц:"
 
-#: gourl.php:2121 gourl.php:2928
+#: gourl.php:2414 gourl.php:3240
 #, php-format
 msgid ""
 "Place one of that tags <a target='_blank' href='%s'>anywhere</a> in the "
@@ -1943,36 +2129,36 @@ msgstr ""
 "в текст на вашу премиум страницу или используйте <a href='%s'>собственный "
 "код</a>"
 
-#: gourl.php:2123 gourl.php:2930
+#: gourl.php:2416 gourl.php:3242
 msgid "Ready to use shortcodes:"
 msgstr "Готовые к использованию шорткоды:"
 
-#: gourl.php:2125
+#: gourl.php:2418
 msgid "locked page with default preview image"
 msgstr "заблокированная страница с изображением предпросмотра по умолчанию"
 
-#: gourl.php:2126 gourl.php:2933
+#: gourl.php:2419 gourl.php:3245
 msgid "locked page with default preview video"
 msgstr "заблокированная страница с видео предпросмотром по умолчанию"
 
-#: gourl.php:2127 gourl.php:2934
+#: gourl.php:2420 gourl.php:3246
 #, php-format
 msgid "locked page with any custom preview image stored in directory %s"
 msgstr ""
 "заблокированная страница с любым пользовательским изображением, хранящимся в "
 "каталоге %s"
 
-#: gourl.php:2128 gourl.php:2935
+#: gourl.php:2421 gourl.php:3247
 msgid "locked page with custom image, image width=400px height=200px"
 msgstr ""
 "заблокированная страница с пользовательским изображением, ширина "
 "изображения=400px высота=200px"
 
-#: gourl.php:2129 gourl.php:2936
+#: gourl.php:2422 gourl.php:3248
 msgid "locked page with any custom image"
 msgstr "заблокированная страница с любым пользовательским изображением"
 
-#: gourl.php:2130
+#: gourl.php:2423
 msgid ""
 "locked page with any custom video preview, etc (iframe). Iframe width=800px, "
 "height=440px"
@@ -1980,24 +2166,24 @@ msgstr ""
 "заблокированная страница с любым пользовательским видео предпросмотром "
 "(iframe), Iframe ширина=400px высота=200px"
 
-#: gourl.php:2148
+#: gourl.php:2441
 msgid "Paid Access to Premium Webages for Unregistered Visitors"
 msgstr ""
 "Платный доступ к премиум страницам для незарегистрированных посетителей"
 
-#: gourl.php:2155 gourl.php:2965
+#: gourl.php:2448 gourl.php:3277
 msgid "Show Preview 1"
 msgstr "Предпросмотр 1"
 
-#: gourl.php:2156 gourl.php:2966
+#: gourl.php:2449 gourl.php:3278
 msgid "Show Preview 2"
 msgstr "Предпросмотр 2"
 
-#: gourl.php:2157 gourl.php:2967
+#: gourl.php:2450 gourl.php:3279
 msgid "Video Preview 3"
 msgstr "Предпросмотр видео 3"
 
-#: gourl.php:2181
+#: gourl.php:2474
 #, php-format
 msgid ""
 "Period after which the payment becomes obsolete and new Cryptocoin Payment "
@@ -2016,11 +2202,11 @@ msgstr ""
 "Если вам нужно больше, пожалуйста, используйте <a href='%s'>pay-per-"
 "membership</a>"
 
-#: gourl.php:2185 gourl.php:2995
+#: gourl.php:2478 gourl.php:3307
 msgid "Lock Page Level"
 msgstr "Уровень блокировки страницы"
 
-#: gourl.php:2192
+#: gourl.php:2485
 #, php-format
 msgid ""
 "Select user access level who will see lock premium page/blog and need to "
@@ -2038,7 +2224,7 @@ msgstr ""
 "<a href='%s'>Любой может зарегистрироваться</a>) и настройка <a "
 "href='%s'>изображение входа</a> на сайт"
 
-#: gourl.php:2221 gourl.php:3032 gourl.php:4118
+#: gourl.php:2514 gourl.php:3344 gourl.php:4447
 msgid ""
 "If box is checked, payment box will accept payments in one default coin "
 "'PaymentBox Coin' (no multiple coins)"
@@ -2046,11 +2232,11 @@ msgstr ""
 "Если флажок установлен, оплата будет приниматься в одной криптовалюте "
 "'PaymentBox монета' (не несколько монет)"
 
-#: gourl.php:2224 gourl.php:3035
+#: gourl.php:2517 gourl.php:3347
 msgid "PaymentBox Style:"
 msgstr "PaymentBox стиль:"
 
-#: gourl.php:2225 gourl.php:3036
+#: gourl.php:2518 gourl.php:3348
 #, php-format
 msgid ""
 "Payment Box <a target='_blank' href='%s'>sizes</a> and border <a "
@@ -2061,11 +2247,11 @@ msgstr ""
 "target='_blank' href='%s'>с тенями</a> вы можете изменить <a href='%s'>здесь "
 "»</a>"
 
-#: gourl.php:2228 gourl.php:3065
+#: gourl.php:2521 gourl.php:3377
 msgid "Text - Above Payment Box"
 msgstr "Текст - выше Payment Box"
 
-#: gourl.php:2231 gourl.php:3068
+#: gourl.php:2524 gourl.php:3380
 msgid ""
 "Your Custom Text and Image above Payment Box on Locked premium pages "
 "(original pages content will be hidden)"
@@ -2073,11 +2259,11 @@ msgstr ""
 "Ваш пользовательский текст и изображения над окном оплаты (Payment Box)  на "
 "заблокированных страницах (оригинальное содержимое страниц будет скрыто)"
 
-#: gourl.php:2235 gourl.php:3072
+#: gourl.php:2528 gourl.php:3384
 msgid "Text - Below Payment Box"
 msgstr "Текст - ниже Payment Box"
 
-#: gourl.php:2238 gourl.php:3075
+#: gourl.php:2531 gourl.php:3387
 msgid ""
 "Your Custom Text and Image below Payment Box on Locked premium pages "
 "(original pages content will be hidden)"
@@ -2085,11 +2271,11 @@ msgstr ""
 "Ваш пользовательский текст и изображения под окном оплаты (Payment Box)  на "
 "заблокированных страницах (оригинальное содержимое страниц будет скрыто)"
 
-#: gourl.php:2241 gourl.php:3081
+#: gourl.php:2534 gourl.php:3393
 msgid "Hide Page Title ?"
 msgstr "Скрыть заголовок страницы ?"
 
-#: gourl.php:2242 gourl.php:3082
+#: gourl.php:2535 gourl.php:3394
 #, php-format
 msgid ""
 "If box is checked, unpaid users will not see current premium page title (<a "
@@ -2098,11 +2284,11 @@ msgstr ""
 "Если флажок установлен, бесплатные пользователи не будут видеть текущее "
 "название премиум страниц (<a href='%s'>скриншот</a>)"
 
-#: gourl.php:2245 gourl.php:3085
+#: gourl.php:2538 gourl.php:3397
 msgid "Hide Menu Titles ?"
 msgstr "Скрыть названия в меню ?"
 
-#: gourl.php:2246 gourl.php:3086
+#: gourl.php:2539 gourl.php:3398
 #, php-format
 msgid ""
 "If box is checked, unpaid users will not see any link titles on premium "
@@ -2111,11 +2297,11 @@ msgstr ""
 "Если флажок установлен, бесплатные пользователи не будут видеть названий в "
 "ссылках на премиум страницах  (<a href='%s'>скриншот</a>)"
 
-#: gourl.php:2249 gourl.php:3089
+#: gourl.php:2542 gourl.php:3401
 msgid "Hide Comments Authors ?"
 msgstr "Скрыть авторов комментариев ?"
 
-#: gourl.php:2250 gourl.php:3090
+#: gourl.php:2543 gourl.php:3402
 #, php-format
 msgid ""
 "If box is checked, unpaid users will not see authors of comments on bottom "
@@ -2124,11 +2310,11 @@ msgstr ""
 "Если флажок установлен, бесплатные пользователи не будут видеть авторов "
 "комментариев в нижней части премиум страниц  (<a href='%s'>скриншот</a>)"
 
-#: gourl.php:2253 gourl.php:3093
+#: gourl.php:2546 gourl.php:3405
 msgid "Hide Comments Body ?"
 msgstr "Скрыть текст в комментариях ?"
 
-#: gourl.php:2254 gourl.php:3094
+#: gourl.php:2547 gourl.php:3406
 #, php-format
 msgid ""
 "If box is checked, unpaid users will not see comments body on bottom of "
@@ -2137,11 +2323,11 @@ msgstr ""
 "Если флажок установлен, бесплатные пользователи не будут видеть текста в "
 "комментариях в нижней части премиум страниц (<a href='%s'>скриншот</a>)"
 
-#: gourl.php:2257 gourl.php:3097
+#: gourl.php:2550 gourl.php:3409
 msgid "Disable Comments Reply ?"
 msgstr "Отключить ответы в комментариях ?"
 
-#: gourl.php:2258 gourl.php:3098
+#: gourl.php:2551 gourl.php:3410
 #, php-format
 msgid ""
 "If box is checked, unpaid users cannot reply/add comments on bottom of "
@@ -2150,20 +2336,20 @@ msgstr ""
 "Если флажок установлен, бесплатные пользователи не смогут ответить/добавить "
 "комментарии в нижней части премиум страниц (<a href='%s'>скриншот</a>)"
 
-#: gourl.php:2633 gourl.php:3441
+#: gourl.php:2939 gourl.php:3770
 msgid "Page Content Locked! Please pay below"
 msgstr "Содержимое страницы заблокировано! Пожалуйста оплатите ниже"
 
-#: gourl.php:2801
+#: gourl.php:3113
 msgid "Membership Period - invalid value"
 msgstr "Период Членство - недопустимое значение"
 
-#: gourl.php:2857
+#: gourl.php:3169
 msgid ""
 "Pay-Per-Membership Settings have been updated <strong>successfully</strong>"
 msgstr "Pay-Per-Membership настройки были обновлены <strong>успешно</strong>"
 
-#: gourl.php:2872
+#: gourl.php:3184
 msgid ""
 "Unregistered visitors / non-logged users will see on your premium pages - "
 "login form with custom text"
@@ -2172,7 +2358,7 @@ msgstr ""
 "будут видеть на ваших премиум страницах  форму входа на сайт с произвольным "
 "текстом"
 
-#: gourl.php:2915
+#: gourl.php:3227
 #, php-format
 msgid ""
 "<b>Pay-Per-Membership</b> - Your <b>registered</b> website users will need "
@@ -2190,7 +2376,7 @@ msgstr ""
 "плагин использует зарегистрированные userID а не cookies. Вам нужно иметь "
 "регистрацию на сайте <a href='%s'>включённой</a>."
 
-#: gourl.php:2917
+#: gourl.php:3229
 #, php-format
 msgid ""
 "<b>Pay-Per-Membership</b> supports <a href='%s'>custom actions</a> (for "
@@ -2208,7 +2394,7 @@ msgstr ""
 "вашем bbPress как премиум и легко монетизировать их с биткоинами/"
 "альткоинами.   <a href='%s'>Более подробно</a>"
 
-#: gourl.php:2919
+#: gourl.php:3231
 #, php-format
 msgid ""
 "Pay-Per-Membership supports ONE paid membership level for website.<br>For "
@@ -2229,11 +2415,11 @@ msgstr ""
 "шорткоды (текущая страница). Пожалуйста, используйте одну из этих систем (не "
 "вместе) на вашем сайте, т.к. эти различные membership системы не совместимы."
 
-#: gourl.php:2921
+#: gourl.php:3233
 msgid "Pay-Per-Membership Premium Pages -"
 msgstr "Pay-Per-Membership премиум страницы -"
 
-#: gourl.php:2932
+#: gourl.php:3244
 msgid ""
 "locked premium page with default preview image; visible for unpaid logged-in "
 "users"
@@ -2241,7 +2427,7 @@ msgstr ""
 "заблокированная премиум страница с изображением по умолчанию; показывается "
 "бесплатным пользователям, вошедшим на сайт"
 
-#: gourl.php:2937
+#: gourl.php:3249
 msgid ""
 "locked page with any custom video preview, etc (iframe). Iframe width=750px, "
 "height=410px"
@@ -2249,35 +2435,35 @@ msgstr ""
 "заблокированная страница с любым видео предпросмотром и т.д. (iframe). "
 "Iframe ширина=750px, высота=410px"
 
-#: gourl.php:2954 gourl.php:3601 gourl.php:3663
+#: gourl.php:3266 gourl.php:3930 gourl.php:3992
 msgid "All Premium Users"
 msgstr "Все платные/премиум пользователи"
 
-#: gourl.php:2957
+#: gourl.php:3269
 msgid "Paid Access to Premium Pages for Registered Users"
 msgstr ""
 "Платный доступ к премиум страницам для зарегистрированных пользователей"
 
-#: gourl.php:2964
+#: gourl.php:3276
 msgid "Screen for non-logged users"
 msgstr "Экран для non-logged пользователей"
 
-#: gourl.php:2974
+#: gourl.php:3286
 msgid "Membership Price"
 msgstr "Membership Цена"
 
-#: gourl.php:2984
+#: gourl.php:3296
 msgid "Membership Period"
 msgstr "Membership период"
 
-#: gourl.php:2991
+#: gourl.php:3303
 msgid ""
 "Period after which the payment becomes obsolete and new Cryptocoin Payment "
 "Box will be shown."
 msgstr ""
 "Период, после которого оплата устаревает и новое окно оплаты будет показано."
 
-#: gourl.php:3002
+#: gourl.php:3314
 #, php-format
 msgid ""
 "Select user access level who will see lock premium page/blog and need to "
@@ -2293,11 +2479,11 @@ msgstr ""
 "регистрации - активируйте регистрацию на сайте (Общие настройки » Членство - "
 "<a href='%s'>Любой может зарегистрироваться</a>)"
 
-#: gourl.php:3005
+#: gourl.php:3317
 msgid "Add to User Profile"
 msgstr "Добавить в профиль пользователя"
 
-#: gourl.php:3006
+#: gourl.php:3318
 #, php-format
 msgid ""
 "If box is checked, users will see own membership status on user profile page "
@@ -2306,13 +2492,13 @@ msgstr ""
 "Если флажок установлен, пользователи будут видеть собственный membership "
 "статус на странице профиля пользователя (<a href='%s'>profile.php</a>)"
 
-#: gourl.php:3041
+#: gourl.php:3353
 msgid "A. Unregistered Users will see Login Form with custom text/images -"
 msgstr ""
 "А. Незарегистрированные посетители будут видеть форму входа на сайт с "
 "произвольным текстом/изображением -"
 
-#: gourl.php:3042
+#: gourl.php:3354
 msgid ""
 "You can separate the content your logged-in users see from what your "
 "unregistered users see; things like a log-in form + custom text A for "
@@ -2325,7 +2511,7 @@ msgstr ""
 "box) + другой  произвольный текст B для бесплатных пользователей вошедших на "
 "сайт."
 
-#: gourl.php:3043
+#: gourl.php:3355
 #, php-format
 msgid ""
 "IMPORTANT: Please check that Website Registration is enabled (option "
@@ -2334,11 +2520,11 @@ msgstr ""
 "Важно: Проверьте, что регистрация включена на сайта (Членство - <a "
 "href='%s'>Любой может зарегистрироваться</a>)"
 
-#: gourl.php:3047
+#: gourl.php:3359
 msgid "Text - Above Login Form"
 msgstr "Текст - выше формы входа"
 
-#: gourl.php:3050
+#: gourl.php:3362
 msgid ""
 "Your Custom Text and Image For Unregistered Users (original pages content "
 "will be hidden). This text will publish <b>Above</b> Login Form"
@@ -2347,11 +2533,11 @@ msgstr ""
 "пользователей (оригинальное содержание страниц будет скрыто). Этот текст "
 "будет публиковаться <b>выше</b> формы входа на сайт"
 
-#: gourl.php:3054
+#: gourl.php:3366
 msgid "Text - Below Login Form"
 msgstr "Текст - ниже формы входа"
 
-#: gourl.php:3057
+#: gourl.php:3369
 msgid ""
 "Your Custom Text and Image For Unregistered Users (original pages content "
 "will be hidden). This text will publish <b>Below</b> Login Form"
@@ -2360,25 +2546,25 @@ msgstr ""
 "пользователей (оригинальное содержание страниц будет скрыто). Этот текст "
 "будет публиковаться <b>под</b> формой входа на сайт"
 
-#: gourl.php:3061
+#: gourl.php:3373
 msgid "B. Unpaid logged-in users will see payment box with custom text -"
 msgstr ""
 "B. Бесплатные пользователи, вошедшие на сайт, будут видеть окно оплаты с "
 "произвольным текстом -"
 
-#: gourl.php:3078
+#: gourl.php:3390
 msgid "General Content Restriction"
 msgstr "Общие настройки ограничения"
 
-#: gourl.php:3427
+#: gourl.php:3756
 msgid "Thank you."
 msgstr "Спасибо!"
 
-#: gourl.php:3427
+#: gourl.php:3756
 msgid "Your Premium membership is active."
 msgstr "Ваше премиум членство активировано."
 
-#: gourl.php:3447
+#: gourl.php:3776
 #, php-format
 msgid ""
 "<b>ADMIN NOTE:</b> Your test payment received successfully.<br>Please <a "
@@ -2388,47 +2574,47 @@ msgstr ""
 "<br>Пожалуйста <a href='%s'>отключите ваш тест членство</a> и вы увидите "
 "окно оплаты снова"
 
-#: gourl.php:3601
+#: gourl.php:3930
 msgid "Manually Add New User"
 msgstr "Вручную добавить нового пользователя"
 
-#: gourl.php:3601
+#: gourl.php:3930
 msgid "Options"
 msgstr "Параметры"
 
-#: gourl.php:3610
+#: gourl.php:3939
 msgid "Total"
 msgstr "Всего"
 
-#: gourl.php:3611
+#: gourl.php:3940
 msgid "Active Premium Users"
 msgstr "Активных премиум пользователей"
 
-#: gourl.php:3611 gourl.php:3612 gourl.php:3613
+#: gourl.php:3940 gourl.php:3941 gourl.php:3942
 msgid "users"
 msgstr "пользователей"
 
-#: gourl.php:3612
+#: gourl.php:3941
 msgid "Manually Added"
 msgstr "Добавленных вручную"
 
-#: gourl.php:3613
+#: gourl.php:3942
 msgid "Manually Disabled"
 msgstr "Заблокированных  вручную"
 
-#: gourl.php:3620
+#: gourl.php:3949
 msgid "Table have been updated <strong>successfully</strong>"
 msgstr "Таблица была обновлена <strong>успешно</strong>"
 
-#: gourl.php:3651
+#: gourl.php:3980
 msgid "Edit Premium User Membership"
 msgstr "Редактировать пользователя премиум членство"
 
-#: gourl.php:3651
+#: gourl.php:3980
 msgid "New User Membership"
 msgstr "Новое членство для пользователя"
 
-#: gourl.php:3653
+#: gourl.php:3982
 msgid ""
 "Create Premium Membership manually if a user has sent the wrong amount of "
 "payment - therefore plugin cannot process payment and cannot create user "
@@ -2438,23 +2624,23 @@ msgstr ""
 "неправильный платеж - следовательно плагин не может обработать платеж и не "
 "может создать премиум членство для пользователя в автоматическом режиме"
 
-#: gourl.php:3666
+#: gourl.php:3995
 msgid "Manually create Premium Membership"
 msgstr "Вручную создать Премиум членство"
 
-#: gourl.php:3674
+#: gourl.php:4003
 msgid "New Membership"
 msgstr "Новое членство"
 
-#: gourl.php:3680 gourl.php:7407
+#: gourl.php:4009 gourl.php:7791
 msgid "User"
 msgstr "Пользователь"
 
-#: gourl.php:3704
+#: gourl.php:4033
 msgid "Select User"
 msgstr "Выбрать пользователя"
 
-#: gourl.php:3719
+#: gourl.php:4048
 #, php-format
 msgid ""
 "Select User. &#160; Current lock pages level: <a href='%s'>%s</a>."
@@ -2465,182 +2651,182 @@ msgstr ""
 "%s</a>.<br>Редакторы сайта / администраторы будут иметь все время полный "
 "доступ к премиум страницам и видеть оригинальное содержание страниц."
 
-#: gourl.php:3722
+#: gourl.php:4051
 msgid "Premium Start Date"
 msgstr "Дата начала членства"
 
-#: gourl.php:3724
+#: gourl.php:4053
 msgid "Premium Membership Start Date. Format: dd/mm/yyyy"
 msgstr "Дата начала премиум членства. Формат: дд/мм/гггг"
 
-#: gourl.php:3727
+#: gourl.php:4056
 msgid "Premium End Date"
 msgstr "Дата окончания членства"
 
-#: gourl.php:3729
+#: gourl.php:4058
 msgid "Premium Membership End Date. Format: dd/mm/yyyy"
 msgstr "Дата окончания премиум членства. Формат: дд/мм/гггг"
 
-#: gourl.php:3753
+#: gourl.php:4082
 msgid "User - cannot be empty"
 msgstr "Пользователь - не может быть пустым"
 
-#: gourl.php:3754
+#: gourl.php:4083
 msgid "Start Date - cannot be empty"
 msgstr "Дата начала членства - не может быть пустым"
 
-#: gourl.php:3756
+#: gourl.php:4085
 msgid "End Date - cannot be empty"
 msgstr "Дата окончания членства - не может быть пустым"
 
-#: gourl.php:3757 gourl.php:3758
+#: gourl.php:4086 gourl.php:4087
 msgid "End Date - invalid value"
 msgstr "Дата окончания членства - недопустимое значение"
 
-#: gourl.php:3802
+#: gourl.php:4131
 msgid "Invalid Product ID, Please reload page"
 msgstr "Недопустимый  Product ID, пожалуйста перезагрузите страницу"
 
-#: gourl.php:3804
+#: gourl.php:4133
 msgid "Product Title - cannot be empty"
 msgstr "Название продукта - не может быть пустым"
 
-#: gourl.php:3805
+#: gourl.php:4134
 msgid "Product Title - Max size 100 symbols"
 msgstr "Название продукта - макс. размер 100 символов"
 
-#: gourl.php:3830
+#: gourl.php:4159
 msgid "Email to Buyer: From Email - cannot be empty"
 msgstr "Email покупателю: с Email  - не может быть пустым"
 
-#: gourl.php:3831
+#: gourl.php:4160
 msgid "Purchase Email Subject - cannot be empty"
 msgstr "Purchase Email тема - не может быть пустым"
 
-#: gourl.php:3832
+#: gourl.php:4161
 msgid "Purchase Email Body - cannot be empty"
 msgstr "Purchase Email текст - не может быть пустым"
 
-#: gourl.php:3837
+#: gourl.php:4166
 msgid "Sale Notification From - cannot be empty"
 msgstr "Sale Notification From  - не может быть пустым"
 
-#: gourl.php:3838
+#: gourl.php:4167
 msgid "Sale Notification Subject - cannot be empty"
 msgstr "Sale Notification тема - не может быть пустым"
 
-#: gourl.php:3839
+#: gourl.php:4168
 msgid "Sale Notification - cannot be empty"
 msgstr "Sale Notification - не может быть пустым"
 
-#: gourl.php:3840
+#: gourl.php:4169
 msgid "Sale Notification To - cannot be empty"
 msgstr "Sale Notification To - не может быть пустым"
 
-#: gourl.php:3843
+#: gourl.php:4172
 #, php-format
 msgid "Email to Buyer: From Email - %s - invalid email format"
 msgstr "Email покупателю: с Email - %s  - неверный формат"
 
-#: gourl.php:3844
+#: gourl.php:4173
 #, php-format
 msgid "Sale Notification From - %s - invalid email format"
 msgstr "Sale Notification From - %s - неверный email формат"
 
-#: gourl.php:3847
+#: gourl.php:4176
 #, php-format
 msgid "Sale Notification To - %s - invalid email format"
 msgstr "Sale Notification To - %s - неверный email формат"
 
-#: gourl.php:3960 gourl.php:4026
+#: gourl.php:4289 gourl.php:4355
 msgid "Edit Product"
 msgstr "Редактировать продукт"
 
-#: gourl.php:3960
+#: gourl.php:4289
 msgid "New Product"
 msgstr "Новый продукт"
 
-#: gourl.php:3968
+#: gourl.php:4297
 msgid "Emails"
 msgstr "Emails"
 
-#: gourl.php:3979 gourl.php:4512
+#: gourl.php:4308 gourl.php:4860
 msgid "Used template tags for preview:"
 msgstr "Используемые шорткоды в предварительном просмотре:"
 
-#: gourl.php:3985
+#: gourl.php:4314
 msgid "Email to Buyer - Purchase Receipt"
 msgstr "Email для покупателя - Подтверждение покупки"
 
-#: gourl.php:3985 gourl.php:3998
+#: gourl.php:4314 gourl.php:4327
 msgid "Activated"
 msgstr "Активирован"
 
-#: gourl.php:3985 gourl.php:3998
+#: gourl.php:4314 gourl.php:4327
 msgid "Not Active"
 msgstr "Неактивный"
 
-#: gourl.php:3987 gourl.php:4000
+#: gourl.php:4316 gourl.php:4329
 msgid "From:"
 msgstr "От:"
 
-#: gourl.php:3988 gourl.php:4001
+#: gourl.php:4317 gourl.php:4330
 msgid "To:"
 msgstr "Куда:"
 
-#: gourl.php:3988
+#: gourl.php:4317
 msgid "- user registered email -"
 msgstr "- пользователя зарегистрированный email -"
 
-#: gourl.php:3989 gourl.php:4002
+#: gourl.php:4318 gourl.php:4331
 msgid "Subject:"
 msgstr "Тема:"
 
-#: gourl.php:3990 gourl.php:4003
+#: gourl.php:4319 gourl.php:4332
 msgid "Body:"
 msgstr "Текст письма:"
 
-#: gourl.php:3998
+#: gourl.php:4327
 msgid "Email to Seller/Admin - Sale Notification"
 msgstr "Email для продавца/админа - Подтверждение продажи"
 
-#: gourl.php:4021
+#: gourl.php:4350
 msgid "New product"
 msgstr "Новый продукт"
 
-#: gourl.php:4023 gourl.php:4269
+#: gourl.php:4352 gourl.php:4598
 msgid "All Paid Products"
 msgstr "Все платные продукты"
 
-#: gourl.php:4026
+#: gourl.php:4355
 msgid "Create New Product"
 msgstr "Создать продукт"
 
-#: gourl.php:4035
+#: gourl.php:4364
 msgid "Preview - Paid"
 msgstr "Предпросмотр - оплачен"
 
-#: gourl.php:4036
+#: gourl.php:4365
 msgid "Preview - Emails"
 msgstr "Предпросмотр - emails"
 
-#: gourl.php:4045
+#: gourl.php:4374
 msgid "Product ID"
 msgstr "Продукт ID"
 
-#: gourl.php:4053
+#: gourl.php:4382
 msgid "Product Title"
 msgstr "Название продукта"
 
-#: gourl.php:4056
+#: gourl.php:4385
 msgid "Title for the product. Users will see this title"
 msgstr "Название продукта. Пользователи будут видеть это название"
 
-#: gourl.php:4062
+#: gourl.php:4391
 msgid "If box is not checked, visitors cannot pay you for this product"
 msgstr "Если флажок не установлен, посетители не смогут оплатить этот продукт"
 
-#: gourl.php:4078
+#: gourl.php:4407
 msgid ""
 "The maximum number of times a product may be purchased. Leave blank or set "
 "to 0 for unlimited number of product purchases"
@@ -2648,7 +2834,7 @@ msgstr ""
 "Максимальное количество раз продукт может быть приобретен. Оставьте пустым "
 "или равным 0 для неограниченного количества продаж"
 
-#: gourl.php:4088
+#: gourl.php:4417
 #, php-format
 msgid ""
 "Period after which the payment becomes obsolete and new Payment Box will be "
@@ -2663,11 +2849,11 @@ msgstr ""
 "повторных покупок с корзиной (shopping cart), вы также можете использовать "
 "<a href='%s'>WooCommerce</a> с <a href='%s'>GoUrl WooCommerce аддон</a>"
 
-#: gourl.php:4122
+#: gourl.php:4451
 msgid "A. Product Description (Unpaid yet)"
 msgstr "A. Описание продукта (неоплачен ещё)"
 
-#: gourl.php:4125
+#: gourl.php:4454
 msgid ""
 "Product Description. Users will see this product description when no payment "
 "has been received yet"
@@ -2675,11 +2861,11 @@ msgstr ""
 "Описание продукта. Пользователи будут видеть это описание продукта, когда "
 "оплата не была получена ещё"
 
-#: gourl.php:4128
+#: gourl.php:4457
 msgid "B. Product Description (Paid already)"
 msgstr "A. Описание продукта (оплачен уже)"
 
-#: gourl.php:4131
+#: gourl.php:4460
 #, php-format
 msgid ""
 "Users will see this product description when payment has been successfully "
@@ -2690,11 +2876,11 @@ msgstr ""
 "успешно. Если оставить поле пустым, оно будет отображать содержимое из поля "
 "«A. Описание продукта - неоплачен»<br>Доступные теги в описании: %s"
 
-#: gourl.php:4135
+#: gourl.php:4464
 msgid "Email to Buyer ?"
 msgstr "Email для покупателя ?"
 
-#: gourl.php:4136
+#: gourl.php:4465
 msgid ""
 "If box is checked, purchase receipt email will be sent to Buyer on user "
 "registered email"
@@ -2702,31 +2888,31 @@ msgstr ""
 "Если флажок установлен, подтверждение покупки email (purchase receipt) будет "
 "отправлен покупателю на его зарегистрированный email"
 
-#: gourl.php:4139
+#: gourl.php:4468
 msgid "Purchase Email - From"
 msgstr "Purchase Email - от кого"
 
-#: gourl.php:4141
+#: gourl.php:4470
 msgid ""
 "Email to Buyer: This will act as the 'from' and 'reply-to' address in email"
 msgstr ""
 "Email для покупателя: это будет использоваться как «От кого» и «ответить» "
 "адрес в электронной почте"
 
-#: gourl.php:4144
+#: gourl.php:4473
 msgid "Purchase Email - Subject"
 msgstr "Purchase Email - тема"
 
-#: gourl.php:4146
+#: gourl.php:4475
 msgid "Email to Buyer: Enter the subject line for the purchase receipt email"
 msgstr ""
 "Email для покупателя: введите тему для email кот. будет послан покупателю"
 
-#: gourl.php:4149
+#: gourl.php:4478
 msgid "Purchase Email - Body"
 msgstr "Purchase Email - текст"
 
-#: gourl.php:4150
+#: gourl.php:4479
 #, php-format
 msgid ""
 "Email to Buyer: Enter email body that is sent to users after completing a "
@@ -2736,33 +2922,33 @@ msgstr ""
 "пользователям, после совершения успешной покупки. HTML не разрешается."
 "<br>Доступные теги: %s"
 
-#: gourl.php:4153
+#: gourl.php:4482
 msgid "Email to Seller/Admin ?"
 msgstr "Email для продавца/админа"
 
-#: gourl.php:4154
+#: gourl.php:4483
 msgid ""
 "If box is checked, new sale notification email will be sent to Seller/Admin"
 msgstr ""
 "Если флажок установлен, email уведомление о новой продаже  будет "
 "направляться продавцу/админу"
 
-#: gourl.php:4157
+#: gourl.php:4486
 msgid "Sale Notification - From"
 msgstr "Sale Notification - от кого"
 
-#: gourl.php:4159
+#: gourl.php:4488
 msgid ""
 "Email to Seller: This will act as the 'from' and 'reply-to' email address"
 msgstr ""
 "Email для продавца: это будет использоваться как «От кого» и «ответить» "
 "адрес в электронной почте"
 
-#: gourl.php:4162
+#: gourl.php:4491
 msgid "Sale Notification - Subject"
 msgstr "Sale Notification - тема"
 
-#: gourl.php:4164
+#: gourl.php:4493
 #, php-format
 msgid ""
 "Email to Seller: Enter the subject line for the sale notification "
@@ -2771,11 +2957,11 @@ msgstr ""
 "Email для продавца: введите тему для email с уведомлением о "
 "продажи<br>Доступные теги: %s"
 
-#: gourl.php:4167
+#: gourl.php:4496
 msgid "Sale Notification - Body"
 msgstr "Sale Notification - текст"
 
-#: gourl.php:4168
+#: gourl.php:4497
 #, php-format
 msgid ""
 "Email to Seller: Enter the sale notification email that is sent to seller/"
@@ -2785,11 +2971,11 @@ msgstr ""
 "Email для продавца: введите текст письма, кот. получит продавец/админ после "
 "того, как пользователь оплатил продукт.<br>Доступные теги: %s"
 
-#: gourl.php:4171
+#: gourl.php:4500
 msgid "Sale Notification - To"
 msgstr "Sale Notification - кому"
 
-#: gourl.php:4172
+#: gourl.php:4501
 msgid ""
 "Email to Seller: Enter the email address(es) that should receive a "
 "notification anytime a sale is made, one per line"
@@ -2797,11 +2983,11 @@ msgstr ""
 "Email для продавца: введите адрес/а электронной почты (по одному в строке), "
 "на которые будут отправляться уведомления о продаже"
 
-#: gourl.php:4269 gourl.php:5182 gourl.php:5183
+#: gourl.php:4598 gourl.php:5513 gourl.php:5514
 msgid "Add New Product"
 msgstr "Добавить продукт"
 
-#: gourl.php:4276
+#: gourl.php:4605
 msgid ""
 "Use 'Pay-Per-product' - sell any of your products online to registered "
 "users. Email notifications to Buyer/Seller."
@@ -2810,7 +2996,7 @@ msgstr ""
 "продуктов онлайн зарегистрированным пользователям. Уведомления по email для "
 "покупателей и продавцов."
 
-#: gourl.php:4277
+#: gourl.php:4606
 #, php-format
 msgid ""
 "You will need to <a href='%s'>create a new product record</a> of what you "
@@ -2822,7 +3008,7 @@ msgstr ""
 "получите wordpress шорткод, <a href='%s'>поместите его</a> на любую страницу "
 "вашего сайта и пользователь увидит окно оплаты продукта."
 
-#: gourl.php:4278
+#: gourl.php:4607
 #, php-format
 msgid ""
 "Please activate website registration (General Settings &#187; Membership - "
@@ -2835,12 +3021,12 @@ msgstr ""
 "посетителей - можно выбрать <a href='%s'>login изображение</a> или "
 "показывать <a href='%s'>Форму входа на сайт</a> напрямую"
 
-#: gourl.php:4279
+#: gourl.php:4608
 #, php-format
 msgid "See also - <a href='%s'>Installation Instruction</a>"
 msgstr "Смотрите также - <a href='%s'>инструкция по настройке</a>"
 
-#: gourl.php:4280
+#: gourl.php:4609
 #, php-format
 msgid ""
 "Alternatively, you can use free <a href='%s'>WooCommerce</a> plugin "
@@ -2852,20 +3038,20 @@ msgstr ""
 "оплата') с нашим дополнением - <a href='%s'>Woocommerce Биткоин/Альткоин "
 "шлюз</a>"
 
-#: gourl.php:4292
+#: gourl.php:4621
 msgid "Total products"
 msgstr "Всего продуктов"
 
-#: gourl.php:4292 gourl.php:4293 gourl.php:4294 gourl.php:4295
+#: gourl.php:4621 gourl.php:4622 gourl.php:4623 gourl.php:4624
 msgid "products"
 msgstr "продукты"
 
-#: gourl.php:4340
+#: gourl.php:4669
 #, php-format
 msgid "Invalid product id '%s' -"
 msgstr "Недопустимый id продукта «%s» -"
 
-#: gourl.php:4385 gourl.php:5468
+#: gourl.php:4714 gourl.php:5811
 msgid ""
 "You need first to login or register on the website to make Bitcoin/Altcoin "
 "Payments"
@@ -2873,23 +3059,23 @@ msgstr ""
 "Вам нужно сначала войти или зарегистрироваться на сайте чтобы сделать платеж "
 "а биткоинах/альткоинах"
 
-#: gourl.php:4477
+#: gourl.php:4806
 msgid "Cryptcoin Payment Box Disabled"
 msgstr "Платежи в криптовалюте отключены"
 
-#: gourl.php:4482
+#: gourl.php:4811
 msgid "Cryptcoin Payment Box Preview"
 msgstr "Payment Box предпросмотр"
 
-#: gourl.php:4631 gourl.php:6173 gourl.php:6193
+#: gourl.php:4979 gourl.php:6561 gourl.php:6581
 msgid "GMT"
 msgstr "GMT"
 
-#: gourl.php:4642
+#: gourl.php:4990
 msgid "All Received Payments"
 msgstr "Все полученные платежи"
 
-#: gourl.php:4647
+#: gourl.php:4995
 #, php-format
 msgid ""
 "Notes: Please wait bitcoin/altcoin transaction confirmations (column "
@@ -2904,14 +3090,14 @@ msgstr ""
 "необходим для предотвращения <a target='_blank' href='%s'>двойной траты тех "
 "же денег</a> , потому что кто-то может время от времени пытаться сделать это."
 
-#: gourl.php:4657
+#: gourl.php:5005
 #, php-format
 msgid ""
 "GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>CONFIRMED</b>"
 msgstr ""
 "GoUrl.io Live Статус: ID платежа <b>%s</b> транзакция - <b>ПОДТВЕРЖДЕНА</b>"
 
-#: gourl.php:4658
+#: gourl.php:5006
 #, php-format
 msgid ""
 "GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>NOT confirmed "
@@ -2920,43 +3106,43 @@ msgstr ""
 "GoUrl.io Live Статус: ID платежа <b>%s</b> транзакция - <b>не подтверждена "
 "еще</b>"
 
-#: gourl.php:4674
+#: gourl.php:5022
 msgid "Recognised"
 msgstr "Распознанные"
 
-#: gourl.php:4675 gourl.php:7515
+#: gourl.php:5023 gourl.php:7899
 msgid "Unrecognised"
 msgstr "Нераспознанные"
 
-#: gourl.php:4676
+#: gourl.php:5024
 msgid "Total Sum"
 msgstr "Общая сумма"
 
-#: gourl.php:4860
+#: gourl.php:5197
 msgid "Login"
 msgstr "Вход на сайт"
 
-#: gourl.php:4864
+#: gourl.php:5201
 msgid "username"
 msgstr "логин"
 
-#: gourl.php:4868
+#: gourl.php:5205
 msgid "password"
 msgstr "пароль"
 
-#: gourl.php:4871
+#: gourl.php:5208
 msgid "Log in"
 msgstr "Войти"
 
-#: gourl.php:4872
+#: gourl.php:5209
 msgid "Lost your password?"
 msgstr "Забыли пароль?"
 
-#: gourl.php:4873
+#: gourl.php:5210
 msgid "Free"
 msgstr "Бесплатно"
 
-#: gourl.php:5104
+#: gourl.php:5435
 #, php-format
 msgid ""
 "If you like <strong>GoUrl Bitcoin/Altcoins Gateway</strong> please leave us "
@@ -2965,7 +3151,7 @@ msgstr ""
 "Если вам нравится <strong>GoUrl Биткоин/Альткоин шлюз</strong>, пожалуйста "
 "поставьте нам рейтинг %s на %s. Огромное спасибо вам от GoUrl заранее!"
 
-#: gourl.php:5115
+#: gourl.php:5446
 #, php-format
 msgid ""
 "<strong>%s Plugin is almost ready to use!</strong> All you need to do is to "
@@ -2976,11 +3162,11 @@ msgstr ""
 "сделать это <a style='text-decoration:underline' href='%s'>обновить "
 "настройки плагина</a>"
 
-#: gourl.php:5115 gourl.php:5127 gourl.php:5297
+#: gourl.php:5446 gourl.php:5458 gourl.php:5628
 msgid "Official GoUrl Bitcoin Payment Gateway for Wordpress"
 msgstr "Официальный GoUrl Биткоин платёжный шлюз для Wordpress"
 
-#: gourl.php:5127
+#: gourl.php:5458
 #, php-format
 msgid ""
 "<strong>Please deactivate %s Plugin,<br>manually set folder %s permission to "
@@ -2993,71 +3179,76 @@ msgstr ""
 "strong><br><br>Если вы уже сделали этого раньше, вручную создайте три папки "
 "ниже и задайте им разрешения 0777:<br>-%s<br>-%s<br>-%s"
 
-#: gourl.php:5143 gourl.php:5144
+#: gourl.php:5474 gourl.php:5475
 msgid "GoUrl Bitcoin"
 msgstr "GoUrl Биткоин"
 
-#: gourl.php:5154 gourl.php:5155
+#: gourl.php:5485 gourl.php:5486
 msgid "&#149; Summary"
 msgstr "&#149; Краткий обзор"
 
-#: gourl.php:5163 gourl.php:5164
+#: gourl.php:5494 gourl.php:5495
 msgid "&#149; All Payments"
 msgstr "&#149; Все платежи"
 
-#: gourl.php:5172 gourl.php:5173
+#: gourl.php:5503 gourl.php:5504
 msgid "&#149; Pay-Per-Product"
 msgstr "&#149; Pay-Per-Product"
 
-#: gourl.php:5192 gourl.php:5193
+#: gourl.php:5523 gourl.php:5524
 msgid "&#149; Pay-Per-Download"
 msgstr "&#149; Pay-Per-Download"
 
-#: gourl.php:5211 gourl.php:5212
+#: gourl.php:5542 gourl.php:5543
 msgid "&#149; Pay-Per-View"
 msgstr "&#149; Pay-Per-View"
 
-#: gourl.php:5221 gourl.php:5222
+#: gourl.php:5552 gourl.php:5553
 msgid "&#149; Pay-Per-Membership"
 msgstr "&#149; Pay-Per-Membership"
 
-#: gourl.php:5231 gourl.php:5232
+#: gourl.php:5562 gourl.php:5563
 msgid "Premium Users"
 msgstr "Премиум польз-ли"
 
-#: gourl.php:5240 gourl.php:5241
+#: gourl.php:5571 gourl.php:5572
 msgid "________________"
 msgstr "________________"
 
-#: gourl.php:5258 gourl.php:5259
+#: gourl.php:5589 gourl.php:5590
 msgid "Add-ons"
 msgstr "Дополнения"
 
-#: gourl.php:5267 gourl.php:5268
+#: gourl.php:5598 gourl.php:5599
 msgid "Contacts"
 msgstr "Контакты"
 
-#: gourl.php:5293
+#: gourl.php:5624
 msgid "GoUrl Pay-Per-Download (Paid File Downloads)"
 msgstr "GoUrl Pay-Per-Download (платные скачивания файлов)"
 
-#: gourl.php:5294
+#: gourl.php:5625
 msgid "GoUrl Pay-Per-View (Anonymous Access to Premium Pages/Video)"
 msgstr "GoUrl Pay-Per-View (Анонимный доступ к премиум страницам/видео)"
 
-#: gourl.php:5295
+#: gourl.php:5626
 msgid "GoUrl Premium Pay-Per-Membership"
 msgstr "GoUrl премиум Pay-Per-Membership"
 
-#: gourl.php:5296
+#: gourl.php:5627
 msgid "GoUrl Pay-Per-Product (selling online)"
 msgstr "GoUrl Pay-Per-Product (продажи онлайн)"
 
-#: gourl.php:5299
+#: gourl.php:5630
 msgid "CRYPTO-CURRENCY PAYMENT GATEWAY"
 msgstr "КРИПТО-ВАЛЮТЫ ПЛАТЕЖНЫЙ ШЛЮЗ"
 
-#: gourl.php:5319
+#: gourl.php:5654
+#, php-format
+msgid "Cannot upload file '%s' on server. You should be ADMIN user!"
+msgstr ""
+
+#: gourl.php:5658
 #, php-format
 msgid ""
 "Cannot upload file '%s' on server. Alternatively, you can upload your file "
@@ -3066,13 +3257,21 @@ msgstr ""
 "Невозможно загрузить файл «%s» на сервер. Альтернативно, вы можете загрузить "
 "свой файл «%s» с помощью FTP File Manager"
 
-#: gourl.php:5320
+#: gourl.php:5659
 #, php-format
 msgid "Invalid image file '%s', supported *.gif, *.jpg, *.png files only"
 msgstr ""
 "Недопустимое изображение «%s», поддерживаемые форматы *.gif, *.jpg, *.png"
 
-#: gourl.php:5337
+#: gourl.php:5660
+#, php-format
+msgid ""
+"Invalid file '%s', supported *.jpg, *.png, *.gif, *.mp3, *.aac, *.ogg, *."
+"avi, *.mov, *.mp4, *.mkv, *.txt, *.doc, *.pdf, *.iso, *.7z, *.rar, *.zip "
+"files only"
+msgstr ""
+
+#: gourl.php:5680
 #, php-format
 msgid ""
 "Cannot move file '%s' to directory '%s' on server. Please check directory "
@@ -3081,28 +3280,28 @@ msgstr ""
 "Не удается переместить файл «%s» в каталог «%s» на сервере. Пожалуйста, "
 "проверьте права доступа к директориям"
 
-#: gourl.php:5340
+#: gourl.php:5683
 #, php-format
 msgid "Your Featured Image %s has been uploaded <strong>successfully</strong>"
 msgstr "Ваше изображение %s было загружено <strong>успешно</strong>"
 
-#: gourl.php:5347
+#: gourl.php:5690
 #, php-format
 msgid "Your File %s has been uploaded <strong>successfully</strong>"
 msgstr "Ваше файл %s был загружен <strong>успешно</strong>"
 
-#: gourl.php:5347
+#: gourl.php:5690
 #, php-format
 msgid "New File Name is <strong>%s</strong>"
 msgstr "Новое имя файла <strong>%s</strong>"
 
-#: gourl.php:5435
+#: gourl.php:5778
 msgid "Error. Please place in variable $YourPluginName - your plugin name"
 msgstr ""
 "Ошибка. Пожалуйста, поместите в переменную $YourPluginName - имя вашего "
 "плагина"
 
-#: gourl.php:5436
+#: gourl.php:5779
 #, php-format
 msgid ""
 "Error. Invalid plugin name - %s. Size: 5-17 symbols. Allowed symbols: a.."
@@ -3111,7 +3310,7 @@ msgstr ""
 "Ошибка. Неверное имя плагина - %s. Размер: 5-17 символов. Допускается "
 "символы:... Z0... 9_-"
 
-#: gourl.php:5437
+#: gourl.php:5780
 msgid ""
 "Error. Please change plugin name. Plugin name can not begin with: 'file..', "
 "'product..', 'pay..', 'membership..', 'user..'"
@@ -3119,29 +3318,29 @@ msgstr ""
 "Ошибка. Пожалуйста, измените название плагина. Имя плагина не может "
 "начинаться с: 'file..', 'product..', 'pay..', 'membership..', 'user..'"
 
-#: gourl.php:5438
+#: gourl.php:5781
 msgid ""
 "Error. Please change plugin name. Plugin name can not use in name '..gourl..'"
 msgstr ""
 "Ошибка. Пожалуйста, измените название плагина. Название плагина можно не "
 "использовать '...gourl..'"
 
-#: gourl.php:5442
+#: gourl.php:5785
 #, php-format
 msgid "Error. Invalid amount value - %s. Min value for USD: 0.01"
 msgstr "Ошибка. Недопустимое значение - %s. Мин значение для USD: 0.01"
 
-#: gourl.php:5443
+#: gourl.php:5786
 #, php-format
 msgid "Error. Invalid amount value - %s. Min value: 0.0001"
 msgstr "Ошибка. Недопустимое значение - %s. Мин значение: 0.0001"
 
-#: gourl.php:5444
+#: gourl.php:5787
 #, php-format
 msgid "Error. Invalid amountCurrency - %s. Allowed: USD, %s"
 msgstr "Ошибка. Недопустимое amountCurrency - %s. Допускаются: USD, %s"
 
-#: gourl.php:5449
+#: gourl.php:5792
 #, php-format
 msgid ""
 "Error. Invalid Order ID - %s. Max size: 32 symbols. Allowed symbols: a.."
@@ -3150,7 +3349,7 @@ msgstr ""
 "Ошибка. Недопустимое Order ID - %s. Макс размер: 32 символа. Допускаются "
 "символы: a..Z0..9_-"
 
-#: gourl.php:5454
+#: gourl.php:5797
 #, php-format
 msgid ""
 "Error. Invalid period value - %s. Allowed: NOEXPIRY, 1..90 HOUR, 1..90 DAY, "
@@ -3159,32 +3358,32 @@ msgstr ""
 "Ошибка. Недопустимый период - %s. Допускается: NOEXPIRY, 1..90 HOUR, 1..90 "
 "DAY, 1..90 WEEK, 1..90 MONTH; Пример: 2 DAYS"
 
-#: gourl.php:5458
+#: gourl.php:5801
 #, php-format
 msgid "Error. Invalid language - %s. Allowed: %s"
 msgstr "Ошибка. Недопустимый язык - %s. Допускаются: %s"
 
-#: gourl.php:5461
+#: gourl.php:5804
 #, php-format
 msgid "Error. Invalid Coin - %s. Allowed: %s"
 msgstr "Ошибка. Недопустимая монета - %s. Допускаются: %s"
 
-#: gourl.php:5464
+#: gourl.php:5807
 msgid "Error. Invalid affiliate_key, you can leave it empty"
 msgstr "Ошибка. Недопустимый affiliate_key, вы можете оставить его пустым"
 
-#: gourl.php:5467
+#: gourl.php:5810
 #, php-format
 msgid "Error. Invalid User ID - %s. Allowed numeric values or 'guest' value"
 msgstr ""
 "Ошибка. Недопустимый User ID - %s. Допускаются числовые значения или 'guest' "
 "значение"
 
-#: gourl.php:5468
+#: gourl.php:5811
 msgid "Error."
 msgstr "Ошибка."
 
-#: gourl.php:5470
+#: gourl.php:5813
 msgid ""
 "Error. Please try a different payment method. GoUrl Bitcoin Plugin not "
 "configured - need setup payment box keys on GoUrl Bitcoin Gateway Options "
@@ -3194,17 +3393,17 @@ msgstr ""
 "настроен - нужно ввести ключи для payment box на странице настроек GoUrl "
 "шлюза"
 
-#: gourl.php:5500
+#: gourl.php:5859
 #, php-format
 msgid "Invalid %s Public Key - %s"
 msgstr "Неверный %s Public Key - %s"
 
-#: gourl.php:5501
+#: gourl.php:5860
 #, php-format
 msgid "Invalid %s Private Key"
 msgstr "Неверный %s Private Key"
 
-#: gourl.php:5513
+#: gourl.php:5872
 #, php-format
 msgid ""
 "Error. Please enter Payment Private/Public Keys on GoUrl Options page for %s."
@@ -3212,7 +3411,7 @@ msgstr ""
 "Ошибка. Пожалуйста, введите Private/Public ключи на GoUrl странице "
 "параметров для %s."
 
-#: gourl.php:5644
+#: gourl.php:6024
 #, php-format
 msgid ""
 "Error! Cannot get exchange rates for %s. Please try a different "
@@ -3221,7 +3420,7 @@ msgstr ""
 "Ошибка! Невозможно получить обменный курс для %s. Попробуйте использовать "
 "другую криптовалюту."
 
-#: gourl.php:6008
+#: gourl.php:6396
 #, php-format
 msgid ""
 "Error. Please enable <a target='_blank' href='%s'>MBSTRING extension</a> in "
@@ -3230,59 +3429,59 @@ msgstr ""
 "Ошибка. Пожалуйста, включите <a target='_blank' href='%s'>MBSTRING "
 "дополнение</a> в PHP. <a target='_blank' href='%s'>Читайте здесь »</a>"
 
-#: gourl.php:6076
+#: gourl.php:6464
 msgid "TB"
 msgstr "Tб"
 
-#: gourl.php:6081
+#: gourl.php:6469
 msgid "GB"
 msgstr "Гб"
 
-#: gourl.php:6086
+#: gourl.php:6474
 msgid "MB"
 msgstr "Мб"
 
-#: gourl.php:6091
+#: gourl.php:6479
 msgid "kb"
 msgstr "кб"
 
-#: gourl.php:6095
+#: gourl.php:6483
 msgid "Bytes"
 msgstr "байтов"
 
-#: gourl.php:6172
+#: gourl.php:6560
 msgid "Bitcoin/altcoin Payments?"
 msgstr "Биткоин/альткоин платежи?"
 
-#: gourl.php:6173 gourl.php:6193 gourl.php:6231
+#: gourl.php:6561 gourl.php:6581 gourl.php:6619
 msgid "YES"
 msgstr "ДА"
 
-#: gourl.php:6173
+#: gourl.php:6561
 msgid "Latest payment"
 msgstr "Последний платеж"
 
-#: gourl.php:6174 gourl.php:6194 gourl.php:6232
+#: gourl.php:6562 gourl.php:6582 gourl.php:6620
 msgid "NO"
 msgstr "НЕТ"
 
-#: gourl.php:6192 gourl.php:6230
+#: gourl.php:6580 gourl.php:6618
 msgid "Premium Membership"
 msgstr "Премиум членство"
 
-#: gourl.php:6193 gourl.php:6231
+#: gourl.php:6581 gourl.php:6619
 msgid "Period"
 msgstr "Период"
 
-#: gourl.php:6194
+#: gourl.php:6582
 msgid "Manually Add Premium Membership"
 msgstr "Вручную создать Премиум членство"
 
-#: gourl.php:6437
+#: gourl.php:6825
 msgid "Please Login"
 msgstr "Пожалуйста, войдите"
 
-#: gourl.php:6458
+#: gourl.php:6846
 #, php-format
 msgid ""
 "<h1>Feed not available, please visit our <a href='%s'>Home Page</a>!</h1>"
@@ -3290,286 +3489,289 @@ msgstr ""
 "<h1>Feed не доступен, пожалуйста, посетите нашу <a href='%s'>домашнюю "
 "страницу</a>!</h1>"
 
-#: gourl.php:6652 gourl.php:6895 gourl.php:7161
+#: gourl.php:7046 gourl.php:7279 gourl.php:7545
 msgid "Show this coin transactions only"
 msgstr "Показать транзакции для этой монеты только"
 
-#: gourl.php:6661 gourl.php:6904
+#: gourl.php:7055 gourl.php:7288
 msgid "unlimited"
 msgstr "неограниченно"
 
-#: gourl.php:6669
+#: gourl.php:7063
 msgid "Registered Users"
 msgstr "Зарегистрированные пользователи"
 
-#: gourl.php:6692 gourl.php:6927 gourl.php:7406
+#: gourl.php:7086 gourl.php:7311 gourl.php:7790
 msgid "ID"
 msgstr "ID"
 
-#: gourl.php:6693 gourl.php:6928
+#: gourl.php:7087 gourl.php:7312
 msgid "Acti-ve?"
 msgstr "Активно?"
 
-#: gourl.php:6694
+#: gourl.php:7088
 msgid "File Name"
 msgstr "Имя файла"
 
-#: gourl.php:6696
+#: gourl.php:7090
 msgid "File Size"
 msgstr "﻿Размер файла"
 
-#: gourl.php:6697
+#: gourl.php:7091
 msgid "Price USD"
 msgstr "Цена USD"
 
-#: gourl.php:6698 gourl.php:6931
+#: gourl.php:7092 gourl.php:7315
 msgid "Price in Coins"
 msgstr "Цена в монетах"
 
-#: gourl.php:6699
+#: gourl.php:7093
 msgid "Show FileName/Price?"
 msgstr "Показ. имя файла/цену?"
 
-#: gourl.php:6701 gourl.php:6933
+#: gourl.php:7095 gourl.php:7317
 msgid "Latest Received Payment, GMT"
 msgstr "Последний полученный платеж, GMT"
 
-#: gourl.php:6702 gourl.php:6934
+#: gourl.php:7096 gourl.php:7318
 msgid "Record Updated, GMT"
 msgstr "Запись обновлена, GMT"
 
-#: gourl.php:6703 gourl.php:6935 gourl.php:7412
+#: gourl.php:7097 gourl.php:7319 gourl.php:7796
 msgid "Record Created, GMT"
 msgstr "Запись создана, GMT"
 
-#: gourl.php:6706 gourl.php:6936
+#: gourl.php:7100 gourl.php:7320
 msgid "Payment Expiry Period"
 msgstr "Срок действия"
 
-#: gourl.php:6707 gourl.php:6937
+#: gourl.php:7101 gourl.php:7321
 msgid "Default Payment Box Coin"
 msgstr "Монета по умолчанию в Payment Box"
 
-#: gourl.php:6708 gourl.php:6938
+#: gourl.php:7102 gourl.php:7322
 msgid "Default Coin only?"
 msgstr "По умолч. монета только?"
 
-#: gourl.php:6709 gourl.php:6939
+#: gourl.php:7103 gourl.php:7323
 msgid "Default Box Language"
 msgstr "Язык по умолчанию"
 
-#: gourl.php:6760 gourl.php:6977
+#: gourl.php:7144 gourl.php:7361
 msgid "Edit"
 msgstr "Редактировать"
 
-#: gourl.php:6761 gourl.php:6978
+#: gourl.php:7145 gourl.php:7362
 msgid "Preview"
 msgstr "Предпросмотр"
 
-#: gourl.php:6930
+#: gourl.php:7314
 msgid "Price in USD"
 msgstr "Цена в USD"
 
-#: gourl.php:6941
+#: gourl.php:7325
 msgid "Email to Buyer?"
 msgstr "Email покупателю?"
 
-#: gourl.php:6942
+#: gourl.php:7326
 msgid "Email to Seller?"
 msgstr "Email продавцу?"
 
-#: gourl.php:7095
+#: gourl.php:7479
 msgid "User already downloaded this file from your website"
 msgstr "Пользователь уже скачал этот файл с вашего сайта"
 
-#: gourl.php:7095
+#: gourl.php:7479
 msgid "User not downloaded this file yet"
 msgstr "Пользователь не скачал этот файл еще"
 
-#: gourl.php:7103
+#: gourl.php:7487
 msgid "View Statistics"
 msgstr "Просмотр статистики"
 
-#: gourl.php:7116
+#: gourl.php:7500
 msgid "woocommerce"
 msgstr "woocommerce"
 
-#: gourl.php:7116 gourl.php:7117 gourl.php:7118 gourl.php:7122 gourl.php:7124
-#: gourl.php:7125 gourl.php:7127
+#: gourl.php:7500 gourl.php:7501 gourl.php:7502 gourl.php:7506 gourl.php:7508
+#: gourl.php:7509 gourl.php:7511
 msgid "order"
 msgstr "заказ"
 
-#: gourl.php:7117
+#: gourl.php:7501
 msgid "wp ecommerce"
 msgstr "wp ecommerce"
 
-#: gourl.php:7118
+#: gourl.php:7502
 msgid "jigoshop"
 msgstr "jigoshop"
 
-#: gourl.php:7122
+#: gourl.php:7506
 msgid "appthemes"
 msgstr "appthemes"
 
-#: gourl.php:7122
+#: gourl.php:7506
 msgid "escrow"
 msgstr "escrow"
 
-#: gourl.php:7124
+#: gourl.php:7508
 msgid "marketpress"
 msgstr "marketpress"
 
-#: gourl.php:7125
+#: gourl.php:7509
 msgid "pmpro"
 msgstr "pmpro"
 
-#: gourl.php:7126
+#: gourl.php:7510
 msgid "give"
 msgstr "give"
 
-#: gourl.php:7126
+#: gourl.php:7510
 msgid "donation"
 msgstr "пожертвование"
 
-#: gourl.php:7127
+#: gourl.php:7511
 msgid "edd"
 msgstr "edd"
 
-#: gourl.php:7138 gourl.php:7373
+#: gourl.php:7522 gourl.php:7757
 msgid "Guest"
 msgstr "Гость"
 
-#: gourl.php:7140 gourl.php:7375
+#: gourl.php:7524 gourl.php:7759
 msgid "wrong paid amount"
 msgstr "неправильно уплаченная сумма"
 
-#: gourl.php:7169
+#: gourl.php:7553
 msgid "Show Only Visitors from this Country"
 msgstr "Показать посетителей из этой страны только"
 
-#: gourl.php:7175
+#: gourl.php:7559
 msgid "Transaction Details"
 msgstr "Детали платежа"
 
-#: gourl.php:7180
+#: gourl.php:7564
 msgid "Wallet Details"
 msgstr "Бумажник детали"
 
-#: gourl.php:7208 gourl.php:7408
+#: gourl.php:7592 gourl.php:7792
 msgid "Payment ID"
 msgstr "Оплата ID"
 
-#: gourl.php:7209
+#: gourl.php:7593
 msgid "Payment Box ID"
 msgstr "Payment Box ID"
 
-#: gourl.php:7210
+#: gourl.php:7594
 msgid "Coin"
 msgstr "Монета"
 
-#: gourl.php:7211
+#: gourl.php:7595
 msgid "Order ID"
 msgstr "Заказ ID"
 
-#: gourl.php:7212
+#: gourl.php:7596
 msgid "Paid Amount"
 msgstr "Оплаченная сумма"
 
-#: gourl.php:7213
+#: gourl.php:7597
 msgid "Approximate in USD"
 msgstr "Приблизительно в USD"
 
-#: gourl.php:7214
+#: gourl.php:7598
 msgid "Unrecogn. Payment?"
 msgstr "Нераспозн. платёж?"
 
-#: gourl.php:7215
+#: gourl.php:7599
 msgid "User ID"
 msgstr "Пользователя ID"
 
-#: gourl.php:7216
+#: gourl.php:7600
 msgid "Transaction Time, GMT"
 msgstr "Время транзакции, GMT"
 
-#: gourl.php:7217
+#: gourl.php:7601
 msgid "User Location"
 msgstr "Местоположение пользователя"
 
-#: gourl.php:7218
+#: gourl.php:7602
 msgid "Confirmed Payment?"
 msgstr "Подтвержд. платёж?"
 
-#: gourl.php:7219
+#: gourl.php:7603
 msgid "User Downl. File?"
 msgstr "Польз. загрузил файл?"
 
-#: gourl.php:7220
+#: gourl.php:7604
 msgid "File Downloaded Time, GMT"
 msgstr "Время загрузки файла, GMT"
 
-#: gourl.php:7221
+#: gourl.php:7605
 msgid "Transaction ID"
 msgstr "Транзакции ID"
 
-#: gourl.php:7222
+#: gourl.php:7606
 msgid "Your GoUrl Wallet Address"
 msgstr "Ваш адрес GoUrl бумажника"
 
-#: gourl.php:7271
+#: gourl.php:7655
 msgid "Re-check Payment Status"
 msgstr "Повторно проверить статус платежа"
 
-#: gourl.php:7271
+#: gourl.php:7655
 msgid "Check"
 msgstr "Проверить"
 
-#: gourl.php:7384
+#: gourl.php:7768
 msgid "manually"
 msgstr "вручную"
 
-#: gourl.php:7409
+#: gourl.php:7793
 msgid "Premium Membership Start, GMT"
 msgstr "Дата начала премиум членства, GMT"
 
-#: gourl.php:7410
+#: gourl.php:7794
 msgid "Premium Membership End, GMT"
 msgstr "Дата окончания премиум членства, GMT"
 
-#: gourl.php:7411
+#: gourl.php:7795
 msgid "Premium Memb. Disabled?"
 msgstr "Премиум членство заблокировано?"
 
-#: gourl.php:7442
+#: gourl.php:7826
 msgid "Are you sure you want to DISABLE Premium Membership?"
 msgstr "Вы уверены, что вы хотите ЗАБЛОКИРОВАТЬ премиум членство?"
 
-#: gourl.php:7442
+#: gourl.php:7826
 msgid "Are you sure you want to ENABLE Premium Membership?"
 msgstr "Вы уверены, что вы хотите РАЗБЛОКИРОВАТЬ премиум членство?"
 
-#: gourl.php:7442
+#: gourl.php:7826
 msgid "Disable"
 msgstr "Отключить"
 
-#: gourl.php:7442
+#: gourl.php:7826
 msgid "Enable"
 msgstr "Включить"
 
-#: gourl.php:7443
+#: gourl.php:7827
 msgid "Are you sure you want to DELETE this record?"
 msgstr "Вы уверены, что хотите УДАЛИТЬ эту запись?"
 
-#: gourl.php:7443
+#: gourl.php:7827
 msgid "Delete"
 msgstr "Удалить"
 
-#: gourl.php:7444
+#: gourl.php:7828
 msgid "Profile"
 msgstr "Профиль"
 
-#: gourl.php:7514
+#: gourl.php:7898
 msgid "All Payments"
 msgstr "Все платежи"
+
+#~ msgid "Your File - cannot be empty"
+#~ msgstr "Ваш файл - не может быть пустым"
 
 #~ msgid ""
 #~ "<b>Testing environment</b>: You can use <a target='_blank' href='%s'>110 "
