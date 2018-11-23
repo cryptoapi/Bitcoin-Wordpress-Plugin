@@ -283,7 +283,7 @@ final class gourlclass
 	*/
 	public static function coin_names()
 	{
-		return array('BTC' => 'bitcoin', 'BCH' => 'bitcoincash', 'LTC' => 'litecoin', 'DASH' => 'dash', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'PPC' => 'peercoin', 'UNIT' => 'universalcurrency', 'MUE' => 'monetaryunit');
+		return array('BTC' => 'bitcoin', 'BCH' => 'bitcoincash', 'BSV' => 'bitcoinsv', 'LTC' => 'litecoin', 'DASH' => 'dash', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'PPC' => 'peercoin', 'UNIT' => 'universalcurrency', 'MUE' => 'monetaryunit');
 	}
 	
 	
@@ -292,7 +292,7 @@ final class gourlclass
 	*/
 	public static function coin_chain()
 	{
-		return array('bitcoin' => 'https://blockchain.info/', 'bitcoincash' => 'http://blockdozer.com/', 'litecoin' => 'https://bchain.info/LTC/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'https://chainz.cryptoid.info/pot/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'universalcurrency' => 'https://explorer.u-currency.com/');
+		return array('bitcoin' => 'https://blockchain.info/', 'bitcoincash' => 'http://blockdozer.com/', 'bitcoinsv' => 'https://bchsvexplorer.com/', 'litecoin' => 'https://bchain.info/LTC/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'https://chainz.cryptoid.info/pot/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'universalcurrency' => 'https://explorer.u-currency.com/');
 	}
 
 
@@ -301,7 +301,7 @@ final class gourlclass
 	*/
 	public static function coin_www()
 	{
-		return array('bitcoin' => 'https://bitcoin.org/', 'bitcoincash' => 'https://www.bitcoincash.org/', 'litecoin' => 'https://litecoin.org/', 'dash' => 'https://www.dashpay.io/', 'dogecoin' => 'http://dogecoin.com/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'universalcurrency' => 'https://www.u-currency.com/');
+		return array('bitcoin' => 'https://bitcoin.org/', 'bitcoincash' => 'https://www.bitcoincash.org/', 'bitcoinsv' => 'https://bitcoinsv.io/', 'litecoin' => 'https://litecoin.org/', 'dash' => 'https://www.dashpay.io/', 'dogecoin' => 'http://dogecoin.com/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'universalcurrency' => 'https://www.u-currency.com/');
 	}
 	
 	
@@ -333,7 +333,7 @@ final class gourlclass
 	
 	
 	/*
-	 *  15. Return paymet box custom image
+	 *  15. Return payment box custom image (need login / payment box disabled / etc)
 	*/
 	public function box_image($type = "plogin") // plogin, flogin, sold, pdisable, fdisable, nofile
 	{
@@ -344,6 +344,18 @@ final class gourlclass
 			return GOURL_DIR2."box/".$this->options[$type.'url'];
 		else
 			return plugins_url("/images/".$type.".png", __FILE__);  
+	}
+	
+	
+	
+	/*
+	 *  15b. Return your company logo for payment box 
+	 */
+	public function box_logo()
+	{
+	    if ($this->options['boxlogo'] == 1) return plugins_url('/images/your_logo.png', __FILE__);
+	    elseif ($this->options['boxlogo'] == 2 && $this->options['boxlogo_url'] && file_exists(GOURL_DIR."box/".$this->options['boxlogo_url'])) return GOURL_DIR2."box/".$this->options['boxlogo_url'];
+        else return "";
 	}
 	
 	
@@ -617,7 +629,7 @@ final class gourlclass
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content, custom <a href='%s'>actions</a>", GOURL), GOURL_ADMIN.GOURL.'paypermembership', plugins_url("/images/dir/membership_actions.txt", __FILE__))." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-membership-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc", GOURL), GOURL_ADMIN.GOURL.'products')." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-product-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.__("<a href='#addon'>Working with third-party plugins</a> - good support for third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)", GOURL).'</li>';
-		$tmp .= '<li> '.__("Support payments in Bitcoin, Bitcoin Cash, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", GOURL).'</li>';
+		$tmp .= '<li> '.__("Support payments in Bitcoin, Bitcoin Cash, Bitcoin SV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", GOURL).'</li>';
 		$tmp .= '<li> '.__("<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour)", GOURL).'</li>';
 		$tmp .= '<li> '.sprintf(__("Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> for You", GOURL), "https://gourl.io/view/contact/Contact_Us.html").'</li>';
 		$tmp .= "</ul>";
@@ -743,6 +755,7 @@ final class gourlclass
 
 		$btc = "1KPBVmXLeY6MCDMPJfKHcTnf4P2SW3b46U";
 		$bch = "15ZGAHwvwDiDhoDZtFjF3j5c5cpF8KFLZY";
+		$bsv = "17wDBhNE2syKCtUyFoFaLU4QVbtXG514Z3";
 		$ltc = "LarmyXoQpydpUCYHx9DZeYoxcQ4YzMfHDt";
 		$spd = "SiDHas473qf8JPJFvFLcNuAAnwXhxtvv9s";
 		$doge = "DNhHdAxV7CCqjPuwg2W4qTESd5jkF7iC1C";
@@ -775,6 +788,7 @@ final class gourlclass
 		$tmp .= "<h3>".__('Our Project Donation Addresses -', GOURL)."</h3>";
 		$tmp .= "<p>Bitcoin: &#160; <a href='bitcoin:".$btc."?label=Donation'>".$btc."</a></p>";
 		$tmp .= "<p>BitcoinCash: &#160; <a href='bitcoincash:".$bch."?label=Donation'>".$bch."</a></p>";
+		$tmp .= "<p>BitcoinSV: &#160; <a href='bitcoinsv:".$bsv."?label=Donation'>".$bsv."</a></p>";
 		$tmp .= "<p>Litecoin: &#160; <a href='litecoin:".$ltc."?label=Donation'>".$ltc."</a></p>";
 		$tmp .= "<p>Dash: &#160; <a href='dash:".$dash."?label=Donation'>".$dash."</a></p>";
 		$tmp .= "<p>Dogecoin: &#160; <a href='dogecoin:".$doge."?label=Donation'>".$doge."</a></p>";
@@ -827,7 +841,7 @@ final class gourlclass
 	private function get_settings()
 	{
 
-		$arr = array("box_type"=>"", "box_theme"=>"", "box_width"=>540, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"");
+	    $arr = array("box_type"=>"", "box_theme"=>"", "box_width"=>540, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"", "boxlogo"=>0, "boxlogo2"=>"", "boxlogo_url"=>"");
 		foreach($arr as $k => $v) $this->options[$k] = "";
 
 		foreach($this->custom_images as $k => $v)
@@ -859,6 +873,7 @@ final class gourlclass
 			if (!$this->options[$k."url"]) $this->options[$k] = 0;
 		}
 		
+		if ((!$this->options["boxlogo_url"] && $this->options["boxlogo"] == 2) || !in_array($this->options["boxlogo"], array(0, 1, 2))) $this->options["boxlogo"] = 0;
 		
 
 		// Additional Security - compare gourl public/private keys sha1 hash with hash stored in file $this->hash_url
@@ -962,6 +977,15 @@ final class gourlclass
 
 				}
 			}
+			
+			// upload company logo
+			$file = (isset($_FILES[GOURL."boxlogo2"]["name"]) && $_FILES[GOURL."boxlogo2"]["name"]) ? $_FILES[GOURL."boxlogo2"] : "";
+			if ($file)
+			{
+			    if ($this->options["boxlogo_url"] && file_exists(GOURL_DIR."box/".$this->options["boxlogo_url"])) unlink(GOURL_DIR."box/".$this->options["boxlogo_url"]);
+			    $this->options["boxlogo_url"] = $this->upload_file($file, "box");
+			}
+			
 			if ($this->record_errors) $this->errors = array_merge($this->errors, $this->record_errors); 
 		}
 
@@ -1111,7 +1135,7 @@ final class gourlclass
 		
 
 
-		$tmp .= '<tr><th colspan="2"><br><br><br><h3>'.__('Payment Box Settings', GOURL).'</h3>';
+		$tmp .= '<tr><th colspan="2" id="st"><br><br><br><h3>'.__('Payment Box Settings', GOURL).'</h3>';
 		if (!$this->errors) $tmp .= '<p><a href="'.GOURL_ADMIN.GOURL.'settings&testconnect=true" style="font-weight:normal" class="'.GOURL.'button button-secondary">'.__('Click to Test Connection to GoUrl.io Server', GOURL).'</a></p><br>';
 		$tmp .= '</th>';
 		$tmp .= '</tr>';
@@ -1147,13 +1171,26 @@ final class gourlclass
 		$tmp .= '</p>';
 
 		
-				
+		$preview = ' &#160; &#160; &#160; &#160; <a href="'.GOURL_ADMIN.GOURL.'payperview&example=2&preview=true#previewcrypto">'.__('Live Preview &#187;', GOURL).'</a>';
+		$tmp .= '<tr><th>'.__('Your Company Logo in Payment Box', GOURL).':</th><td>';
+		$tmp .= '<p><input type="radio" name="'.GOURL.'boxlogo" value="0" '.$this->chk($this->options['boxlogo'], 0).'> '.__('No Logo', GOURL).($this->options['boxlogo']==0?$preview:'').'</p>';
+		$tmp .= '<p><input type="radio" name="'.GOURL.'boxlogo" value="1" '.$this->chk($this->options['boxlogo'], 1).'> '.__('Example Logo', GOURL).($this->options['boxlogo']==1?$preview:' -').'</p>';
+		$tmp .= "<img src='".plugins_url('/images/your_logo.png', __FILE__)."' border='0'>";
+		$tmp .= '<p><input type="radio" name="'.GOURL.'boxlogo" value="2" '.$this->chk($this->options['boxlogo'], 2).'> '.__('Custom Image', GOURL).($this->options['boxlogo']==2?$preview:' -').'</p>';
+		if ($this->options['boxlogo_url'] && file_exists(GOURL_DIR."box/".$this->options['boxlogo_url'])) $tmp .= "<img style='max-width:200px;max-height:40px;' src='".GOURL_DIR2."box/".$this->options['boxlogo_url']."' border='0'>"; else $this->options['boxlogo_url'] = "";
+		$tmp .= "<input type='hidden' id='".GOURL."boxlogo_url' name='".GOURL."boxlogo_url' value='".htmlspecialchars($this->options['boxlogo_url'], ENT_QUOTES)."'>";
+		$tmp .= '<input type="file" accept="image/*" id="'.GOURL.'boxlogo2" name="'.GOURL.'boxlogo2" class="widefat"><br><em>'.__('Optimal size: 200x40px. Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
+		$tmp .= '</td></tr>';
+		
+		
 		
 		foreach ($this->coin_names as $k => $v)
 		{
 			$v2 = ucfirst($v);
-			if ($v2 == "Bitcoincash") $v2 = "Bitcoin Cash";
-			if ($k == "BCH") $k .= "/BCC";
+			if ($v2 == "Bitcoincash") $v2 = "Bitcoin Cash ABC";
+			if ($v2 == "Bitcoinsv")   $v2 = "Bitcoin SV";
+			if ($k == "BCH") $k .= "/BCHABC";
+			if ($k == "BSV") $k .= "/BCHSV";
 	
 			$tmp .= '<tr><th>'.$v2.' '.__('Payments', GOURL).':<br><a target="_blank" href="'.$this->coin_www[$v].'"><img title="'.$v2.' Payment API" src="'.plugins_url('/images/'.$v.'.png', __FILE__).'" border="0"></a></th>';
 			$tmp .= '<td>';
@@ -1896,7 +1933,7 @@ final class gourlclass
 			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'files&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			echo "<div class='".GOURL."intro postbox'>";
 			echo '<a style="float:right" target="_blank" href="https://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, BitcoinCash, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
+			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, BitcoinCash, BitcoinSV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
 			echo '<p>'.sprintf(__("Create <a href='%s'>New Paid File Downloads</a> and place new generated <a href='%s'>shortcode</a> on your public page/post. Done!", GOURL), GOURL_ADMIN.GOURL.'file', plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 			echo sprintf(__("<a href='%s'>Read more</a>", GOURL), GOURL_ADMIN.GOURL."#i3").'</p>';
 			echo '<p><b>-----------------<br>'.sprintf(__("Alternatively, you can use free <a href='%s'>Easy Digital Downloads</a> plugin (advanced digital selling plugin with Credit Cards/Paypal) with our <a href='%s'>EDD Bitcoin/Altcoin Gateway</a> addon", GOURL), admin_url('plugin-install.php?tab=search&type=term&s=Easy+Digital+Downloads+sell+complete+management+sales+charts+Email+Subscribers+csv'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+easy+digital+Downloads+edd')) . '</b></p>';
@@ -2132,7 +2169,7 @@ final class gourlclass
                     // Active Payment Box - jQuery
 
                     $box_html  = $this->bootstrap_scripts();
-                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, "", "default", 250, "", "curl");
+                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
 
                     // Re-test after receive json data from live server
                     $is_paid = $box->is_paid();
@@ -2915,7 +2952,8 @@ final class gourlclass
             // Active Payment Box - jQuery
 
             $box_html  = $this->bootstrap_scripts();
-            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, "", "default", 250, "", "curl");
+            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
+            
 
             // Re-test after receive json data from live server
             $is_paid = $box->is_paid();
@@ -3725,7 +3763,7 @@ final class gourlclass
             // Active Payment Box - jQuery
             
             $box_html  = $this->bootstrap_scripts();
-            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, "", "default", 250, "", "curl");
+            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
 
             // Re-test after receive json data from live server
             $is_paid = $box->is_paid();
@@ -4835,7 +4873,7 @@ final class gourlclass
                     // Active Payment Box - jQuery
                     
                     $box_html  = $this->bootstrap_scripts();
-                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, "", "default", 250, "", "curl");
+                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
 
                     // Re-test after receive json data from live server
                     $is_paid = $box->is_paid();
@@ -5655,11 +5693,11 @@ final class gourlclass
 		}
 		else
 		{
-    		if (!is_uploaded_file($file["tmp_name"])) $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. Alternatively, you can upload your file to '%s' using the FTP File Manager", GOURL), $file["name"], GOURL_DIR2.$dir);
-    		elseif (in_array($dir, array("images", "box")) && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__("Invalid image file '%s', supported *.gif, *.jpg, *.png files only", GOURL), $file["name"]);
-    		elseif (in_array($dir, array("files")) && !in_array($ext, array("jpg","jpeg","png","gif","mp3","aac","ogg","avi","mov","mp4","mkv","txt","doc","pdf","iso","7z","rar","zip"))) $this->record_errors[] = sprintf(__("Invalid file '%s', supported *.jpg, *.png, *.gif, *.mp3, *.aac, *.ogg, *.avi, *.mov, *.mp4, *.mkv, *.txt, *.doc, *.pdf, *.iso, *.7z, *.rar, *.zip files only", GOURL), $file["name"]);
-    		else
-    		{
+		    if (!is_uploaded_file($file["tmp_name"])) $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. Alternatively, you can upload your file to '%s' using the FTP File Manager", GOURL), $file["name"], GOURL_DIR2.$dir);
+		    elseif (in_array($dir, array("images", "box")) && !in_array($ext, array("jpg", "jpeg", "png", "gif"))) $this->record_errors[] = sprintf(__("Invalid image file '%s', supported *.gif, *.jpg, *.png files only", GOURL), $file["name"]);
+		    elseif (in_array($dir, array("files")) && !in_array($ext, array("jpg","jpeg","png","gif","mp3","aac","ogg","avi","mov","mp4","mkv","txt","doc","pdf","iso","7z","rar","zip"))) $this->record_errors[] = sprintf(__("Invalid file '%s', supported *.jpg, *.png, *.gif, *.mp3, *.aac, *.ogg, *.avi, *.mov, *.mp4, *.mkv, *.txt, *.doc, *.pdf, *.iso, *.7z, *.rar, *.zip files only", GOURL), $file["name"]);
+		    else
+		    {
     			if ($english) $fileName = preg_replace('/[^A-Za-z0-9\.\_\&]/', ' ', $fileName); // allowed english symbols only
     			else $fileName = preg_replace('/[\(\)\?\!\;\,\>\<\'\"\%\&]/', ' ', $fileName);
     
@@ -5691,7 +5729,7 @@ final class gourlclass
     
     				return $fileName;
     			}
-    		}
+		    }
 		}
 
 		return "";
@@ -5995,7 +6033,7 @@ final class gourlclass
             // Active Payment Box - jQuery
 
             $box_html  = $this->bootstrap_scripts();
-            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $default_coin, $default_language, $customtext, $icon_width, $qrcodesize, $showlanguages, "", "default", 250, $redirect, "curl") . "<br>";
+            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $default_coin, $default_language, $customtext, $icon_width, $qrcodesize, $showlanguages, $this->box_logo(), "default", 250, $redirect, "curl") . "<br>";
             
             // info function display_cryptobox_bootstrap ($coins = array(), $def_coin = "", $def_language = "en", $customtext = "", $coinImageSize = 70, $qrcodeSize = 200, $show_languages = true, $logoimg_path = "default", $resultimg_path = "default", $resultimgSize = 250, $redirect = "", $method = "ajax", $debug = false)
 
@@ -8191,7 +8229,14 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     if (isset($arr["BTC_LTC"]) && $arr["BTC_LTC"]["last"] > 0)
     {
         foreach ($arr as $k => $v)
-            if ($v["last"] > 0 && $gourl->left($k, "_") == "BTC" && $gourl->right($k, "_") == $altcoin) $price = sprintf('%.8f', $v["last"]);
+        {
+            $main = $gourl->left($k, "_");
+            $alt  = $gourl->right($k, "_");
+            if ($alt == "BCH") 		$alt = "oldBCH"; 	// not used any more on poloniex
+            if ($alt == "BCHABC") 	$alt = "BCH"; 		// using now
+            if ($alt == "BCHSV") 	$alt = "BSV"; 		// using now
+            if ($v["last"] > 0 && $main == "BTC" && $alt == $altcoin) $price = sprintf('%.8f', $v["last"]);
+        }
     }
 
      
@@ -8205,7 +8250,12 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
         if (isset($arr["success"]) && $arr["success"] == "1" && is_array($arr["result"]))
         {
             foreach ($arr["result"] as $k => $v)
-                if ($v["Last"] > 0 && $gourl->left($v["MarketName"], "-") == "BTC" && ($gourl->right($v["MarketName"], "-")=="BCC"?"BCH":$gourl->right($v["MarketName"], "-")) == $altcoin) $price = sprintf('%.8f', $v["Last"]);
+            {
+                $main = $gourl->left($v["MarketName"], "-");
+                $alt  = $gourl->right($v["MarketName"], "-");
+                if ($alt == "BCC") 	$alt = "BCH";
+                if ($v["Last"] > 0 && $main == "BTC" && $alt == $altcoin) $price = sprintf('%.8f', $v["Last"]);
+            }
         }
     }
     
@@ -8216,11 +8266,17 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     $data = gourl_get_url('https://www.coinexchange.io/api/v1/getmarketsummaries');
     $arr = json_decode($data, true);
     $coinexchangeIds = array('FTC' => 78, 'MUE' => 280, 'UNIT' => 305); // "MarketID":"305","MarketAssetName":"UnitCurrency"  from https://www.coinexchange.io/api/v1/getmarkets
+    // full list $coinexchangeIds = array('LTC' => 18, 'DOGE' => 21, 'FTC' => 78, 'MUE' => 280, 'DASH' => 281, 'UNIT' => 305, 'BCH' => 1018);
     
     if (isset($arr["success"]) && $arr["success"] == "1" && is_array($arr["result"]))
     {
         foreach ($arr["result"] as $k => $v)
-            if ($v["LastPrice"] > 0 && in_array($v["MarketID"], $coinexchangeIds) && array_search($v["MarketID"], $coinexchangeIds) == $altcoin) $price = sprintf('%.8f', $v["LastPrice"]);
+            if (in_array($v["MarketID"], $coinexchangeIds))
+            {
+                $main = "BTC";
+                $alt  = array_search($v["MarketID"], $coinexchangeIds);
+                if ($v["LastPrice"] > 0 &&  $alt == $altcoin) $price = sprintf('%.8f', $v["LastPrice"]);
+            }
     }
     
 
@@ -8241,5 +8297,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
    
-    return 0;
+    return 0;         
 }
