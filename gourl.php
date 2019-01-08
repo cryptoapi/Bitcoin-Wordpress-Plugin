@@ -6759,42 +6759,46 @@ function cryptobox_new_payment($paymentID, $arr, $box_status)
 		if (strpos($user_id, ".guest")) $user_id = "guest";
 	}
 	
+
+	$payment_details = array (
+	    "status"        	=> $arr["status"],
+	    "error" 			=> $arr["err"],
+	    "is_paid"			=> 1,
+	    
+	    "paymentID"     	=> intval($paymentID),
+	    "paymentDate"		=> $arr["datetime"], 				// GMT 2015-01-30 13:32:45
+	    "paymentTimestamp"	=> $arr["timestamp"], 				// 1422624765
+	    "paymentLink"		=> GOURL_ADMIN.GOURL."payments&s=payment_".$paymentID,
+	    "addr"       		=> $arr["addr"], 					// website admin cryptocoin wallet address
+	    "tx"            	=> $arr["tx"],						// transaction id, see also paymentDate
+	    "is_confirmed"     	=> intval($arr["confirmed"]), 		// confirmed transaction or not, need wait 10+ min for confirmation
+	    
+	    "amount"			=> $arr["amount"], 					// paid coins amount (bitcoin, litecoin, etc)
+	    "amountusd"			=> $arr["amountusd"],
+	    "coinlabel"			=> $arr["coinlabel"],
+	    "coinname"			=> strtolower($arr["coinname"]),
+	    
+	    "boxID"     		=> $arr["box"],
+	    "boxtype"    		=> $arr["boxtype"],
+	    "boxLink"    		=> "https://gourl.io/view/coin_boxes/".$arr["box"]."/statistics.html", // website owner have access only
+	    
+	    "orderID"       	=> $order_id,
+	    "userID"        	=> $user_id,
+	    "usercountry"		=> $arr["usercountry"],
+	    "userLink"        	=> (strpos($arr["user"], "user")===0 ? admin_url("user-edit.php?user_id=".$user_id) : "")
+	);
+	
+
+	// Hook - Execute user function cryptobox_after_new_payment  
+	do_action('cryptobox_after_new_payment', $user_id, $order_id, $payment_details, $box_status);
+	
 	
 	// Call IPN function
 	if ($func_callback && function_exists($func_callback))
 	{
-		$payment_details = array (
-						"status"        	=> $arr["status"],
-						"error" 			=> $arr["err"],
-						"is_paid"			=> 1,
-							
-						"paymentID"     	=> intval($paymentID),
-						"paymentDate"		=> $arr["datetime"], 				// GMT 2015-01-30 13:32:45
-						"paymentTimestamp"	=> $arr["timestamp"], 				// 1422624765
-						"paymentLink"		=> GOURL_ADMIN.GOURL."payments&s=payment_".$paymentID,
-						"addr"       		=> $arr["addr"], 					// website admin cryptocoin wallet address
-						"tx"            	=> $arr["tx"],						// transaction id, see also paymentDate
-						"is_confirmed"     	=> intval($arr["confirmed"]), 		// confirmed transaction or not, need wait 10+ min for confirmation
-							
-						"amount"			=> $arr["amount"], 					// paid coins amount (bitcoin, litecoin, etc)
-						"amountusd"			=> $arr["amountusd"],
-						"coinlabel"			=> $arr["coinlabel"],
-						"coinname"			=> strtolower($arr["coinname"]),
-							
-						"boxID"     		=> $arr["box"],
-						"boxtype"    		=> $arr["boxtype"],
-						"boxLink"    		=> "https://gourl.io/view/coin_boxes/".$arr["box"]."/statistics.html", // website owner have access only
-							
-						"orderID"       	=> $order_id,
-						"userID"        	=> $user_id,
-						"usercountry"		=> $arr["usercountry"],
-						"userLink"        	=> (strpos($arr["user"], "user")===0 ? admin_url("user-edit.php?user_id=".$user_id) : "")
-				);
-	
 		$func_callback($user_id, $order_id, $payment_details, $box_status);
 	}
-	
-	
+
 	
 	return true;
 }
