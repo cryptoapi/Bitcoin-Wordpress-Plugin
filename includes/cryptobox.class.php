@@ -1104,7 +1104,7 @@ class Cryptobox {
 	                 
 	     $tmp .= "<div class='card-body'>";
 
-	     if ($qrcodeSize) $tmp .= "<div class='".$ext."copy_address'><a href='#a'><img class='".$ext."qrcode_image' style='max-width:100%; height:auto; width:auto\9;' alt='qrcode' data-size='".intval($qrcodeSize)."' src='#'></a></div>";
+	     if ($qrcodeSize) $tmp .= "<div class='".$ext."copy_address'><a href='#a'><img class='".$ext."qrcode_image' style='max-width:".intval($qrcodeSize)."px; height:auto; width:auto\9;' alt='qrcode' data-size='".intval($qrcodeSize)."' src='#'></a></div>";
 	                     
 	     $tmp .= "<h1 class='mt-3 mb-4 pb-1 card-title ".$ext."copy_amount'><span class='".$ext."amount'>&#160;</span> <small class='text-muted'><span class='".$ext."coinlabel'></span></small></h1>";
 	     $tmp .= "<div class='lead ".$ext."copy_amount ".$ext."texts_send'></div>";
@@ -1225,10 +1225,10 @@ class Cryptobox {
 	     
 	     $tmp .= "<h1 class='display-4'>Raw JSON Data (from GoUrl.io payment gateway) -</h1>";
 	     $tmp .= "<br>";
-	     $tmp .= "<p class='lead'><b>PHP Language</b> - Please use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L747'>\$box->display_cryptobox_bootstrap (...)</a>; it generate customize mobile friendly bitcoin/altcoin payment box and automatically displays successful payment message (bootstrap4, json, your own logo, white label product, etc)</p>";
+	     $tmp .= "<p class='lead'><b>PHP Language</b> - Please use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L754'>\$box->display_cryptobox_bootstrap (...)</a>; it generate customize mobile friendly bitcoin/altcoin payment box and automatically displays successful payment message (bootstrap4, json, your own logo, white label product, etc)</p>";
 	     $tmp .= "<p class='lead'><b>ASP/Other Languages</b> - You can use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L320'>\$box->cryptobox_json_url()</a>; It generates url with your parameters to gourl.io payment gateway. ";
 	     $tmp .= "Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax (on the user side). ";
-	     $tmp .= "Or your server can receive JSON values through curl - function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L373'>\$box->get_json_values()</a>; and use it in your files/scripts directly without javascript when generating the webpage (on the server side).</p>";
+	     $tmp .= "Or your server can receive JSON values through curl - function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L374'>\$box->get_json_values()</a>; and use it in your files/scripts directly without javascript when generating the webpage (on the server side).</p>";
 	     $tmp .= "<p class='lead'><a target='_blank' href='" . $this->cryptobox_json_url() . "'>JSON data source &#187;</a></p>";
 	     
 	     $tmp .= "<div class='card card-body bg-light'>";
@@ -2274,6 +2274,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);                          
+		unset($v); unset($cryptobox_private_keys);     
 	}
 ?>
