@@ -2007,11 +2007,18 @@ class Cryptobox {
 				}
 			}
 			$mysqli = @mysqli_connect($dbhost, DB_USER, DB_PASSWORD, DB_NAME, $port, $socket);			
+			$err = (mysqli_connect_errno()) ? mysqli_connect_error() : "";
+			if ($err)
+			{
+				// try SSL connection
+				$mysqli = mysqli_init();
+				$mysqli->real_connect ($dbhost, DB_USER, DB_PASSWORD, DB_NAME, $port, $socket, MYSQLI_CLIENT_SSL);
+			}
 			if (mysqli_connect_errno())
 			{
 				echo "<br /><b>Error. Can't connect to your MySQL server.</b> You need to have PHP 5.2+ and MySQL 5.5+ with mysqli extension activated. <a href='http://crybit.com/how-to-enable-mysqli-extension-on-web-server/'>Instruction &#187;</a>\n";
 				if (!CRYPTOBOX_WORDPRESS) echo "<br />Also <b>please check DB username/password in file cryptobox.config.php</b>\n";
-				die("<br />Server has returned error - <b>".mysqli_connect_error()."</b>");
+				die("<br />Server has returned error - <b>".$err."</b>");
 			}
 			$mysqli->query("SET NAMES utf8");
 		}
@@ -2274,6 +2281,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);     
+		unset($v); unset($cryptobox_private_keys);         
 	}
 ?>

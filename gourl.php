@@ -76,7 +76,7 @@ final class gourlclass
 
 
 		// security data hash; you can change path / file location
-		$this->hash_url = GOURL_DIR."files/gourl.hash";
+		$this->hash_url = GOURL_PHP."/gourl.hash";
 	    
 
 		$this->coin_names 	= self::coin_names();
@@ -160,7 +160,7 @@ final class gourlclass
 		if (is_admin())
 		{
 			if ($this->errors && $this->page != 'gourlsettings') add_action('admin_notices', array(&$this, 'admin_warning'));
-			if (!file_exists(GOURL_DIR."files") || !file_exists(GOURL_DIR."images") || !file_exists(GOURL_DIR."lockimg")) add_action('admin_notices', array(&$this, 'admin_warning_reactivate'));
+			if (!file_exists(GOURL_DIR."files") || !file_exists(GOURL_DIR."images") || !file_exists(GOURL_DIR."lockimg") || !file_exists(GOURL_PHP)) add_action('admin_notices', array(&$this, 'admin_warning_reactivate'));
 			add_action('admin_menu', 			array(&$this, 'admin_menu'));
 			add_action('init', 					array(&$this, 'admin_init'));
 			add_action('admin_head', 			array(&$this, 'admin_header'), 15);
@@ -726,7 +726,7 @@ final class gourlclass
 		$tmp .= "<br><br><br><br><br><br><br>";
 		$tmp .= "<div class='gourltitle'>5. ".__('Adding Custom Actions after Payment has been received', GOURL)."</div>";
 		$tmp .= "<p><b>".__('Using for Pay-Per-Product, Pay-Per-Download, Pay-Per-View, Pay-Per-Membership only', GOURL)."</b></p>";
-		$tmp .= "<p id='gourl_successful_payment'>".sprintf(__("Optional - You can use additional actions after a payment has been received (for example create/update database records, etc) using gourl instant payment notification system. Simply edit php file <a href='%s'>gourl_ipn.php</a> in directory %s and add section with your order_ID in function <b>%s</b>.", GOURL), plugins_url('/images/dir/gourl_ipn.default.txt', __FILE__), GOURL_DIR2."files/", 'gourl_successful_payment(...)')." ";
+		$tmp .= "<p id='gourl_successful_payment'>".sprintf(__("Optional - You can use additional actions after a payment has been received (for example create/update database records, etc) using gourl instant payment notification system. Simply edit php file <a href='%s'>gourl_ipn.php</a> in directory %s and add section with your order_ID in function <b>%s</b>.", GOURL), plugins_url('/images/dir/gourl_ipn.default.txt', __FILE__), GOURL_PHP, 'gourl_successful_payment(...)')." ";
 		$tmp .= __("This function will appear every time when a new payment from any user is received successfully. Function gets user_ID - user who made payment, current order_ID (the same value as at the bottom of record edit page Pay-Per-Product, Pay-Per-Download, etc.) and payment details as array.", GOURL)."</p>";
 
 		$tmp .= "<p><a target='_blank' href='https://gourl.io/affiliate-bitcoin-wordpress-plugins.html'><img alt='".__('Example of PHP code', GOURL)."' src='".plugins_url('/images/output.png', __FILE__)."' border='0'></a></p>";
@@ -2169,7 +2169,7 @@ final class gourlclass
                     // Active Payment Box - jQuery
 
                     $box_html  = $this->bootstrap_scripts();
-                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
+                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 180, true, $this->box_logo(), "default", 250, "", "curl");
 
                     // Re-test after receive json data from live server
                     $is_paid = $box->is_paid();
@@ -2952,7 +2952,7 @@ final class gourlclass
             // Active Payment Box - jQuery
 
             $box_html  = $this->bootstrap_scripts();
-            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
+            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 180, true, $this->box_logo(), "default", 250, "", "curl");
             
 
             // Re-test after receive json data from live server
@@ -3763,7 +3763,7 @@ final class gourlclass
             // Active Payment Box - jQuery
             
             $box_html  = $this->bootstrap_scripts();
-            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
+            $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 180, true, $this->box_logo(), "default", 250, "", "curl");
 
             // Re-test after receive json data from live server
             $is_paid = $box->is_paid();
@@ -4873,7 +4873,7 @@ final class gourlclass
                     // Active Payment Box - jQuery
                     
                     $box_html  = $this->bootstrap_scripts();
-                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 200, true, $this->box_logo(), "default", 250, "", "curl");
+                    $box_html .= $box->display_cryptobox_bootstrap ($available_coins, $defCoin, $lang, "", 70, 180, true, $this->box_logo(), "default", 250, "", "curl");
 
                     // Re-test after receive json data from live server
                     $is_paid = $box->is_paid();
@@ -6462,8 +6462,7 @@ function gourl_retest_dir()
 	
 	if (!file_exists(GOURL_DIR."files")) wp_mkdir_p(GOURL_DIR."files");
 	if (!file_exists(GOURL_DIR."files/.htaccess")) copy($dir."files/.htaccess", GOURL_DIR."files/.htaccess");
-	if (!file_exists(GOURL_DIR."files/index.htm")) copy($dir."files/index.htm", GOURL_DIR."files/index.htm");
-	if (!file_exists(GOURL_DIR."files/gourl_ipn.php") || filesize(GOURL_DIR."files/gourl_ipn.php") == "4104") { copy($dir."gourl_ipn.default.txt", GOURL_DIR."files/gourl_ipn.php"); chmod(GOURL_DIR."files/gourl_ipn.php", 0777); }
+	if (!file_exists(GOURL_DIR."files/index.html")) copy($dir."files/index.html", GOURL_DIR."files/index.html");
 	
 	if (!file_exists(GOURL_DIR."lockimg")) wp_mkdir_p(GOURL_DIR."lockimg");
 	if (!file_exists(GOURL_DIR."lockimg/index.htm")) copy($dir."lockimg/index.htm", GOURL_DIR."lockimg/index.htm");
@@ -6483,6 +6482,24 @@ function gourl_retest_dir()
 			if (is_file($dir."images/".$file) && !in_array($file, array(".", "..")))
 			copy($dir."images/".$file, GOURL_DIR."images/".$file);
 	}
+	
+	if (!file_exists(GOURL_PHP)) wp_mkdir_p(GOURL_PHP);
+	if (!file_exists(GOURL_PHP."/.htaccess")) copy($dir."files/.htaccess", GOURL_PHP."/.htaccess");
+	if (!file_exists(GOURL_PHP."/index.html")) copy($dir."files/index.html", GOURL_PHP."/index.html");
+	if (!file_exists(GOURL_PHP."/gourl_ipn.php")) 
+	{ 
+	    if (file_exists(GOURL_DIR."files/gourl_ipn.php") && filesize(GOURL_DIR."files/gourl_ipn.php") != "4104") 
+	        copy(GOURL_DIR."files/gourl_ipn.php", GOURL_PHP."/gourl_ipn.php");
+	    else 
+	        copy($dir."gourl_ipn.default.txt", GOURL_PHP."/gourl_ipn.php");
+	    
+	    if (file_exists(GOURL_DIR."files/gourl_ipn.php"))  unlink(GOURL_DIR."files/gourl_ipn.php");
+	    if (file_exists(GOURL_DIR."files/gourl.hash"))     unlink(GOURL_DIR."files/gourl.hash");
+	    chmod(GOURL_PHP."/gourl.hash", 0755);
+	    chmod(GOURL_PHP."/gourl_ipn.php", 0755); 
+	}
+	
+	
 	
 	error_reporting($elevel);
 
@@ -6745,7 +6762,7 @@ function cryptobox_new_payment($paymentID, $arr, $box_status)
 			
 			if (!defined('GOURL_IPN'))  DEFINE('GOURL_IPN', true);
 			if (strpos($arr["order"], "membership") === 0) $arr["order"] = "membership";
-			include_once(GOURL_DIR."files/gourl_ipn.php");
+			include_once(GOURL_PHP."/gourl_ipn.php");
 			
 			$order_id		= $arr["order"];
 			$func_callback 	= "gourl_successful_payment";
