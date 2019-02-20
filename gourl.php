@@ -359,6 +359,17 @@ final class gourlclass
 	}
 	
 	
+	
+	/*
+	 *  15c.
+	 */
+	public function currencyconverterapi_key()
+	{
+	    return $this->options['currencyconverterapi_key'];
+	}
+	
+	
+	
 	/*
 	 *  16. Return transaction url to block explorer
 	*/
@@ -841,7 +852,7 @@ final class gourlclass
 	private function get_settings()
 	{
 
-	    $arr = array("box_type"=>"", "box_theme"=>"", "box_width"=>540, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"", "boxlogo"=>0, "boxlogo2"=>"", "boxlogo_url"=>"");
+	    $arr = array("box_type"=>"", "box_theme"=>"", "box_width"=>540, "box_height"=>230, "box_border"=>"", "box_style"=>"", "message_border"=>"", "message_style"=>"", "login_type"=>"", "rec_per_page"=>20, "popup_message"=>__('It is a Paid Download ! Please pay below', GOURL), "file_columns"=>"", "chart_reverse"=>"", "boxlogo"=>0, "boxlogo2"=>"", "boxlogo_url"=>"", "currencyconverterapi_key"=>"");
 		foreach($arr as $k => $v) $this->options[$k] = "";
 
 		foreach($this->custom_images as $k => $v)
@@ -989,6 +1000,18 @@ final class gourlclass
 			if ($this->record_errors) $this->errors = array_merge($this->errors, $this->record_errors); 
 		}
 
+		
+		// test currencyconverterapi.com api key
+		if ($this->options["currencyconverterapi_key"] && $this->options["currencyconverterapi_key"] != get_option(GOURL.'currencyconverterapi_key'))
+		{
+		    $val = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
+		    if ($val <= 0)
+		    {
+    		    $val2 = json_decode(gourl_get_url("https://api.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
+    		    if ($val2 <= 0) $this->errors[] = __('Invalid Currencyconverterapi.com Free/Premium API Key', GOURL);
+		    }
+		}
+		
 		
 		// system re-test
 		if (!function_exists( 'curl_init' )) 				$this->errors[] = sprintf(__("Error. Please enable <a target='_blank' href='%s'>CURL extension</a> in PHP. <a target='_blank' href='%s'>Read here &#187;</a>", GOURL), "http://php.net/manual/en/book.curl.php", "http://stackoverflow.com/questions/1347146/how-to-enable-curl-in-php-xampp");
@@ -1182,6 +1205,10 @@ final class gourlclass
 		$tmp .= '<input type="file" accept="image/*" id="'.GOURL.'boxlogo2" name="'.GOURL.'boxlogo2" class="widefat"><br><em>'.__('Optimal size: 200x40px. Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
 		$tmp .= '</td></tr>';
 		
+		$tmp .= '<tr><th><br>'.__('Free CurrencyConverterApi.com Key (optional)', GOURL).':</th>';
+		$txt2 = ($this->options['currencyconverterapi_key']) ? "&#160; and &#160; " . sprintf(__('<a target="_blank" href="%s">Test Your Free API Key Now &#187;</a>', GOURL), "https://free.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
+		$tmp .= '<td><br><input type="text" id="'.GOURL.'currencyconverterapi_key" name="'.GOURL.'currencyconverterapi_key" value="'.htmlspecialchars($this->options['currencyconverterapi_key'], ENT_QUOTES).'" class="widefat"><br><em>'.sprintf(__('if you accept payments other than USD, place free api key here. <a target="_blank" href="%s">Get free API key on currencyconverterapi.com</a>', GOURL), "https://free.currencyconverterapi.com/free-api-key").$txt2.' &#160; &#160; &#160; ('.__("you can use premium key also but you don't need it", GOURL).')</em><br><br><br></td>';
+		$tmp .= '</tr>';
 		
 		
 		foreach ($this->coin_names as $k => $v)
@@ -8007,7 +8034,7 @@ if (!function_exists('has_shortcode') && version_compare(get_bloginfo('version')
 /*
  *	XXIII. Get URL Data
  */
-function gourl_get_url( $url, $timeout = 20 )
+function gourl_get_url( $url, $timeout = 20, $ignore_httpcode = false )
 {
     $ch = curl_init();
     curl_setopt ($ch, CURLOPT_URL, $url);
@@ -8021,7 +8048,7 @@ function gourl_get_url( $url, $timeout = 20 )
     $httpcode 	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    return ($httpcode>=200 && $httpcode<300) ? $data : false;
+    return (($httpcode>=200 && $httpcode<300) || $ignore_httpcode) ? $data : false;
 }
 
 
@@ -8030,8 +8057,13 @@ function gourl_get_url( $url, $timeout = 20 )
  *	XXV. Convert USD to AUD, EUR to GBP, etc using live exchange rates websites
  *  Update interval in hours; default 1 hour
  */
-function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval = 1)
+function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval = 1, $error_info = false)
 {
+    global $gourl;
+    
+    $error  = "";
+    $currencyconverterapi_key = $gourl->currencyconverterapi_key();
+    
     $from_Currency = trim(strtoupper(urlencode($from_Currency)));
     $to_Currency   = trim(strtoupper(urlencode($to_Currency)));
     
@@ -8045,7 +8077,7 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     if ($from_Currency == "IRT") { $from_Currency = "IRR"; $amount = $amount * 10; } // fix for Iranian Toman; 1IRT = 10IRR
     
     
-    $key 	= GOURL.'_exchange_'.$from_Currency.'_'.$to_Currency;
+    $key 	= GOURL.'_exchange_'.preg_replace("/[^A-Za-z0-9]+/", "", $currencyconverterapi_key).'_'.$from_Currency.'_'.$to_Currency;
     
     
     
@@ -8058,7 +8090,11 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
         if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
+        
+        if (isset($arr["error"])) $error = $arr["error"];
+        if ($error_info) $total = array("val" => $total, "error" => $error); 
         return $total;
+        
     }
 
 
@@ -8124,13 +8160,20 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     }
     
     
-    // d. get rates from https://free.currencyconverterapi.com/api/v6/convert?q=BTC_EUR&compact=y
+    // d. get rates from https://free.currencyconverterapi.com/api/v6/convert?q=BTC_EUR&compact=ultra&apiKey=sample-api-key
     // ----------------
     if (!$val)
     {
         $key2 	= $from_Currency.'_'.$to_Currency;
-        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=y"), TRUE);
-        if (isset($data[$key2]["val"]) && $data[$key2]["val"] > 0) $val = $data[$key2]["val"];
+        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
+        if (isset($data[$key2]) && $data[$key2] > 0) $val = $data[$key2];
+        elseif(isset($data["error"])) 
+        {
+            $error = $data["error"] . "<br>-> <a style='text-decoration: underline;' href='".admin_url('admin.php?page=gourlsettings#'.GOURL.'boxlogo2')."'>" . __("Please check/save your free currencyconverterapi.com key on GoUrl plugin Settings page", GOURL )."</a>";
+            // try premium key
+            $data = json_decode(gourl_get_url("https://api.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
+            if (isset($data[$key2]) && $data[$key2] > 0) { $val = $data[$key2]; $error = ""; }
+        }
     }
     
     
@@ -8139,13 +8182,14 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
     // ------------
     if ($val > 0)
     {
-        $arr = array("price" => $val, "time" => strtotime("now"));
+        $arr = array("price" => $val, "error" => $error, "time" => strtotime("now"));
         update_option($key, $arr);
         
         $total = $val*$amount;
         if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
+        if ($error_info) $total = array("val" => $total, "error" => $error);
         return $total;
     }
     
@@ -8155,10 +8199,15 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
         if ($to_Currency=="BTC" || $total<0.01) $total = sprintf('%.5f', round($total, 5));
         else $total = round($total, 2);
         if ($total == 0) $total = sprintf('%.5f', 0.00001);
+        if ($error_info) $total = array("val" => $total, "error" => $error);
         return $total;
     }
 
-    return 0;
+    // no valid result
+    $total = 0;
+    if ($error_info) $total = array("val" => $total, "error" => $error);
+    
+    return $total;
 }
 
 
@@ -8318,5 +8367,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
    
-    return 0;         
+    return 0;   
 }
