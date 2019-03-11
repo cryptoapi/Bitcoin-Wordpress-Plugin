@@ -691,7 +691,8 @@ final class gourlclass
 		$tmp .= "<li> ".sprintf(__("Free <a target='_blank' href='%s'>Register</a> or <a target='_blank' href='%s'>Login</a> on GoUrl.io - Global Bitcoin Payment Gateway", GOURL), "https://gourl.io/view/registration", "https://gourl.io/info/memberarea/My_Account.html")."</li>";
 		$tmp .= "<li> ".sprintf(__("Create <a target='_blank' href='%s'>Payment Box</a> Records for all coin types you will accept on your website", GOURL), "https://gourl.io/editrecord/coin_boxes/0")."</li>";
 		$tmp .= "<li> ".sprintf(__("You will need to place <a href='%s'>Callback URL</a> on Gourl.io, please use: <b>%s</b>", GOURL), plugins_url('/images/callback_field.png', __FILE__), trim(get_site_url(), "/ ")."/?cryptobox.callback.php")."</li>";
-		$tmp .= "<li> ".sprintf(__("You will get Free GoUrl <a href='%s'>Public/Private keys</a> from new created <a target='_blank' href='%s'>payment box</a>, save them on <a href='%s'>Settings Page</a>", GOURL), plugins_url('/images/keys_field.png', __FILE__), "https://gourl.io/editrecord/coin_boxes/0", GOURL_ADMIN.GOURL."settings")."</li>";
+		$tmp .= "<li> ".sprintf(__("You will get Free GoUrl <a href='%s'>Public/Private keys</a> from new created <a target='_blank' href='%s'>payment box</a>, save them on <a href='%s'>Settings Page</a>", GOURL), plugins_url('/images/keys_field.png', __FILE__), "https://gourl.io/editrecord/coin_boxes/0", GOURL_ADMIN.GOURL."settings#".GOURL."currencyconverterapi_key")."</li>";
+		$tmp .= "<li> ".sprintf(__("Optional - add your <a href='%s'>company logo</a> to payment box on <a href='%s'>Settings Page</a>", GOURL), plugins_url('/images/compare_box.png', __FILE__), GOURL_ADMIN.GOURL."settings#".GOURL."box_theme")."</li>";
 		$tmp .= "</ul>";
 
 		$tmp .= "<p>".__("THAT'S IT! YOUR WEBSITE IS READY TO ACCEPT BITCOINS ONLINE!", GOURL)."</p>";
@@ -1174,7 +1175,7 @@ final class gourlclass
 
 		$tmp .= '<tr><th>'.__('Payment Box Theme', GOURL).':</th><td>';
 		$tmp .= '<p>';
-		$tmp .= '<select name="'.GOURL.'box_theme" >';
+		$tmp .= '<select id="'.GOURL.'box_theme" name="'.GOURL.'box_theme">';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], '').' value="">Default</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greyred').' value="greyred">LightGrey/Red</option>';
 		$tmp .= '<option '.$this->sel($this->options['box_theme'], 'greygreen').' value="greygreen">DarkGrey/Green</option>';
@@ -8366,6 +8367,6 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
         return $arr2["price"];
     }
      
-   
-    return 0;   
+ 
+    return 0;
 }
