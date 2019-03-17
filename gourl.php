@@ -164,7 +164,8 @@ final class gourlclass
 			add_action('admin_menu', 			array(&$this, 'admin_menu'));
 			add_action('init', 					array(&$this, 'admin_init'));
 			add_action('admin_head', 			array(&$this, 'admin_header'), 15);
-
+			add_filter('plugin_row_meta',       array(&$this, 'admin_plugin_meta'), 10, 2 );
+			
 			if (strpos($this->page, GOURL) === 0)  add_action("admin_enqueue_scripts", array(&$this, "admin_scripts"));
 
 			if (in_array($this->page, array("gourl", "gourlpayments", "gourlproducts", "gourlproduct", "gourlfiles", "gourlfile", "gourlpayperview", "gourlpaypermembership", "gourlpaypermembership_users", "gourlpaypermembership_user", "gourlsettings"))) add_action('admin_footer_text', array(&$this, 'admin_footer_text'), 15);
@@ -2249,7 +2250,7 @@ final class gourlclass
                     $box->set_status_processed();
 
                     // Flush Cache
-                    ob_flush();
+                    if (ob_get_level()) ob_flush();
 
                     die;
                 }
@@ -5481,7 +5482,7 @@ final class gourlclass
 				$this->download_file($filePath);
 					
 				// Flush Cache
-				ob_flush();
+				if (ob_get_level()) ob_flush();
 				
 				die;
 			}	
@@ -5492,6 +5493,26 @@ final class gourlclass
 	
 	
 
+
+	/*
+	 *  66b.
+	 */
+	public function admin_plugin_meta( $links, $file ) {
+	    
+	    if ( strpos( $file, 'gourl_wordpress.php' ) !== false ) {
+	        
+	        // Set link for Reviews.
+	        $new_links = array('<a style="color:#0073aa" href="https://wordpress.org/support/plugin/gourl-bitcoin-payment-gateway-paid-downloads-membership/reviews/?filter=5" target="_blank"><span class="dashicons dashicons-thumbs-up"></span> ' . __( 'Vote!', GOURL ) . '</a>',
+	        );
+	        
+	        $links = array_merge( $links, $new_links );
+	    }
+	    
+	    return $links;
+	}
+	
+	
+	
 	
 	/*
 	 *  67.
@@ -5771,8 +5792,8 @@ final class gourlclass
 	*/
 	private function download_file($file)
 	{
-		// Erase Old Cache
-		ob_clean();
+		// Erase/turn off output buffering
+		if (ob_get_level()) ob_end_clean();
 
 		// Starting Download
 		$size = filesize($file);
@@ -8368,5 +8389,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
  
-    return 0;
+    return 0;   
 }

@@ -15,7 +15,7 @@
  * @example     https://gourl.io/lib/examples/example_customize_box.php    <----
  * @gitHub  	https://github.com/cryptoapi/Payment-Gateway
  * @license 	Free GPLv2
- * @version     2.1.5
+ * @version     2.1.6
  *
  *
  *  CLASS CRYPTOBOX - LIST OF METHODS:
@@ -79,7 +79,7 @@ if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
 
-define("CRYPTOBOX_VERSION", "2.1.5");
+define("CRYPTOBOX_VERSION", "2.1.6");
 
 // GoUrl supported crypto currencies
 define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dash', 'dogecoin', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit', 'universalcurrency')));
@@ -1782,9 +1782,10 @@ class Cryptobox {
 	 *
 	 * Currency Converter using live exchange rates websites
 	 * Example - convert_currency_live("EUR", "USD", 22.37) - convert 22.37euro to usd
-	 convert_currency_live("EUR", "BTC", 22.37) - convert 22.37euro to bitcoin
+	             convert_currency_live("EUR", "BTC", 22.37) - convert 22.37euro to bitcoin
+	   optional - currencyconverterapi_key you can get on https://free.currencyconverterapi.com/free-api-key
 	 */
-	function convert_currency_live($from_Currency, $to_Currency, $amount)
+	function convert_currency_live($from_Currency, $to_Currency, $amount, $currencyconverterapi_key = "")
 	{
 	    static $arr = array();
 	    
@@ -1888,8 +1889,9 @@ class Cryptobox {
 	    // ----------------
 	    if (!$val)
 	    {
-	        $data = json_decode(get_url_contents("https://free.currencyconverterapi.com/api/v6/convert?q=".$key."&compact=y"), TRUE);
-	        if (isset($data[$key]["val"]) && $data[$key]["val"] > 0) $val = $data[$key]["val"];
+	        $data = json_decode(get_url_contents("https://free.currencyconverterapi.com/api/v6/convert?q=".$key."&compact=ultra&apiKey=".$currencyconverterapi_key, 20, TRUE), TRUE);
+	        if (isset($data[$key]) && $data[$key] > 0) $val = $data[$key];
+	        elseif(isset($data["error"])) echo "<h1>Error in function convert_currency_live(...)! ". $data["error"] . "</h1>";
 	    }
 	    
 	    
@@ -1917,7 +1919,7 @@ class Cryptobox {
 	
 	/*	I. Get URL Data
 	*/
-	function get_url_contents( $url, $timeout = 20 )
+	function get_url_contents( $url, $timeout = 20, $ignore_httpcode = false )
 	{
 	    $ch = curl_init();
 	    curl_setopt ($ch, CURLOPT_URL, $url);
@@ -1931,7 +1933,7 @@ class Cryptobox {
 	    $httpcode 	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	    curl_close($ch);
 	
-	    return ($httpcode>=200 && $httpcode<300) ? $data : false;
+	    return (($httpcode>=200 && $httpcode<300) || $ignore_httpcode) ? $data : false;
 	}
 	
 	
@@ -2281,6 +2283,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);         
+		unset($v); unset($cryptobox_private_keys);                  
 	}
 ?>
