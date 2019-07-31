@@ -1102,7 +1102,7 @@ final class gourlclass
 
         if (!$this->errors && ((isset($_GET['testconnect']) && $_GET["testconnect"] == "true") || $this->updated))
         {
-            if (!is_admin()) $message .= "<div class='error'><p>".__('Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!', GOURL)."</p></div>";
+            if (!(is_admin() && current_user_can('administrator'))) $message .= "<div class='error'><p>".__('Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!', GOURL)."</p></div>";
             else 
             {
                 $messages = $this->test_gourl_connection( $this->updated );
@@ -5736,7 +5736,7 @@ final class gourlclass
 		if (mb_strpos($ext, " ")!==false)         $ext = str_replace(" ", "_", $ext);
 		if (mb_strpos($fileName, ".")!==false)    $fileName = str_replace(".", "_", $fileName);
 
-		if (!is_admin())
+		if (!(is_admin() && current_user_can('administrator')))
 		{
 		    $this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. You should be ADMIN user!", GOURL), $file["name"]);
 		}
@@ -8389,5 +8389,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
      
  
-    return 0;   
+    return 0;     
 }
