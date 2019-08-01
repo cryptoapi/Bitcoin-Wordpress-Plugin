@@ -985,7 +985,7 @@ final class gourlclass
 				$file = (isset($_FILES[GOURL.$k."2"]["name"]) && $_FILES[GOURL.$k."2"]["name"]) ? $_FILES[GOURL.$k."2"] : "";
 				if ($file) 
 				{
-					if ($this->options[$k."url"] && file_exists(GOURL_DIR."box/".$this->options[$k.'url'])) unlink(GOURL_DIR."box/".$this->options[$k.'url']);
+				    if ($this->options[$k."url"] && file_exists(GOURL_DIR."box/".$this->options[$k.'url']) && current_user_can('administrator')) unlink(GOURL_DIR."box/".$this->options[$k.'url']);
 					$this->options[$k."url"] = $this->upload_file($file, "box");
 
 				}
@@ -995,7 +995,7 @@ final class gourlclass
 			$file = (isset($_FILES[GOURL."boxlogo2"]["name"]) && $_FILES[GOURL."boxlogo2"]["name"]) ? $_FILES[GOURL."boxlogo2"] : "";
 			if ($file)
 			{
-			    if ($this->options["boxlogo_url"] && file_exists(GOURL_DIR."box/".$this->options["boxlogo_url"])) unlink(GOURL_DIR."box/".$this->options["boxlogo_url"]);
+			    if ($this->options["boxlogo_url"] && file_exists(GOURL_DIR."box/".$this->options["boxlogo_url"]) && current_user_can('administrator')) unlink(GOURL_DIR."box/".$this->options["boxlogo_url"]);
 			    $this->options["boxlogo_url"] = $this->upload_file($file, "box");
 			}
 			
@@ -8387,7 +8387,7 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     {
         return $arr2["price"];
     }
-     
+   
  
-    return 0;     
+    return 0;
 }
