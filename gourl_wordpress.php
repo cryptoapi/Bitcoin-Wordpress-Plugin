@@ -31,27 +31,27 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 $dir_arr = wp_upload_dir();
 
-DEFINE( 'GOURL', 				'gourl' );
-DEFINE( 'GOURL_PREVIEW', 		'gourladmin' );
-DEFINE( 'GOURL_VERSION', 		'1.4.19' );
-DEFINE( 'GOURL_ADMIN', 			admin_url( 'admin.php?page=' ) );
-DEFINE( 'GOURL_DIR',  			$dir_arr["basedir"]. '/' .GOURL.'/' );
-DEFINE( 'GOURL_DIR2', 			$dir_arr["baseurl"]. '/' .GOURL.'/' );
-DEFINE( 'GOURL_PHP',  			rtrim( WP_PLUGIN_DIR, '/ ' ). '/gourl-php' );
-DEFINE( 'GOURL_IMG', 			plugins_url( '/images/', __FILE__ ) );
-DEFINE( 'GOURL_BASENAME', 		plugin_basename( __FILE__ ) );
-DEFINE( 'GOURL_PERMISSION', 		'add_users' );
+define( 'GOURL', 				'gourl' );
+define( 'GOURL_PREVIEW', 		'gourladmin' );
+define( 'GOURL_VERSION', 		'1.4.19' );
+define( 'GOURL_ADMIN', 			admin_url( 'admin.php?page=' ) );
+define( 'GOURL_DIR',  			$dir_arr["basedir"]. '/' .GOURL.'/' );
+define( 'GOURL_DIR2', 			$dir_arr["baseurl"]. '/' .GOURL.'/' );
+define( 'GOURL_PHP',  			rtrim( WP_PLUGIN_DIR, '/ ' ). '/gourl-php' );
+define( 'GOURL_IMG', 			plugins_url( '/images/', __FILE__ ) );
+define( 'GOURL_BASENAME', 		plugin_basename( __FILE__ ) );
+define( 'GOURL_PERMISSION', 		'add_users' );
 
-DEFINE( 'GOURL_TAG_DOWNLOAD',	'gourl-download' ); 		// [gourl-download id=1] 				- paid download tag
-DEFINE( 'GOURL_TAG_PRODUCT',		'gourl-product' ); 		// [gourl-product id=1] 				- paid product tag
-DEFINE( 'GOURL_TAG_VIEW',		'gourl-lock' ); 			// [gourl-lock img='image1.jpg'] 		- paid lock page tag
-DEFINE( 'GOURL_TAG_MEMBERSHIP',	'gourl-membership' ); 	// [gourl-membership img='image1.png'] 	- paid membership tag
-DEFINE( 'GOURL_TAG_MEMCHECKOUT',	'gourl-membership-checkout' ); 	// [gourl-membership-checkout img='image1.png'] 	- membership checkout page tag
+define( 'GOURL_TAG_DOWNLOAD',	'gourl-download' ); 		// [gourl-download id=1] 				- paid download tag
+define( 'GOURL_TAG_PRODUCT',		'gourl-product' ); 		// [gourl-product id=1] 				- paid product tag
+define( 'GOURL_TAG_VIEW',		'gourl-lock' ); 			// [gourl-lock img='image1.jpg'] 		- paid lock page tag
+define( 'GOURL_TAG_MEMBERSHIP',	'gourl-membership' ); 	// [gourl-membership img='image1.png'] 	- paid membership tag
+define( 'GOURL_TAG_MEMCHECKOUT',	'gourl-membership-checkout' ); 	// [gourl-membership-checkout img='image1.png'] 	- membership checkout page tag
 
-DEFINE( 'GOURL_LOCK_START',		'<!-- start_cryptopayment_box -->' );
-DEFINE( 'GOURL_LOCK_END',		'<!-- end_cryptopayment_box -->' );
+define( 'GOURL_LOCK_START',		'<!-- start_cryptopayment_box -->' );
+define( 'GOURL_LOCK_END',		'<!-- end_cryptopayment_box -->' );
 
-DEFINE( 'GOURL_RATES', json_encode( array(
+define( 'GOURL_RATES', json_encode( array(
 	'USD' => 'US Dollar',
 	'EUR' => 'Euro',
 	'GBP' => "British Pound",
@@ -76,7 +76,7 @@ DEFINE( 'GOURL_RATES', json_encode( array(
 	'TWD' => 'Taiwan New Dollar',
 	) ) );
 
-DEFINE( 'CRYPTOBOX_WORDPRESS', true );
+define( 'CRYPTOBOX_WORDPRESS', true );
 
 unset( $dir_arr );
 
