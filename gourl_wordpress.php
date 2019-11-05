@@ -35,17 +35,18 @@ define( 'GOURL', 				'gourl' );
 define( 'GOURL_PREVIEW', 		'gourladmin' );
 define( 'GOURL_VERSION', 		'1.4.19' );
 define( 'GOURL_ADMIN', 			admin_url( 'admin.php?page=' ) );
-define( 'GOURL_DIR',  			$dir_arr["basedir"]. '/' .GOURL.'/' );
-define( 'GOURL_DIR2', 			$dir_arr["baseurl"]. '/' .GOURL.'/' );
-define( 'GOURL_PHP',  			rtrim( WP_PLUGIN_DIR, '/ ' ). '/gourl-php' );
+define( 'GOURL_DIR',  			$dir_arr["basedir"] . '/' . GOURL . '/' );
+define( 'GOURL_DIR2', 			$dir_arr["baseurl"] . '/' . GOURL . '/' );
+define( 'GOURL_PHP',  			rtrim( WP_PLUGIN_DIR, '/ ' ) . '/gourl-php' );
+define( 'GOURL_PATH', 			dirname( __FILE__ ) );
 define( 'GOURL_IMG', 			plugins_url( '/images/', __FILE__ ) );
 define( 'GOURL_BASENAME', 		plugin_basename( __FILE__ ) );
-define( 'GOURL_PERMISSION', 		'add_users' );
+define( 'GOURL_PERMISSION',		'add_users' );
 
-define( 'GOURL_TAG_DOWNLOAD',	'gourl-download' ); 		// [gourl-download id=1] 				- paid download tag
+define( 'GOURL_TAG_DOWNLOAD',		'gourl-download' ); 		// [gourl-download id=1] 				- paid download tag
 define( 'GOURL_TAG_PRODUCT',		'gourl-product' ); 		// [gourl-product id=1] 				- paid product tag
-define( 'GOURL_TAG_VIEW',		'gourl-lock' ); 			// [gourl-lock img='image1.jpg'] 		- paid lock page tag
-define( 'GOURL_TAG_MEMBERSHIP',	'gourl-membership' ); 	// [gourl-membership img='image1.png'] 	- paid membership tag
+define( 'GOURL_TAG_VIEW',			'gourl-lock' ); 			// [gourl-lock img='image1.jpg'] 		- paid lock page tag
+define( 'GOURL_TAG_MEMBERSHIP',		'gourl-membership' ); 	// [gourl-membership img='image1.png'] 	- paid membership tag
 define( 'GOURL_TAG_MEMCHECKOUT',	'gourl-membership-checkout' ); 	// [gourl-membership-checkout img='image1.png'] 	- membership checkout page tag
 
 define( 'GOURL_LOCK_START',		'<!-- start_cryptopayment_box -->' );
@@ -81,7 +82,7 @@ define( 'CRYPTOBOX_WORDPRESS', true );
 unset( $dir_arr );
 
 
-require_once( plugin_dir_path( __FILE__ ). '/gourl.php' );
+require_once( GOURL_PATH . '/gourl.php' );
 
 
 register_activation_hook( __FILE__, 'gourl_activate' );
@@ -92,5 +93,5 @@ add_action( 'edit_user_profile', 	'gourl_edit_user_profile' );
 add_filter( 'plugin_action_links', 	'gourl_action_links', 10, 2 );
 add_action( 'plugins_loaded', 		'gourl_load_textdomain' );
 
-if (function_exists( 'mb_stripos' ) && function_exists( 'mb_strripos' ) && function_exists( 'curl_init' ) && function_exists( 'mysqli_connect' ) && version_compare(phpversion(), '5.4.0', '>=')) $gourl = new gourlclass();
+if (function_exists( 'mb_stripos' ) && function_exists( 'mb_strripos' ) && function_exists( 'curl_init' ) && function_exists( 'mysqli_connect' ) && version_compare( phpversion(), '5.4.0', '>=' ) ) $gourl = new gourlclass();
 
