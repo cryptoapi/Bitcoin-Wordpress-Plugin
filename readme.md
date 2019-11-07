@@ -14,8 +14,9 @@ Accept Bitcoin, BitcoinCash, BitcoinSV, Litecoin, Dash, Dogecoin, Speedcoin, Red
 * Plugin Page: [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)
 * Wordpress Page: [https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership](https://wordpress.org/plugins/gourl-bitcoin-payment-gateway-paid-downloads-membership/)
 * Screenshots - [https://gourl.io/bitcoin-wordpress-plugin.html#screenshot](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot)
+* Instruction - [https://tishonator.com/blog/how-to-add-bitcoin-payment-to-your-woocommerce-store](https://tishonator.com/blog/how-to-add-bitcoin-payment-to-your-woocommerce-store)
 * Requires at least: 3.5
-* Tested up to: 5.2
+* Tested up to: 5.3
 * Stable Tag: 1.4.19
 * License: GNU Version 2 or Any Later Version
   
@@ -141,5 +142,4 @@ The minimum account balance on GoUrl.io which our system will automatically tran
 # ![Demo](https://gourl.io/images/wordpress/screenshot8.png)                
 
 
-More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)    
- 
+More information at [https://gourl.io/bitcoin-wordpress-plugin.html](https://gourl.io/bitcoin-wordpress-plugin.html)   

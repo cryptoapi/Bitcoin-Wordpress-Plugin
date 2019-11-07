@@ -5,7 +5,7 @@ Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
 Tags: bitcoin, accept bitcoin, bitcoin payments, bitcoin woocommerce, bitcoin wordpress plugin, bitcoin wordpress, bitcoin payments, bitcoincash, bitcoin cash, bitcoin sv, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, universalcurrency, file download, gateway, gourl, litecoin, membership, paid content, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, potcoin, monetaryunit, peercoin, white label
 Requires at least: 3.5
-Tested up to: 5.2
+Tested up to: 5.3
 Stable Tag: 1.4.19
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,7 @@ GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Accept Bitcoin, Bi
 
 == Description ==
 
-GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Open Source [White Label](https://gourl.io/lib/examples/box_only.php?alang=en&acoin=bitcoin#hacrypto) / Your Own Logo. See [Screenshots](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot). 
+GoUrl Official Bitcoin/Altcoin Payment Gateway for Wordpress. Open Source [White Label](https://gourl.io/lib/examples/box_only.php?alang=en&acoin=bitcoin#hacrypto) / Your Own Logo. See [Screenshots](https://gourl.io/bitcoin-wordpress-plugin.html#screenshot) and [Instruction](https://tishonator.com/blog/how-to-add-bitcoin-payment-to-your-woocommerce-store). 
 We believe there is no better measure of our success than the trust our customers place in our services. 
 Our customers list - [https://gourl.io#customers](https://gourl.io#customers)
 
