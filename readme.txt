@@ -5,8 +5,8 @@ Plugin URI: https://gourl.io/bitcoin-wordpress-plugin.html
 Author URI: https://gourl.io 
 Tags: bitcoin, accept bitcoin, bitcoin payments, bitcoin woocommerce, bitcoin wordpress plugin, bitcoin wordpress, bitcoin payments, bitcoincash, bitcoin cash, bitcoin sv, bitcoins, affiliate program, cryptocurrency, affiliates, altcoins, bitpay, paid memberships pro, pmpro, paid membership, btc, marketpress, coinbase, e-commerce, content protection, access-control, credit cards, currency, payment, dash, digital downloads, dogecoin, donation, downloads, e-downloads, e-store, easy digital downloads, ecommerce, feathercoin, universalcurrency, file download, gateway, gourl, litecoin, membership, paid content, payment gateway, paypal, potcoin, protection, reddcoin, registration, restrict access, restrict content, speedcoin, subscription, usd, vertcoin, virtual currency, jigoshop, woocommerce, authorize, shop, wp e-commerce, appthemes, classipress, vantage, jobroller, clipper, taskerr, hirebee, ideas, quality control, akismet, bbpress, buddypress, discussion, forums, forum, bitcoin donations, bitcoin donation, charity, churches, crowdfunding, donate, donation, donations, fundraiser, fundraising, gifts, giving, non-profit, nonprofit, paypal, stripe, give, wordpress donations, bitcoin, payments, payment gateway, digital downloads, download, downloads, e-commerce, e-downloads, e-store, ecommerce, eshop, selling, wp ecommerce, edd, easy digital downloads, litecoin, dogecoin, dash, speedcoin, vertcoin, reddcoin, feathercoin, potcoin, monetaryunit, peercoin, white label
 Requires at least: 3.5
-Tested up to: 5.3
-Stable Tag: 1.4.19
+Tested up to: 5.4
+Stable Tag: 1.5.0
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,8 +180,19 @@ Yes, we offer [Free Technical Support](https://gourl.io/view/contact/Contact_Us.
 
 == Changelog ==
 
+= 1.5.0 =
+*  Several new enhancements. Recommended Update
+*  Added Albanian Language (Thanks to Meso J.)
+*  Added Czech Language (Thanks to Kneebo T.)
+*  Added Estonian Language (Thanks to Aimar)
+*  Added Finnish Language (Thanks to Rami V.)
+*  Added Greek Language (Thanks to Charalampos P, Bay)
+*  Added Serbian Language (Thanks to Nikola L.)
+*  Added Slovenian Language (Thanks to Grega J.)
+*  Added Swedish Language (Thanks to Jack)
+
 = 1.4.19 =
-Several new enhancements. Recommended Update
+Several new enhancements
 
 = 1.4.17 =
 Added support currencyconverterapi.com free/premium keys
@@ -327,4 +338,4 @@ Add Pay-Per-Product, Pay-Per-Membership
 
 = 1.0.0 =
 This is the first version of GoUrl Bitcoin Payment Gateway & Paid Downloads & Membership Plugin
-   
+      

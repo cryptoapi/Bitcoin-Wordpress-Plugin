@@ -340,6 +340,10 @@ word-break: break-all;
 	color: white; 
 }
 
+.bootstrapiso .mncrpt .text-left {
+	padding-bottom: 0px !important;
+}
+
 .mncrpt_debug { 
 	text-align: left; 
 	font-weight: bold; 

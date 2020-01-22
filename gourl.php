@@ -37,7 +37,7 @@ final class gourlclass
 
 	private $fields_download 	= array("fileID" => 0,  "fileTitle" => "", "active" => 1, "fileName"  => "", "fileUrl"  => "", "fileText" => "", "fileSize" => 0, "priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "userFormat"  => "COOKIE", "expiryPeriod" => "2 DAYS", "lang"  => "en", "defCoin" => "", "defShow" => 0, "image"  => "", "imageWidth" => 200,  "priceShow" => 1, "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
 	private $fields_product 	= array("productID" => 0,  "productTitle" => "", "active" => 1,"priceUSD"  => "0.00", "priceCoin"  => "0.0000", "priceLabel"  => "BTC", "purchases"  => "0", "expiryPeriod" => "NO EXPIRY", "lang"  => "en", "defCoin" => "", "defShow" => 0, "productText"  => "", "finalText" => "", "emailUser" => 0, "emailUserFrom" => "", "emailUserTitle" => "", "emailUserBody" => "", "emailAdmin" => 0, "emailAdminFrom" => "", "emailAdminTitle" => "", "emailAdminBody" => "", "emailAdminTo" => "", "paymentCnt" => 0, "paymentTime" => "", "updatetime"  => "", "createtime"  => "");
-	
+
 	private $fields_view 		= array("ppvPrice" => "0.00", "ppvPriceCoin" => "0.0000", "ppvPriceLabel" => "BTC", "ppvExpiry" => "1 DAY", "ppvLevel"  => 0, "ppvLang" => "en", "ppvCoin"  => "", "ppvOneCoin"  => "", "ppvTextAbove"  => "", "ppvTextBelow"  => "", "ppvTitle" => "", "ppvTitle2" => "", "ppvCommentAuthor"  => "", "ppvCommentBody"  => "", "ppvCommentReply"  => "");
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");
@@ -182,26 +182,26 @@ final class gourlclass
 			add_shortcode(GOURL_TAG_MEMBERSHIP, array(&$this, "shortcode_membership"));
 			add_shortcode(GOURL_TAG_MEMCHECKOUT,array(&$this, "shortcode_memcheckout"));
 		}
-		
-		
+
+
 		// Process Callbacks from GoUrl.io Payment Server
 		add_action('parse_request', array(&$this, 'callback_parse_request'), 1);
-		
-		
+
+
 		// Force Login - external plugins
 		add_filter('v_forcelogin_whitelist', array(&$this, "v_forcelogin_whitelist"), 10, 1); // https://wordpress.org/plugins/wp-force-login/
 	
 		
 		// Exclude gourl js file from aggregation
 		add_filter('autoptimize_filter_js_exclude', array(&$this, "exclude_js_file"), 10, 1);
-		
+
 		// Disable BJ Lazy Load  iframes
 		$bj_lazy_load_options = get_option('bj_lazy_load_options');
 		if ($bj_lazy_load_options && is_array($bj_lazy_load_options)) update_option('bj_lazy_load_options', array_merge( $bj_lazy_load_options, array("lazy_load_iframes" => "no") ));
-		
+
 	}
 
-	
+
 	/*
 	 *  2.
 	 */
@@ -284,7 +284,7 @@ final class gourlclass
 	*/
 	public static function coin_names()
 	{
-		return array('BTC' => 'bitcoin', 'BCH' => 'bitcoincash', 'BSV' => 'bitcoinsv', 'LTC' => 'litecoin', 'DASH' => 'dash', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'PPC' => 'peercoin', 'UNIT' => 'universalcurrency', 'MUE' => 'monetaryunit');
+		return array('BTC' => 'bitcoin', 'BCH' => 'bitcoincash', 'BSV' => 'bitcoinsv', 'LTC' => 'litecoin', 'DASH' => 'dash', 'DOGE' => 'dogecoin', 'SPD' => 'speedcoin', 'RDD' => 'reddcoin', 'POT' => 'potcoin', 'FTC' => 'feathercoin', 'VTC' => 'vertcoin', 'PPC' => 'peercoin', 'MUE' => 'monetaryunit');
 	}
 	
 	
@@ -293,7 +293,7 @@ final class gourlclass
 	*/
 	public static function coin_chain()
 	{
-		return array('bitcoin' => 'https://blockchain.info/', 'bitcoincash' => 'http://blockdozer.com/', 'bitcoinsv' => 'https://bchsvexplorer.com/', 'litecoin' => 'https://bchain.info/LTC/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'https://chainz.cryptoid.info/pot/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://explorer.vertcoin.org/exp/', 'peercoin' => 'https://bkchain.org/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/', 'universalcurrency' => 'https://explorer.u-currency.com/');
+		return array('bitcoin' => 'https://www.blockchain.com/btc/', 'bitcoincash' => 'https://www.blockchain.com/bch/', 'bitcoinsv' => 'https://bchsvexplorer.com/', 'litecoin' => 'https://chainz.cryptoid.info/ltc/', 'dash' => 'https://chainz.cryptoid.info/dash/', 'dogecoin' => 'https://dogechain.info/', 'speedcoin' => 'http://speedcoin.org:2750/', 'reddcoin' => 'http://live.reddcoin.com/', 'potcoin' => 'https://chainz.cryptoid.info/pot/', 'feathercoin' => 'https://chainz.cryptoid.info/ftc/', 'vertcoin' => 'https://chainz.cryptoid.info/vtc/', 'peercoin' => 'https://chainz.cryptoid.info/ppc/', 'monetaryunit' => 'https://chainz.cryptoid.info/mue/');
 	}
 
 
@@ -302,7 +302,7 @@ final class gourlclass
 	*/
 	public static function coin_www()
 	{
-		return array('bitcoin' => 'https://bitcoin.org/', 'bitcoincash' => 'https://www.bitcoincash.org/', 'bitcoinsv' => 'https://bitcoinsv.io/', 'litecoin' => 'https://litecoin.org/', 'dash' => 'https://www.dashpay.io/', 'dogecoin' => 'http://dogecoin.com/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/', 'universalcurrency' => 'https://www.u-currency.com/');
+		return array('bitcoin' => 'https://bitcoin.org/', 'bitcoincash' => 'https://www.bitcoincash.org/', 'bitcoinsv' => 'https://bitcoinsv.io/', 'litecoin' => 'https://litecoin.org/', 'dash' => 'https://www.dashpay.io/', 'dogecoin' => 'http://dogecoin.com/', 'speedcoin' => 'https://speedcoin.org/', 'reddcoin' => 'http://reddcoin.com/', 'potcoin' => 'http://www.potcoin.com/', 'feathercoin' => 'https://www.feathercoin.com/', 'vertcoin' => 'http://vertcoin.org/', 'peercoin' => 'http://peercoin.net/', 'monetaryunit' => 'http://www.monetaryunit.org/');
 	}
 	
 	
@@ -311,7 +311,7 @@ final class gourlclass
 	*/
 	public static function languages()
 	{
-		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'nl' => 'Dutch', 'it' => 'Italian', 'ru' => 'Russian', 'pl' => 'Polish', 'pt' => 'Portuguese', 'fa' => 'Persian', 'ko' => 'Korean', 'ja' => 'Japanese', 'id' => 'Indonesian', 'tr' => 'Turkish', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'hi' => 'Hindi');
+		return array('en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'de' => 'German', 'it' => 'Italian', 'nl' => 'Dutch', 'ru' => 'Russian', 'sv' => 'Swedish', 'sq' => 'Albanian', 'ar' => 'Arabic', 'cn' => 'Simplified Chinese', 'zh' => 'Traditional Chinese', 'cs' => 'Czech', 'et' => 'Estonian', 'fi' => 'Finnish', 'el' => 'Greek', 'hi' => 'Hindi', 'id' => 'Indonesian', 'ja' => 'Japanese', 'ko' => 'Korean', 'fa' => 'Persian', 'pl' => 'Polish', 'pt' => 'Portuguese', 'sr' => 'Serbian', 'sl' => 'Slovenian', 'tr' => 'Turkish');
 	}
 	
 
@@ -641,7 +641,7 @@ final class gourlclass
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Membership</a> - for your <b>registered users</b>: offer paid access to your premium content, custom <a href='%s'>actions</a>", GOURL), GOURL_ADMIN.GOURL.'paypermembership', plugins_url("/images/dir/membership_actions.txt", __FILE__))." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-membership-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.sprintf(__("<a href='%s'>Pay-Per-Product</a> - advanced solution for your <b>registered users</b>: sell any products on website, invoices with buyer confirmation email, etc", GOURL), GOURL_ADMIN.GOURL.'products')." <a target='_blank' href='https://gourl.io/lib/examples/pay-per-product-multi.php'>".$img."</a></li>";
 		$tmp .= '<li> '.__("<a href='#addon'>Working with third-party plugins</a> - good support for third party plugins (WoCommerce, Jigoshop, bbPress, AppThemes, etc)", GOURL).'</li>';
-		$tmp .= '<li> '.__("Support payments in Bitcoin, Bitcoin Cash, Bitcoin SV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", GOURL).'</li>';
+		$tmp .= '<li> '.__("Support payments in Bitcoin, Bitcoin Cash, Bitcoin SV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit", GOURL).'</li>';
 		$tmp .= '<li> '.__("<b>Auto Synchronization</b> - between payments data stored on your GoUrl.io account and your Website. If GoUrl attempts to deliver a payment notification/transaction confirmation but your website is unavailable, the notification is stored on the queue, and delivered to the your website when it becomes available (re-check connection with your website every hour)", GOURL).'</li>';
 		$tmp .= '<li> '.sprintf(__("Free <a href='%s'>Plugin Support</a> and <a href='#addon'>Free Add-ons</a> for You", GOURL), "https://gourl.io/view/contact/Contact_Us.html").'</li>';
 		$tmp .= "</ul>";
@@ -659,12 +659,12 @@ final class gourlclass
 		
 		$tmp .= "<table class='gourltable gourltable-addons'>";
 		$tmp .= "<tr><th style='width:10px'></th><th>".__('Bitcoin/Altcoin Gateway', GOURL)."</th><th style='padding-left:60px'>".__('Description', GOURL)."</th><th>".__('Homepage', GOURL)."</th><th>".__('Wordpress.org', GOURL)."</th><th>".__('Installation pages', GOURL)."</th></tr>";
-		$tmp .= "<tr><td class='gourlnum'>1.</td><td><a target='_blank' href='https://wordpress.org/plugins/woocommerce/'><img src='".plugins_url('/images/logos/woocommerce.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for wordpress E-Commerce - <a target='_blank' href='%s'>WooCommerce 2.1+</a>", GOURL), "https://wordpress.org/plugins/woocommerce/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?s=WooCommerce+Beautifully+Automattic&tab=search&type=term')."'>".__('WooCommerce', GOURL)." &#187;</a></td></tr>";
+		$tmp .= "<tr><td class='gourlnum'>1.</td><td><a target='_blank' href='https://wordpress.org/plugins/woocommerce/'><img src='".plugins_url('/images/logos/woocommerce.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for wordpress E-Commerce - <a target='_blank' href='%s'>WooCommerce 2.1+</a>", GOURL), "https://wordpress.org/plugins/woocommerce/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?s=WooCommerce+Automattic+eCommerce+web+services+Android+and+iOS&tab=search&type=term')."'>".__('WooCommerce', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>2.</td><td><a target='_blank' href='https://woocommerce.com/products/woocommerce-subscriptions/'><img src='".plugins_url('/images/logos/woocommerce_subscriptions.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for- <a target='_blank' href='%s'>WooCommerce Subscriptions</a><br><br>NOTE: WOOCOMMERCE SUBSCRIPTIONS PLUGIN IS FREE OPEN SOURCE, DO NOT PAY $199!<br>Free plugin download from <a target='_blank' href='%s'>Github Plugin Repository</a>", GOURL), "https://wordpress.org/plugins/woocommerce/", "https://github.com/wp-premium/woocommerce-subscriptions")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-woocommerce.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-woocommerce-bitcoin-altcoin-payment-gateway-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-Woocommerce'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+woocommerce+addon')."'>".__('GoUrl Install Now', GOURL)." &#187;</a><br><br>b. <a target='_blank' href='https://github.com/wp-premium/woocommerce-subscriptions'>".__('Woo Subscriptions', GOURL)." &#187;</a></td></tr>";
-		$tmp .= "<tr><td class='gourlnum'>3.</td><td><a target='_blank' href='https://wordpress.org/plugins/give/'><img src='".plugins_url('/images/logos/give.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Bitcoin/Altcoin & Paypal Donations in Wordpress. Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' href='%s'>Give 0.8+</a> - easy to use wordpress donation plugin for accepting bitcoins, altcoins, paypal, authorize.net, stripe, paymill donations directly onto your website.", GOURL), "https://wordpress.org/plugins/give/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-donations-wordpress-plugin.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-donations-wordpress-plugin.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bitcoin-paypal-donations-give-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Paypal-Donations-Wordpress'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+donation+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=Give+Donation+Plugin+Fundraising+Platform+Transform')."'>".__('Give', GOURL)." &#187;</a></td></tr>";
+		$tmp .= "<tr><td class='gourlnum'>3.</td><td><a target='_blank' href='https://wordpress.org/plugins/give/'><img src='".plugins_url('/images/logos/give.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Bitcoin/Altcoin & Paypal Donations in Wordpress. Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' href='%s'>Give 0.8+</a> - easy to use wordpress donation plugin for accepting bitcoins, altcoins, paypal, authorize.net, stripe, paymill donations directly onto your website.", GOURL), "https://wordpress.org/plugins/give/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-donations-wordpress-plugin.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-donations-wordpress-plugin.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bitcoin-paypal-donations-give-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Paypal-Donations-Wordpress'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+donation+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='https://github.com/cryptoapi/Give-Wordpress-Donations-Bitcoin'>".__('Give', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>4.</td><td><a target='_blank' href='https://wordpress.org/plugins/easy-digital-downloads/'><img src='".plugins_url('/images/logos/edd.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' href='%s'>Easy Digital Downloads 2.4+</a> - sell digital files / downloads through WordPress.", GOURL), "https://wordpress.org/plugins/easy-digital-downloads/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-easy-digital-downloads-edd.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-easy-digital-downloads-edd.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bitcoin-easy-digital-downloads-edd/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Easy-Digital-Downloads'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+easy+digital+Downloads+edd')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=Easy+Digital+Downloads+easiest+way+sell+digital+products+Track+dozen')."'>".__('EDD', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>5.</td><td><a target='_blank' href='https://wordpress.org/plugins/paid-memberships-pro/'><img src='".plugins_url('/images/logos/paid-memberships-pro.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for advanced wordpress membership plugin - <a target='_blank' href='%s'>Paid Memberships Pro 1.8.4+</a>", GOURL), "https://wordpress.org/plugins/paid-memberships-pro/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-paid-memberships-pro.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-paid-memberships-pro.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bitcoin-paid-memberships-pro/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Gateway-Paid-Memberships-Pro'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+paid+memberships+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?s=paid+memberships+pro+stranger+studios+member+management&tab=search&type=term')."'>".__('PaidMembPro', GOURL)." &#187;</a></td></tr>";
-		$tmp .= "<tr><td class='gourlnum'>6.</td><td><a target='_blank' href='https://wordpress.org/plugins/bbpress/'><img src='".plugins_url('/images/logos/bbpress.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("This addon will add Premium Membership and Bitcoin payment gateway to <a target='_blank' href='%s'>bbPress 2.5+</a> Forum / Customer Support System.<br>You can mark some topics on your forum/customer support system as Premium and can easily monetise it with Bitcoins/altcoins - user pay to read / pay to create / add new replies to the topic, etc.<br>You can add premium user support to your web site using <a target='_blank' href='%s'>bbPress</a>. Any user can place questions (create new premium topic in bbPress), and only paid/premium users will see your answers, etc.", GOURL), "https://wordpress.org/plugins/bbpress/", "https://wordpress.org/plugins/bbpress/")."</td><td><a target='_blank' href='https://gourl.io/bbpress-premium-membership.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bbpress-premium-membership.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/bbPress-Premium-Membership-Bitcoins'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=bbPress+forum+keeping+lean')."'>".__('bbPress', GOURL)." &#187;</a></td></tr>";
+		$tmp .= "<tr><td class='gourlnum'>6.</td><td><a target='_blank' href='https://wordpress.org/plugins/bbpress/'><img src='".plugins_url('/images/logos/bbpress.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("This addon will add Premium Membership and Bitcoin payment gateway to <a target='_blank' href='%s'>bbPress 2.5+</a> Forum / Customer Support System.<br>You can mark some topics on your forum/customer support system as Premium and can easily monetise it with Bitcoins/altcoins - user pay to read / pay to create / add new replies to the topic, etc.<br>You can add premium user support to your web site using <a target='_blank' href='%s'>bbPress</a>. Any user can place questions (create new premium topic in bbPress), and only paid/premium users will see your answers, etc.", GOURL), "https://wordpress.org/plugins/bbpress/", "https://wordpress.org/plugins/bbpress/")."</td><td><a target='_blank' href='https://gourl.io/bbpress-premium-membership.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bbpress-premium-membership.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-bbpress-premium-membership-bitcoin-payments/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/bbPress-Premium-Membership-Bitcoins'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+bbpress+topics')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=bbPress+scale+forum+growing+community+contributors')."'>".__('bbPress', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>7.</td><td><a target='_blank' href='https://www.appthemes.com/themes/'><img src='".plugins_url('/images/logos/appthemes.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway and Escrow for all <a target='_blank' href='%s'>AppThemes Premium Themes</a> - Classipress, Vantage, JobRoller, Clipper, Taskerr, HireBee, Ideas, Quality Control, etc.", GOURL), "https://www.appthemes.com/themes/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-appthemes-classipress-jobroller-vantage-etc.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-appthemes-bitcoin-payments-classipress-vantage-jobroller/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-Appthemes'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+appthemes+escrow')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='https://www.appthemes.com/themes/'>".__('AppThemes', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>8.</td><td><a target='_blank' href='https://wordpress.org/plugins/jigoshop/'><img src='".plugins_url('/images/logos/jigoshop.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' href='%s'>Jigoshop 1.12+</a>", GOURL), "https://wordpress.org/plugins/jigoshop/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-jigoshop.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-jigoshop.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-jigoshop-bitcoin-payment-gateway-processor/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-Jigoshop'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+jigoshop+processor')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=jigoshop+excellent+performance+dynamic')."'>".__('Jigoshop', GOURL)." &#187;</a></td></tr>";
 		$tmp .= "<tr><td class='gourlnum'>9.</td><td><a target='_blank' href='https://wordpress.org/plugins/wp-e-commerce/'><img src='".plugins_url('/images/logos/wp-ecommerce.png', __FILE__)."' border='0'></a></td><td class='gourldesc'>".sprintf(__("Provides a GoUrl Bitcoin/Altcoin Payment Gateway for <a target='_blank' href='%s'>WP eCommerce 3.8.10+</a>", GOURL), "https://wordpress.org/plugins/wp-e-commerce/")."</td><td><a target='_blank' href='https://gourl.io/bitcoin-payments-wp-ecommerce.html'>".__('Plugin Homepage', GOURL)."</a><br><br><a target='_blank' href='https://gourl.io/bitcoin-payments-wp-ecommerce.html#screenshot'>".__('Screenshots', GOURL)."</a></td><td><a target='_blank' href='https://wordpress.org/plugins/gourl-wp-ecommerce-bitcoin-altcoin-payment-gateway-addon/'>".__('Wordpress Page', GOURL)."</a><br><br><a target='_blank' href='https://github.com/cryptoapi/Bitcoin-Payments-WP-eCommerce'>".__('Open Source', GOURL)."</a></td><td>a. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=gourl+wp+ecommerce+addon')."'>".__('Install Now', GOURL)." &#187;</a><br><br>b. <a href='".admin_url('plugin-install.php?tab=search&type=term&s=wp+ecommerce+empowers+sell+anything+ssl')."'>".__('WP eCommerce', GOURL)." &#187;</a></td></tr>";
@@ -779,7 +779,6 @@ final class gourlclass
 		$vtc = "VeRUojCEkZn9u8AswqiKvpfHW4BW8Uas7V";
 		$ppc = "PUxNprg24a8JjgG5pETKqesSiC5HprutvB";
 		$mue = "7SA3Ht7CvoVueRvnKqqRR7fW6xg5hZk8TX";
-		$unit = "PDxPpyajfFnFHWPQYYGVKHwsPvsgLywDA1";
 
 		$tmp .= "<p>".sprintf(__('Please contact us with any questions - %s', GOURL), "<a href='https://gourl.io/view/contact/Contact_Us.html'>https://gourl.io/view/contact/Contact_Us.html</a>")."</p>";
 		
@@ -810,7 +809,6 @@ final class gourlclass
 		$tmp .= "<p>Potcoin: &#160; <a href='potcoin:".$pot."?label=Donation'>".$pot."</a></p>";
 		$tmp .= "<p>Feathercoin: &#160; <a href='feathercoin:".$ftc."?label=Donation'>".$ftc."</a></p>";
 		$tmp .= "<p>Vertcoin: &#160; <a href='vertcoin:".$vtc."?label=Donation'>".$vtc."</a></p>";
-		$tmp .= "<p>UniversalCurrency: &#160; <a href='universalcurrency:".$unit."?label=Donation'>".$unit."</a></p>";
 		$tmp .= "<p>MonetaryUnit: &#160; <a href='monetaryunit:".$mue."?label=Donation'>".$mue."</a></p>";
 		$tmp .= "<p>Peercoin: &#160; <a href='peercoin:".$ppc."?label=Donation'>".$ppc."</a></p>";
 		$tmp .= "</div>";
@@ -1962,7 +1960,7 @@ final class gourlclass
 			echo '<div class="'.GOURL.'intro_btn"><a href="'.GOURL_ADMIN.GOURL.'files&intro=1" class="'.GOURL.'button button-secondary">'.__('Hide Introduction', GOURL).' &#8595;</a></div>';
 			echo "<div class='".GOURL."intro postbox'>";
 			echo '<a style="float:right" target="_blank" href="https://gourl.io/lib/examples/pay-per-download-multi.php"><img width="110" hspace="10" title="Example - Pay Per Download" src="'.plugins_url('/images/pay-per-download.png', __FILE__).'" border="0"></a>';
-			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, BitcoinCash, BitcoinSV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, UniversalCurrency, MonetaryUnit", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
+			echo '<p>'.sprintf(__("Easily Sell Files, Videos, Music, Photos, Software (digital downloads) on your WordPress site/blog and accept %s payments online. No Chargebacks, Global, Secure. Anonymous Bitcoins & Cryptocurrency Payments. All in automatic mode. &#160; <a target='_blank' href='%s'>Example</a><br>If your site requires registration - activate website registration (General Settings &#187; Membership - <a href='%s'>Anyone can register</a>) and customize <a href='%s'>login</a> image.", GOURL), "<b>Bitcoin</b>, BitcoinCash, BitcoinSV, Litecoin, Dash, Dogecoin, Speedcoin, Reddcoin, Potcoin, Feathercoin, Vertcoin, Peercoin, MonetaryUnit", "https://gourl.io/lib/examples/pay-per-download-multi.php", admin_url('options-general.php'), GOURL_ADMIN.GOURL."settings#images") .'</p>';
 			echo '<p>'.sprintf(__("Create <a href='%s'>New Paid File Downloads</a> and place new generated <a href='%s'>shortcode</a> on your public page/post. Done!", GOURL), GOURL_ADMIN.GOURL.'file', plugins_url('/images/tagexample_download_full.png', __FILE__)).$this->space(1);
 			echo sprintf(__("<a href='%s'>Read more</a>", GOURL), GOURL_ADMIN.GOURL."#i3").'</p>';
 			echo '<p><b>-----------------<br>'.sprintf(__("Alternatively, you can use free <a href='%s'>Easy Digital Downloads</a> plugin (advanced digital selling plugin with Credit Cards/Paypal) with our <a href='%s'>EDD Bitcoin/Altcoin Gateway</a> addon", GOURL), admin_url('plugin-install.php?tab=search&type=term&s=Easy+Digital+Downloads+sell+complete+management+sales+charts+Email+Subscribers+csv'), admin_url('plugin-install.php?tab=search&type=term&s=gourl+easy+digital+Downloads+edd')) . '</b></p>';
@@ -3956,9 +3954,9 @@ final class gourlclass
 	public function page_membership_users()
 	{
 		global $wpdb;
-	
+
 		$dt = gmdate('Y-m-d H:i:s');
-		
+
 		$search = "";
 		if (isset($_GET["s"]) && trim($_GET["s"]))
 		{
@@ -3969,27 +3967,32 @@ final class gourlclass
 			elseif (strpos($s, "user_") === 0 && is_numeric(substr($s, 5))) $search = " && userID = ".intval(substr($s, 5));
 			elseif (strpos($s, "user") === 0 && is_numeric(substr($s, 4))) $search = " && userID = ".intval(substr($s, 4));
 			elseif (strpos($s, "payment_") === 0) $search = " && paymentID = ".intval(substr($s, 8));
-				
+
 			if (!$search)
 			{
 				$s = esc_sql($s);
-				$search = " && (userID LIKE '%".$s."%' || paymentID LIKE '%".$s."%' || DATE_FORMAT(startDate, '%d %M %Y') LIKE '%".$s."%' || DATE_FORMAT(endDate, '%d %M %Y') LIKE '%".$s."%')";
+				$ids = "";
+				$result = $wpdb->get_results("SELECT ID FROM $wpdb->users WHERE user_login LIKE '%".$s."%' || user_nicename LIKE '%".$s."%' || user_email LIKE '%".$s."%' || display_name LIKE '%".$s."%' LIMIT 200");
+				foreach ( $result as $obj ) $ids .= ", " . intval($obj->ID);
+				$ids = trim($ids, ", ");
+				if ($ids) $ids = " || userID IN (".$ids.")";
+				$search = " && (userID LIKE '%".$s."%' || paymentID LIKE '%".$s."%' || DATE_FORMAT(startDate, '%d %M %Y') LIKE '%".$s."%' || DATE_FORMAT(endDate, '%d %M %Y') LIKE '%".$s."%'".$ids.")";
 			}
 		}
-		
+
 		$res = $wpdb->get_row("SELECT count(membID) as cnt from crypto_membership WHERE 1".$search, OBJECT);
 		$total = (int)$res->cnt;
-	
+
 		$res = $wpdb->get_row("SELECT count(distinct userID) as cnt from crypto_membership WHERE startDate <= '$dt' && endDate >= '$dt' && disabled = 0".$search, OBJECT);
 		$active = (int)$res->cnt;
 
 		$res = $wpdb->get_row("SELECT count(distinct userID) as cnt from crypto_membership WHERE paymentID = 0".$search, OBJECT);
 		$manual = (int)$res->cnt;
-		
+
 		$res = $wpdb->get_row("SELECT count(distinct userID) as cnt from crypto_membership WHERE disabled = 1".$search, OBJECT);
 		$disabled = (int)$res->cnt;
-	
-	
+
+
 		$wp_list_table = new  gourl_table_premiumusers($search, $this->options['rec_per_page']);
 		$wp_list_table->prepare_items();
 
@@ -4000,7 +4003,7 @@ final class gourlclass
 		echo '<input type="hidden" name="page" value="'.$this->page.'" />';
 		$wp_list_table->search_box( 'search', 'search_id' );
 		echo '</form>';
-	
+
 		echo "<div class='".GOURL."tablestats'>";
 		echo "<div>";
 		echo "<b>" . ($search?__('Found', GOURL):__('Total', GOURL)). ":</b> " . $total . " " . __('records', GOURL) . $this->space(3);
@@ -4010,20 +4013,20 @@ final class gourlclass
 		if ($search) echo "<br><a href='".GOURL_ADMIN.GOURL."paypermembership_users'>" . __('Reset Search Filters', GOURL). "</a>";
 		echo "</div>";
 		echo "</div>";
-	
+
 		echo '<div class="'.GOURL.'userstable">';
-	
+
 		if ($this->updated)  echo '<div class="updated"><p>'.__('Table have been updated <strong>successfully</strong>', GOURL).'</p></div>';
-		
+
 		$wp_list_table->display();
-	
+
 		echo  '</div>';
 		echo  '</div>';
 		echo  '<br><br>';
-	
+
 		return true;
 	}
-		
+
 	
 	
 	
@@ -4647,7 +4650,7 @@ final class gourlclass
 				$search = " && (productTitle LIKE '%".$s."%' || productText LIKE '%".$s."%' || finalText LIKE '%".$s."%' || priceUSD LIKE '%".$s."%' || priceCoin LIKE '%".$s."%' || priceLabel LIKE '%".$s."%' || expiryPeriod LIKE '%".$s."%' || defCoin LIKE '%".$s."%' || emailUserFrom LIKE '%".$s."%' || emailUserTitle LIKE '%".$s."%' || emailUserBody LIKE '%".$s."%' || emailAdminFrom LIKE '%".$s."%' || emailAdminTitle LIKE '%".$s."%' || emailAdminBody LIKE '%".$s."%' || emailAdminTo LIKE '%".$s."%' || paymentCnt LIKE '%".$s."%' || lang LIKE '%".$s."%' || DATE_FORMAT(createtime, '%d %M %Y') LIKE '%".$s."%')";
 			}
 		}
-		
+
 		$res = $wpdb->get_row("SELECT count(productID) as cnt from crypto_products WHERE active != 0".$search, OBJECT);
 		$active = (int)$res->cnt;
 	
@@ -5012,7 +5015,7 @@ final class gourlclass
 				elseif ($s == "files") 			$search = " && orderID LIKE 'file\_%'";
 				elseif ($s == "membership") 	$search = " && orderID LIKE 'membership%'";
 				elseif ($s == "payperview") 	$search = " && orderID = 'payperview'";
-				elseif ($s == "guest") 			$search = " && userID NOT LIKE 'user%'";
+				elseif ($s == "guest" || $s == "guests") $search = " && userID NOT LIKE 'user%'";
 				elseif ($s == "plugins") 		$search = " && orderID LIKE '%.%'".$sql_where;
 				elseif (strpos($s, "user_") === 0 && is_numeric(substr($s, 5))) $search = " && (userID = 'user".intval(substr($s, 5))."' || userID = 'user_".intval(substr($s, 5))."')";
 				elseif (strpos($s, "user") === 0 && is_numeric(substr($s, 4)))  $search = " && (userID = 'user".intval(substr($s, 4))."' || userID = 'user_".intval(substr($s, 4))."')";
@@ -5033,56 +5036,63 @@ final class gourlclass
 				if (substr(strtoupper($s), -4) == " USD") $s = substr($s, 0, -4);
 				elseif (strtolower($s) == "wp ecommerce") $s = "wpecommerce";
 				$s = esc_sql($s);
-				$search = " && (orderID LIKE '%".$s."%' || userID LIKE '%".$s."%' || countryID LIKE '%".$s."%' || coinLabel LIKE '%".$s."%' || amount LIKE '%".$s."%' || amountUSD LIKE '%".$s."%' || addr LIKE '%".$s."%' || txID LIKE '%".$s."%' || DATE_FORMAT(txDate, '%d %M %Y') LIKE '%".$s."%')";
+				$ids = "";
+				$result = $wpdb->get_results("SELECT ID FROM $wpdb->users WHERE user_login LIKE '%".$s."%' || user_nicename LIKE '%".$s."%' || user_email LIKE '%".$s."%' || display_name LIKE '%".$s."%' LIMIT 200");
+				foreach ( $result as $obj ) $ids .= ", 'user_" . intval($obj->ID) . "', 'user" . intval($obj->ID) . "'";
+				$ids = trim($ids, ", ");
+				if ($ids) $ids = " || userID IN (".$ids.")";
+				$search = " && (orderID LIKE '%".$s."%' || userID LIKE '%".$s."%' || countryID LIKE '%".$s."%' || coinLabel LIKE '%".$s."%' || amount LIKE '%".$s."%' || amountUSD LIKE '%".$s."%' || addr LIKE '%".$s."%' || txID LIKE '%".$s."%' || DATE_FORMAT(txDate, '%d %M %Y') LIKE '%".$s."%'".$ids.")";
 			}
-		}	
+		}
 
 		$res = $wpdb->get_row("SELECT sum(amountUSD) as total from crypto_payments WHERE 1".$search, OBJECT);
-		$total = $res->total; 
+		$total = $res->total;
 		$total = number_format($total, 2);
 		if (strpos($total, ".")) $num = rtrim(rtrim($total, "0"), ".");
-		
+
 		$res = $wpdb->get_row("SELECT DATE_FORMAT(txDate, '%d %M %Y, %H:%i %p') as latest from crypto_payments WHERE 1".$search." ORDER BY txDate DESC LIMIT 1", OBJECT);
 		$latest = ($res) ? $res->latest . " " . __('GMT', GOURL) : "";
-		
-		
+
+
 		$res = $wpdb->get_row("SELECT count(paymentID) as cnt from crypto_payments WHERE unrecognised = 0".$search, OBJECT);
-		$recognised = (int)$res->cnt; 
-		
+		$recognised = (int)$res->cnt;
+
 		$res = $wpdb->get_row("SELECT count(paymentID) as cnt from crypto_payments WHERE unrecognised != 0".$search, OBJECT);
-		$unrecognised = (int)$res->cnt; 
-		
-		
+		$unrecognised = (int)$res->cnt;
+
+
 		echo "<div class='wrap ".GOURL."admin'>";
 		echo $this->page_title(__('All Received Payments', GOURL));
-		
+
 		if (!(isset($_GET["b"]) && is_numeric($_GET["b"])))
 		{
 		  echo "<div class='".GOURL."intro postbox'>";
 		  echo sprintf( __("Notes: Please wait bitcoin/altcoin transaction confirmations (column 'Confirmed Payment?' in table below) before sending any purchased products / services to users. A transaction confirmation is needed to prevent <a target='_blank' href='%s'>double spending of the same money</a> because somebody may from time to time try to do so.", GOURL), "https://en.bitcoin.it/wiki/Double-spending");
 		  echo "</div>";
 		}
-		
-		
-		if (isset($_GET["b"]) && is_numeric($_GET["b"])) 
-		{	
+
+
+		if (isset($_GET["b"]) && is_numeric($_GET["b"]))
+		{
 			$c = $this->check_payment_confirmation($_GET["b"]);
-		
+
 			echo  "<div class='".($c?"updated":"error")." postbox'>";
 			if ($c) echo  "<span style='color:green'>".sprintf(__('GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>CONFIRMED</b>', GOURL), '#'.intval($_GET["b"]))."</span>";
 			else echo  "<span style='color:red'>".sprintf(__('GoUrl.io Live Status : Payment id <b>%s</b> transaction - <b>NOT confirmed yet</b>', GOURL), '#'.intval($_GET["b"]))."</span>";
 			echo "</div>";
 		}
-		
-		
+
+
 		$wp_list_table = new  gourl_table_payments($search, $this->options['rec_per_page'], $this->options['file_columns']);
 		$wp_list_table->prepare_items();
-		
+
 		echo '<form class="gourlsearch" method="get" accept-charset="utf-8" action="">';
 		echo '<input type="hidden" name="page" value="'.$this->page.'" />';
 		$wp_list_table->search_box( 'search', 'search_id' );
 		echo '</form>';
-		
+
+
+
 		echo "<div class='".GOURL."tablestats'>";
 		echo "<div>";
 		echo "<span><b>" . ($search?__('Found', GOURL):__('Total Received', GOURL)). ":</b> " . number_format($recognised+$unrecognised) . " " . __('payments', GOURL) . $this->space(1) . "</span> <span><small>( ";
@@ -6602,7 +6612,7 @@ function gourl_number_format ($num, $precision = 1)
 {
 	$num = number_format($num, $precision);
 	if (strpos($num, ".")) $num = rtrim(rtrim($num, "0"), ".");
-	
+
 	return $num;
 }
 
@@ -8357,9 +8367,9 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     
     $data = gourl_get_url('https://www.coinexchange.io/api/v1/getmarketsummaries');
     $arr = json_decode($data, true);
-    $coinexchangeIds = array('FTC' => 78, 'MUE' => 280, 'UNIT' => 305); // "MarketID":"305","MarketAssetName":"UnitCurrency"  from https://www.coinexchange.io/api/v1/getmarkets
+    $coinexchangeIds = array('FTC' => 78, 'MUE' => 280); // "MarketID":"305" from https://www.coinexchange.io/api/v1/getmarkets
     // full list $coinexchangeIds = array('LTC' => 18, 'DOGE' => 21, 'FTC' => 78, 'MUE' => 280, 'DASH' => 281, 'UNIT' => 305, 'BCH' => 1018);
-    
+
     if (isset($arr["success"]) && $arr["success"] == "1" && is_array($arr["result"]))
     {
         foreach ($arr["result"] as $k => $v)
@@ -8389,5 +8399,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
    
  
-    return 0;
+    return 0;    
 }
