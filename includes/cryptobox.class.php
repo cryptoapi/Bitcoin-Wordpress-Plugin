@@ -1915,11 +1915,12 @@ class Cryptobox {
 	    }
 	    
 	    
-	    // d. get rates from https://free.currencyconverterapi.com/api/v6/convert?q=BTC_EUR&compact=y
+	    // d. get rates from https://free.currconv.com/api/v7/convert?q=BTC_EUR&compact=y&apiKey=your_free_currencyconverterapi_key
+	    // free api key here - https://free.currencyconverterapi.com/free-api-key
 	    // ----------------
 	    if (!$val)
 	    {
-	        $data = json_decode(get_url_contents("https://free.currencyconverterapi.com/api/v6/convert?q=".$key."&compact=ultra&apiKey=".$currencyconverterapi_key, 20, TRUE), TRUE);
+	        $data = json_decode(get_url_contents("https://free.currconv.com/api/v7/convert?q=".$key."&compact=ultra&apiKey=".$currencyconverterapi_key, 20, TRUE), TRUE);
 	        if (isset($data[$key]) && $data[$key] > 0) $val = $data[$key];
 	        elseif(isset($data["error"])) echo "<h1>Error in function convert_currency_live(...)! ". $data["error"] . "</h1>";
 	    }
@@ -2386,6 +2387,6 @@ class Cryptobox {
 		foreach ($cryptobox_private_keys as $v)
 			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
 
-		unset($v); unset($cryptobox_private_keys);                 
+		unset($v); unset($cryptobox_private_keys);                   
 	}
 ?>

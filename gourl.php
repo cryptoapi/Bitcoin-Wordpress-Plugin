@@ -1000,15 +1000,19 @@ final class gourlclass
 			if ($this->record_errors) $this->errors = array_merge($this->errors, $this->record_errors); 
 		}
 
-		
+
 		// test currencyconverterapi.com api key
 		if ($this->options["currencyconverterapi_key"] && $this->options["currencyconverterapi_key"] != get_option(GOURL.'currencyconverterapi_key'))
 		{
-		    $val = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
+		    $val = json_decode(gourl_get_url("https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
 		    if ($val <= 0)
 		    {
-    		    $val2 = json_decode(gourl_get_url("https://api.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
-    		    if ($val2 <= 0) $this->errors[] = __('Invalid Currencyconverterapi.com Free/Premium API Key', GOURL);
+    		    $val = json_decode(gourl_get_url("https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
+    		    if ($val <= 0)
+				{
+					$val = json_decode(gourl_get_url("https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
+					if ($val <= 0) $this->errors[] = __('Invalid Currencyconverterapi.com Free/Prepaid/Premium API Key', GOURL);
+				}
 		    }
 		}
 		
@@ -1204,12 +1208,13 @@ final class gourlclass
 		$tmp .= "<input type='hidden' id='".GOURL."boxlogo_url' name='".GOURL."boxlogo_url' value='".htmlspecialchars($this->options['boxlogo_url'], ENT_QUOTES)."'>";
 		$tmp .= '<input type="file" accept="image/*" id="'.GOURL.'boxlogo2" name="'.GOURL.'boxlogo2" class="widefat"><br><em>'.__('Optimal size: 200x40px. Allowed images: JPG, GIF, PNG.', GOURL).'</em>';
 		$tmp .= '</td></tr>';
-		
+
 		$tmp .= '<tr><th><br>'.__('Free CurrencyConverterApi.com Key (optional)', GOURL).':</th>';
-		$txt2 = ($this->options['currencyconverterapi_key']) ? "&#160; and &#160; " . sprintf(__('<a target="_blank" href="%s">Test Your Free API Key Now &#187;</a>', GOURL), "https://free.currencyconverterapi.com/api/v6/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
-		$tmp .= '<td><br><input type="text" id="'.GOURL.'currencyconverterapi_key" name="'.GOURL.'currencyconverterapi_key" value="'.htmlspecialchars($this->options['currencyconverterapi_key'], ENT_QUOTES).'" class="widefat"><br><em>'.sprintf(__('if you accept payments other than USD, place free api key here. <a target="_blank" href="%s">Get free API key on currencyconverterapi.com</a>', GOURL), "https://free.currencyconverterapi.com/free-api-key").$txt2.' &#160; &#160; &#160; ('.__("you can use premium key also but you don't need it", GOURL).')</em><br><br><br></td>';
+		$txt2 = ($this->options['currencyconverterapi_key']) ? "&#160; and &#160; " . sprintf(__('<a target="_blank" href="%s">Test Your Free API Key Now &#187;</a>', GOURL), "https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
+		$txt3 = ($this->options['currencyconverterapi_key']) ? sprintf(__('Test your prepaid key <a target="_blank" href="%s">here</a> or premium key <a target="_blank" href="%s">here</a>', GOURL), "https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key'], "https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
+		$tmp .= '<td><br><input type="text" id="'.GOURL.'currencyconverterapi_key" name="'.GOURL.'currencyconverterapi_key" value="'.htmlspecialchars($this->options['currencyconverterapi_key'], ENT_QUOTES).'" class="widefat"><br><em>'. sprintf( __('if you accept payments other than USD, place free api key here.<br><a target="_blank" href="%s">Get free API key on currencyconverterapi.com</a>', GOURL), "https://free.currencyconverterapi.com/free-api-key") .$txt2.' <br> ( '. sprintf( __('you can use <a target="_blank" href="%s">PREPAID</a> / <a target="_blank" href="%s">PREMIUM</a> key also but you don\'t need it.', GOURL), "https://www.currencyconverterapi.com/dev/register-app?plan=prepaid", "https://www.currencyconverterapi.com/dev/register-app?plan=premium" ) .' ' .$txt3.' )</em><br><br><br></td>';
 		$tmp .= '</tr>';
-		
+		  
 		
 		foreach ($this->coin_names as $k => $v)
 		{
@@ -2786,6 +2791,9 @@ final class gourlclass
 		global $wpdb, $current_user;
 		static $html = "-1";
 	
+		// Marks the current page as noncacheable. https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:api
+		if ( class_exists( 'LiteSpeed_Cache_API' ) ) LiteSpeed_Cache_API::set_nocache();
+			
 	
 		if ($html !== "-1") return $html;
 	
@@ -6524,7 +6532,7 @@ function gourl_retest_dir()
 	if (!file_exists(GOURL_DIR."files/index.html")) copy($dir."files/index.html", GOURL_DIR."files/index.html");
 	
 	if (!file_exists(GOURL_DIR."lockimg")) wp_mkdir_p(GOURL_DIR."lockimg");
-	if (!file_exists(GOURL_DIR."lockimg/index.htm")) copy($dir."lockimg/index.htm", GOURL_DIR."lockimg/index.htm");
+	if (!file_exists(GOURL_DIR."lockimg/index.html")) copy($dir."lockimg/index.html", GOURL_DIR."lockimg/index.html");
 	if (!file_exists(GOURL_DIR."lockimg/image1.jpg")) copy($dir."lockimg/image1.jpg", GOURL_DIR."lockimg/image1.jpg");
 	if (!file_exists(GOURL_DIR."lockimg/image1.png")) copy($dir."lockimg/image1.png", GOURL_DIR."lockimg/image1.png");
 	if (!file_exists(GOURL_DIR."lockimg/image1b.png")) copy($dir."lockimg/image1b.png", GOURL_DIR."lockimg/image1b.png");
@@ -8191,20 +8199,29 @@ function gourl_convert_currency($from_Currency, $to_Currency, $amount, $interval
         }
     }
     
-    
-    // d. get rates from https://free.currencyconverterapi.com/api/v6/convert?q=BTC_EUR&compact=ultra&apiKey=sample-api-key
-    // ----------------
+
+    /* d. get rates from
+     https://free.currconv.com/api/v7/convert?q=BTC_EUR&compact=ultra&apiKey=sample-api-key
+     https://prepaid.currconv.com/api/v7/convert?q=BTC_EUR&compact=ultra&apiKey=sample-api-key
+     https://api.currconv.com/api/v7/convert?q=BTC_EUR&compact=ultra&apiKey=sample-api-key
+     ---------------- */
     if (!$val)
     {
         $key2 	= $from_Currency.'_'.$to_Currency;
-        $data = json_decode(gourl_get_url("https://free.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
+        $data = json_decode(gourl_get_url("https://free.currconv.com/api/v7/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
         if (isset($data[$key2]) && $data[$key2] > 0) $val = $data[$key2];
         elseif(isset($data["error"])) 
         {
             $error = $data["error"] . "<br>-> <a style='text-decoration: underline;' href='".admin_url('admin.php?page=gourlsettings#'.GOURL.'boxlogo2')."'>" . __("Please check/save your free currencyconverterapi.com key on GoUrl plugin Settings page", GOURL )."</a>";
-            // try premium key
-            $data = json_decode(gourl_get_url("https://api.currencyconverterapi.com/api/v6/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
+
+            // try prepaid key
+            $data = json_decode(gourl_get_url("https://prepaid.currconv.com/api/v7/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
             if (isset($data[$key2]) && $data[$key2] > 0) { $val = $data[$key2]; $error = ""; }
+            else {
+                // try premium key
+                $data = json_decode(gourl_get_url("https://api.currconv.com/api/v7/convert?q=".$key2."&compact=ultra&apiKey=".$currencyconverterapi_key, 10, TRUE), TRUE);
+                if (isset($data[$key2]) && $data[$key2] > 0) { $val = $data[$key2]; $error = ""; }
+            }
         }
     }
     
@@ -8397,7 +8414,7 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     {
         return $arr2["price"];
     }
-   
- 
-    return 0;    
+  
+
+    return 0;  
 }
