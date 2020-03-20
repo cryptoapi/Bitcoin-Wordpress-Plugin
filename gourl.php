@@ -1002,18 +1002,25 @@ final class gourlclass
 
 
 		// test currencyconverterapi.com api key
+		$err = "";
 		if ($this->options["currencyconverterapi_key"] && $this->options["currencyconverterapi_key"] != get_option(GOURL.'currencyconverterapi_key'))
 		{
-		    $val = json_decode(gourl_get_url("https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
-		    if ($val <= 0)
+		    $val = json_decode(gourl_get_url("https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
+		    if (is_array($val) && isset($val["error"])) $err .= "<li>- Free key: ".$val["error"]."</li>";
+
+ 		    if (is_array($val) || $val <= 0)
 		    {
-    		    $val = json_decode(gourl_get_url("https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
-    		    if ($val <= 0)
+    		    		$val = json_decode(gourl_get_url("https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
+				if (is_array($val) && isset($val["error"])) $err .= "<li>- Prepaid key: ".$val["error"]."</li>";
+                                                                                                                        
+				if (is_array($val) || $val <= 0)
 				{
-					$val = json_decode(gourl_get_url("https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10), TRUE);
-					if ($val <= 0) $this->errors[] = __('Invalid Currencyconverterapi.com Free/Prepaid/Premium API Key', GOURL);
+					$val = json_decode(gourl_get_url("https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
+					if (is_array($val) && isset($val["error"])) $err .= "<li>- Premium key: ".$val["error"]."</li>";					
+
+					if (is_array($val) || $val <= 0)  $this->errors[] = __('Invalid Currencyconverterapi.com Free/Prepaid/Premium API Key', GOURL) . ($err? "<div style='font-weight:normal;margin:0 25px;padding:0;'>".__('Currencyconverterapi.com website Responses:', GOURL).' <ul>'.$err.'</ul></div>':"");
 				}
-		    }
+	    	    }	
 		}
 		
 		
@@ -1211,8 +1218,8 @@ final class gourlclass
 
 		$tmp .= '<tr><th><br>'.__('Free CurrencyConverterApi.com Key (optional)', GOURL).':</th>';
 		$txt2 = ($this->options['currencyconverterapi_key']) ? "&#160; and &#160; " . sprintf(__('<a target="_blank" href="%s">Test Your Free API Key Now &#187;</a>', GOURL), "https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
-		$txt3 = ($this->options['currencyconverterapi_key']) ? sprintf(__('Test your prepaid key <a target="_blank" href="%s">here</a> or premium key <a target="_blank" href="%s">here</a>', GOURL), "https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key'], "https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
-		$tmp .= '<td><br><input type="text" id="'.GOURL.'currencyconverterapi_key" name="'.GOURL.'currencyconverterapi_key" value="'.htmlspecialchars($this->options['currencyconverterapi_key'], ENT_QUOTES).'" class="widefat"><br><em>'. sprintf( __('if you accept payments other than USD, place free api key here.<br><a target="_blank" href="%s">Get free API key on currencyconverterapi.com</a>', GOURL), "https://free.currencyconverterapi.com/free-api-key") .$txt2.' <br> ( '. sprintf( __('you can use <a target="_blank" href="%s">PREPAID</a> / <a target="_blank" href="%s">PREMIUM</a> key also but you don\'t need it.', GOURL), "https://www.currencyconverterapi.com/dev/register-app?plan=prepaid", "https://www.currencyconverterapi.com/dev/register-app?plan=premium" ) .' ' .$txt3.' )</em><br><br><br></td>';
+		$txt3 = ($this->options['currencyconverterapi_key']) ? sprintf(__('Test your prepaid key <a target="_blank" href="%s"><b>here</b></a> or premium key <a target="_blank" href="%s"><b>here</b></a>', GOURL), "https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key'], "https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options['currencyconverterapi_key']) : "";
+		$tmp .= '<td><br><input type="text" id="'.GOURL.'currencyconverterapi_key" name="'.GOURL.'currencyconverterapi_key" value="'.htmlspecialchars($this->options['currencyconverterapi_key'], ENT_QUOTES).'" class="widefat"><br><em>'. sprintf( __('place free/paid api key, if you accept payments other than USD, EUR, JPY, BGN, CZK, DKK, GBP, HUF, PLN, RON, SEK, CHF, ISK, NOK, HRK, RUB, TRY, AUD, BRL, CAD, CNY, HKD, IDR, ILS, INR, KRW, MXN, MYR, NZD, PHP, SGD, THB, ZAR (<a target="_blank" href="%s">ECB Rates are used</a> for these currencies).<br><a target="_blank" href="%s">Get free API key on currencyconverterapi.com</a>', GOURL), "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml", "https://free.currencyconverterapi.com/free-api-key") .$txt2.' <br> ( '. sprintf( __('you can use <a target="_blank" href="%s">PREPAID</a> / <a target="_blank" href="%s">PREMIUM</a> key also.', GOURL), "https://www.currencyconverterapi.com/dev/register-app?plan=prepaid", "https://www.currencyconverterapi.com/dev/register-app?plan=premium" ) .' ' .$txt3.' )</em><br><br><br></td>';
 		$tmp .= '</tr>';
 		  
 		
@@ -8081,13 +8088,13 @@ function gourl_get_url( $url, $timeout = 20, $ignore_httpcode = false )
     curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, FALSE);
     curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt ($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
-    curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
+    curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0");
     curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
     $data 		= curl_exec($ch);
     $httpcode 	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-
+                      
     return (($httpcode>=200 && $httpcode<300) || $ignore_httpcode) ? $data : false;
 }
 
@@ -8416,5 +8423,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
   
 
-    return 0;  
+    return 0;       
 }
