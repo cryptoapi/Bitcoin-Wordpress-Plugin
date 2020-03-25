@@ -1007,16 +1007,19 @@ final class gourlclass
 		{
 		    $val = json_decode(gourl_get_url("https://free.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
 		    if (is_array($val) && isset($val["error"])) $err .= "<li>- Free key: ".$val["error"]."</li>";
+		    if (is_array($val) && isset($val["AUD_USD"]) && $val["AUD_USD"] > 0) $val = $val["AUD_USD"];
 
  		    if (is_array($val) || $val <= 0)
 		    {
     		    		$val = json_decode(gourl_get_url("https://prepaid.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
 				if (is_array($val) && isset($val["error"])) $err .= "<li>- Prepaid key: ".$val["error"]."</li>";
+		    		if (is_array($val) && isset($val["AUD_USD"]) && $val["AUD_USD"] > 0) $val = $val["AUD_USD"];
                                                                                                                         
 				if (is_array($val) || $val <= 0)
 				{
 					$val = json_decode(gourl_get_url("https://api.currconv.com/api/v7/convert?q=AUD_USD&compact=ultra&apiKey=".$this->options["currencyconverterapi_key"], 10, TRUE), TRUE);
 					if (is_array($val) && isset($val["error"])) $err .= "<li>- Premium key: ".$val["error"]."</li>";					
+		    			if (is_array($val) && isset($val["AUD_USD"]) && $val["AUD_USD"] > 0) $val = $val["AUD_USD"];
 
 					if (is_array($val) || $val <= 0)  $this->errors[] = __('Invalid Currencyconverterapi.com Free/Prepaid/Premium API Key', GOURL) . ($err? "<div style='font-weight:normal;margin:0 25px;padding:0;'>".__('Currencyconverterapi.com website Responses:', GOURL).' <ul>'.$err.'</ul></div>':"");
 				}
