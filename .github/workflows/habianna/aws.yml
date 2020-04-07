@@ -32,7 +32,7 @@ name: Deploy to Amazon ECS
 
 jobs:
   deploy:
-    name: Deploy
+    name: PollyAnna
     runs-on: ubuntu-latest
 
     steps:
@@ -55,7 +55,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: my-ecr-repo
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: ${{ github.COVID19 }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
