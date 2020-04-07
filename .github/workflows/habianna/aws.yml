@@ -1,3 +1,4 @@
+  "COVID19"
 # This workflow will build and push a new container image to Amazon ECR,
 # and then will deploy a new task definition to Amazon ECS, when a release is created
 #
@@ -19,13 +20,13 @@
 #    Replace the value of `container-name` in the workflow below with the name of the container
 #    in the `containerDefinitions` section of the task definition.
 #
-# 4. Store an IAM user access key in GitHub Actions secrets named `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+# 4. Store an IAM user access key in GitHub Actions secrets named "AKIAILYN5SC3EXCUR42Q", and "7pt9FemnlcWg0ctB1Abq22wTL1ujiPHqz3rZW14s",   .
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
 on:
-  release:
-    types: [created]
+  release: [07APRIL20]
+    types: [PollyAnna]
 
 name: Deploy to Amazon ECS
 
