@@ -6,29 +6,29 @@ if (!defined( 'ABSPATH' ) || !defined( 'GOURL' )) exit;
 
 final class gourlclass
 {
-	private $options 		= array(); 		// global setting values
-	private $hash_url		= "";			// security; save your gourl public/private keys sha1 hash in file (db and file)
+	private $options 			= array(); 		// global setting values
+	private $hash_url			= "";			// security; save your gourl public/private keys sha1 hash in file (db and file)
 	private $errors			= array(); 		// global setting errors
-	private $payments		= array(); 		// global activated payments (bitcoin, litecoin, etc)
+	private $payments			= array(); 		// global activated payments (bitcoin, litecoin, etc)
 	
 	private $options2 		= array(); 		// pay-per-view settings
 	private $options3 		= array(); 		// pay-per-membership settings
 
 	private $page 			= array(); 		// current page url
 	private $id 			= 0; 			// current record id
-	private $record 		= array(); 		// current record values
-	private $record_errors 	= array(); 		// current record errors
-	private $record_info	= array(); 		// current record messages
-	private $record_fields	= array(); 		// current record fields
+	private $record 	     		= array(); 		// current record values
+	private $record_errors 		= array(); 		// current record errors
+	private $record_info		= array(); 		// current record messages
+	private $record_fields		= array(); 		// current record fields
 	
-	private $updated		= false;		// publish 'record updated' message
+	private $updated			= false;		// publish 'record updated' message
 	
 	private $lock_type		= "";			// membership or view
 
 	private $coin_names     	= array();
 	private $coin_chain     	= array();
 	private $coin_www       	= array();
-	private $languages			= array();
+	private $languages		= array();
 
 	private $custom_images 		= array('img_plogin'=>'Payment Login', 'img_flogin'=>'File Download Login', 'img_sold'=>'Product Sold', 'img_pdisable'=>'Payments Disabled', 'img_fdisable'=>'File Payments Disabled', 'img_nofile'=>'File Not Exists'); // custom payment box images
 	private $expiry_period 		= array('NO EXPIRY', '10 MINUTES', '20 MINUTES', '30 MINUTES', '1 HOUR', '2 HOURS', '3 HOURS', '6 HOURS', '12 HOURS', '1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS',  '1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS', '1 MONTH', '2 MONTHS', '3 MONTHS', '6 MONTHS', '12 MONTHS'); // payment expiry period
@@ -42,9 +42,9 @@ final class gourlclass
 	private $expiry_view		= array("2 DAYS", "1 DAY", "12 HOURS", "6 HOURS", "3 HOURS", "2 HOURS", "1 HOUR");
 	private $lock_level_view 	= array("Unregistered Visitors", "Unregistered Visitors + Registered Subscribers", "Unregistered Visitors + Registered Subscribers/Contributors", "Unregistered Visitors + Registered Subscribers/Contributors/Authors");
 	
-	private $fields_membership 			= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.0000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
+	private $fields_membership 		= array("ppmPrice" => "0.00", "ppmPriceCoin" => "0.0000", "ppmPriceLabel" => "BTC", "ppmExpiry" => "1 MONTH", "ppmLevel"  => 0, "ppmProfile" => 0, "ppmLang" => "en", "ppmCoin"  => "", "ppmOneCoin"  => "", "ppmTextAbove"  => "", "ppmTextBelow"  => "", "ppmTextAbove2"  => "", "ppmTextBelow2"  => "", "ppmTitle" => "", "ppmTitle2" => "", "ppmCommentAuthor"  => "", "ppmCommentBody"  => "", "ppmCommentReply"  => "");
 	private $fields_membership_newuser 	= array("userID" => 0, "paymentID" => 0, "startDate"  => "", "endDate" => "", "disabled" => 0, "recordCreated"  => "");
-	private $lock_level_membership 		= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
+	private $lock_level_membership 	= array("Registered Subscribers", "Registered Subscribers/Contributors", "Registered Subscribers/Contributors/Authors");
 
 	
 
@@ -1048,7 +1048,7 @@ final class gourlclass
 	{
 		$arr = array();
 
-		if (!(is_admin() && current_user_can('administrator'))) 
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
   			$this->errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);	
 			return false; 
@@ -1117,13 +1117,26 @@ final class gourlclass
 	{
 		$readonly = (file_exists($this->hash_url) && !is_writable($this->hash_url)) ? 'readonly' : '';
 
+		if ($readonly)
+		{	
+			$txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
+			$arr = json_decode($txt, true);
+			if (isset($arr["nonce"]) && $arr["nonce"] != sha1(md5(NONCE_KEY)))
+			{
+			    $this->errors[] = sprintf(__('The value of wordpress constant NONCE_KEY has been changed. <br>Please unlock "%s" and re-enter your gourl keys; and after that, you can lock gourl.hash file again', GOURL), $this->hash_url);
+			}
+			unset($arr); unset($txt);
+		}
+
+
+
 		if ($this->errors) $message = "<div class='error'>".__('Please fix errors below:', GOURL)."<ul><li>- ".implode("</li><li>- ", $this->errors)."</li></ul></div>";
 		elseif ($this->updated)  $message = '<div class="updated"><p>'.__('Settings have been updated <strong>successfully</strong>', GOURL).'</p></div>';
 		else $message = "";
 
         if (!$this->errors && ((isset($_GET['testconnect']) && $_GET["testconnect"] == "true") || $this->updated))
         {
-            if (!(is_admin() && current_user_can('administrator'))) $message .= "<div class='error'><p>".__('Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!', GOURL)."</p></div>";
+            if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) $message .= "<div class='error'><p>".__('Cannot test connection to GoUrl.io Payment Server. You should be ADMIN user!', GOURL)."</p></div>";
             else 
             {
                 $messages = $this->test_gourl_connection( $this->updated );
@@ -1164,7 +1177,7 @@ final class gourlclass
 	
 		$tmp .= '<p>'.sprintf(__( "If you use multiple websites online, please create separate <a target='_blank' href='%s'>GoUrl Payment Box</a> records (with unique payment box public/private keys) for each of your websites. Do not use the same GoUrl Payment Box with the same public/private keys on your different websites.", GOURL ), "https://gourl.io/editrecord/coin_boxes/0") . '</p>';
 		$tmp .= '<p>'.sprintf(__( "If you want to use plugin in a language other than English, see the page <a href='%s'>Languages and Translations</a>. &#160;  This enables you to easily customize the texts of all the labels visible to your users.", GOURL ), "https://gourl.io/languages.html", "https://gourl.io/languages.html") . '</p>';
-		if (!$readonly) $tmp .= '<p class="blue">'.sprintf(__( "<b style='color:red'>ADDITIONAL PAYMENTS SECURITY</b>  - You can make file <a href='%s'>%s</a> - <a target='_blank' href='%s'>readonly</a>. GoUrl Public/Private keys on page below will be not editable anymore (readonly mode). Optional - for full security make <a target='_blank' href='%s'>readonly</a> gourl main plugin file <a href='%s'>gourl.php</a> also.", GOURL ), $this->hash_url, "<b>".basename($this->hash_url)."</b>", "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/", "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/", plugin_dir_url( __FILE__ )."gourl.php") . '</p>';
+		if (!$readonly) $tmp .= '<p class="blue">'.sprintf(__( "<b style='color:red'>ADDITIONAL PAYMENTS SECURITY</b>  - You can make file <a href='%s'>%s</a> - <a target='_blank' href='%s'>readonly</a> (<b>file location</b> - %s; <a target='_blank' href='%s'>instruction</a>) <br>GoUrl Public/Private keys on page below will be not editable anymore (readonly mode). <br>Optional - for full security make <a target='_blank' href='%s'>readonly</a> gourl main plugin file <a href='%s'>gourl.php</a> also.", GOURL ), $this->hash_url, "<b>".basename($this->hash_url)."</b>", "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/", (strpos($this->hash_url, "wp-content") ? "wp-content".$this->right($this->hash_url, "wp-content") : $this->hash_url), "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/", "https://www.cyberciti.biz/faq/linux-write-protecting-a-file/", plugin_dir_url( __FILE__ )."gourl.php") . '</p>';
 		$tmp .= '<br><br>';
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
@@ -1592,7 +1605,7 @@ final class gourlclass
 	
 		$dt = gmdate('Y-m-d H:i:s');  
 
-		if (!(is_admin() && current_user_can('administrator'))) 
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
 			$this->record_errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);
 			return false; 
@@ -2425,7 +2438,7 @@ final class gourlclass
 		if ($this->options2['ppvPriceCoin'] <= 0 || $this->options2['ppvPrice'] > 0) { $this->options2['ppvPriceCoin'] = 0; $this->options2['ppvPriceLabel'] = ""; }
 
 
-     		if (!(is_admin() && current_user_can('administrator'))) 
+     		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
 			$this->record_errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);
 			return false; 
@@ -3241,7 +3254,7 @@ final class gourlclass
 		if ($this->options3['ppmPrice'] <= 0)  $this->options3['ppmPrice'] = 0;
 		if ($this->options3['ppmPriceCoin'] <= 0 || $this->options3['ppmPrice'] > 0) { $this->options3['ppmPriceCoin'] = 0; $this->options3['ppmPriceLabel'] = ""; }
 		
-     		if (!(is_admin() && current_user_can('administrator'))) 
+     		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
 			$this->record_errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);
 			return false; 
@@ -4218,7 +4231,7 @@ final class gourlclass
 		global $wpdb;
 
 
-		if (!(is_admin() && current_user_can('administrator'))) 
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
 			$this->record_errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);
 			return false; 
@@ -4319,7 +4332,7 @@ final class gourlclass
 		
 		$dt = gmdate('Y-m-d H:i:s');
 
-		if (!(is_admin() && current_user_can('administrator'))) 
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
 			$this->record_errors[] = __('You don\'t have permission to edit this page. Please login as ADMIN user!', GOURL);
 			return false; 
@@ -5502,7 +5515,7 @@ final class gourlclass
 		
 		// Actions GET
 			    
-		if (!isset($_POST['ak_action']) && strpos($this->page, GOURL) === 0 && is_admin() && current_user_can('administrator'))
+		if (!isset($_POST['ak_action']) && strpos($this->page, GOURL) === 0 && is_admin() && is_user_logged_in() && current_user_can('administrator'))
 		{           
 			
 			switch($this->page)
@@ -5831,7 +5844,7 @@ final class gourlclass
 		if (mb_strpos($ext, " ")!==false)         $ext = str_replace(" ", "_", $ext);
 		if (mb_strpos($fileName, ".")!==false)    $fileName = str_replace(".", "_", $fileName);
 
-		if (!(is_admin() && current_user_can('administrator')))
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator')))
 		{
 		    	$this->record_errors[] = sprintf(__("Cannot upload file '%s' on server. Please login as ADMIN user!", GOURL), $file["name"]);
 			return "";
@@ -8500,6 +8513,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
   
 
-    return 0;       
-}
-  
+    return 0; 
+} 
