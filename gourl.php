@@ -10,6 +10,8 @@ final class gourlclass
 	private $hash_url			= "";			// security; save your gourl public/private keys sha1 hash in file (db and file)
 	private $errors			= array(); 		// global setting errors
 	private $payments			= array(); 		// global activated payments (bitcoin, litecoin, etc)
+	private $adminform          	= "gourl_adminform";
+	private $admin_form_key      	= "";  		// unique form key
 	
 	private $options2 		= array(); 		// pay-per-view settings
 	private $options3 		= array(); 		// pay-per-membership settings
@@ -78,11 +80,14 @@ final class gourlclass
 		// security data hash; you can change path / file location
 		$this->hash_url = GOURL_PHP."/gourl.hash";
 	    
+		// admin form
+		$this->adminform      	= "gourl_adminform_" . md5(sha1(AUTH_KEY.NONCE_KEY.AUTH_KEY)); 
+		$this->admin_form_key	= 'gourl_adminformkey_' . sha1(md5(AUTH_KEY.NONCE_KEY));
 
 		$this->coin_names 	= self::coin_names();
 		$this->coin_chain 	= self::coin_chain();
-		$this->coin_www 	= self::coin_www();
-		$this->languages 	= self::languages();
+		$this->coin_www 		= self::coin_www();
+		$this->languages 		= self::languages();
 		
 		// compatible test
 		$ver = get_option(GOURL.'version');
@@ -892,12 +897,14 @@ final class gourlclass
 		$txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
 		$arr = json_decode($txt, true);
 
+		/*
 		if (isset($arr["nonce"]) && $arr["nonce"] != sha1(md5(NONCE_KEY)))
 		{
 		    $this->save_cryptokeys_hash(); // admin changed NONCE_KEY
 		    $txt = (is_readable($this->hash_url)) ? file_get_contents($this->hash_url) : "";
 		    $arr = json_decode($txt, true);
 		}
+		*/
 
 		foreach($this->coin_names as $k => $v)
 		{
@@ -925,7 +932,8 @@ final class gourlclass
 	 *  20.
 	*/
 	private function post_settings()
-	{
+	{      
+ 
 		foreach ($this->options as $key => $value)
 		{
 			$this->options[$key] = (isset($_POST[GOURL.$key])) ? stripslashes($_POST[GOURL.$key]) : "";
@@ -1046,7 +1054,8 @@ final class gourlclass
 	*/
 	private function save_settings()
 	{
-		$arr = array();
+		$arr = array(); 
+		$editable = (!file_exists($this->hash_url) || is_writable($this->hash_url)) ? true : false;
 
 		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator'))) 
 		{
@@ -1058,21 +1067,23 @@ final class gourlclass
 			foreach ($this->options as $key => $value)
 			{
 			    $boxkey = (strpos($key, "public_key") || strpos($key, "private_key")) ? true : false;
-			    if (!(file_exists($this->hash_url) && !is_writable($this->hash_url) && $boxkey))
+			    if ($editable || !$boxkey)
 			    {
-			        $oldval = get_option(GOURL.$key);
+			    	$oldval = get_option(GOURL.$key);
 			    	if ($boxkey && $oldval != $value) $arr[$key] = array("old_key" => ($oldval ? substr($oldval, 0, -20)."....." : "-empty-"), "new_key" => ($value ? substr($value, 0, -20)."....." : "-empty-"));
 			    	update_option(GOURL.$key, $value);
 			    }
 			}
 			
 			if ($arr) 
-			{    
-			    wp_mail(get_bloginfo('admin_email'), 'Notification - GoUrl Bitcoin Payment Gateway Plugin - Cryptobox Keys Changed', 
-			    date("r")."\n\nGoUrl Bitcoin Payment Gateway for Wordpress plugin\n\nFollowing crypto payment box/es keys was changed on your website -\n\n".print_r($arr, true));
+			{
+				wp_mail(get_bloginfo('admin_email'), 'Notification - GoUrl Bitcoin Payment Gateway Plugin - Cryptobox Keys Changed', 
+				date("r")."\n\nGoUrl Bitcoin Payment Gateway for Wordpress plugin\n\nFollowing crypto payment box/es keys was changed on your website -\n\n".print_r($arr, true));
+
+				$this->save_cryptokeys_hash();
 			}    
 
-			$this->save_cryptokeys_hash();
+		     
 		}
 
 		return true;
@@ -1107,6 +1118,24 @@ final class gourlclass
 	}
 
 
+	/*
+	 *  Notice for non-admin users
+	*/
+	private function is_nonadmin_user ()
+	{    
+		if (!(is_admin() && is_user_logged_in() && current_user_can('administrator')))
+		{
+			$tmp  = "<div class='wrap ".GOURL."admin'>";	
+			$tmp .= $this->page_title(__('Admin Area', GOURL));
+			$tmp .= "<br><br><br><br><h2><center>".__('Only Admin users can access to this page !', GOURL)."</center></h2><br><br><br>";
+			$tmp .= "</div>";
+
+			echo $tmp;
+			
+			return true;
+		}
+		else return false;
+	}
 
 
 
@@ -1114,7 +1143,10 @@ final class gourlclass
 	 *  24.
 	*/
 	public function page_settings()
-	{
+	{       
+		
+		if ($this->is_nonadmin_user()) return true;  
+
 		$readonly = (file_exists($this->hash_url) && !is_writable($this->hash_url)) ? 'readonly' : '';
 
 		if ($readonly)
@@ -1173,7 +1205,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__('General Settings', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
 
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_settings" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_settings" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<p>'.sprintf(__( "If you use multiple websites online, please create separate <a target='_blank' href='%s'>GoUrl Payment Box</a> records (with unique payment box public/private keys) for each of your websites. Do not use the same GoUrl Payment Box with the same public/private keys on your different websites.", GOURL ), "https://gourl.io/editrecord/coin_boxes/0") . '</p>';
 		$tmp .= '<p>'.sprintf(__( "If you want to use plugin in a language other than English, see the page <a href='%s'>Languages and Translations</a>. &#160;  This enables you to easily customize the texts of all the labels visible to your users.", GOURL ), "https://gourl.io/languages.html", "https://gourl.io/languages.html") . '</p>';
@@ -1684,6 +1717,7 @@ final class gourlclass
 	*/
 	public function page_newfile()
 	{
+		if ($this->is_nonadmin_user()) return true;  
 	
 		$preview = ($this->id && isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
 	
@@ -1727,7 +1761,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__(($this->id?'Edit file':'Upload New File, Music, Picture, Video'), GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
 	
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_download" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_download" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
@@ -1951,6 +1986,7 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+ 		if ($this->is_nonadmin_user()) return true;  
 
 		if (isset($_GET["intro"]))
 		{
@@ -2459,6 +2495,8 @@ final class gourlclass
 	*/
 	public function page_view()
 	{
+		if ($this->is_nonadmin_user()) return true;  		
+
 		$example = 0;
 		$preview = (isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
 
@@ -2557,7 +2595,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__('Paid Access to Premium Webages for Unregistered Visitors', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
 	
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_view" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_view" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
@@ -3281,6 +3320,8 @@ final class gourlclass
 	{
 		global $current_user;
 		
+		if ($this->is_nonadmin_user()) return true;  
+
 		$example = 0;
 		$preview = (isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
 		
@@ -3396,7 +3437,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__('Paid Access to Premium Pages for Registered Users', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
 	
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_membership" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_membership" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<input type="submit" class="'.GOURL.'button button-primary" name="submit" value="'.__('Save Settings', GOURL).'">';
@@ -4017,6 +4059,8 @@ final class gourlclass
 	{
 		global $wpdb;
 
+		if ($this->is_nonadmin_user()) return true;  
+
 		$dt = gmdate('Y-m-d H:i:s');
 
 		$search = "";
@@ -4104,6 +4148,8 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+		if ($this->is_nonadmin_user()) return true;  
+
 		if ($this->record_errors) $message = "<div class='error'>".__('Please fix errors below:', GOURL)."<ul><li>- ".implode("</li><li>- ", $this->record_errors)."</li></ul></div>";
 		else $message = "";
 	
@@ -4127,7 +4173,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__('Manually create Premium Membership', GOURL)."</h3>";
 		$tmp .= "<div class='inside'>";
 	
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_membership_newuser" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_membership_newuser" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
@@ -4421,6 +4468,8 @@ final class gourlclass
 	public function page_newproduct()
 	{
 	
+		if ($this->is_nonadmin_user()) return true;  
+
 		$preview 		= ($this->id && isset($_GET["preview"]) && $_GET["preview"] == "true") ? true : false;
 		$preview_final  = ($this->id && isset($_GET["previewfinal"]) && $_GET["previewfinal"] == "true") ? true : false;
 		$preview_email  = ($this->id && isset($_GET["previewemail"]) && $_GET["previewemail"] == "true") ? true : false;
@@ -4502,7 +4551,8 @@ final class gourlclass
 		$tmp .= "<h3 class='hndle'>".__($this->id?__('Edit Product', GOURL):__('Create New Product', GOURL))."</h3>";
 		$tmp .= "<div class='inside'>";
 	
-		$tmp .= '<input type="hidden" name="ak_action" value="'.GOURL.'save_product" />';
+		$tmp .= '<input type="hidden" name="'.$this->adminform.'" value="'.GOURL.'save_product" />';
+		$tmp .= wp_nonce_field( $this->admin_form_key );
 	
 		$tmp .= '<div class="alignright">';
 		$tmp .= '<img id="gourlsubmitloading" src="'.plugins_url('/images/loading.gif', __FILE__).'" border="0">';
@@ -4700,6 +4750,8 @@ final class gourlclass
 	{
 		global $wpdb;
 	
+		if ($this->is_nonadmin_user()) return true;  
+
 		if (isset($_GET["intro"]))
 		{
 			$intro = intval($_GET["intro"]);
@@ -5073,7 +5125,9 @@ final class gourlclass
 	public function page_payments()
 	{
 		global $wpdb;
-		
+	
+		if ($this->is_nonadmin_user()) return true;  
+	
 		$search = $sql_where = "";
 		
 		if (isset($_GET["s"]) && trim($_GET["s"]))
@@ -5394,9 +5448,11 @@ final class gourlclass
 	
 		// Actions POST
 	
-		if (isset($_POST['ak_action']) && strpos($this->page, GOURL) === 0)
+		if (isset($_POST[$this->adminform]) && strpos($this->page, GOURL) === 0)
 		{
-			switch($_POST['ak_action'])
+		     check_admin_referer( $this->admin_form_key );		
+
+			switch($_POST[$this->adminform])
 			{
 				case GOURL.'save_settings':
 	
@@ -5515,7 +5571,7 @@ final class gourlclass
 		
 		// Actions GET
 			    
-		if (!isset($_POST['ak_action']) && strpos($this->page, GOURL) === 0 && is_admin() && is_user_logged_in() && current_user_can('administrator'))
+		if (!isset($_POST[$this->adminform]) && strpos($this->page, GOURL) === 0 && is_admin() && is_user_logged_in() && current_user_can('administrator'))
 		{           
 			
 			switch($this->page)
