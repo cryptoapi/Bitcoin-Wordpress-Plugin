@@ -1078,7 +1078,7 @@ final class gourlclass
 			if ($arr) 
 			{
 				wp_mail(get_bloginfo('admin_email'), 'Notification - GoUrl Bitcoin Payment Gateway Plugin - Cryptobox Keys Changed', 
-				date("r")."\n\nGoUrl Bitcoin Payment Gateway for Wordpress plugin\n\nFollowing crypto payment box/es keys was changed on your website -\n\n".print_r($arr, true));
+				date("r")." GMT \n\nGoUrl Bitcoin Payment Gateway for Wordpress plugin \n\nCrypto payment box/es keys was changed on your website (gourl plugin Settings Page).\n\nIF YOU DIDN'T CHANGE YOUR GOURL KEYS, PLEASE CHANGE YOUR WORDPRESS ADMIN PASSWORD AND RESTORE ORIGINAL KEYS !\nALSO UPDATE GOURL PLUGIN TO THE LATEST VERSION IF YOU ARE USING AN OLD VERSION ! \n\n".print_r($arr, true));
 
 				$this->save_cryptokeys_hash();
 			}    
