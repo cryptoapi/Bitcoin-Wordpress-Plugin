@@ -3730,23 +3730,26 @@ final class gourlclass
 		// not available activated bitcoin/altcoin
 		if (!$this->payments) 
 		{ 
-			add_filter('the_content', 		'gourl_lock_filter', 11111);
-			add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
-			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
-			add_filter("wp_title", 		'gourl_hide_headtitle_unlogged', 11111);
-			add_filter("wp_title_rss", 	'gourl_hide_headtitle_unlogged', 11111);
-			add_filter('the_title', 	'gourl_hide_all_titles', 11111);
-			add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
-			add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
-			add_filter('comment_text',	'gourl_lock_comments', 11111);
-			add_filter('post_comments_link',     'gourl_return_false', 1);
-			add_filter('comment_reply_link',     'gourl_return_false', 1);
-			add_filter('comments_open', 		'gourl_return_false', 1);
-			add_action('do_feed',      'gourl_disable_feed', 1);
-			add_action('do_feed_rdf',  'gourl_disable_feed', 1);
-			add_action('do_feed_rss',  'gourl_disable_feed', 1);
-			add_action('do_feed_rss2', 'gourl_disable_feed', 1);
-			add_action('do_feed_atom', 'gourl_disable_feed', 1);
+			if (!$preview_mode)
+			{	
+				add_filter('the_content', 		'gourl_lock_filter', 11111);
+				add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
+				add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
+				add_filter("wp_title", 		'gourl_hide_headtitle_unlogged', 11111);
+				add_filter("wp_title_rss", 	'gourl_hide_headtitle_unlogged', 11111);
+				add_filter('the_title', 	'gourl_hide_all_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
+				add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
+				add_filter('comment_text',	'gourl_lock_comments', 11111);
+				add_filter('post_comments_link',     'gourl_return_false', 1);
+				add_filter('comment_reply_link',     'gourl_return_false', 1);
+				add_filter('comments_open', 		'gourl_return_false', 1);
+				add_action('do_feed',      'gourl_disable_feed', 1);
+				add_action('do_feed_rdf',  'gourl_disable_feed', 1);
+				add_action('do_feed_rss',  'gourl_disable_feed', 1);
+				add_action('do_feed_rss2', 'gourl_disable_feed', 1);
+				add_action('do_feed_atom', 'gourl_disable_feed', 1);
+			}
 
 			$html = GOURL_LOCK_START.$this->display_error_nokeys().GOURL_LOCK_END; 
 
@@ -8653,5 +8656,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
   
 
-    return 0;        
+    return 0;    
 } 
