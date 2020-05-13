@@ -90,10 +90,12 @@ final class gourlclass
 		$this->languages 		= self::languages();
 		
 		// compatible test
-		$ver = get_option(GOURL.'version');
-		if (!$ver || version_compare($ver, GOURL_VERSION) < 0) $this->upgrade();
+		$ver 		= get_option(GOURL.'version');         //  current plugin version; '-empty-' if you unistalled plugin
+		$prevver 	= get_option(GOURL.'prev_version');	   //  current plugin version; ; keep version value when plugin uninstalled; $ver ==  $prevver if plugin activated
+		if (!$ver || version_compare($ver, GOURL_VERSION) < 0 || version_compare($prevver, $ver) < 0) $this->upgrade();
 		elseif (is_admin()) gourl_retest_dir();
 		
+
 		
 		// Current Page, Record ID
 		$this->page = (isset($_GET['page'])) ? substr(preg_replace("/[^A-Za-z0-9\_\-]+/", "", $_GET['page']), 0, 50) : "";
@@ -6331,7 +6333,7 @@ final class gourlclass
 	/*
 	 *  76.
 	 */ 
-	private function upgrade ()
+	private function upgrade()
 	{
 		global $wpdb;
 	
@@ -6397,16 +6399,13 @@ final class gourlclass
 			$wpdb->query("alter table crypto_files add key `priceCoin` (priceCoin)");
 			$wpdb->query("alter table crypto_files add key `priceLabel` (priceLabel)");
 		}
-		elseif (true === version_compare(get_option(GOURL.'version'), '1.4.7', '<'))
+		elseif ($wpdb->query("select fileUrl from crypto_files limit 1") === false)
 		{
 			$wpdb->query("alter table crypto_files add `fileUrl` varchar(255) NOT NULL DEFAULT '' after fileName");
 			$wpdb->query("alter table crypto_files add key `fileUrl` (fileUrl)");
 			$wpdb->query("ALTER TABLE `crypto_files` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
 		}
-		elseif (true === version_compare(get_option(GOURL.'version'), '1.2.7', '<'))
-		{
-			$wpdb->query("ALTER TABLE `crypto_files` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
-		}
+
 
 	
 		// TABLE 2 - crypto_payments
@@ -6536,17 +6535,23 @@ final class gourlclass
 	
 			$wpdb->query($sql);
 		}
-		elseif (true === version_compare(get_option(GOURL.'version'), '1.2.7', '<')) 
+
+
+		if (true === version_compare(get_option(GOURL.'prev_version'), '1.6.0', '<'))
+		foreach($this->coin_names as $k => $v)
 		{
-			$wpdb->query("ALTER TABLE `crypto_products` CHANGE `priceCoin` `priceCoin` DOUBLE(17,5) NOT NULL DEFAULT '0.00000'");
-		} 
-		
+			update_option(GOURL.$v."public_key", "");
+			update_option(GOURL.$v."private_key", "");
+		}
+
+
 		// upload dir
 		gourl_retest_dir();
 	
 		if (!file_exists($this->hash_url)) file_put_contents($this->hash_url, '{"nonce":"1"}');
 
-		// current version
+		// current plugin version
+		update_option(GOURL.'prev_version', GOURL_VERSION);
 		update_option(GOURL.'version', GOURL_VERSION);
 				
 		ob_flush();
@@ -8569,5 +8574,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
   
 
-    return 0; 
+    return 0;    
 } 
