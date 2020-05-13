@@ -1613,7 +1613,10 @@ final class gourlclass
 
 		if (!$this->record["defCoin"]) $this->record_errors[] = __("Field 'PaymentBox Coin' - cannot be empty", GOURL);
 		elseif (!isset($this->coin_names[$this->record["defCoin"]])) $this->record_errors[] = __("Field 'PaymentBox Coin' - invalid value", GOURL);
-		elseif (!isset($this->payments[$this->record["defCoin"]])) $this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please re-save record", GOURL), $this->coin_names[$this->record["defCoin"]]);
+		elseif (!isset($this->payments[$this->record["defCoin"]])) {
+ 			if (!$this->payments) $this->record_errors[] = sprintf(__("You must choose at least one payment method. Please enter your GoUrl Public/Private Keys on <a href='%s'>settings page</a>. Instruction <a href='%s'>here &#187;</a>", GOURL),  GOURL_ADMIN.GOURL.'settings#gourlcurrencyconverterapi_key', GOURL_ADMIN.GOURL."#i3");	
+			$this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please re-save record", GOURL), $this->coin_names[$this->record["defCoin"]]);
+		}
 		elseif ($this->record["priceCoin"] != 0 && $this->record["defCoin"] != $this->record["priceLabel"])
 		{
 			if (isset($this->payments[$this->record["priceLabel"]])) $this->record["defCoin"] = $this->record["priceLabel"];
@@ -2088,7 +2091,7 @@ final class gourlclass
 		global $wpdb, $current_user;
 
 		// not available activated coins
-		if (!$this->payments) return "";
+		if (!$this->payments) { $html = $this->display_error_nokeys(); return $html; } 
 
 		if (!isset($arr["id"]) || !intval($arr["id"])) return '<div>'.sprintf(__('Invalid format. Use %s', GOURL), '&#160; ['.GOURL_TAG_DOWNLOAD.' id=..id..]').'</div>';
 
@@ -2190,7 +2193,7 @@ final class gourlclass
 
 			if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 
-			if (!$available_coins) return '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>';
+			if (!$available_coins) { $html = '<div>'.$this->display_error_nokeys().' '.$short_code.'</div>'; return $html; }
 
 			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 
@@ -2458,7 +2461,10 @@ final class gourlclass
 	
 		if (!$this->options2["ppvCoin"]) $this->record_errors[] = __("Field 'PaymentBox Coin' - cannot be empty", GOURL);
 		elseif (!isset($this->coin_names[$this->options2["ppvCoin"]])) $this->record_errors[] = __("Field 'PaymentBox Coin' - invalid value", GOURL);
-		elseif (!isset($this->payments[$this->options2["ppvCoin"]])) $this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please click on 'Save Settings' button", GOURL), $this->coin_names[$this->options2["ppvCoin"]]);
+		elseif (!isset($this->payments[$this->options2["ppvCoin"]])) {    
+			if (!$this->payments) $this->record_errors[] = sprintf(__("You must choose at least one payment method. Please enter your GoUrl Public/Private Keys on <a href='%s'>settings page</a>. Instruction <a href='%s'>here &#187;</a>", GOURL),  GOURL_ADMIN.GOURL.'settings#gourlcurrencyconverterapi_key', GOURL_ADMIN.GOURL."#i3");
+			$this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please click on 'Save Settings' button", GOURL), $this->coin_names[$this->options2["ppvCoin"]]);
+		}
 		elseif ($this->options2["ppvPriceCoin"] != 0 && $this->options2["ppvCoin"] != $this->options2["ppvPriceLabel"]) $this->record_errors[] = sprintf(__("Field 'PaymentBox Coin' - please select '%s' because you have entered price in %s", GOURL), $this->coin_names[$this->options2["ppvPriceLabel"]], $this->coin_names[$this->options2["ppvPriceLabel"]]);
 		
 		if ($this->options2["ppvPriceCoin"] != 0 && !$this->options2["ppvOneCoin"]) $this->record_errors[] = sprintf(__("Field 'Use Default Coin Only' - check it because you have entered price in %s. Please use price in USD if you want to accept multiple coins", GOURL), $this->coin_names[$this->options2["ppvPriceLabel"]]);
@@ -2807,7 +2813,7 @@ final class gourlclass
 				
 			if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 				
-			if (!$available_coins) { echo '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>'; return false; }
+			if (!$available_coins) { echo '<div>'.$this->display_error_nokeys().' '.$short_code.'</div>'; return false; }
 				
 			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 				
@@ -2892,12 +2898,46 @@ final class gourlclass
 		// another tag [gourl-membership] with hgh priority exists on page 
 		if ($this->lock_type == GOURL_TAG_MEMBERSHIP) return ""; 
 	
-		// not available activated coins
-		if (!$this->payments) return "";
-		
-		
 		// preview admin mode
-		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpayperview") ? true : false;
+		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpayperview" && current_user_can('administrator')) ? true : false;
+
+
+		// not available activated bitcoin/altcoin
+		if (!$this->payments) 
+		{     
+			if (!$preview_mode)
+			{
+			    	add_filter('the_content', 		'gourl_lock_filter', 11111);
+				add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
+				add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
+				add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+				add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
+				add_filter('the_title', 	'gourl_hide_all_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
+				add_filter('the_title', 	'gourl_hide_menu_titles', 11111);
+				add_filter('the_title_rss', 'gourl_hide_menu_titles', 11111);
+				add_filter("wp_title", 		'gourl_hide_headtitle', 11111);
+				add_filter("wp_title_rss", 	'gourl_hide_headtitle', 11111);
+				add_filter('the_title', 	'gourl_hide_page_title', 11111);
+				add_filter('the_title_rss', 'gourl_hide_page_title', 11111);
+				add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
+				add_filter('comment_text',	'gourl_lock_comments', 11111);  
+				add_filter('post_comments_link',     'gourl_return_false', 1);
+				add_filter('comment_reply_link',     'gourl_return_false', 1);
+				add_filter('comments_open', 		'gourl_return_false', 1);  
+				add_action('do_feed',      'gourl_disable_feed', 1);
+				add_action('do_feed_rdf',  'gourl_disable_feed', 1);
+				add_action('do_feed_rss',  'gourl_disable_feed', 1);
+				add_action('do_feed_rss2', 'gourl_disable_feed', 1);
+				add_action('do_feed_atom', 'gourl_disable_feed', 1);	
+			}		
+
+			$html = GOURL_LOCK_START.$this->display_error_nokeys().GOURL_LOCK_END; 
+
+			return $html; 
+		}
+					
+		
 		
 		
 		// if user already bought pay-per-view
@@ -3000,7 +3040,7 @@ final class gourlclass
 			
 		if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 			
-		if (!$available_coins) { $html = '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>'; return $html; } 
+		if (!$available_coins) { $html = '<div>'.$this->display_error_nokeys().' '.$short_code.'</div>'; return $html; } 
 			
 		if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 
@@ -3199,7 +3239,6 @@ final class gourlclass
 	
 	
 	
-
 	
 	
 	
@@ -3277,7 +3316,10 @@ final class gourlclass
 	
 		if (!$this->options3["ppmCoin"]) $this->record_errors[] = __("Field 'PaymentBox Coin' - cannot be empty", GOURL);
 		elseif (!isset($this->coin_names[$this->options3["ppmCoin"]])) $this->record_errors[] = __("Field 'PaymentBox Coin' - invalid value", GOURL);
-		elseif (!isset($this->payments[$this->options3["ppmCoin"]])) $this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please click on 'Save Settings' button", GOURL), $this->coin_names[$this->options3["ppmCoin"]]);
+		elseif (!isset($this->payments[$this->options3["ppmCoin"]])) {  
+			if (!$this->payments) $this->record_errors[] = sprintf(__("You must choose at least one payment method. Please enter your GoUrl Public/Private Keys on <a href='%s'>settings page</a>. Instruction <a href='%s'>here &#187;</a>", GOURL),  GOURL_ADMIN.GOURL.'settings#gourlcurrencyconverterapi_key', GOURL_ADMIN.GOURL."#i3");
+			$this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please click on 'Save Settings' button", GOURL), $this->coin_names[$this->options3["ppmCoin"]]);
+		}
 		elseif ($this->options3["ppmPriceCoin"] != 0 && $this->options3["ppmCoin"] != $this->options3["ppmPriceLabel"]) $this->record_errors[] = sprintf(__("Field 'PaymentBox Coin' - please select '%s' because you have entered price in %s", GOURL), $this->coin_names[$this->options3["ppmPriceLabel"]], $this->coin_names[$this->options3["ppmPriceLabel"]]);
 		
 		if ($this->options3["ppmPriceCoin"] != 0 && !$this->options3["ppmOneCoin"]) $this->record_errors[] = sprintf(__("Field 'Use Default Coin Only' - check it because you have entered price in %s. Please use price in USD if you want to accept multiple coins", GOURL), $this->coin_names[$this->options3["ppmPriceLabel"]]);
@@ -3681,13 +3723,37 @@ final class gourlclass
 		// empty by dafault
 		$html = "";
 		
+   		// preview admin mode
+		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpaypermembership" && current_user_can('administrator')) ? true : false;
 
-		// not available activated coins
-		if (!$this->payments) return "";
+
+		// not available activated bitcoin/altcoin
+		if (!$this->payments) 
+		{ 
+			add_filter('the_content', 		'gourl_lock_filter', 11111);
+			add_filter('the_content_rss', 	'gourl_lock_filter', 11111);
+			add_filter('the_content_feed', 	'gourl_lock_filter', 11111);
+			add_filter("wp_title", 		'gourl_hide_headtitle_unlogged', 11111);
+			add_filter("wp_title_rss", 	'gourl_hide_headtitle_unlogged', 11111);
+			add_filter('the_title', 	'gourl_hide_all_titles', 11111);
+			add_filter('the_title_rss', 'gourl_hide_all_titles', 11111);
+			add_filter('get_comment_author_link', 	'gourl_return_false', 11111);
+			add_filter('comment_text',	'gourl_lock_comments', 11111);
+			add_filter('post_comments_link',     'gourl_return_false', 1);
+			add_filter('comment_reply_link',     'gourl_return_false', 1);
+			add_filter('comments_open', 		'gourl_return_false', 1);
+			add_action('do_feed',      'gourl_disable_feed', 1);
+			add_action('do_feed_rdf',  'gourl_disable_feed', 1);
+			add_action('do_feed_rss',  'gourl_disable_feed', 1);
+			add_action('do_feed_rss2', 'gourl_disable_feed', 1);
+			add_action('do_feed_atom', 'gourl_disable_feed', 1);
+
+			$html = GOURL_LOCK_START.$this->display_error_nokeys().GOURL_LOCK_END; 
+
+			return $html; 
+		} 
 	
 		
-		// preview admin mode
-		$preview_mode	= (stripos($_SERVER["REQUEST_URI"], "wp-admin/admin.php?") && $this->page == "gourlpaypermembership") ? true : false;
 		
 
 		// if premium user already or don't need upgade user membership 
@@ -3820,7 +3886,7 @@ final class gourlclass
 			
 		if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 			
-		if (!$available_coins) { $html = '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>'; return $html; } 
+		if (!$available_coins) { $html = '<div>'.$this->display_error_nokeys().' '.$short_code.'</div>'; return $html; } 
 			
 		if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 			
@@ -4340,7 +4406,10 @@ final class gourlclass
 		
 		if (!$this->record["defCoin"]) $this->record_errors[] = __("Field 'PaymentBox Coin' - cannot be empty", GOURL);
 		elseif (!isset($this->coin_names[$this->record["defCoin"]])) $this->record_errors[] = __("Field 'PaymentBox Coin' - invalid value", GOURL);
-		elseif (!isset($this->payments[$this->record["defCoin"]])) $this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please re-save record", GOURL), $this->coin_names[$this->record["defCoin"]]);
+		elseif (!isset($this->payments[$this->record["defCoin"]])) {
+			if (!$this->payments) $this->record_errors[] = sprintf(__("You must choose at least one payment method. Please enter your GoUrl Public/Private Keys on <a href='%s'>settings page</a>. Instruction <a href='%s'>here &#187;</a>", GOURL),  GOURL_ADMIN.GOURL.'settings#gourlcurrencyconverterapi_key', GOURL_ADMIN.GOURL."#i3");
+			$this->record_errors[] = sprintf( __("Field 'PaymentBox Coin' - payments in %s not available. Please re-save record", GOURL), $this->coin_names[$this->record["defCoin"]]);
+		}
 		elseif ($this->record["priceCoin"] != 0 && $this->record["defCoin"] != $this->record["priceLabel"]) $this->record_errors[] = sprintf(__("Field 'PaymentBox Coin' - please select '%s' because you have entered price in %s", GOURL), $this->coin_names[$this->record["priceLabel"]], $this->coin_names[$this->record["priceLabel"]]);
 
 		if ($this->record["emailUser"])
@@ -4851,7 +4920,7 @@ final class gourlclass
 		global $wpdb, $current_user;
 	
 		// not available activated coins
-		if (!$this->payments) return "";
+		if (!$this->payments) { $html = $this->display_error_nokeys(); return $html; } 
 	
 		if (!isset($arr["id"]) || !intval($arr["id"])) return '<div>'.sprintf(__('Invalid format. Use %s', GOURL), '&#160; ['.GOURL_TAG_PRODUCT.' id="..id.."]').'</div>';
 	
@@ -4943,7 +5012,7 @@ final class gourlclass
 	
 			if(!defined("CRYPTOBOX_PRIVATE_KEYS")) define("CRYPTOBOX_PRIVATE_KEYS", implode("^", $cryptobox_private_keys));
 	
-			if (!$available_coins) return '<div>'.__('No Available Payments -', GOURL).' '.$short_code.'</div>';
+			if (!$available_coins) { $html = '<div>'.$this->display_error_nokeys().' '.$short_code.'</div>'; return $html; }
 	
 			if (!in_array($defCoin, $available_coins)) { $vals = array_values($available_coins); $defCoin = array_shift($vals); }
 	
@@ -6064,7 +6133,7 @@ final class gourlclass
 		if ($userID && $userID != "guest" && (!is_numeric($userID) || preg_replace('/[^0-9]/', '', $userID) != $userID)) return array("error" => sprintf(__("Error. Invalid User ID - %s. Allowed numeric values or 'guest' value", GOURL), $userID));
 		if (!$userID) return array("error" => __("Error.", GOURL).__("You need first to login or register on the website to make Bitcoin/Altcoin Payments", GOURL));
 	
-		if (!$this->payments) return array("error" => __("Error. Please try a different payment method. GoUrl Bitcoin Plugin not configured - need setup payment box keys on GoUrl Bitcoin Gateway Options page", GOURL));
+		if (!$this->payments) return array("error" => __("Error. Please try a different payment method. GoUrl.io Bitcoin plugin is not configured yet. Need to setup GoUrl Public/Private Keys on plugin settings page. Please contact the website administrator.", GOURL));
 
 		$icon_width = str_replace("px", "", $icon_width);
 		if (!is_numeric($icon_width) || $icon_width < 30 || $icon_width > 250) $icon_width = 60;
@@ -6588,10 +6657,20 @@ final class gourlclass
 	    return $exclude . ", cryptobox.min";
 	}
 	
-	
+
 	
 	/*
-	 *  79. Supported Functions
+	 *  79. Need to setup gourl.io keys
+	 */ 
+	public function display_error_nokeys()
+	{
+		return "<div align='center'><a href='".$_SERVER['REQUEST_URI']."'><img border='0' src='".plugins_url('/images/error_keys.png', __FILE__)."'></img></a></div>";
+	}
+	
+
+
+	/*
+	 *  80. Supported Functions
 	 */ 
 	private function sel($val1, $val2)
 	{
@@ -8574,5 +8653,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
   
 
-    return 0;    
+    return 0;        
 } 
