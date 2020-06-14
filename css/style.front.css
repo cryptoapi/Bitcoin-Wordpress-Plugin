@@ -333,6 +333,7 @@ word-break: break-all;
 	padding: .375rem .75rem;
 	border-radius: .25rem;
 	width: auto;
+	position: relative;
 }
 
 .mncrpt .btn-outline-secondary:hover { 
@@ -343,6 +344,9 @@ word-break: break-all;
 .bootstrapiso .mncrpt .text-left {
 	padding-bottom: 0px !important;
 }
+
+
+
 
 .mncrpt_debug { 
 	text-align: left; 
