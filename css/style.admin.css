@@ -60,6 +60,7 @@
 	color: #666;
 }
 
+
 .gourlsmalltext {
 	font-size: 14px;
 	text-decoration: none;
@@ -69,7 +70,7 @@
 .gourladmin .postbox {
 	padding: 10px 20px;
 	position: relative;
-	width: 97%;
+	min-width: 90%;
 	height: 100%;
 	overflow: hidden;
 }
