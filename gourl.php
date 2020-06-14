@@ -1223,8 +1223,11 @@ final class gourlclass
 
 		$tmp .= "<table class='".GOURL."table ".GOURL."settings'>";
 
+		$callback_url = trim(get_site_url(), "/ ").'/?cryptobox.callback.php';
+		$callback_url_encoded = trim(base64_encode($callback_url), "= ");
+
 		$tmp .= '<tr><th>'.__('Your Callback Url', GOURL).':</th>';
-		$tmp .= '<td><b>'.trim(get_site_url(), "/ ").'/?cryptobox.callback.php</b> '.($this->payments? '&#160; &#160; <a target="_blank" href="https://gourl.io/info/ipn/IPN_Website_Testing.html">'.__('Test here &#187;', GOURL).'</a>' : '').'<br><br><em>'.sprintf(__("IMPORTANT - Please place this url in field <a href='%s'>Callback URL</a> for all your Payment Boxes on gourl.io. <a href='%s'>See screenshot</a>", GOURL), "https://gourl.io/editrecord/coin_boxes/0", plugins_url('/images/callback_field.png', __FILE__)).'</em></td>';
+		$tmp .= '<td><b>'.$callback_url.'</b> '.($this->payments? '&#160; &#160; <a target="_blank" href="https://gourl.io/info/ipn/callback/'.$callback_url_encoded.'/IPN_Website_Testing.html">'.__('Test here &#187;', GOURL).'</a>' : '').'<br><br><em>'.sprintf(__("IMPORTANT - Please place this url in field <a href='%s'>Callback URL</a> for all your Payment Boxes on gourl.io. <a href='%s'>See screenshot</a>", GOURL), "https://gourl.io/editrecord/coin_boxes/0", plugins_url('/images/callback_field.png', __FILE__)).'</em></td>';
 		$tmp .= '</tr>';
 
 
@@ -1232,7 +1235,7 @@ final class gourlclass
 		if (!$this->errors)
         {
             $tmp .= '<p style="font-weight:normal"> &#160; a. <a href="'.GOURL_ADMIN.GOURL.'settings&testconnect=true" class="'.GOURL.'button button-secondary">'.__('Click to Test Connection to GoUrl.io Server', GOURL).'</a>';
-            $tmp .= ' &#160;  &#160;  &#160; b. <a target="_blank" href="https://gourl.io/info/ipn/IPN_Website_Testing.html" class="'.GOURL.'button button-secondary">'.__('Test your Callback Url', GOURL).'</a></p><br>';
+            $tmp .= ' &#160;  &#160;  &#160; b. <a target="_blank" href="https://gourl.io/info/ipn/callback/'.$callback_url_encoded.'/IPN_Website_Testing.html" class="'.GOURL.'button button-secondary">'.__('Test your Callback Url', GOURL).'</a></p><br>';
         }
 		$tmp .= '</th>';
 		$tmp .= '</tr>';
@@ -8674,5 +8677,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
 
 
-    return 0;     
+    return 0;       
 }
