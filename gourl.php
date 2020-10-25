@@ -1292,9 +1292,9 @@ final class gourlclass
 		foreach ($this->coin_names as $k => $v)
 		{
 			$v2 = ucfirst($v);
-			if ($v2 == "Bitcoincash") $v2 = "Bitcoin Cash ABC";
+			if ($v2 == "Bitcoincash") $v2 = "Bitcoin Cash BCH";
 			if ($v2 == "Bitcoinsv")   $v2 = "Bitcoin SV";
-			if ($k == "BCH") $k .= "/BCHABC";
+			if ($k == "BCH") $k .= "/BCHN";
 			if ($k == "BSV") $k .= "/BCHSV";
 
 			$tmp .= '<tr><th>'.$v2.' '.__('Payments', GOURL).':<br><a target="_blank" href="'.$this->coin_www[$v].'"><img title="'.$v2.' Payment API" src="'.plugins_url('/images/'.$v.'.png', __FILE__).'" border="0"></a></th>';
@@ -8677,5 +8677,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
 
 
-    return 0;       
+    return 0;         
 }
