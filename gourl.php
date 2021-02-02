@@ -773,7 +773,7 @@ final class gourlclass
 		$tmp .= "<br><br><br><br><br><br><br>";
 		$tmp .= "<div class='gourltitle'>7. ".__('GoUrl Contacts', GOURL)."</div>";
 
-		$btc = "1KPBVmXLeY6MCDMPJfKHcTnf4P2SW3b46U";
+		$btc = "16oxamUoh6zwLgFUoADkr5KnNC6mTbBbsj";
 		$bch = "15ZGAHwvwDiDhoDZtFjF3j5c5cpF8KFLZY";
 		$bsv = "17wDBhNE2syKCtUyFoFaLU4QVbtXG514Z3";
 		$ltc = "LarmyXoQpydpUCYHx9DZeYoxcQ4YzMfHDt";
@@ -6116,7 +6116,7 @@ final class gourlclass
 	/*
 	 *  75. Bitcoin Payments with Any Other Wordpress Plugins
 	*/
-	public function cryptopayments ($pluginName, $amount, $amountLabel = "USD", $orderID, $period, $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60, $emultiplier = 1, $additional_options = array())
+	public function cryptopayments ($pluginName, $amount, $amountLabel = "USD", $orderID = "", $period = "", $default_language = "en", $default_coin = "bitcoin", $affiliate_key = "", $userID = "auto", $icon_width = 60, $emultiplier = 1, $additional_options = array())
 	{
 
 		// Security Test
