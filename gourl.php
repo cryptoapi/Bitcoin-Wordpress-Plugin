@@ -7023,6 +7023,7 @@ function gourl_show_user_profile($user)
 function cryptobox_new_payment($paymentID, $arr, $box_status)
 {
 	$dt = gmdate('Y-m-d H:i:s');
+	$order_id = '';
 
 	if (!isset($arr["status"]) || !in_array($arr["status"], array("payment_received", "payment_received_unrecognised")) || !in_array($box_status, array("cryptobox_newrecord", "cryptobox_updated"))) return false;
 
@@ -8677,5 +8678,5 @@ function gourl_altcoin_btc_price ($altcoin, $interval = 1)
     }
 
 
-    return 0;         
+    return 0; 
 }
