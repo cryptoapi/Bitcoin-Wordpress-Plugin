@@ -1,10 +1,10 @@
 	/**
 	* @package     GoUrl Bitcoin/Altcoin Payment Box - Update HTML Payment Box values
-	* @copyright   2014-2020 Delta Consultants
+	* @copyright   2014-2024 Delta Consultants
 	* @category    Javascript
 	* @website     https://gourl.io   
 	* @api         https://gourl.io/api.html     
-	* @version     2.2.2
+	* @version     2.2.4
 	*/
 	
 	/**
@@ -61,7 +61,7 @@
 		else jQuery('.'+ext+'logo_image').attr('src', src);
 
 		var qrcodesize = (typeof jQuery('.'+ext+'qrcode_image').attr('data-size') === 'undefined') ? 110 : jQuery('.'+ext+'qrcode_image').attr('data-size');
-		jQuery('.'+ext+'qrcode_image').attr('src', 'https://chart.googleapis.com/chart?chs='+qrcodesize+'x'+qrcodesize+'&chld=M|0&cht=qr&chl='+coinName+'%3A'+data.addr+'%3Famount%3D'+data.amount+'&choe=UTF-8'); 
+		jQuery('.'+ext+'qrcode_image').attr('src', 'https://api.qrserver.com/v1/create-qr-code/?size='+qrcodesize+'x'+qrcodesize+'&data='+coinName+'%3A'+data.addr+'%3Famount%3D'+data.amount+'&charset-source=UTF-8'); 
 		
 		if (jQuery.isFunction(jQuery.fn.tooltip)) 
 		{ 

@@ -8,14 +8,14 @@
  * PHP Cryptocurrency Payment Class
  *
  * @package     GoUrl PHP Bitcoin/Altcoin Payments and Crypto Captcha
- * @copyright   2014-2020 Delta Consultants
+ * @copyright   2014-2024 Delta Consultants
  * @category    Libraries
  * @website     https://gourl.io
  * @api         https://gourl.io/bitcoin-payment-gateway-api.html
  * @example     https://gourl.io/lib/examples/example_customize_box.php    <----
  * @gitHub  	https://github.com/cryptoapi/Payment-Gateway
  * @license 	Free GPLv2
- * @version     2.2.2
+ * @version     2.2.4
  *
  *
  *  CLASS CRYPTOBOX - LIST OF METHODS:
@@ -82,7 +82,7 @@ if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
 
-define("CRYPTOBOX_VERSION", "2.2.2");
+define("CRYPTOBOX_VERSION", "2.2.4");
 
 // GoUrl supported crypto currencies
 define("CRYPTOBOX_COINS", json_encode(array('bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dash', 'dogecoin', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit', 'universalcurrency')));
@@ -804,7 +804,7 @@ class Cryptobox {
 	 *  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" crossorigin="anonymous"></script>
 	 *  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 	 *  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" crossorigin="anonymous"></script>
-	 *  script src="<?php echo CRYPTOBOX_JS_FILES_PATH; ?>support.min.js" crossorigin="anonymous"></script>
+	 *  script src="<?php echo CRYPTOBOX_JS_FILES_PATH; ?>support.min.js?1" crossorigin="anonymous"></script>
 	 *  <style>
             html { font-size: 14px; }
             @media (min-width: 768px) { html { font-size: 16px; } .tooltip-inner { max-width: 350px; } }

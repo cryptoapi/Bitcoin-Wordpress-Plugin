@@ -8,10 +8,10 @@
  * Cryptobox Server Callbacks
  *
  * @package     Cryptobox callbacks
- * @copyright   2014-2020 Delta Consultants
+ * @copyright   2014-2024 Delta Consultants
  * @category    Libraries
  * @website     https://gourl.io
- * @version     2.2.2
+ * @version     2.2.4
  *
  *
  * This file processes call-backs from Cryptocoin Payment Box server when new payment

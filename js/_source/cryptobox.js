@@ -1,10 +1,10 @@
 	/**
 	* @package     GoUrl Bitcoin/Altcoin Payment Box - show iFrame Payment Box
-	* @copyright   2014-2020 Delta Consultants
+	* @copyright   2014-2024 Delta Consultants
 	* @category    Javascript
 	* @website     https://gourl.io
 	* @api         https://gourl.io/api.html
-	* @version     2.2.2
+	* @version     2.2.4
 	*/
 
 	/**
