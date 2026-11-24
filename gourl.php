@@ -7545,8 +7545,8 @@ class gourl_table_files extends WP_List_Table
 
 		$query = "SELECT * FROM crypto_files WHERE 1 ".$this->search;
 
-		$orderby = !empty($_GET["orderby"]) ? esc_sql(substr($_GET["orderby"], 0, 30)) : 'ASC';
-		$order = !empty($_GET["order"]) ? esc_sql(substr($_GET["order"], 0, 30)) : '';
+		$orderby = !empty($_GET["orderby"]) ? preg_replace('/[^A-Za-z]/', '', substr($_GET["orderby"], 0, 5)) : 'ASC';
+		$order = !empty($_GET["order"]) ? preg_replace('/[^A-Za-z0-9]/', '', substr($_GET["order"], 0, 15)) : '';
 		if(!empty($orderby) & !empty($order)) { $query.=' ORDER BY '.$orderby.' '.$order; }
 		else $query.=' ORDER BY updatetime DESC';
 
@@ -7762,8 +7762,8 @@ class gourl_table_products extends WP_List_Table
 
 		$query = "SELECT * FROM crypto_products WHERE 1 ".$this->search;
 
-		$orderby = !empty($_GET["orderby"]) ? esc_sql(substr($_GET["orderby"], 0, 30)) : 'ASC';
-		$order = !empty($_GET["order"]) ? esc_sql(substr($_GET["order"], 0, 30)) : '';
+		$orderby = !empty($_GET["orderby"]) ? preg_replace('/[^A-Za-z]/', '', substr($_GET["orderby"], 0, 5)) : 'ASC';
+		$order = !empty($_GET["order"]) ? preg_replace('/[^A-Za-z0-9]/', '', substr($_GET["order"], 0, 15)) : '';
 		if(!empty($orderby) & !empty($order)) { $query.=' ORDER BY '.$orderby.' '.$order; }
 		else $query.=' ORDER BY updatetime DESC';
 
@@ -8056,8 +8056,8 @@ class gourl_table_payments extends WP_List_Table
 
 		$query = "SELECT * FROM crypto_payments WHERE 1 ".$this->search;
 
-		$orderby = !empty($_GET["orderby"]) ? esc_sql(substr($_GET["orderby"], 0, 30)) : 'ASC';
-		$order = !empty($_GET["order"]) ? esc_sql(substr($_GET["order"], 0, 30)) : '';
+		$orderby = !empty($_GET["orderby"]) ? preg_replace('/[^A-Za-z]/', '', substr($_GET["orderby"], 0, 5)) : 'ASC';
+		$order = !empty($_GET["order"]) ? preg_replace('/[^A-Za-z0-9]/', '', substr($_GET["order"], 0, 15)) : '';
 		if(!empty($orderby) & !empty($order)) { $query.=' ORDER BY '.$orderby.' '.$order; }
 		else $query.=' ORDER BY paymentID DESC';
 
@@ -8233,8 +8233,8 @@ class gourl_table_premiumusers extends WP_List_Table
 
 		$query = "SELECT * FROM crypto_membership WHERE 1 ".$this->search;
 
-		$orderby = !empty($_GET["orderby"]) ? esc_sql(substr($_GET["orderby"], 0, 30)) : 'ASC';
-		$order = !empty($_GET["order"]) ? esc_sql(substr($_GET["order"], 0, 30)) : '';
+		$orderby = !empty($_GET["orderby"]) ? preg_replace('/[^A-Za-z]/', '', substr($_GET["orderby"], 0, 5)) : 'ASC';
+		$order = !empty($_GET["order"]) ? preg_replace('/[^A-Za-z0-9]/', '', substr($_GET["order"], 0, 15)) : '';
 		if(!empty($orderby) & !empty($order)) { $query.=' ORDER BY '.$orderby.' '.$order; }
 		else $query.=' ORDER BY recordCreated DESC';
 
